@@ -1,4 +1,5 @@
 import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/sections/Hero';
 import { About } from '@/components/sections/About';
 import { Gallery } from '@/components/sections/Gallery';
@@ -8,7 +9,9 @@ import { Experiences } from '@/components/sections/Experiences';
 import { Location } from '@/components/sections/Location';
 import { Pricing } from '@/components/sections/Pricing';
 import { HouseRules } from '@/components/sections/HouseRules';
+import { FAQ } from '@/components/sections/FAQ';
 import { Booking } from '@/components/sections/Booking';
+import { Contact } from '@/components/sections/Contact';
 
 export default function HomePage() {
   return (
@@ -24,8 +27,11 @@ export default function HomePage() {
         <Location />
         <Pricing />
         <HouseRules />
+        <FAQ />
         <Booking />
+        <Contact />
       </main>
+      <Footer />
     </>
   );
 }

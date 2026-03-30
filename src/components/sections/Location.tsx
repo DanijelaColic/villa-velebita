@@ -1,31 +1,6 @@
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { MapPin, Navigation, Clock } from 'lucide-react';
-
-const distances = [
-  { category: 'Priroda', items: [
-    { name: 'Nacionalni park Plitvička jezera', time: '20 min', km: '~22 km' },
-    { name: 'Majerovo vrelo – izvor Gacke', time: '10 min', km: '~8 km' },
-    { name: 'Rijeka Gacka', time: '5 min', km: '~4 km' },
-    { name: 'Utočište medvjeda Kuterevo', time: '30 min', km: '~28 km' },
-  ]},
-  { category: 'Aktivnosti', items: [
-    { name: 'Zipline "Pazi Medo"', time: '1 min', km: 'tik uz kuću' },
-    { name: 'Lovište jelena Ličko Lešće', time: '5 min', km: '~3 km' },
-    { name: 'Skijalište Mukinje', time: '20 min', km: '~20 km' },
-  ]},
-  { category: 'Servisi', items: [
-    { name: 'Konzum Vrhovine', time: '5 min', km: '~2 km' },
-    { name: 'Pošta Vrhovine', time: '5 min', km: '~2 km' },
-    { name: 'Dom zdravlja Otočac', time: '20 min', km: '~20 km' },
-    { name: 'More (Senj / Karlobag)', time: '55 min', km: '~55 km' },
-  ]},
-  { category: 'Restorani', items: [
-    { name: 'Restoran Big Bear', time: '3 min', km: '~2 km' },
-    { name: 'Restoran Jelen', time: '5 min', km: '~3 km' },
-    { name: 'Restorani Otočac', time: '20 min', km: '~15 km' },
-  ]},
-];
+import { MapPin, Navigation } from 'lucide-react';
 
 export function Location() {
   return (
@@ -52,7 +27,7 @@ export function Location() {
           />
         </div>
 
-        {/* Distances */}
+        {/* Address */}
         <div className="space-y-6">
           <div className="flex items-start gap-3 p-4 bg-cream rounded-card">
             <MapPin className="size-5 text-terracotta mt-0.5 shrink-0" />
@@ -70,31 +45,6 @@ export function Location() {
               </a>
             </div>
           </div>
-
-          {distances.map(group => (
-            <div key={group.category}>
-              <h3 className="text-xs font-semibold uppercase tracking-widest text-stone mb-3">
-                {group.category}
-              </h3>
-              <ul className="space-y-2">
-                {group.items.map(item => (
-                  <li
-                    key={item.name}
-                    className="flex items-center justify-between py-2 border-b border-stone-pale/60 last:border-0"
-                  >
-                    <span className="text-sm text-oak">{item.name}</span>
-                    <div className="flex items-center gap-3 shrink-0 ml-4">
-                      <span className="text-xs text-stone">{item.km}</span>
-                      <span className="flex items-center gap-1 text-xs text-forest font-medium">
-                        <Clock className="size-3" />
-                        {item.time}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
         </div>
       </div>
     </SectionWrapper>

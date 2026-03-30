@@ -11,7 +11,7 @@ const categories = [
     color: 'bg-forest',
     title: 'Netaknuta lička divljina',
     intro:
-      'Lika je jedna od najočuvanijih regija Hrvatske – here je priroda još uvijek na prvom mjestu. Oko kuće se rasprostiru prostrane šume, livade i planinski pejzaži koji mijenjaju lice sa svakim godišnjim dobom.',
+      'Lika je jedna od najočuvanijih regija Hrvatske – ovdje je priroda još uvijek na prvom mjestu. Oko kuće se rasprostiru prostrane šume, livade i planinski pejzaži koji mijenjaju lice sa svakim godišnjim dobom.',
     image: 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80',
     imageAlt: 'Netaknuta ličke šume i planinski pejzaž',
     activities: [
@@ -47,15 +47,16 @@ const categories = [
     color: 'bg-gold',
     title: 'Okusi Like',
     intro:
-      'Lička kuhinja nosi duh planina i tradicije. Jagnjetina s ražnja, peka, domaći sir i vrhnje, lovačka juha – ovo su okusi koji se pamte. U blizini kuće nalaze se izvrsni restorani koji donose te okuse na vaš tanjur.',
+      'Uživajte u autentičnim okusima Like – lička mlada janjetina s ražnja, tradicionalna peka, domaći škripavac i basa, uz nezaobilaznu ličku kalju. U blizini kuće nalaze se restorani koje svakako vrijedi posjetiti i doživjeti pravu gastronomiju ovog kraja.',
     image: 'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&q=80',
     imageAlt: 'Tradicionalna lička hrana na roštilju',
     activities: [
-      { name: 'Restoran Big Bear (kamp)', distance: '2 km', highlight: true },
-      { name: 'Restoran Jelen', distance: '3 km' },
-      { name: 'Restorani u Otočcu', distance: '15 km' },
+      { name: 'Restoran Big Bear (kamp)', distance: '3 min', highlight: true },
+      { name: 'Restoran Jelen', distance: '5 min' },
+      { name: 'Pizzeria Ruspante', distance: '20 min' },
+      { name: 'Restorani u Otočcu', distance: '20 min' },
       { name: 'Vlastiti roštilj i pečenjara u kući', distance: 'u dvorištu' },
-      { name: 'Konzum (Vrhovine / Otočac)', distance: '2–15 km' },
+      { name: 'Konzum (Vrhovine / Otočac)', distance: '5–20 min' },
     ],
   },
   {
@@ -64,16 +65,16 @@ const categories = [
     color: 'bg-oak',
     title: 'Sve što vrijedi vidjeti',
     intro:
-      'Villa Velebita savršena je baza za istraživanje cijele regije. U sat vremena vožnje dostupne su najpopularnije atrakcije Likeile i Kvarnera – od UNESCO prirodne baštine do jadranskih plaža.',
+      'Villa Velebita savršena je baza za istraživanje cijele regije. U sat vremena vožnje dostupne su najpopularnije atrakcije Like i Kvarnera – od UNESCO prirodne baštine do jadranskih plaža.',
     image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80',
     imageAlt: 'Plitvička jezera – UNESCO svjetska baština',
     activities: [
       { name: 'Plitvička jezera (UNESCO)', distance: '20 min', highlight: true },
-      { name: 'Lovište jelena lopatara Ličko Lešće', distance: '5 min' },
-      { name: 'More – Senj / Karlobag', distance: '55 km' },
-      { name: 'Grad Otočac', distance: '20 km' },
-      { name: 'Pošta Vrhovine', distance: '2 km' },
-      { name: 'Dom zdravlja Otočac', distance: '20 km' },
+      { name: 'Lovište jelena lopatara u Ličkom Lešću', distance: '5 min' },
+      { name: 'More – Senj / Karlobag', distance: '55 min' },
+      { name: 'Grad Otočac', distance: '20 min' },
+      { name: 'Pošta Vrhovine', distance: '5 min' },
+      { name: 'Dom zdravlja Otočac', distance: '20 min' },
     ],
   },
 ];
@@ -97,7 +98,7 @@ export function Experiences() {
             )}
           >
             {/* Image */}
-            <div className="relative aspect-[4/3] rounded-card overflow-hidden shadow-warm group">
+            <div className="relative aspect-4/3 rounded-card overflow-hidden shadow-warm group">
               <Image
                 src={cat.image}
                 alt={cat.imageAlt}
@@ -105,7 +106,7 @@ export function Experiences() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-oak/50 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-oak/50 to-transparent" />
               <span
                 className={cn(
                   'absolute top-4 left-4 text-xs font-semibold uppercase tracking-widest text-cream px-3 py-1.5 rounded-full',
