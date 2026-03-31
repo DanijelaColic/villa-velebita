@@ -30,12 +30,12 @@ const FAQ_ITEMS = [
   {
     question: 'Prihvaćate li kućne ljubimce?',
     answer:
-      'Kućni ljubimci se ne prihvaćaju kao standardna opcija. Ako imate poseban zahtjev, slobodno nas kontaktirajte unaprijed i dogovorit ćemo se.',
+      'Naravno, kućni ljubimci su dobrodošli 😊Primamo manje pasmine uz prethodnu najavu, kako bismo osigurali ugodan boravak za sve goste.',
   },
   {
     question: 'Kada je check-in, a kada check-out?',
     answer:
-      'Check-in je od 14:00, a check-out do 10:00. Za raniji dolazak ili kasniji odlazak, javite se unaprijed — nastojimo izaći u susret prema mogućnostima.',
+      'Check-in je od 14:00, a check-out do 11:00. Za raniji dolazak ili kasniji odlazak, javite se unaprijed — nastojimo izaći u susret prema mogućnostima.',
   },
   {
     question: 'Kako funkcionira jacuzzi?',

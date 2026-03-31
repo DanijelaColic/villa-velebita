@@ -6,6 +6,7 @@ import { Gallery } from '@/components/sections/Gallery';
 import { FloorPlan } from '@/components/sections/FloorPlan';
 import { Amenities } from '@/components/sections/Amenities';
 import { Experiences } from '@/components/sections/Experiences';
+import { CaffeBarPlitvice } from '@/components/sections/CaffeBarPlitvice';
 import { Location } from '@/components/sections/Location';
 import { Pricing } from '@/components/sections/Pricing';
 import { HouseRules } from '@/components/sections/HouseRules';
@@ -24,6 +25,7 @@ export default function HomePage() {
         <FloorPlan />
         <Amenities />
         <Experiences />
+        <CaffeBarPlitvice />
         <Location />
         <Pricing />
         <HouseRules />
