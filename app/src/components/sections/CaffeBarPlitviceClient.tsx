@@ -31,19 +31,19 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
       <SectionHeading
         label="Posebna preporuka"
         title="Caffe bar Plitvice"
-        subtitle="Mali kutak s velikom toplinom domaćina na putu prema Nacionalnom parku Plitvička jezera."
+        subtitle="Mali kutak s velikom toplinom domaćina na putu kroz prirodne ljepote Like."
       />
 
       <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
         <div className="lg:col-span-7 space-y-4 text-stone leading-relaxed">
           <p>
-            Na putu prema Nacionalnom parku Plitvička jezera, nalazi se jedno posebno
+          Na putu kroz ličke krajolike, nalazi se jedno posebno
             mjesto koje gosti dugo pamte - Caffe bar Plitvice.
           </p>
           <p>
-            Tamo vas uvijek dočekuje nasmijana Sniježa, uz toplinu domaćeg ličkog
-            ambijenta i miris svježe kave. No ono što ovo mjesto čini još posebnijim je
-            pažnja prema gostima - svi koji odsjednu u Villa Velebita imaju posebnu
+            Tamo vas uvijek dočekuje nasmijana gazdarica Sniježa i obitelj Gačević-Čakarić, 
+            uz toplinu domaćeg ličkog ambijenta i miris svježe Sniježine kavice. No ono
+            što ovo mjesto čini još posebnijim je pažnja prema gostima - svi koji odsjednu u Villa Velebita imaju posebnu
             dobrodošlicu.
           </p>
           <p>
