@@ -27,7 +27,7 @@ export const DEPOSIT_PERCENT = 0.3;
 export const MIN_NIGHTS = 3;
 
 /**
- * Visoka sezona: prazno jer je cijena ista cijele godine (560 €/noć flat rate).
+ * Visoka sezona: prazno jer je cijena ista cijele godine (590 €/noć flat rate).
  * Za sezonske razlike dodaj npr. [7, 8].
  */
 export const HIGH_SEASON_MONTHS: number[] = [];
@@ -59,8 +59,8 @@ export const apartments: Apartment[] = [
     view: false,
     balcony: false,
     floors: 2,
-    priceOffSeason: 560,
-    priceHighSeason: 560,
+    priceOffSeason: 590,
+    priceHighSeason: 590,
     fullyBooked: false,
     amenities: [
       'Besplatni WiFi',
@@ -71,7 +71,7 @@ export const apartments: Apartment[] = [
       'Vanjski jacuzzi',
       'Roštilj i pečenjara',
       'Terasa',
-      'Dječji krevetić (na upit)',
+      'Krevetić za bebu (besplatno, na upit)',
     ],
     images: [
       '/images/exterior/exterior-01.jpg',

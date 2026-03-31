@@ -21,8 +21,8 @@ export default function HomePage() {
       <main>
         <Hero />
         <About />
-        <Gallery />
         <FloorPlan />
+        <Gallery />
         <Amenities />
         <Experiences />
         <CaffeBarPlitvice />

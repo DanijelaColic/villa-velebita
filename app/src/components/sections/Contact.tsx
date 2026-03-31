@@ -6,10 +6,21 @@ import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 
-const CONTACT_PHONE_DISPLAY = '091 929 5907';
-const CONTACT_PHONE_LINK = '+385919295907';
-const CONTACT_NAME = 'Ivica Ćaćić';
-const CONTACT_EMAIL = 'Ivica.cacic485@gmail.com';
+const CONTACT_NAME = 'Ivica i Ivana Ćaćić';
+const CONTACTS = [
+  {
+    label: 'Ivana',
+    phoneDisplay: '095 750 3811',
+    phoneLink: '+385957503811',
+    email: 'Ivana.cacic485@gmail.com',
+  },
+  {
+    label: 'Ivica',
+    phoneDisplay: '091 929 5907',
+    phoneLink: '+385919295907',
+    email: 'Ivica.cacic485@gmail.com',
+  },
+];
 
 type ContactFormState = {
   name: string;
@@ -58,7 +69,7 @@ export function Contact() {
 
       setStatus({
         type: 'ok',
-        text: 'Hvala na upitu. Ivica će vas kontaktirati u najkraćem roku.',
+        text: 'Hvala na upitu. Ivica ili Ivana će vas kontaktirati u najkraćem roku.',
       });
       setForm(initialFormState);
     } catch (err) {
@@ -82,8 +93,10 @@ export function Contact() {
         {/* Lijevo: fiksni kontakt podaci koje korisnik odmah vidi. */}
         <div className="bg-white rounded-card p-6 md:p-8 shadow-card space-y-5">
           <p className="text-stone leading-relaxed">
-            Najbrži put do rezervacije je direktan kontakt. Ako želite, možete odmah nazvati ili
-            poslati email.
+            Villa Velebita nije samo kuća za odmor - to je mjesto gdje će vas dočekati Ivica i
+            Ivana Ćaćić, bračni par koji s ljubavlju i pažnjom brine o svakom detalju. Njihova
+            najveća želja je da se svaki gost osjeća kao kod kuće - opušteno, dobrodošlo i
+            bezbrižno, od prvog kontakta pa sve do odlaska.
           </p>
 
           <div className="space-y-4">
@@ -91,35 +104,43 @@ export function Contact() {
               <UserRound className="size-5 text-terracotta mt-0.5" />
               <div>
                 <p className="text-sm text-stone">Vlasnik</p>
+                {/* Kontakt je zajednički jer domaćini zajedno vode brigu o gostima i smještaju. */}
                 <p className="text-oak font-semibold">{CONTACT_NAME}</p>
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
-              <Phone className="size-5 text-terracotta mt-0.5" />
-              <div>
-                <p className="text-sm text-stone">Telefon</p>
-                <a
-                  href={`tel:${CONTACT_PHONE_LINK}`}
-                  className="text-oak font-semibold hover:text-terracotta transition-colors"
-                >
-                  {CONTACT_PHONE_DISPLAY}
-                </a>
-              </div>
-            </div>
+            {/* Svaki kontakt prikazujemo zasebno: ime, telefon i email. */}
+            {CONTACTS.map(contact => (
+              <div key={contact.email} className="rounded-btn border border-stone-pale bg-cream p-4 space-y-3">
+                <p className="text-oak font-semibold">{contact.label}</p>
 
-            <div className="flex items-start gap-3">
-              <Mail className="size-5 text-terracotta mt-0.5" />
-              <div>
-                <p className="text-sm text-stone">Email</p>
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="text-oak font-semibold break-all hover:text-terracotta transition-colors"
-                >
-                  {CONTACT_EMAIL}
-                </a>
+                <div className="flex items-start gap-3">
+                  <Phone className="size-5 text-terracotta mt-0.5" />
+                  <div>
+                    <p className="text-sm text-stone">Telefon</p>
+                    <a
+                      href={`tel:${contact.phoneLink}`}
+                      className="text-oak font-semibold hover:text-terracotta transition-colors"
+                    >
+                      {contact.phoneDisplay}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <Mail className="size-5 text-terracotta mt-0.5" />
+                  <div>
+                    <p className="text-sm text-stone">Email</p>
+                    <a
+                      href={`mailto:${contact.email}`}
+                      className="text-oak font-semibold break-all hover:text-terracotta transition-colors"
+                    >
+                      {contact.email}
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
 
