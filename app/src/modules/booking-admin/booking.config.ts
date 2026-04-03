@@ -34,6 +34,17 @@ export const CANCELLATION_POLICY_LINES_HR = [
 export const INVOICE_POLICY_HR =
   'Računi se izdaju prilikom dolaska ili odlaska gostiju.';
 
+/** Detaljan opis za stranicu rezervacije (155 m², tri etaže) */
+export const BOOKING_VILLA_LONG_DESCRIPTION_HR =
+  'Prostrana kuća od 155 m², raspoređena na tri etaže, pruža udoban smještaj za veći broj gostiju. Na raspolaganju su tri spavaće sobe – jedna s dva odvojena kreveta, druga s velikim bračnim krevetom i dodatnim ležajevima te treća s bračnim krevetom i dječjim krevetićem. Uz to, gostima su na raspolaganju dnevni boravak s kutnom garniturom na razvlačenje i poseban prostor za druženje s velikim hrastovim stolom. Dostupne su i dvije moderno opremljene kupaonice s hidromasažnim tušem.';
+
+/** Jedinstveni tekst plaćanja za ekran potvrde (nakon slanja upita) */
+export function formatPaymentTermsConfirmationHr(): string {
+  const dep = Math.round(DEPOSIT_PERCENT * 100);
+  const bal = 100 - dep;
+  return `Plaćanje: ${dep}% depozita pri rezervaciji na IBAN (primatelj: ${RECIPIENT_NAME}); preostalih ${bal}% uplatiti najkasnije ${BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska. Banka: ${RECIPIENT_BANK_NAME} — BIC/SWIFT ${RECIPIENT_BIC} (uplate iz inozemstva).`;
+}
+
 /** Isti smisao za gostiju e-mail (EN) */
 export const CANCELLATION_POLICY_LINES_EN = [
   'Up to 14 days before arrival — 100% refund of the deposit paid.',
@@ -79,14 +90,14 @@ export const apartments: Apartment[] = [
     name: 'Villa Velebita',
     tagline: 'Cijela villa za vas — privatnost, priroda, komfor.',
     description:
-      'Cijela villa s 3 spavaće sobe, 2 kupaone, potpuno opremljenom kuhinjom, dnevnim boravkom, vanjskim jauzzijem, roštiljem i pečenjarom. Idealno za obitelji i grupe do 9 osoba.',
-    capacity: 9,
-    capacityNote: 'do 9 osoba',
-    size: 160,
-    beds: '3 spavaće sobe (7 ležaja + dječji krevetić)',
+      'Cijela villa na tri etaže (155 m²), tri spavaće sobe, dvije kupaonice, potpuno opremljena kuhinja, dnevni boravak, vanjski jacuzzi, roštilj i pečenjara. Idealno za obitelji i grupe do 13 osoba.',
+    capacity: 13,
+    capacityNote: 'do 13 osoba',
+    size: 155,
+    beds: '3 spavaće sobe, razvlačna garnitura, dodatni ležajevi',
     view: false,
     balcony: false,
-    floors: 2,
+    floors: 3,
     priceOffSeason: 560,
     priceHighSeason: 560,
     fullyBooked: false,

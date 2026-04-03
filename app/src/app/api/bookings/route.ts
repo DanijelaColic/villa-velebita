@@ -16,12 +16,12 @@ export async function GET(request: NextRequest) {
   const slug = searchParams.get('apartment');
 
   if (!slug) {
-    return NextResponse.json({ error: 'Missing apartment parameter' }, { status: 400 });
+    return NextResponse.json({ error: 'Nedostaje parametar apartmana.' }, { status: 400 });
   }
 
   const apt = getApartment(slug);
   if (!apt) {
-    return NextResponse.json({ error: 'Apartment not found' }, { status: 404 });
+    return NextResponse.json({ error: 'Smještaj nije pronađen.' }, { status: 404 });
   }
 
   if (apt.fullyBooked) {
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(data ?? []);
   } catch (err) {
     console.error('[GET /api/bookings] Supabase error:', err);
-    return NextResponse.json({ error: 'Error fetching bookings' }, { status: 500 });
+    return NextResponse.json({ error: 'Greška pri dohvaćanju rezervacija.' }, { status: 500 });
   }
 }
 
@@ -63,17 +63,17 @@ export async function POST(request: NextRequest) {
     } = body;
 
     if (!apartment_slug || !check_in || !check_out || !guest_name || !guest_email) {
-      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+      return NextResponse.json({ error: 'Nedostaju obavezni podaci.' }, { status: 400 });
     }
 
     const apt = getApartment(apartment_slug);
     if (!apt) {
-      return NextResponse.json({ error: 'Apartment not found' }, { status: 404 });
+      return NextResponse.json({ error: 'Smještaj nije pronađen.' }, { status: 404 });
     }
 
     if (apt.fullyBooked) {
       return NextResponse.json(
-        { error: 'This apartment is not available for booking' },
+        { error: 'Ovaj smještaj trenutačno nije dostupan za rezervaciju.' },
         { status: 400 },
       );
     }
@@ -107,7 +107,7 @@ export async function POST(request: NextRequest) {
 
     if (!isRangeAvailable(checkInDate, checkOutDate, existing ?? [])) {
       return NextResponse.json(
-        { error: 'Selected dates are already booked. Please choose different dates.' },
+        { error: 'Odabrani datumi su već zauzeti. Molimo odaberite druge datume.' },
         { status: 409 },
       );
     }
@@ -165,7 +165,7 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     console.error('Booking error:', err);
     return NextResponse.json(
-      { error: 'Error creating booking. Please try again or contact us.' },
+      { error: 'Greška pri spremanju rezervacije. Pokušajte ponovno ili nas kontaktirajte.' },
       { status: 500 },
     );
   }

@@ -28,7 +28,7 @@ const FAQ_ITEMS = [
   {
     question: 'Koliko gostiju može boraviti u villi?',
     answer:
-      'Villa prima do 9 gostiju — 7 u standardnim krevetima raspoređenim u tri spavaće sobe, plus 2 na pomoćnim ležajevima. Kapacitet je idealan za veće obitelji ili grupu prijatelja.',
+      'Kuća je predviđena za do 13 gostiju — tri spavaće sobe, razvlačna garnitura u dnevnom boravku i dodatni ležajevi. Pogodna je za veće obitelji ili grupe prijatelja.',
   },
   {
     question: 'Što je uključeno u cijenu najma?',
@@ -38,7 +38,7 @@ const FAQ_ITEMS = [
   {
     question: 'Kakav je minimalni boravak?',
     answer:
-      'Minimalni boravak su 3 noći. Osnovna cijena je 560 € po noći za cijelu kuću (do 9 osoba), odnosno 62,22 € po osobi (560/9). Za rezervacije od 7 ili više noći dobivate popust od 10%.',
+      'Minimalni boravak su 3 noći. Osnovna cijena je 560 € po noći za cijelu kuću (do 13 osoba). Za rezervacije od 7 ili više noći dobivate popust od 10%.',
   },
   {
     question: 'Prihvaćate li kućne ljubimce?',

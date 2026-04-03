@@ -65,9 +65,9 @@ export default function BookingCalendar({
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) setBookedRanges(data);
-        else setError('Error loading availability');
+        else setError('Greška pri učitavanju dostupnosti.');
       })
-      .catch(() => setError('Error loading available dates'))
+      .catch(() => setError('Greška pri učitavanju slobodnih datuma.'))
       .finally(() => setLoading(false));
   }, [apartmentSlug, bookingsApiPath]);
 
@@ -162,7 +162,7 @@ export default function BookingCalendar({
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20 text-muted text-sm">
-        <span className="animate-pulse">Loading calendar...</span>
+        <span className="animate-pulse">Učitavam kalendar…</span>
       </div>
     );
   }
@@ -177,22 +177,22 @@ export default function BookingCalendar({
       <div className="flex flex-wrap items-center gap-4 mb-6 text-xs text-muted">
         <span className="flex items-center gap-1.5">
           <span className="w-3.5 h-3.5 rounded-sm bg-green-100 border border-green-300 inline-block" />
-          Available
+          Slobodno
         </span>
         <span className="flex items-center gap-1.5">
           <span className="w-3.5 h-3.5 rounded-sm bg-red-100 border border-red-300 inline-block" />
-          Unavailable
+          Zauzeto
         </span>
         <span className="flex items-center gap-1.5">
           <span className="w-3.5 h-3.5 rounded-sm bg-primary inline-block" />
-          Selected
+          Odabrano
         </span>
         {!checkIn && (
-          <span className="ml-auto text-secondary font-medium">Select check-in date</span>
+          <span className="ml-auto text-secondary font-medium">Odaberite datum dolaska</span>
         )}
         {checkIn && !checkOut && (
           <span className="ml-auto text-secondary font-medium">
-            Select check-out (min. {minNights} nights)
+            Odaberite datum odlaska (min. {minNights} {minNights === 1 ? 'noć' : 'noći'})
           </span>
         )}
       </div>
@@ -203,14 +203,14 @@ export default function BookingCalendar({
           onClick={() => setMonthOffset((o) => Math.max(0, o - 1))}
           disabled={monthOffset === 0}
           className="p-2 rounded-full hover:bg-sand disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          aria-label="Previous month"
+          aria-label="Prethodni mjesec"
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={() => setMonthOffset((o) => o + 2)}
           className="p-2 rounded-full hover:bg-sand transition-colors"
-          aria-label="Next month"
+          aria-label="Sljedeći mjesec"
         >
           <ChevronRight size={20} />
         </button>
@@ -223,6 +223,7 @@ export default function BookingCalendar({
             key={`${year}-${month}`}
             year={year}
             month={month}
+            minNights={minNights}
             getDayState={getDayState}
             onDayClick={handleDayClick}
             onDayHover={handleDayHover}
@@ -236,7 +237,7 @@ export default function BookingCalendar({
             onClick={onReset}
             className="text-sm text-muted hover:text-primary underline underline-offset-2 transition-colors"
           >
-            Clear selection
+            Poništi odabir
           </button>
         </div>
       )}
@@ -249,12 +250,13 @@ export default function BookingCalendar({
 type MonthGridProps = {
   year: number;
   month: number;
+  minNights: number;
   getDayState: (day: Date) => DayState;
   onDayClick: (day: Date) => void;
   onDayHover: (day: Date) => void;
 };
 
-function MonthGrid({ year, month, getDayState, onDayClick, onDayHover }: MonthGridProps) {
+function MonthGrid({ year, month, minNights, getDayState, onDayClick, onDayHover }: MonthGridProps) {
   const grid = getMonthGrid(year, month);
 
   return (
@@ -306,9 +308,9 @@ function MonthGrid({ year, month, getDayState, onDayClick, onDayHover }: MonthGr
               )}
               title={
                 state === 'booked'
-                  ? 'Unavailable'
+                  ? 'Zauzeto'
                   : state === 'too-close'
-                    ? `Minimum stay is ${2} nights`
+                    ? `Minimalni boravak: ${minNights} ${minNights === 1 ? 'noć' : 'noći'}`
                     : undefined
               }
             >

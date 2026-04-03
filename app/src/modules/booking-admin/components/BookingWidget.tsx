@@ -1,26 +1,28 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import { Check, AlertCircle, Loader2 } from 'lucide-react';
-import clsx from 'clsx';
 import BookingCalendar from './BookingCalendar';
 import { formatDisplayDate, formatShortDate, formatDate, calculatePrice } from '../lib/dates';
 import {
   apartments,
   RECIPIENT_IBAN,
   RECIPIENT_NAME,
-  RECIPIENT_BIC,
-  RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
-  BALANCE_DAYS_BEFORE_CHECK_IN,
   MIN_NIGHTS,
   CANCELLATION_POLICY_LINES_HR,
   INVOICE_POLICY_HR,
+  BOOKING_VILLA_LONG_DESCRIPTION_HR,
+  formatPaymentTermsConfirmationHr,
 } from '../booking.config';
 
-const AVAILABLE_APARTMENTS = apartments.filter((a) => !a.fullyBooked);
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
 const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
+
+function nightsLabel(n: number): string {
+  if (n === 1) return '1 noć';
+  return `${n} noći`;
+}
 
 type FormData = {
   name: string;
@@ -48,12 +50,16 @@ export default function BookingWidget({
   barcodeApiPath = '/api/generate-barcode',
   rulesText,
 }: Props) {
-  const defaultSlug =
-    initialSlug && !apartments.find((a) => a.slug === initialSlug)?.fullyBooked
-      ? initialSlug
-      : AVAILABLE_APARTMENTS[0]?.slug ?? '';
+  const selectedSlug = useMemo(() => {
+    const available = apartments.filter((a) => !a.fullyBooked);
+    const fromParam =
+      initialSlug && !apartments.find((a) => a.slug === initialSlug)?.fullyBooked
+        ? initialSlug
+        : null;
+    return fromParam ?? available[0]?.slug ?? '';
+  }, [initialSlug]);
 
-  const [selectedSlug, setSelectedSlug] = useState(defaultSlug);
+  const successRef = useRef<HTMLDivElement>(null);
   const [checkIn, setCheckIn] = useState<Date | null>(null);
   const [checkOut, setCheckOut] = useState<Date | null>(null);
   const [form, setForm] = useState<FormData>({
@@ -65,6 +71,12 @@ export default function BookingWidget({
   const [hub3Barcode, setHub3Barcode] = useState<string | null>(null);
   const [epcQR, setEpcQR] = useState<string | null>(null);
   const [barcodeLoading, setBarcodeLoading] = useState(false);
+
+  useEffect(() => {
+    if (success && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [success]);
 
   const selectedApartment = apartments.find((a) => a.slug === selectedSlug);
   const priceData =
@@ -101,14 +113,6 @@ export default function BookingWidget({
     setCheckOut(null);
   }, []);
 
-  const handleApartmentChange = useCallback(
-    (slug: string) => {
-      setSelectedSlug(slug);
-      handleReset();
-    },
-    [handleReset],
-  );
-
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
@@ -135,7 +139,7 @@ export default function BookingWidget({
     const totalGuests = parseInt(form.adults) + parseInt(form.children);
     if (totalGuests > selectedApartment.capacity) {
       setSubmitError(
-        `${selectedApartment.name} accommodates a maximum of ${selectedApartment.capacity} guests.`,
+        `${selectedApartment.name}: maksimalno ${selectedApartment.capacity} gostiju.`,
       );
       return;
     }
@@ -161,71 +165,87 @@ export default function BookingWidget({
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? 'Error sending request');
+      if (!res.ok) throw new Error(data.error ?? 'Slanje upita nije uspjelo.');
       setSuccess(true);
       if (priceData && data.bookingId) {
         fetchBarcodes(priceData.deposit, form.name, data.bookingId);
       }
     } catch (err) {
-      setSubmitError(err instanceof Error ? err.message : 'Error sending booking request');
+      setSubmitError(
+        err instanceof Error ? err.message : 'Slanje upita za rezervaciju nije uspjelo.',
+      );
     } finally {
       setSubmitting(false);
     }
   };
 
-  // ── Success screen ─────────────────────────────────────────────
+  // ── Potvrda upita (nakon slanja) ───────────────────────────────
   if (success) {
     return (
-      <div className="max-w-lg mx-auto text-center py-16 px-4">
+      <div
+        ref={successRef}
+        className="max-w-lg mx-auto text-center py-8 sm:py-12 px-4 scroll-mt-24"
+      >
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <Check size={32} className="text-green-600" />
         </div>
         <h2 className="font-serif text-2xl font-semibold text-text mb-3">
-          Booking request received!
+          Upit za rezervaciju zaprimljen!
         </h2>
         <p className="text-muted leading-relaxed mb-6">
-          Thank you, <strong className="text-text">{form.name}</strong>! We sent a confirmation to{' '}
-          <strong className="text-text">{form.email}</strong>. We will contact you shortly.
+          Hvala vam, <strong className="text-text">{form.name}</strong>! Poslali smo potvrdu na{' '}
+          <strong className="text-text">{form.email}</strong>. Javit ćemo vam se u najkraćem roku.
         </p>
 
         {priceData && (
-          <div className="bg-sand-light rounded-xl p-5 text-left text-sm mb-6">
-            <p className="text-muted mb-1">
-              <strong className="text-text">Apartment:</strong> {selectedApartment?.name}
+          <div className="bg-sand-light rounded-xl p-5 text-left text-sm mb-6 space-y-3">
+            <p className="text-muted">
+              <strong className="text-text">Smještaj:</strong> {selectedApartment?.name}
             </p>
-            <p className="text-muted mb-1">
-              <strong className="text-text">Check-in:</strong>{' '}
+            <p className="text-muted">
+              <strong className="text-text">Dolazak:</strong>{' '}
               {checkIn ? formatDisplayDate(checkIn) : ''}
             </p>
-            <p className="text-muted mb-1">
-              <strong className="text-text">Check-out:</strong>{' '}
+            <p className="text-muted">
+              <strong className="text-text">Odlazak:</strong>{' '}
               {checkOut ? formatDisplayDate(checkOut) : ''}
             </p>
-            <p className="text-muted mb-1">
-              <strong className="text-text">Nights:</strong> {priceData.nights}
+            <p className="text-muted">
+              <strong className="text-text">Noćenja:</strong> {nightsLabel(priceData.nights)}
             </p>
-            <div className="border-t border-sand mt-3 pt-3 flex justify-between items-center">
-              <strong className="text-text">Total:</strong>
-              <span className="text-primary font-bold text-lg">{priceData.totalPrice}€</span>
+            <div className="border-t border-sand pt-3 flex justify-between items-center">
+              <strong className="text-text">Ukupno:</strong>
+              <span className="text-primary font-bold text-lg">{priceData.totalPrice} €</span>
             </div>
-            <p className="text-muted mt-2">
-              <strong className="text-text">Deposit ({DEPOSIT_PCT_DISPLAY}%):</strong>{' '}
-              <span className="text-secondary font-semibold">{priceData.deposit}€</span>
+            <p className="text-muted">
+              <strong className="text-text">Depozit ({DEPOSIT_PCT_DISPLAY}%):</strong>{' '}
+              <span className="text-secondary font-semibold">{priceData.deposit} €</span>
+              <span className="text-muted"> — plaća se pri samoj rezervaciji.</span>
             </p>
-            <p className="text-muted mt-1">
-              <strong className="text-text">Balance ({BALANCE_PCT_DISPLAY}%):</strong>{' '}
+            <p className="text-muted">
+              <strong className="text-text">Ostatak ({BALANCE_PCT_DISPLAY}%):</strong>{' '}
               <span className="text-text font-medium">
-                {priceData.totalPrice - priceData.deposit}€
-              </span>
-              <span className="text-muted">
-                {' '}
-                — due no later than {BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in (same IBAN)
+                {priceData.totalPrice - priceData.deposit} €
               </span>
             </p>
 
-            {/* IBAN — booking.config (override env-om na deployu) */}
+            <div className="border-t border-sand pt-3 space-y-2 text-muted text-xs leading-relaxed">
+              <p>{formatPaymentTermsConfirmationHr()}</p>
+              <p>
+                <strong className="text-text">Otkazivanje (depozit):</strong>
+              </p>
+              <ul className="list-disc pl-4 space-y-1">
+                {CANCELLATION_POLICY_LINES_HR.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+              <p>
+                <strong className="text-text">Računi:</strong> {INVOICE_POLICY_HR}
+              </p>
+            </div>
+
             {RECIPIENT_IBAN && (
-              <div className="mt-3 font-mono text-xs bg-white border border-sand px-3 py-2 rounded-lg space-y-1">
+              <div className="font-mono text-xs bg-white border border-sand px-3 py-2 rounded-lg space-y-1">
                 {RECIPIENT_NAME && (
                   <p className="font-sans text-text font-medium">{RECIPIENT_NAME}</p>
                 )}
@@ -233,44 +253,45 @@ export default function BookingWidget({
               </div>
             )}
 
-            {/* QR barcodes = iznos depozita */}
             {(barcodeLoading || hub3Barcode || epcQR) && (
-              <div className="mt-4 pt-4 border-t border-sand">
-                <p className="text-xs font-semibold text-text mb-3">Quick pay with QR code:</p>
+              <div className="pt-4 border-t border-sand">
+                <p className="text-xs font-semibold text-text mb-3 text-center">
+                  Brzo plaćanje QR kodom (iznos = depozit)
+                </p>
                 {barcodeLoading ? (
                   <div className="flex items-center justify-center gap-2 py-4 text-xs text-muted">
                     <Loader2 size={14} className="animate-spin" />
-                    Generating QR codes...
+                    Generiram QR kodove…
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {hub3Barcode && (
                       <div className="bg-white border border-sand rounded-lg p-3 text-center">
                         <p className="text-[11px] font-semibold text-text mb-2">
-                          🇭🇷 Croatian bank
+                          🇭🇷 Hrvatske banke
                         </p>
                         <img
                           src={hub3Barcode}
-                          alt="HUB3 PDF417 barcode"
+                          alt="HUB3 PDF417 barkod"
                           className="max-w-full h-auto mx-auto"
                         />
                         <p className="text-[10px] text-muted mt-2">
-                          m-zaba, m-keks, Erste, OTP, PBZ...
+                          m-zaba, m-keks, Erste, OTP, PBZ…
                         </p>
                       </div>
                     )}
                     {epcQR && (
                       <div className="bg-white border border-sand rounded-lg p-3 text-center">
                         <p className="text-[11px] font-semibold text-text mb-2">
-                          🌍 EU / international
+                          🌍 EU / inozemstvo
                         </p>
                         <img
                           src={epcQR}
-                          alt="EPC SEPA QR code"
+                          alt="EPC SEPA QR kod"
                           className="max-w-full h-auto mx-auto"
                         />
                         <p className="text-[10px] text-muted mt-2">
-                          Revolut, N26, Wise, SEPA...
+                          Revolut, N26, Wise, SEPA…
                         </p>
                       </div>
                     )}
@@ -282,6 +303,7 @@ export default function BookingWidget({
         )}
 
         <button
+          type="button"
           onClick={() => {
             setSuccess(false);
             setHub3Barcode(null);
@@ -293,7 +315,7 @@ export default function BookingWidget({
           }}
           className="text-sm text-primary underline underline-offset-2"
         >
-          New booking
+          Nova rezervacija
         </button>
       </div>
     );
@@ -301,47 +323,20 @@ export default function BookingWidget({
 
   return (
     <div>
-      {/* ── 1. Odabir apartmana ───────────────────────────────────── */}
+      {/* Opis objekta (155 m²) */}
       <section className="mb-8">
-        <h2 className="font-serif text-xl font-semibold text-text mb-4">
-          1. Select apartment
-        </h2>
-        <div className="flex flex-wrap gap-3">
-          {AVAILABLE_APARTMENTS.map((apt) => (
-            <button
-              key={apt.slug}
-              onClick={() => handleApartmentChange(apt.slug)}
-              className={clsx(
-                'px-5 py-2.5 rounded-full text-sm font-medium border transition-all',
-                selectedSlug === apt.slug
-                  ? 'bg-primary text-white border-primary'
-                  : 'border-sand text-text hover:border-primary hover:text-primary',
-              )}
-            >
-              {apt.name}
-              <span className="ml-2 text-xs opacity-70">{apt.capacityNote}</span>
-            </button>
-          ))}
-        </div>
-        {selectedApartment && (
-          <p className="text-sm text-muted mt-3">
-            {selectedApartment.size} m² · {selectedApartment.beds}
-            {selectedApartment.view && ' · Sea view'}
-            {selectedApartment.balcony && ' · Balcony'}
-          </p>
-        )}
+        <p className="text-sm text-muted leading-relaxed">{BOOKING_VILLA_LONG_DESCRIPTION_HR}</p>
       </section>
 
-      {/* ── 2. Kalendar ──────────────────────────────────────────── */}
+      {/* ── 1. Kalendar ──────────────────────────────────────────── */}
       <section className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="font-serif text-xl font-semibold text-text">
-            2. Select dates
-          </h2>
-          {checkIn && checkOut && (
+        <div className="flex items-center justify-between mb-4 gap-2 flex-wrap">
+          <h2 className="font-serif text-xl font-semibold text-text">1. Odabir datuma</h2>
+          {checkIn && checkOut && priceData && (
             <span className="text-sm text-secondary font-medium">
               {formatShortDate(checkIn)} → {formatShortDate(checkOut)}
-              {' '}· {priceData?.nights} nights
+              {' '}
+              · {nightsLabel(priceData.nights)}
             </span>
           )}
         </div>
@@ -360,71 +355,46 @@ export default function BookingWidget({
         </div>
       </section>
 
-      {/* ── 3. Sažetak + forma ───────────────────────────────────── */}
+      {/* ── 2. Sažetak + forma ───────────────────────────────────── */}
       {checkIn && checkOut && priceData && selectedApartment && (
         <>
-          {/* Price summary */}
           <section className="mb-8">
-            <h2 className="font-serif text-xl font-semibold text-text mb-4">
-              Price summary
-            </h2>
+            <h2 className="font-serif text-xl font-semibold text-text mb-4">2. Sažetak cijene</h2>
             <div className="bg-sand-light rounded-xl p-5">
-              <div className="flex justify-between items-center mb-3">
+              <div className="flex justify-between items-center mb-3 gap-2 flex-wrap">
                 <span className="text-sm text-muted">
                   {formatDisplayDate(checkIn)} → {formatDisplayDate(checkOut)}
                 </span>
-                <span className="text-sm text-muted">{priceData.nights} nights</span>
+                <span className="text-sm text-muted">{nightsLabel(priceData.nights)}</span>
               </div>
 
               {priceData.lines.map((line) => (
-                <div key={line.label} className="flex justify-between text-sm mb-1">
+                <div key={line.label} className="flex justify-between text-sm mb-1 gap-2">
                   <span className="text-muted">
-                    {line.nights}× night ({line.label}) · {line.pricePerNight}€
+                    {line.nights}× noć ({line.label}) · {line.pricePerNight} €
                   </span>
-                  <span className="text-text font-medium">{line.subtotal}€</span>
+                  <span className="text-text font-medium shrink-0">{line.subtotal} €</span>
                 </div>
               ))}
 
               <div className="border-t border-sand mt-3 pt-3 flex justify-between items-center">
-                <span className="font-semibold text-text">Total</span>
-                <span className="font-semibold text-primary text-xl">{priceData.totalPrice}€</span>
+                <span className="font-semibold text-text">Ukupno</span>
+                <span className="font-semibold text-primary text-xl">{priceData.totalPrice} €</span>
               </div>
-
-              <div className="mt-3 flex justify-between items-center text-sm">
-                <span className="text-muted">Deposit ({DEPOSIT_PCT_DISPLAY}%)</span>
-                <span className="font-medium text-secondary">{priceData.deposit}€</span>
-              </div>
-              <div className="mt-1 flex justify-between items-center text-sm">
-                <span className="text-muted">Balance ({BALANCE_PCT_DISPLAY}%)</span>
-                <span className="font-medium text-text">
-                  {priceData.totalPrice - priceData.deposit}€
-                </span>
-              </div>
-              <p className="text-[11px] text-muted mt-1">
-                Pay balance no later than {BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in.
+              <p className="text-[11px] text-muted mt-2">
+                Uvjeti plaćanja, otkazivanja i IBAN prikazuju se nakon slanja upita, na ekranu
+                potvrde.
               </p>
-
-              {RECIPIENT_IBAN && (
-                <div className="text-xs text-muted mt-2 space-y-0.5">
-                  {RECIPIENT_NAME && (
-                    <p className="font-sans text-text font-medium">{RECIPIENT_NAME}</p>
-                  )}
-                  <p className="font-mono">IBAN: {RECIPIENT_IBAN}</p>
-                </div>
-              )}
             </div>
           </section>
 
-          {/* Guest form */}
           <section>
-            <h2 className="font-serif text-xl font-semibold text-text mb-4">
-              3. Your details
-            </h2>
+            <h2 className="font-serif text-xl font-semibold text-text mb-4">3. Vaši podaci</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text mb-1.5">
-                    Full name <span className="text-red-400">*</span>
+                    Ime i prezime <span className="text-red-400">*</span>
                   </label>
                   <input
                     name="name"
@@ -432,12 +402,12 @@ export default function BookingWidget({
                     onChange={handleFormChange}
                     required
                     className="w-full border border-sand rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Jane Smith"
+                    placeholder="Ana Horvat"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text mb-1.5">
-                    Email <span className="text-red-400">*</span>
+                    E-pošta <span className="text-red-400">*</span>
                   </label>
                   <input
                     name="email"
@@ -446,7 +416,7 @@ export default function BookingWidget({
                     onChange={handleFormChange}
                     required
                     className="w-full border border-sand rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="jane@email.com"
+                    placeholder="ana@primjer.hr"
                   />
                 </div>
               </div>
@@ -454,7 +424,7 @@ export default function BookingWidget({
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-text mb-1.5">
-                    Phone / WhatsApp <span className="text-red-400">*</span>
+                    Mobitel / WhatsApp <span className="text-red-400">*</span>
                   </label>
                   <input
                     name="phone"
@@ -463,11 +433,11 @@ export default function BookingWidget({
                     onChange={handleFormChange}
                     required
                     className="w-full border border-sand rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors"
-                    placeholder="+1 234 567 8900"
+                    placeholder="+385 91 234 5678"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-text mb-1.5">Adults</label>
+                  <label className="block text-sm font-medium text-text mb-1.5">Odrasli</label>
                   <select
                     name="adults"
                     value={form.adults}
@@ -475,12 +445,16 @@ export default function BookingWidget({
                     className="w-full border border-sand rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors bg-white"
                   >
                     {Array.from({ length: selectedApartment.capacity }, (_, i) => i + 1).map(
-                      (n) => <option key={n} value={n}>{n}</option>,
+                      (n) => (
+                        <option key={n} value={n}>
+                          {n}
+                        </option>
+                      ),
                     )}
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-text mb-1.5">Children</label>
+                  <label className="block text-sm font-medium text-text mb-1.5">Djeca</label>
                   <select
                     name="children"
                     value={form.children}
@@ -494,17 +468,21 @@ export default function BookingWidget({
                           1,
                       },
                       (_, i) => i,
-                    ).map((n) => <option key={n} value={n}>{n}</option>)}
+                    ).map((n) => (
+                      <option key={n} value={n}>
+                        {n}
+                      </option>
+                    ))}
                   </select>
                   <p className="text-xs text-muted mt-1">
-                    Max. {selectedApartment.capacity} guests total
+                    Najviše {selectedApartment.capacity} gostiju ukupno
                   </p>
                 </div>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-text mb-1.5">
-                  Notes (optional)
+                  Napomena (nije obavezno)
                 </label>
                 <textarea
                   name="notes"
@@ -512,30 +490,16 @@ export default function BookingWidget({
                   onChange={handleFormChange}
                   rows={3}
                   className="w-full border border-sand rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-primary transition-colors resize-none"
-                  placeholder="Special requests, questions..."
+                  placeholder="Posebne želje ili pitanja…"
                 />
               </div>
 
-              {/* Pravila — custom ili default */}
               {rulesText ?? (
                 <div className="bg-sand-light rounded-xl p-4 text-xs text-muted space-y-1">
                   <p>
-                    <strong className="text-text">Check-in:</strong> 14:00 – 23:00
+                    <strong className="text-text">Dolazak (check-in):</strong> 14:00 – 23:00
                     &nbsp;|&nbsp;
-                    <strong className="text-text">Check-out:</strong> 09:00 – 11:00
-                  </p>
-                  <p>
-                    <strong className="text-text">Payment:</strong>{' '}
-                    {DEPOSIT_PCT_DISPLAY}% deposit when booking; remaining {BALANCE_PCT_DISPLAY}% no
-                    later than {BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in (same IBAN,{' '}
-                    {RECIPIENT_BANK_NAME}, BIC {RECIPIENT_BIC}).
-                  </p>
-                  <p>
-                    <strong className="text-text">Cancellation (deposit):</strong>{' '}
-                    {CANCELLATION_POLICY_LINES_HR.join(' ')}
-                  </p>
-                  <p>
-                    <strong className="text-text">Invoices:</strong> {INVOICE_POLICY_HR}
+                    <strong className="text-text">Odlazak (check-out):</strong> 09:00 – 11:00
                   </p>
                 </div>
               )}
@@ -550,7 +514,7 @@ export default function BookingWidget({
                   className="mt-0.5 accent-primary"
                 />
                 <span className="text-sm text-muted">
-                  I agree with the house rules and booking terms.
+                  Slažem se s pravilima kuće i uvjetima rezervacije.
                   <span className="text-red-400"> *</span>
                 </span>
               </label>
@@ -569,8 +533,8 @@ export default function BookingWidget({
               >
                 {submitting && <Loader2 size={16} className="animate-spin" />}
                 {submitting
-                  ? 'Sending...'
-                  : `Send booking request · ${priceData.totalPrice}€`}
+                  ? 'Šaljem…'
+                  : `Pošalji upit za rezervaciju · ${priceData.totalPrice} €`}
               </button>
             </form>
           </section>

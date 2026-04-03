@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, X, Phone } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
@@ -16,6 +17,7 @@ const navLinks = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -43,6 +45,13 @@ export function Navbar() {
               'font-display font-semibold text-xl md:text-2xl transition-colors',
               scrolled ? 'text-oak' : 'text-cream drop-shadow-md',
             )}
+            onClick={e => {
+              setOpen(false);
+              if (pathname === '/') {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
           >
             Villa <span className="text-terracotta-light">Velebita</span>
           </Link>
