@@ -31,6 +31,12 @@ function getResend(): Resend | null {
 
 const FROM = () => process.env.RESEND_FROM ?? 'onboarding@resend.dev';
 const OWNER = () => OWNER_EMAIL || (process.env.OWNER_EMAIL ?? '');
+
+/** U test fazi: postavi RESEND_TEST_RECIPIENT — svi `to` idu tamo (gost, vlasnik, kontakt). U produkciji ostavi prazno. */
+function resolveRecipient(actualTo: string): string {
+  const test = process.env.RESEND_TEST_RECIPIENT?.trim();
+  return test || actualTo;
+}
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
 const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
 
@@ -90,7 +96,7 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
     }),
     resend.emails.send({
       from: FROM(),
-      to: OWNER(),
+      to: resolveRecipient(OWNER()),
       subject: `New booking – ${data.guestName} | ${data.apartmentName}`,
       html: ownerNewBookingHtml(fullData),
     }),
@@ -128,7 +134,7 @@ export async function sendConfirmationEmail(data: BookingEmailData) {
 
   const result = await resend.emails.send({
     from: FROM(),
-    to: data.guestEmail,
+    to: resolveRecipient(data.guestEmail),
     subject: `Booking confirmed ✓ – ${data.apartmentName} | ${SITE_NAME}`,
     html: guestConfirmedHtml(fullData),
     ...(attachments.length > 0 && { attachments }),
@@ -148,7 +154,7 @@ export async function sendContactEmail(opts: {
 
   await resend.emails.send({
     from: FROM(),
-    to: OWNER(),
+    to: resolveRecipient(OWNER()),
     subject: `New contact message – ${opts.senderName}`,
     html: contactEmailHtml(opts),
   });
