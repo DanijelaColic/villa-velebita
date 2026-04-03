@@ -8,12 +8,19 @@ import { formatDisplayDate, formatShortDate, formatDate, calculatePrice } from '
 import {
   apartments,
   RECIPIENT_IBAN,
+  RECIPIENT_NAME,
+  RECIPIENT_BIC,
+  RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
+  BALANCE_DAYS_BEFORE_CHECK_IN,
   MIN_NIGHTS,
+  CANCELLATION_POLICY_LINES_HR,
+  INVOICE_POLICY_HR,
 } from '../booking.config';
 
 const AVAILABLE_APARTMENTS = apartments.filter((a) => !a.fullyBooked);
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
+const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
 
 type FormData = {
   name: string;
@@ -205,15 +212,28 @@ export default function BookingWidget({
               <strong className="text-text">Deposit ({DEPOSIT_PCT_DISPLAY}%):</strong>{' '}
               <span className="text-secondary font-semibold">{priceData.deposit}€</span>
             </p>
+            <p className="text-muted mt-1">
+              <strong className="text-text">Balance ({BALANCE_PCT_DISPLAY}%):</strong>{' '}
+              <span className="text-text font-medium">
+                {priceData.totalPrice - priceData.deposit}€
+              </span>
+              <span className="text-muted">
+                {' '}
+                — due no later than {BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in (same IBAN)
+              </span>
+            </p>
 
-            {/* IBAN — prikazuje se samo ako je konfiguriran */}
+            {/* IBAN — booking.config (override env-om na deployu) */}
             {RECIPIENT_IBAN && (
-              <p className="mt-3 font-mono text-xs bg-white border border-sand px-3 py-2 rounded-lg">
-                IBAN: {RECIPIENT_IBAN}
-              </p>
+              <div className="mt-3 font-mono text-xs bg-white border border-sand px-3 py-2 rounded-lg space-y-1">
+                {RECIPIENT_NAME && (
+                  <p className="font-sans text-text font-medium">{RECIPIENT_NAME}</p>
+                )}
+                <p>IBAN: {RECIPIENT_IBAN}</p>
+              </div>
             )}
 
-            {/* QR barcodes za uplatu depozita */}
+            {/* QR barcodes = iznos depozita */}
             {(barcodeLoading || hub3Barcode || epcQR) && (
               <div className="mt-4 pt-4 border-t border-sand">
                 <p className="text-xs font-semibold text-text mb-3">Quick pay with QR code:</p>
@@ -374,9 +394,23 @@ export default function BookingWidget({
                 <span className="text-muted">Deposit ({DEPOSIT_PCT_DISPLAY}%)</span>
                 <span className="font-medium text-secondary">{priceData.deposit}€</span>
               </div>
+              <div className="mt-1 flex justify-between items-center text-sm">
+                <span className="text-muted">Balance ({BALANCE_PCT_DISPLAY}%)</span>
+                <span className="font-medium text-text">
+                  {priceData.totalPrice - priceData.deposit}€
+                </span>
+              </div>
+              <p className="text-[11px] text-muted mt-1">
+                Pay balance no later than {BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in.
+              </p>
 
               {RECIPIENT_IBAN && (
-                <p className="text-xs text-muted mt-1 font-mono">IBAN: {RECIPIENT_IBAN}</p>
+                <div className="text-xs text-muted mt-2 space-y-0.5">
+                  {RECIPIENT_NAME && (
+                    <p className="font-sans text-text font-medium">{RECIPIENT_NAME}</p>
+                  )}
+                  <p className="font-mono">IBAN: {RECIPIENT_IBAN}</p>
+                </div>
               )}
             </div>
           </section>
@@ -491,9 +525,17 @@ export default function BookingWidget({
                     <strong className="text-text">Check-out:</strong> 09:00 – 11:00
                   </p>
                   <p>
-                    <strong className="text-text">Deposit:</strong>{' '}
-                    {DEPOSIT_PCT_DISPLAY}% of total ({priceData.deposit}€) — payment
-                    within 24h confirms your booking
+                    <strong className="text-text">Payment:</strong>{' '}
+                    {DEPOSIT_PCT_DISPLAY}% deposit when booking; remaining {BALANCE_PCT_DISPLAY}% no
+                    later than {BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in (same IBAN,{' '}
+                    {RECIPIENT_BANK_NAME}, BIC {RECIPIENT_BIC}).
+                  </p>
+                  <p>
+                    <strong className="text-text">Cancellation (deposit):</strong>{' '}
+                    {CANCELLATION_POLICY_LINES_HR.join(' ')}
+                  </p>
+                  <p>
+                    <strong className="text-text">Invoices:</strong> {INVOICE_POLICY_HR}
                   </p>
                 </div>
               )}

@@ -16,12 +16,40 @@ export const OWNER_PHONE = process.env.OWNER_PHONE ?? '+385 91 929 5907';
 export const OWNER_WHATSAPP = process.env.OWNER_WHATSAPP_URL ?? 'https://wa.me/385919295907';
 
 // ── Plaćanje (HUB3 / SEPA QR) ────────────────────────────────────
-export const RECIPIENT_IBAN = process.env.RECIPIENT_IBAN ?? '';
-export const RECIPIENT_NAME = process.env.RECIPIENT_NAME ?? '';
+/** Zadano za produkciju; override preko RECIPIENT_* u .env */
+export const RECIPIENT_IBAN =
+  process.env.RECIPIENT_IBAN || 'HR7324840083235678378';
+export const RECIPIENT_NAME = process.env.RECIPIENT_NAME || 'Ivana Ćaćić';
+export const RECIPIENT_BIC = process.env.RECIPIENT_BIC || 'RZBHHR2X';
+export const RECIPIENT_BANK_NAME =
+  process.env.RECIPIENT_BANK_NAME || 'Raiffeisen banka d.d. (RBA)';
+
+/** Uvjeti otkazivanja — depozit (HR, jedan izvor za web + FAQ) */
+export const CANCELLATION_POLICY_LINES_HR = [
+  'Do 14 dana prije dolaska — povrat 100% uplaćenog depozita.',
+  '7–14 dana prije dolaska — povrat 50% depozita.',
+  'Manje od 7 dana prije dolaska — depozit se ne vraća.',
+] as const;
+
+export const INVOICE_POLICY_HR =
+  'Računi se izdaju prilikom dolaska ili odlaska gostiju.';
+
+/** Isti smisao za gostiju e-mail (EN) */
+export const CANCELLATION_POLICY_LINES_EN = [
+  'Up to 14 days before arrival — 100% refund of the deposit paid.',
+  '7–14 days before arrival — 50% of the deposit refunded.',
+  'Less than 7 days before arrival — deposit is non-refundable.',
+] as const;
+
+export const INVOICE_POLICY_EN =
+  'Invoices are issued at guest check-in or check-out.';
 
 // ── Poslovni uvjeti ───────────────────────────────────────────────
-/** 30% depozit */
+/** 30% depozit pri rezervaciji */
 export const DEPOSIT_PERCENT = 0.3;
+
+/** Ostatak (70% = ukupno − depozit) — uplatiti najkasnije ovoliko dana prije dolaska */
+export const BALANCE_DAYS_BEFORE_CHECK_IN = 3;
 
 /** Minimalni boravak: 3 noći */
 export const MIN_NIGHTS = 3;

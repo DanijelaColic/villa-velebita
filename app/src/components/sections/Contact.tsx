@@ -1,10 +1,23 @@
 'use client';
 
+import Image from 'next/image';
 import { FormEvent, useState } from 'react';
-import { Mail, Phone, UserRound } from 'lucide-react';
+import { Mail, MapPin, Navigation, Phone } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
+
+/** Slika u `app/public/images/contact/` — uskladite s pravim imenom datoteke. */
+const OWNER_PHOTO_SRC = '/images/contact/vlasnici.jpg.jpeg';
+
+const ADDRESS_LINES = ['Rudopolje 124', '53223 Vrhovine, Hrvatska'] as const;
+const ADDRESS_MAP_QUERY = 'Rudopolje 124, 53223 Vrhovine, Hrvatska';
+
+/** Ugrađena karta (bez API ključa). */
+const GOOGLE_MAPS_EMBED_SRC = `https://www.google.com/maps?q=${encodeURIComponent(ADDRESS_MAP_QUERY)}&hl=hr&z=15&output=embed`;
+
+/** Izravno otvara Google Karte s uputama do odredišta (unos polaznog mjesta u aplikaciji). */
+const GOOGLE_MAPS_DIRECTIONS_HREF = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(ADDRESS_MAP_QUERY)}`;
 
 const CONTACT_NAME = 'Ivica i Ivana Ćaćić';
 const CONTACTS = [
@@ -39,6 +52,7 @@ const initialFormState: ContactFormState = {
 export function Contact() {
   const [form, setForm] = useState<ContactFormState>(initialFormState);
   const [isSending, setIsSending] = useState(false);
+  const [ownerPhotoVisible, setOwnerPhotoVisible] = useState(true);
   const [status, setStatus] = useState<{ type: 'idle' | 'ok' | 'error'; text: string }>({
     type: 'idle',
     text: '',
@@ -85,69 +99,117 @@ export function Contact() {
     <SectionWrapper id="kontakt" bg="cream-dark">
       <SectionHeading
         label="Kontakt"
-        title="Javite se direktno vlasniku"
-        subtitle="Za upit, termin ili dodatne informacije, pošaljite poruku ili nazovite."
+        title="Javite se vlasnicima"
+        subtitle="Poruka ili poziv — odgovorimo u najkraćem roku."
+        className="mb-8 md:mb-10"
       />
 
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 items-start">
-        {/* Lijevo: fiksni kontakt podaci koje korisnik odmah vidi. */}
-        <div className="bg-white rounded-card p-6 md:p-8 shadow-card space-y-5">
-          <p className="text-stone leading-relaxed">
+      <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+        <div className="bg-white rounded-card p-5 md:p-6 shadow-card space-y-5">
+          {ownerPhotoVisible && (
+            <div className="relative mx-auto w-full max-w-sm aspect-4/3 rounded-btn overflow-hidden border border-stone-pale bg-cream">
+              <Image
+                src={OWNER_PHOTO_SRC}
+                alt={`${CONTACT_NAME}, vlasnici Ville Velebita`}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 384px"
+                priority
+                onError={() => setOwnerPhotoVisible(false)}
+              />
+            </div>
+          )}
+
+          <p className="text-stone text-sm md:text-base leading-relaxed">
             Villa Velebita nije samo kuća za odmor - to je mjesto gdje će vas dočekati Ivica i
             Ivana Ćaćić, bračni par koji s ljubavlju i pažnjom brine o svakom detalju. Njihova
             najveća želja je da se svaki gost osjeća kao kod kuće - opušteno, dobrodošlo i
             bezbrižno, od prvog kontakta pa sve do odlaska.
           </p>
 
-          <div className="space-y-4">
-            <div className="flex items-start gap-3">
-              <UserRound className="size-5 text-terracotta mt-0.5" />
-              <div>
-                <p className="text-sm text-stone">Vlasnik</p>
-                {/* Kontakt je zajednički jer domaćini zajedno vode brigu o gostima i smještaju. */}
-                <p className="text-oak font-semibold">{CONTACT_NAME}</p>
+          <div className="space-y-3">
+            <div>
+              <p className="text-oak font-semibold text-base md:text-lg">{CONTACT_NAME}</p>
+              <p className="text-sm text-stone mt-0.5">Vlasnici i domaćini</p>
+            </div>
+
+            <ul className="space-y-4">
+              {CONTACTS.map(contact => (
+                <li
+                  key={`${contact.label}-${contact.email}`}
+                  className="flex flex-col gap-1.5 text-sm"
+                >
+                  <span className="font-semibold text-oak">{contact.label}</span>
+                  <a
+                    href={`tel:${contact.phoneLink}`}
+                    className="inline-flex items-center gap-2 text-oak hover:text-terracotta transition-colors"
+                  >
+                    <Phone className="size-4 text-terracotta shrink-0" aria-hidden />
+                    {contact.phoneDisplay}
+                  </a>
+                  <a
+                    href={`mailto:${contact.email}`}
+                    className="inline-flex items-center gap-2 text-oak break-all hover:text-terracotta transition-colors"
+                  >
+                    <Mail className="size-4 text-terracotta shrink-0" aria-hidden />
+                    {contact.email}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="space-y-5 border-t border-stone-pale pt-5">
+            <div className="flex items-start gap-3 rounded-btn border border-stone-pale bg-cream px-4 py-3">
+              <MapPin className="size-5 text-terracotta mt-0.5 shrink-0" aria-hidden />
+              <div className="min-w-0 text-sm">
+                <p className="text-stone font-medium">Adresa</p>
+                <a
+                  href={GOOGLE_MAPS_DIRECTIONS_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block text-oak font-semibold hover:text-terracotta transition-colors"
+                >
+                  {ADDRESS_LINES.map((line, i) => (
+                    <span key={line} className="block">
+                      {line}
+                      {i === 0 ? ',' : ''}
+                    </span>
+                  ))}
+                </a>
               </div>
             </div>
 
-            {/* Svaki kontakt prikazujemo zasebno: ime, telefon i email. */}
-            {CONTACTS.map(contact => (
-              <div key={contact.email} className="rounded-btn border border-stone-pale bg-cream p-4 space-y-3">
-                <p className="text-oak font-semibold">{contact.label}</p>
-
-                <div className="flex items-start gap-3">
-                  <Phone className="size-5 text-terracotta mt-0.5" />
-                  <div>
-                    <p className="text-sm text-stone">Telefon</p>
-                    <a
-                      href={`tel:${contact.phoneLink}`}
-                      className="text-oak font-semibold hover:text-terracotta transition-colors"
-                    >
-                      {contact.phoneDisplay}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail className="size-5 text-terracotta mt-0.5" />
-                  <div>
-                    <p className="text-sm text-stone">Email</p>
-                    <a
-                      href={`mailto:${contact.email}`}
-                      className="text-oak font-semibold break-all hover:text-terracotta transition-colors"
-                    >
-                      {contact.email}
-                    </a>
-                  </div>
-                </div>
+            <div className="rounded-btn border border-stone-pale overflow-hidden bg-stone-pale/30 shadow-sm">
+              <div className="relative aspect-video w-full min-h-[200px] md:min-h-[240px]">
+                <iframe
+                  title="Lokacija Villa Velebita — Google Karte"
+                  src={GOOGLE_MAPS_EMBED_SRC}
+                  className="absolute inset-0 size-full border-0"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  allowFullScreen
+                />
               </div>
-            ))}
+              <a
+                href={GOOGLE_MAPS_DIRECTIONS_HREF}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-white px-4 py-3 text-sm font-semibold text-oak hover:bg-cream hover:text-terracotta transition-colors border-t border-stone-pale"
+              >
+                <Navigation className="size-4 shrink-0 text-terracotta" aria-hidden />
+                Upute do smještaja u Google Kartama
+              </a>
+            </div>
           </div>
         </div>
 
-        {/* Desno: jednostavna forma koja šalje upit na backend endpoint. */}
-        <form onSubmit={handleSubmit} className="bg-white rounded-card p-6 md:p-8 shadow-card space-y-4">
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white rounded-card p-5 md:p-6 shadow-card space-y-3.5"
+        >
           <div>
-            <label htmlFor="contact-name" className="block text-sm font-medium text-oak mb-1.5">
+            <label htmlFor="contact-name" className="block text-sm font-medium text-oak mb-1">
               Ime i prezime
             </label>
             <input
@@ -156,13 +218,13 @@ export function Contact() {
               required
               value={form.name}
               onChange={event => setForm(prev => ({ ...prev, name: event.target.value }))}
-              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2.5 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
+              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
               placeholder="Vaše ime"
             />
           </div>
 
           <div>
-            <label htmlFor="contact-email" className="block text-sm font-medium text-oak mb-1.5">
+            <label htmlFor="contact-email" className="block text-sm font-medium text-oak mb-1">
               Email
             </label>
             <input
@@ -171,13 +233,13 @@ export function Contact() {
               required
               value={form.email}
               onChange={event => setForm(prev => ({ ...prev, email: event.target.value }))}
-              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2.5 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
+              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
               placeholder="vas@email.com"
             />
           </div>
 
           <div>
-            <label htmlFor="contact-phone" className="block text-sm font-medium text-oak mb-1.5">
+            <label htmlFor="contact-phone" className="block text-sm font-medium text-oak mb-1">
               Telefon (opcionalno)
             </label>
             <input
@@ -185,23 +247,23 @@ export function Contact() {
               type="tel"
               value={form.phone}
               onChange={event => setForm(prev => ({ ...prev, phone: event.target.value }))}
-              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2.5 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
+              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
               placeholder="+385 ..."
             />
           </div>
 
           <div>
-            <label htmlFor="contact-message" className="block text-sm font-medium text-oak mb-1.5">
+            <label htmlFor="contact-message" className="block text-sm font-medium text-oak mb-1">
               Poruka
             </label>
             <textarea
               id="contact-message"
               required
-              rows={5}
+              rows={4}
               value={form.message}
               onChange={event => setForm(prev => ({ ...prev, message: event.target.value }))}
-              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2.5 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
-              placeholder="Napišite željeni termin, broj osoba i dodatna pitanja..."
+              className="w-full rounded-btn border border-stone-pale bg-cream px-3.5 py-2 text-oak placeholder:text-stone focus:outline-none focus:ring-2 focus:ring-terracotta/30"
+              placeholder="Termin, broj osoba, pitanja…"
             />
           </div>
 

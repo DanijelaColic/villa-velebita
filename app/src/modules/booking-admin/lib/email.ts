@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { formatDisplayDate } from './dates';
+import { formatDisplayDate, addDays } from './dates';
 import { generateHUB3Buffer, generateEPCBuffer } from './barcode';
 import {
   SITE_NAME,
@@ -8,7 +8,13 @@ import {
   OWNER_PHONE,
   OWNER_WHATSAPP,
   RECIPIENT_IBAN,
+  RECIPIENT_NAME,
+  RECIPIENT_BIC,
+  RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
+  BALANCE_DAYS_BEFORE_CHECK_IN,
+  CANCELLATION_POLICY_LINES_EN,
+  INVOICE_POLICY_EN,
 } from '../booking.config';
 import type { BookingEmailData } from '../types';
 
@@ -26,6 +32,23 @@ function getResend(): Resend | null {
 const FROM = () => process.env.RESEND_FROM ?? 'onboarding@resend.dev';
 const OWNER = () => OWNER_EMAIL || (process.env.OWNER_EMAIL ?? '');
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
+const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
+
+function balanceDueDateLabel(checkIn: Date): string {
+  return formatDisplayDate(addDays(checkIn, -BALANCE_DAYS_BEFORE_CHECK_IN));
+}
+
+function emailTermsAndInvoicesHtml(): string {
+  const lis = CANCELLATION_POLICY_LINES_EN.map(
+    (line) => `<li style="margin: 5px 0;">${line}</li>`,
+  ).join('');
+  return `
+      <div style="background: #f8fafc; border-radius: 8px; padding: 18px 20px; margin: 24px 0; border: 1px solid #e2e8f0;">
+        <h3 style="margin: 0 0 10px; font-size: 15px; color: #1c2b35;">Cancellation (deposit refunds)</h3>
+        <ul style="margin: 0; padding-left: 18px; color: #6b7a85; font-size: 14px; line-height: 1.65;">${lis}</ul>
+        <p style="margin: 14px 0 0; color: #6b7a85; font-size: 14px; line-height: 1.7;"><strong style="color: #1c2b35;">Invoices:</strong> ${INVOICE_POLICY_EN}</p>
+      </div>`;
+}
 
 /** Šalje gost email (potvrda primitka) + vlasnik email (nova rezervacija) */
 export async function sendNewBookingEmails(data: BookingEmailData) {
@@ -165,24 +188,31 @@ function guestReceivedHtml(d: FullData) {
       </div>
       ${RECIPIENT_IBAN ? `
       <div style="background: #fff8e7; border-radius: 8px; padding: 20px; margin: 24px 0;">
-        <h3 style="margin: 0 0 12px; font-size: 15px;">Deposit (${DEPOSIT_PCT_DISPLAY}%)</h3>
+        <h3 style="margin: 0 0 12px; font-size: 15px;">Payment (${DEPOSIT_PCT_DISPLAY}% now, ${BALANCE_PCT_DISPLAY}% before arrival)</h3>
         <p style="margin: 0; color: #6b7a85; font-size: 14px; line-height: 1.7;">
-          Please pay <strong style="color: #1c2b35;">${d.deposit}€</strong> within 24 hours:
+          <strong style="color: #1c2b35;">Deposit (${DEPOSIT_PCT_DISPLAY}%):</strong> please pay <strong style="color: #1c2b35;">${d.deposit}€</strong> now to secure your booking.
+        </p>
+        <p style="margin: 12px 0 0; color: #6b7a85; font-size: 14px; line-height: 1.7;">
+          <strong style="color: #1c2b35;">Balance (${BALANCE_PCT_DISPLAY}%):</strong> pay the remaining <strong style="color: #1c2b35;">${d.totalPrice - d.deposit}€</strong> no later than <strong style="color: #1c2b35;">${BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in</strong> (by ${balanceDueDateLabel(d.checkIn)}) — same IBAN.
         </p>
         <p style="margin: 12px 0 0; font-family: monospace; background: #fff; border: 1px solid #f0e6d3; padding: 10px 14px; border-radius: 6px; font-size: 14px;">
-          IBAN: ${RECIPIENT_IBAN}
+          ${RECIPIENT_NAME ? `<span style="display:block; font-family: Georgia, serif; margin-bottom: 6px; color: #1c2b35;">${RECIPIENT_NAME}</span>` : ''}IBAN: ${RECIPIENT_IBAN}
+        </p>
+        <p style="margin: 8px 0 0; font-size: 13px; color: #6b7a85;">
+          ${RECIPIENT_BANK_NAME} · BIC/SWIFT: <strong style="font-family: monospace; color: #1c2b35;">${RECIPIENT_BIC}</strong>
         </p>
         <p style="margin: 8px 0 0; font-size: 13px; color: #6b7a85;">
           Reference: <strong style="color: #1c2b35;">${d.reference ?? `${d.guestName} — ${d.apartmentName}`}</strong>
         </p>
         ${d.reference ? `
         <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 12px 16px; margin-top: 14px; font-size: 13px; color: #0c4a6e; line-height: 1.6;">
-          📎 <strong>QR payment codes are attached to this email.</strong><br>
+          📎 <strong>QR payment codes are attached to this email.</strong> They are for the <strong>deposit only</strong>.<br>
           Open the attached files and scan the appropriate code:<br>
           &nbsp;· <em>qr-payment-hr.png</em> — for Croatian banks (HUB3 format)<br>
           &nbsp;· <em>qr-payment-eu.png</em> — for Revolut, N26, Wise and other SEPA banks
         </div>` : ''}
       </div>` : ''}
+      ${emailTermsAndInvoicesHtml()}
       ${OWNER_EMAIL ? `
       <p style="color: #6b7a85; font-size: 14px; line-height: 1.7;">
         For any questions, contact us at <a href="mailto:${OWNER_EMAIL}" style="color: #1e4a5f;">${OWNER_EMAIL}</a>${OWNER_PHONE ? ` or ${OWNER_PHONE}` : ''}.
@@ -225,19 +255,22 @@ function guestConfirmedHtml(d: FullData) {
       </div>
       ${RECIPIENT_IBAN ? `
       <div style="background: #fff8e7; border-radius: 8px; padding: 20px; margin: 24px 0;">
-        <h3 style="margin: 0 0 8px; font-size: 15px;">Deposit (${DEPOSIT_PCT_DISPLAY}% = ${d.deposit}€)</h3>
+        <h3 style="margin: 0 0 8px; font-size: 15px;">Payment schedule</h3>
         <p style="margin: 0; color: #6b7a85; font-size: 14px; line-height: 1.7;">
-          If you haven't paid the deposit yet, please do so as soon as possible:
+          <strong style="color: #1c2b35;">Deposit (${DEPOSIT_PCT_DISPLAY}%):</strong> ${d.deposit}€ — if not paid yet, please pay as soon as possible.
+        </p>
+        <p style="margin: 10px 0 0; color: #6b7a85; font-size: 14px; line-height: 1.7;">
+          <strong style="color: #1c2b35;">Balance (${BALANCE_PCT_DISPLAY}%):</strong> ${d.totalPrice - d.deposit}€ — due no later than ${BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in (by ${balanceDueDateLabel(d.checkIn)}), same IBAN.
         </p>
         <p style="margin: 12px 0 0; font-family: monospace; background: #fff; border: 1px solid #f0e6d3; padding: 10px 14px; border-radius: 6px; font-size: 14px;">
-          IBAN: ${RECIPIENT_IBAN}
+          ${RECIPIENT_NAME ? `<span style="display:block; font-family: Georgia, serif; margin-bottom: 6px; color: #1c2b35;">${RECIPIENT_NAME}</span>` : ''}IBAN: ${RECIPIENT_IBAN}
         </p>
         <p style="margin: 8px 0 0; font-size: 13px; color: #6b7a85;">
           Reference: <strong style="color: #1c2b35;">${d.reference ?? `${d.guestName} — ${d.apartmentName}`}</strong>
         </p>
         ${d.reference ? `
         <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 12px 16px; margin-top: 14px; font-size: 13px; color: #0c4a6e; line-height: 1.6;">
-          📎 <strong>QR payment codes are attached to this email.</strong><br>
+          📎 <strong>QR payment codes are attached to this email.</strong> They are for the <strong>deposit only</strong>.<br>
           &nbsp;· <em>qr-payment-hr.png</em> — Croatian banks (HUB3)<br>
           &nbsp;· <em>qr-payment-eu.png</em> — Revolut, N26, Wise, SEPA banks
         </div>` : ''}
@@ -275,7 +308,10 @@ function ownerNewBookingHtml(d: FullData) {
         <tr><td style="padding: 8px 12px; color: #6b7a85;">Check-out</td><td style="padding: 8px 12px; font-weight: bold;">${d.checkOutStr}</td></tr>
         <tr style="background: #fafafa;"><td style="padding: 8px 12px; color: #6b7a85;">Nights</td><td style="padding: 8px 12px;">${d.nights}</td></tr>
         <tr><td style="padding: 8px 12px; color: #6b7a85;">Total</td><td style="padding: 8px 12px; font-weight: bold; font-size: 18px; color: #1e4a5f;">${d.totalPrice}€</td></tr>
-        <tr style="background: #fafafa;"><td style="padding: 8px 12px; color: #6b7a85;">Deposit</td><td style="padding: 8px 12px;">${d.deposit}€</td></tr>
+        <tr style="background: #fafafa;"><td style="padding: 8px 12px; color: #6b7a85;">Deposit (${DEPOSIT_PCT_DISPLAY}%)</td><td style="padding: 8px 12px;">${d.deposit}€</td></tr>
+        <tr><td style="padding: 8px 12px; color: #6b7a85;">Balance (${BALANCE_PCT_DISPLAY}%)</td><td style="padding: 8px 12px;">${d.totalPrice - d.deposit}€ — due ${BALANCE_DAYS_BEFORE_CHECK_IN} days before check-in</td></tr>
+        ${RECIPIENT_IBAN ? `<tr style="background: #fafafa;"><td style="padding: 8px 12px; color: #6b7a85;">IBAN</td><td style="padding: 8px 12px; font-family: monospace; font-size: 13px;">${RECIPIENT_IBAN}</td></tr>` : ''}
+        ${RECIPIENT_BIC ? `<tr><td style="padding: 8px 12px; color: #6b7a85;">BIC/SWIFT</td><td style="padding: 8px 12px; font-family: monospace; font-size: 13px;">${RECIPIENT_BIC} (${RECIPIENT_BANK_NAME})</td></tr>` : ''}
       </table>
     </div>
   </div>

@@ -5,6 +5,19 @@ import { ChevronDown } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { cn } from '@/lib/utils';
+import {
+  RECIPIENT_IBAN,
+  RECIPIENT_NAME,
+  RECIPIENT_BIC,
+  RECIPIENT_BANK_NAME,
+  DEPOSIT_PERCENT,
+  BALANCE_DAYS_BEFORE_CHECK_IN,
+  CANCELLATION_POLICY_LINES_HR,
+  INVOICE_POLICY_HR,
+} from '@/modules/booking-admin/booking.config';
+
+const DEPOSIT_PCT_FAQ = Math.round(DEPOSIT_PERCENT * 100);
+const BALANCE_PCT_FAQ = 100 - DEPOSIT_PCT_FAQ;
 
 const FAQ_ITEMS = [
   {
@@ -44,8 +57,11 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Može li se platiti karticom?',
-    answer:
-      'Rezervacija se potvrđuje predujmom bankovnom transakcijom. Ostatak iznosa plaća se po dolasku gotovinom ili transakcijom. Za više detalja, kontaktirajte vlasnika direktno.',
+    answer: `Rezervacija se potvrđuje uplatom ${DEPOSIT_PCT_FAQ}% depozita bankovnom transakcijom na IBAN ${RECIPIENT_IBAN} (primatelj ${RECIPIENT_NAME}, ${RECIPIENT_BANK_NAME}). Za uplate iz inozemstva potreban je BIC/SWIFT: ${RECIPIENT_BIC}. Preostalih ${BALANCE_PCT_FAQ}% ukupne cijene potrebno je uplatiti najkasnije ${BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska, također na isti IBAN. Kartično plaćanje nije u ponudi.`,
+  },
+  {
+    question: 'Kako glase uvjeti otkazivanja i kada dobivam račun?',
+    answer: `${CANCELLATION_POLICY_LINES_HR.join(' ')} ${INVOICE_POLICY_HR}`,
   },
 ];
 
