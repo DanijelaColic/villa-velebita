@@ -21,7 +21,11 @@ const rules = [
   { icon: <Sparkles className="size-4" />, label: 'Popust 7+ noći', value: '10% popusta' },
 ];
 
-export function Pricing() {
+type PricingProps = {
+  bookingHref?: string;
+};
+
+export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
   return (
     <SectionWrapper id="cijene" bg="oak">
       <SectionHeading
@@ -112,7 +116,7 @@ export function Pricing() {
               asChild
               className="w-full bg-cream text-terracotta hover:bg-cream-dark font-semibold"
             >
-              <a href="#rezervacije">Provjerite dostupnost</a>
+              <a href={bookingHref}>Provjerite dostupnost</a>
             </Button>
             <Button
               asChild

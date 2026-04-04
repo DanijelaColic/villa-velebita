@@ -4,14 +4,14 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 const OWNER_DISPLAY_EMAIL = process.env.NEXT_PUBLIC_OWNER_EMAIL?.trim() ?? '';
 
 const NAV_LINKS = [
-  { href: '#o-smjestaju', label: 'O smještaju' },
-  { href: '#galerija', label: 'Galerija' },
-  { href: '#sadrzaji', label: 'Sadržaji' },
-  { href: '#iskustva', label: 'Iskustva' },
-  { href: '#lokacija', label: 'Lokacija' },
-  { href: '#cijene', label: 'Cijene' },
-  { href: '#rezervacije', label: 'Rezervacije' },
-  { href: '#kontakt', label: 'Kontakt' },
+  { href: '/smjestaj', label: 'O smještaju' },
+  { href: '/galerija', label: 'Galerija' },
+  { href: '/sadrzaji', label: 'Sadržaji' },
+  { href: '/lokacija', label: 'Lokacija' },
+  { href: '/cjenik', label: 'Cijene' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/booking', label: 'Rezervacije' },
+  { href: '/#kontakt', label: 'Kontakt' },
 ];
 
 export function Footer() {

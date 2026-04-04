@@ -27,7 +27,16 @@ const highlights = [
   },
 ];
 
-export function About() {
+type AboutProps = {
+  /** Na podstranicama npr. /booking i /galerija umjesto # sidra na početnoj. */
+  bookingHref?: string;
+  galleryHref?: string;
+};
+
+export function About({
+  bookingHref = '#rezervacije',
+  galleryHref = '#galerija',
+}: AboutProps = {}) {
   return (
     <SectionWrapper id="o-smjestaju" bg="cream">
       <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -68,10 +77,10 @@ export function About() {
 
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild>
-              <a href="#rezervacije">Rezervirajte odmor</a>
+              <a href={bookingHref}>Rezervirajte odmor</a>
             </Button>
             <Button variant="outline" asChild>
-              <a href="#galerija">Pogledajte galeriju</a>
+              <a href={galleryHref}>Pogledajte galeriju</a>
             </Button>
           </div>
         </div>

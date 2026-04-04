@@ -34,9 +34,9 @@ export const CANCELLATION_POLICY_LINES_HR = [
 export const INVOICE_POLICY_HR =
   'Računi se izdaju prilikom dolaska ili odlaska gostiju.';
 
-/** Detaljan opis za stranicu rezervacije (155 m², tri etaže) */
+/** Kratki opis iznad kalendara (početna + /booking) */
 export const BOOKING_VILLA_LONG_DESCRIPTION_HR =
-  'Prostrana kuća od 155 m², raspoređena na tri etaže, pruža udoban smještaj za veći broj gostiju. Na raspolaganju su tri spavaće sobe – jedna s dva odvojena kreveta, druga s velikim bračnim krevetom i dodatnim ležajevima te treća s bračnim krevetom i dječjim krevetićem. Uz to, gostima su na raspolaganju dnevni boravak s kutnom garniturom na razvlačenje i poseban prostor za druženje s velikim hrastovim stolom. Dostupne su i dvije moderno opremljene kupaonice s hidromasažnim tušem.';
+  '155 m² na tri etaže, do 9 gostiju: tri spavaće sobe, dnevni boravak s garniturom na razvlačenje, prostor za druženje i dvije kupaonice s hidromasažnim tušem.';
 
 /** Isti smisao za gostiju e-mail (EN) */
 export const CANCELLATION_POLICY_LINES_EN = [
