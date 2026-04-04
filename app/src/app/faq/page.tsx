@@ -23,10 +23,7 @@ export default function FaqPage() {
     <>
       <Navbar />
       <main className="min-h-screen bg-cream pt-20">
-        <SubpageHeader
-          title="Česta pitanja"
-          description="Kompletan popis odgovora; strukturirani podaci za tražilice (FAQPage) ostaju na ovoj stranici."
-        />
+        <SubpageHeader title="Česta pitanja" />
         <FAQ />
       </main>
       <Footer />

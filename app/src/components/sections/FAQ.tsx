@@ -89,7 +89,6 @@ export function FAQ() {
       />
 
       <SectionHeading
-        label="Česta pitanja"
         title="Sve što trebate znati"
         subtitle="Odgovori na najčešće upite gostiju — ako ne nađete odgovor, nazovite nas direktno."
       />
