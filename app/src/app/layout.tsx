@@ -39,6 +39,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://villavelebita.hr',
   },
+  verification: {
+    google: '4ugte3dwYu7RDKWlmZ68Bb_xAAa1m5sODy_5f-MrLr8',
+  },
   openGraph: {
     type: 'website',
     locale: 'hr_HR',
