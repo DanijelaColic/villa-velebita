@@ -1,5 +1,8 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 
+/** Isti kao OWNER_EMAIL u .env (mapiran u next.config.ts). */
+const OWNER_DISPLAY_EMAIL = process.env.NEXT_PUBLIC_OWNER_EMAIL?.trim() ?? '';
+
 const NAV_LINKS = [
   { href: '#o-smjestaju', label: 'O smještaju' },
   { href: '#galerija', label: 'Galerija' },
