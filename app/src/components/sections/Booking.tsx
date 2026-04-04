@@ -31,7 +31,8 @@ export function Booking() {
                 ponudu
               </p>
               <p className="text-stone/90">
-                Detalji o plaćanju, otkazivanju i IBAN prikazuju se nakon slanja upita.
+                Nakon odabira datuma prikazuju se iznosi depozita i ostatka; podatke za uplatu
+                (primatelj i broj računa) vidjet ćete tek nakon slanja upita.
               </p>
             </div>
           }

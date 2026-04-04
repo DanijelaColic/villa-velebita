@@ -8,12 +8,13 @@ import {
   apartments,
   RECIPIENT_IBAN,
   RECIPIENT_NAME,
+  RECIPIENT_BIC,
+  RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
+  BALANCE_DAYS_BEFORE_CHECK_IN,
   MIN_NIGHTS,
   CANCELLATION_POLICY_LINES_HR,
-  INVOICE_POLICY_HR,
   BOOKING_VILLA_LONG_DESCRIPTION_HR,
-  formatPaymentTermsConfirmationHr,
 } from '../booking.config';
 
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
@@ -227,10 +228,13 @@ export default function BookingWidget({
               <span className="text-text font-medium">
                 {priceData.totalPrice - priceData.deposit} €
               </span>
+              <span className="text-muted">
+                {' '}
+                — plaća se najkasnije {BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska
+              </span>
             </p>
 
             <div className="border-t border-sand pt-3 space-y-2 text-muted text-xs leading-relaxed">
-              <p>{formatPaymentTermsConfirmationHr()}</p>
               <p>
                 <strong className="text-text">Otkazivanje (depozit):</strong>
               </p>
@@ -239,17 +243,20 @@ export default function BookingWidget({
                   <li key={line}>{line}</li>
                 ))}
               </ul>
-              <p>
-                <strong className="text-text">Računi:</strong> {INVOICE_POLICY_HR}
-              </p>
             </div>
 
             {RECIPIENT_IBAN && (
-              <div className="font-mono text-xs bg-white border border-sand px-3 py-2 rounded-lg space-y-1">
+              <div className="text-xs bg-white border border-sand px-3 py-3 rounded-lg space-y-1.5 text-left text-muted leading-relaxed">
                 {RECIPIENT_NAME && (
-                  <p className="font-sans text-text font-medium">{RECIPIENT_NAME}</p>
+                  <p className="font-sans text-text font-medium text-sm">{RECIPIENT_NAME}</p>
                 )}
-                <p>IBAN: {RECIPIENT_IBAN}</p>
+                <p className="font-mono">IBAN: {RECIPIENT_IBAN}</p>
+                <p className="font-sans">
+                  Banka: {RECIPIENT_BANK_NAME}
+                </p>
+                <p className="font-sans">
+                  BIC/SWIFT {RECIPIENT_BIC} (uplate iz inozemstva)
+                </p>
               </div>
             )}
 
@@ -353,6 +360,39 @@ export default function BookingWidget({
             minNights={MIN_NIGHTS}
           />
         </div>
+
+        {priceData && (
+          <div className="mt-6 bg-sand-light border border-sand rounded-xl p-5 text-sm text-muted space-y-3">
+            <h3 className="font-serif text-base font-semibold text-text">
+              Uvjeti plaćanja i otkazivanja
+            </h3>
+            <p>
+              <strong className="text-text">Depozit ({DEPOSIT_PCT_DISPLAY}%):</strong>{' '}
+              <span className="text-secondary font-semibold">{priceData.deposit} €</span>
+              <span className="text-muted"> — plaća se pri samoj rezervaciji.</span>
+            </p>
+            <p>
+              <strong className="text-text">Ostatak ({BALANCE_PCT_DISPLAY}%):</strong>{' '}
+              <span className="text-text font-medium">
+                {priceData.totalPrice - priceData.deposit} €
+              </span>
+              <span className="text-muted">
+                {' '}
+                — plaća se najkasnije {BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska
+              </span>
+            </p>
+            <div className="pt-1 text-xs leading-relaxed space-y-2">
+              <p>
+                <strong className="text-text">Otkazivanje (depozit):</strong>
+              </p>
+              <ul className="list-disc pl-4 space-y-1">
+                {CANCELLATION_POLICY_LINES_HR.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* ── 2. Sažetak + forma ───────────────────────────────────── */}
@@ -381,10 +421,6 @@ export default function BookingWidget({
                 <span className="font-semibold text-text">Ukupno</span>
                 <span className="font-semibold text-primary text-xl">{priceData.totalPrice} €</span>
               </div>
-              <p className="text-[11px] text-muted mt-2">
-                Uvjeti plaćanja, otkazivanja i IBAN prikazuju se nakon slanja upita, na ekranu
-                potvrde.
-              </p>
             </div>
           </section>
 
