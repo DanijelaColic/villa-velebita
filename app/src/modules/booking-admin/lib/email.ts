@@ -16,6 +16,7 @@ import {
   BALANCE_DAYS_BEFORE_CHECK_IN,
   CANCELLATION_POLICY_LINES_HR,
   INVOICE_POLICY_HR,
+  apartments,
 } from '../booking.config';
 import type { BookingEmailData } from '../types';
 
@@ -40,6 +41,7 @@ function resolveRecipient(actualTo: string): string {
 
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
 const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
+const BASE_PRICE_PER_NIGHT = apartments[0]?.priceOffSeason ?? 490;
 
 /** Osnovna zaštita od HTML u korisničkim poljima u predlošcima. */
 function esc(s: string): string {
@@ -252,6 +254,7 @@ function guestReceivedHtml(d: FullData) {
         <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Odlazak</strong> ${esc(d.checkOutStr)} do 11:00</p>
         <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Noćenja</strong> ${d.nights}</p>
         <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;line-height:1.4;color:#1e4a5f;font-weight:700;">Ukupno: ${d.totalPrice} €</p>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">Osnovna cijena: ${BASE_PRICE_PER_NIGHT} EUR/noć</p>
       </div>
 
       ${RECIPIENT_IBAN ? `
@@ -315,6 +318,7 @@ function guestConfirmedHtml(d: FullData) {
         <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Odlazak</strong> ${esc(d.checkOutStr)} do 11:00</p>
         <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Noćenja</strong> ${d.nights}</p>
         <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;color:#1e4a5f;font-weight:700;">Ukupno: ${d.totalPrice} €</p>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">Osnovna cijena: ${BASE_PRICE_PER_NIGHT} EUR/noć</p>
       </div>
 
       ${RECIPIENT_IBAN ? `
@@ -363,6 +367,7 @@ function ownerNewBookingHtml(d: FullData) {
       <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">Odlazak</strong> ${esc(d.checkOutStr)}</p>
       <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">Noćenja</strong> ${d.nights}</p>
       <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #e2e8f0;font-size:18px;font-weight:700;color:#1e4a5f;">Ukupno: ${d.totalPrice} €</p>
+      <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">Osnovna cijena: ${BASE_PRICE_PER_NIGHT} EUR/noć</p>
       <p style="margin:10px 0;font-size:15px;color:#475569;">Depozit (${DEPOSIT_PCT_DISPLAY}%): ${d.deposit} €</p>
       <p style="margin:10px 0;font-size:15px;color:#475569;">Ostatak (${BALANCE_PCT_DISPLAY}%): ${d.totalPrice - d.deposit} € · rok ${BALANCE_DAYS_BEFORE_CHECK_IN} d prije dolaska</p>
       ${RECIPIENT_IBAN ? `<p style="margin:10px 0;font-size:14px;font-family:ui-monospace,monospace;word-break:break-all;color:#334155;">IBAN: ${esc(RECIPIENT_IBAN)}</p>` : ''}

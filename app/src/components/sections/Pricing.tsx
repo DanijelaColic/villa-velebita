@@ -17,7 +17,7 @@ const included = [
 const rules = [
   { icon: <Users className="size-4" />, label: 'Kapacitet', value: '7+2 osobe (do 9)' },
   { icon: <CalendarDays className="size-4" />, label: 'Min. boravak', value: '3 noći' },
-  { icon: <Tag className="size-4" />, label: 'Cijena/noć', value: '560 € (cijela kuća)' },
+  { icon: <Tag className="size-4" />, label: 'Cijena/noć', value: '490 € (cijela kuća)' },
   { icon: <Sparkles className="size-4" />, label: 'Popust 7+ noći', value: '10% popusta' },
 ];
 
@@ -44,17 +44,17 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
                 Cijena najma
               </p>
               <div className="flex items-end gap-2">
-                <span className="font-display text-6xl font-semibold text-oak">560</span>
+                <span className="font-display text-6xl font-semibold text-oak">490</span>
                 <span className="text-xl text-stone mb-2">€ / noć</span>
               </div>
-              <p className="text-stone text-sm mt-1">Cijela kuća · do 9 osoba · 62,22 € po osobi (560/9)</p>
+              <p className="text-stone text-sm mt-1">Cijela kuća · do 9 osoba · 54,44 € po osobi (490/9)</p>
             </div>
             <div className="bg-terracotta/10 border border-terracotta/20 rounded-card px-5 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-terracotta mb-1">
                 Rezerviraj 7+ noći
               </p>
               <p className="font-display text-3xl font-semibold text-terracotta">−10%</p>
-              <p className="text-xs text-stone mt-1">= 504 € / noć</p>
+              <p className="text-xs text-stone mt-1">= 441 € / noć</p>
             </div>
           </div>
 
@@ -133,8 +133,8 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
 
       {/* Disclaimer */}
       <p className="mt-6 text-center text-xs text-stone-light">
-        Cijene su iskazane u eurima. Osnovna cijena je 560 € po noći za cijelu kuću (do 9 osoba), odnosno
-        62,22 € po osobi (560/9). Minimalni boravak 3 noći. Popust od 10% za rezervacije 7 i više noći.
+        Cijene su iskazane u eurima. Osnovna cijena je 490 € po noći za cijelu kuću (do 9 osoba), odnosno
+        54,44 € po osobi (490/9). Minimalni boravak 3 noći. Popust od 10% za rezervacije 7 i više noći.
         Krevetić za bebu je besplatan (na upit), a za posebne zahtjeve (kućni ljubimci) javite se unaprijed.
       </p>
     </SectionWrapper>

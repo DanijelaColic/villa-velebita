@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { SubpageHeader } from '@/components/SubpageHeader';
 import { FAQ } from '@/components/sections/FAQ';
 
 const canonical = 'https://villavelebita.hr/faq';
@@ -23,7 +22,6 @@ export default function FaqPage() {
     <>
       <Navbar />
       <main className="min-h-screen bg-cream pt-20">
-        <SubpageHeader title="Česta pitanja" />
         <FAQ />
       </main>
       <Footer />

@@ -59,7 +59,7 @@ export const BALANCE_DAYS_BEFORE_CHECK_IN = 3;
 export const MIN_NIGHTS = 3;
 
 /**
- * Visoka sezona: prazno jer je cijena ista cijele godine (560 €/noć flat rate).
+ * Visoka sezona: prazno jer je cijena ista cijele godine (490 €/noć flat rate).
  * Za sezonske razlike dodaj npr. [7, 8].
  */
 export const HIGH_SEASON_MONTHS: number[] = [];
@@ -91,8 +91,8 @@ export const apartments: Apartment[] = [
     view: false,
     balcony: false,
     floors: 3,
-    priceOffSeason: 560,
-    priceHighSeason: 560,
+    priceOffSeason: 490,
+    priceHighSeason: 490,
     fullyBooked: false,
     amenities: [
       'Besplatni WiFi',

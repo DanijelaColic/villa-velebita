@@ -4,6 +4,8 @@ interface SectionHeadingProps {
   label?: string;
   title: string;
   subtitle?: string;
+  /** Na samostalnoj stranici (npr. /faq) koristi h1 umjesto h2. */
+  titleAs?: 'h1' | 'h2';
   align?: 'left' | 'center';
   light?: boolean;
   className?: string;
@@ -13,10 +15,13 @@ export function SectionHeading({
   label,
   title,
   subtitle,
+  titleAs = 'h2',
   align = 'center',
   light = false,
   className,
 }: SectionHeadingProps) {
+  const TitleTag = titleAs === 'h1' ? 'h1' : 'h2';
+
   return (
     <div
       className={cn(
@@ -35,14 +40,14 @@ export function SectionHeading({
           {label}
         </span>
       )}
-      <h2
+      <TitleTag
         className={cn(
           'font-display text-3xl md:text-4xl lg:text-5xl font-semibold',
           light ? 'text-cream' : 'text-oak',
         )}
       >
         {title}
-      </h2>
+      </TitleTag>
       {subtitle && (
         <p
           className={cn(

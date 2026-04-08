@@ -38,7 +38,7 @@ const FAQ_ITEMS = [
   {
     question: 'Kakav je minimalni boravak?',
     answer:
-      'Minimalni boravak su 3 noći. Osnovna cijena je 560 € po noći za cijelu kuću (do 13 osoba). Za rezervacije od 7 ili više noći dobivate popust od 10%.',
+      'Minimalni boravak su 3 noći. Osnovna cijena je 490 € po noći za cijelu kuću (do 13 osoba). Za rezervacije od 7 ili više noći dobivate popust od 10%.',
   },
   {
     question: 'Prihvaćate li kućne ljubimce?',
@@ -89,6 +89,7 @@ export function FAQ() {
       />
 
       <SectionHeading
+        titleAs="h1"
         title="Sve što trebate znati"
         subtitle="Odgovori na najčešće upite gostiju — ako ne nađete odgovor, nazovite nas direktno."
       />

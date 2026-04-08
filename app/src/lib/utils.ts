@@ -19,7 +19,7 @@ export function calculateNights(checkIn: Date, checkOut: Date): number {
   return Math.round(diff / (1000 * 60 * 60 * 24));
 }
 
-export function calculatePrice(nights: number, basePrice = 560): number {
+export function calculatePrice(nights: number, basePrice = 490): number {
   if (nights >= 7) return basePrice * nights * 0.9;
   return basePrice * nights;
 }
