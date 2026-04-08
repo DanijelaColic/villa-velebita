@@ -5,9 +5,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from 'MODULE_ROOT/lib/supabase';
 import { getApartment } from 'MODULE_ROOT/booking.config';
-import { parseLocalDate, isRangeAvailable, diffDays } from 'MODULE_ROOT/lib/dates';
+import { parseLocalDate, isRangeAvailable, diffDays, calculatePrice } from 'MODULE_ROOT/lib/dates';
 import { sendNewBookingEmails } from 'MODULE_ROOT/lib/email';
-import { MIN_NIGHTS, DEPOSIT_PERCENT, HIGH_SEASON_MONTHS } from 'MODULE_ROOT/booking.config';
+import { MIN_NIGHTS } from 'MODULE_ROOT/booking.config';
 
 // GET /api/bookings?apartment=slug
 // Vraća zauzete datume za odabrani apartman (koristi BookingCalendar)
@@ -112,18 +112,9 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Izračun cijene po sezoni
-    let lowNights = 0;
-    let highNights = 0;
-    const current = new Date(checkInDate);
-    while (current < checkOutDate) {
-      const month = current.getMonth() + 1;
-      if (HIGH_SEASON_MONTHS.includes(month)) highNights++;
-      else lowNights++;
-      current.setDate(current.getDate() + 1);
-    }
-    const totalPrice = lowNights * apt.priceOffSeason + highNights * apt.priceHighSeason;
-    const deposit = Math.round(totalPrice * DEPOSIT_PERCENT);
+    const priceData = calculatePrice(checkInDate, checkOutDate, apt);
+    const totalPrice = priceData.totalPrice;
+    const deposit = priceData.deposit;
     const avgPricePerNight = Math.round(totalPrice / nights);
 
     const { data: booking, error: insertError } = await supabase

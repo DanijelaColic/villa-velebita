@@ -13,6 +13,8 @@ import {
   DEPOSIT_PERCENT,
   BALANCE_DAYS_BEFORE_CHECK_IN,
   MIN_NIGHTS,
+  LONG_STAY_DISCOUNT_NIGHTS,
+  LONG_STAY_DISCOUNT_RATE,
   CANCELLATION_POLICY_LINES_HR,
   BOOKING_VILLA_LONG_DESCRIPTION_HR,
 } from '../booking.config';
@@ -416,6 +418,15 @@ export default function BookingWidget({
                   <span className="text-text font-medium shrink-0">{line.subtotal} €</span>
                 </div>
               ))}
+            {priceData.discountAmount ? (
+              <div className="flex justify-between text-sm mb-1 gap-2">
+                <span className="text-muted">
+                  Popust {LONG_STAY_DISCOUNT_NIGHTS}+ noći (
+                  {Math.round(LONG_STAY_DISCOUNT_RATE * 100)}%)
+                </span>
+                <span className="text-forest font-medium shrink-0">- {priceData.discountAmount} €</span>
+              </div>
+            ) : null}
 
               <div className="border-t border-sand mt-3 pt-3 flex justify-between items-center">
                 <span className="font-semibold text-text">Ukupno</span>

@@ -939,6 +939,12 @@ function PricePreview({
           <span>{l.subtotal}€</span>
         </div>
       ))}
+      {priceData.discountAmount ? (
+        <div className="flex justify-between text-xs text-green-700">
+          <span>Long-stay discount</span>
+          <span>-{priceData.discountAmount}€</span>
+        </div>
+      ) : null}
       <div className="flex justify-between text-xs text-gray-500 mt-1 pt-1 border-t border-blue-100">
         <span>Deposit ({Math.round(DEPOSIT_PERCENT * 100)}%)</span>
         <span className="font-medium">{priceData.deposit}€</span>

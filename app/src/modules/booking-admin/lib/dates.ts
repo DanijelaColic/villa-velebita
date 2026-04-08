@@ -1,6 +1,13 @@
 import type { BookedRange } from '../types';
 import type { Apartment } from '../types';
-import { HIGH_SEASON_MONTHS, HIGH_SEASON_LABEL, OFF_SEASON_LABEL, DEPOSIT_PERCENT } from '../booking.config';
+import {
+  HIGH_SEASON_MONTHS,
+  HIGH_SEASON_LABEL,
+  OFF_SEASON_LABEL,
+  DEPOSIT_PERCENT,
+  LONG_STAY_DISCOUNT_NIGHTS,
+  LONG_STAY_DISCOUNT_RATE,
+} from '../booking.config';
 import type { PriceBreakdown } from '../types';
 
 // ── Lokalizirani nazivi — prilagodi po potrebi ────────────────────
@@ -155,13 +162,20 @@ export function calculatePrice(
     });
   }
 
-  const totalPrice = lines.reduce((sum, l) => sum + l.subtotal, 0);
+  const nights = lowNights + highNights;
+  const rawTotalPrice = lines.reduce((sum, l) => sum + l.subtotal, 0);
+  const discountAmount =
+    nights >= LONG_STAY_DISCOUNT_NIGHTS
+      ? Math.round(rawTotalPrice * LONG_STAY_DISCOUNT_RATE)
+      : 0;
+  const totalPrice = rawTotalPrice - discountAmount;
   const deposit = Math.round(totalPrice * DEPOSIT_PERCENT);
 
   return {
-    nights: lowNights + highNights,
+    nights,
     totalPrice,
     deposit,
     lines,
+    discountAmount,
   };
 }

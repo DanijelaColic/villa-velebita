@@ -3,10 +3,8 @@ import { createServerSupabaseClient } from '@/modules/booking-admin/lib/supabase
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
 import {
   getApartment,
-  HIGH_SEASON_MONTHS,
-  DEPOSIT_PERCENT,
 } from '@/modules/booking-admin/booking.config';
-import { parseLocalDate, diffDays } from '@/modules/booking-admin/lib/dates';
+import { parseLocalDate, diffDays, calculatePrice } from '@/modules/booking-admin/lib/dates';
 
 // GET /api/admin/bookings — sve rezervacije
 export async function GET(request: NextRequest) {
@@ -56,17 +54,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Check-out must be after check-in' }, { status: 400 });
   }
 
-  let lowNights = 0;
-  let highNights = 0;
-  const d = new Date(checkInDate);
-  while (d < checkOutDate) {
-    const m = d.getMonth() + 1;
-    if (HIGH_SEASON_MONTHS.includes(m)) highNights++;
-    else lowNights++;
-    d.setDate(d.getDate() + 1);
-  }
-  const totalPrice = lowNights * apt.priceOffSeason + highNights * apt.priceHighSeason;
-  const deposit = Math.round(totalPrice * DEPOSIT_PERCENT);
+  const priceData = calculatePrice(checkInDate, checkOutDate, apt);
+  const totalPrice = priceData.totalPrice;
+  const deposit = priceData.deposit;
 
   const supabase = createServerSupabaseClient();
   const { data, error } = await supabase

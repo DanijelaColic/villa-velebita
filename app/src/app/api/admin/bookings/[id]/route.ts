@@ -3,10 +3,8 @@ import { createServerSupabaseClient } from '@/modules/booking-admin/lib/supabase
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
 import {
   getApartment,
-  HIGH_SEASON_MONTHS,
-  DEPOSIT_PERCENT,
 } from '@/modules/booking-admin/booking.config';
-import { parseLocalDate, diffDays } from '@/modules/booking-admin/lib/dates';
+import { parseLocalDate, diffDays, calculatePrice } from '@/modules/booking-admin/lib/dates';
 import { sendConfirmationEmail } from '@/modules/booking-admin/lib/email';
 import type { Booking } from '@/modules/booking-admin/types';
 
@@ -65,17 +63,9 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 
     if (apt && checkOut > checkIn) {
       const nights = diffDays(checkOut, checkIn);
-      let lowNights = 0;
-      let highNights = 0;
-      const d = new Date(checkIn);
-      while (d < checkOut) {
-        const m = d.getMonth() + 1;
-        if (HIGH_SEASON_MONTHS.includes(m)) highNights++;
-        else lowNights++;
-        d.setDate(d.getDate() + 1);
-      }
-      const totalPrice = lowNights * apt.priceOffSeason + highNights * apt.priceHighSeason;
-      const deposit = Math.round(totalPrice * DEPOSIT_PERCENT);
+      const priceData = calculatePrice(checkIn, checkOut, apt);
+      const totalPrice = priceData.totalPrice;
+      const deposit = priceData.deposit;
       updates.nights = nights;
       updates.total_price = totalPrice;
       updates.deposit = deposit;

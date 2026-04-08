@@ -58,6 +58,10 @@ export const BALANCE_DAYS_BEFORE_CHECK_IN = 3;
 /** Minimalni boravak: 3 noći */
 export const MIN_NIGHTS = 3;
 
+/** Dug boravak: od 7 noći odobrava se 10% popusta na ukupan iznos */
+export const LONG_STAY_DISCOUNT_NIGHTS = 7;
+export const LONG_STAY_DISCOUNT_RATE = 0.1;
+
 /**
  * Visoka sezona: prazno jer je cijena ista cijele godine (490 €/noć flat rate).
  * Za sezonske razlike dodaj npr. [7, 8].

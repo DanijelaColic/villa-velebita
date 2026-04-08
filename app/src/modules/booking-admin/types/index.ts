@@ -61,6 +61,7 @@ export type PriceBreakdown = {
   totalPrice: number;
   deposit: number;
   lines: PriceLine[];
+  discountAmount?: number;
 };
 
 // ── Email types ───────────────────────────────────────────────────
