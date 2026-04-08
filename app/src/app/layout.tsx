@@ -14,6 +14,8 @@ const playfair = Playfair_Display({
   display: 'swap',
 });
 
+const HERO_OG_IMAGE_PATH = '/images/hero/exterior-08.jpg';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://villavelebita.hr'),
   title: {
@@ -50,11 +52,20 @@ export const metadata: Metadata = {
     title: 'Villa Velebita – Kuća za odmor u srcu Like',
     description:
       'Autentična kameno-drvena kuća za odmor u Rudopolju. Jacuzzi, roštilj, 20 min od Plitvičkih jezera. Idealno za obitelji do 9 osoba.',
+    images: [
+      {
+        url: HERO_OG_IMAGE_PATH,
+        width: 1200,
+        height: 630,
+        alt: 'Villa Velebita – Kuća za odmor u Lici',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Villa Velebita – Kuća za odmor u srcu Like',
     description: 'Autentična kuća za odmor blizu Plitvičkih jezera. Rezervirajte direktno.',
+    images: [HERO_OG_IMAGE_PATH],
   },
   robots: {
     index: true,
@@ -90,7 +101,7 @@ const jsonLd = {
     latitude: 44.8624957,
     longitude: 15.4748033,
   },
-  image: 'https://villavelebita.hr/images/og-image.jpg',
+  image: `https://villavelebita.hr${HERO_OG_IMAGE_PATH}`,
   priceRange: '€€€',
   currenciesAccepted: 'EUR',
   numberOfRooms: 3,
