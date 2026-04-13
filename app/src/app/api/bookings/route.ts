@@ -153,19 +153,24 @@ export async function POST(request: NextRequest) {
 
     if (insertError) throw insertError;
 
-    await sendNewBookingEmails({
-      guestName: guest_name,
-      guestEmail: guest_email,
-      guestPhone: guest_phone,
-      apartmentName: apt.name,
-      checkIn: checkInDate,
-      checkOut: checkOutDate,
-      nights,
-      totalPrice,
-      deposit,
-      bookingId: booking.id,
-      locale: booking.locale ?? locale,
-    });
+    // A saved booking must not fail just because email delivery failed afterwards.
+    try {
+      await sendNewBookingEmails({
+        guestName: guest_name,
+        guestEmail: guest_email,
+        guestPhone: guest_phone,
+        apartmentName: apt.name,
+        checkIn: checkInDate,
+        checkOut: checkOutDate,
+        nights,
+        totalPrice,
+        deposit,
+        bookingId: booking.id,
+        locale: booking.locale ?? locale,
+      });
+    } catch (emailError) {
+      console.error('[POST /api/bookings] Non-fatal email error:', emailError);
+    }
 
     return NextResponse.json({ success: true, bookingId: booking.id }, { status: 201 });
   } catch (err) {

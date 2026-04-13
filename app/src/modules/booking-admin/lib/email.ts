@@ -127,6 +127,7 @@ function publicViewCtaBlock(
 export async function sendNewBookingEmails(data: BookingEmailData) {
   const resend = getResend();
   if (!resend) return;
+  const ownerEmail = resolveRecipient(OWNER()).trim();
   const locale = getValidLocale(data.locale);
   const emailMessages = await getBookingEmailMessages(locale);
 
@@ -169,7 +170,7 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
     }
   }
 
-  const [guestResult, ownerResult] = await Promise.allSettled([
+  const emailTasks = [
     resend.emails.send({
       from: FROM(),
       to: data.guestEmail,
@@ -177,16 +178,31 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
       html: guestReceivedHtml(fullData, emailMessages),
       ...(attachments.length > 0 && { attachments }),
     }),
-    resend.emails.send({
-      from: FROM(),
-      to: resolveRecipient(OWNER()),
-      subject: `${emailMessages.owner.subject} – ${data.guestName} | ${data.apartmentName}`,
-      html: ownerNewBookingHtml(fullData, emailMessages),
-    }),
-  ]);
+  ];
+
+  if (ownerEmail) {
+    emailTasks.push(
+      resend.emails.send({
+        from: FROM(),
+        to: ownerEmail,
+        subject: `${emailMessages.owner.subject} – ${data.guestName} | ${data.apartmentName}`,
+        html: ownerNewBookingHtml(fullData, emailMessages),
+      }),
+    );
+  } else {
+    console.warn('[email] OWNER_EMAIL not set — owner booking notification skipped');
+  }
+
+  const [guestResult, ownerResult] = await Promise.allSettled(emailTasks);
 
   if (guestResult.status === 'rejected') console.error('[email] Guest email failed:', guestResult.reason);
-  if (ownerResult.status === 'rejected') console.error('[email] Owner email failed:', ownerResult.reason);
+  if (guestResult.status === 'fulfilled' && guestResult.value.error) {
+    console.error('[email] Guest email API error:', guestResult.value.error);
+  }
+  if (ownerResult?.status === 'rejected') console.error('[email] Owner email failed:', ownerResult.reason);
+  if (ownerResult?.status === 'fulfilled' && ownerResult.value.error) {
+    console.error('[email] Owner email API error:', ownerResult.value.error);
+  }
 }
 
 export async function sendConfirmationEmail(data: BookingEmailData) {
