@@ -1,67 +1,69 @@
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { getTranslations } from 'next-intl/server';
 import {
   Wifi, Car, Waves, Flame, Coffee, Microwave, Wind,
   Baby, Tv, Utensils, ShowerHead, TreePine, Thermometer,
   Cigarette, PawPrint, Clock, CheckCircle2,
 } from 'lucide-react';
 
-const amenityGroups = [
-  {
-    title: 'Kuhinja',
-    items: [
-      { icon: <Utensils className="size-5" />, label: 'Indukcijska ploča' },
-      { icon: <Microwave className="size-5" />, label: 'Mikrovalna pećnica' },
-      { icon: <Wind className="size-5" />, label: 'Perilica za suđe' },
-      { icon: <Thermometer className="size-5" />, label: 'Hladnjak' },
-      { icon: <Coffee className="size-5" />, label: 'Aparat za kavu' },
-      { icon: <Coffee className="size-5" />, label: 'Kuhalo za vodu' },
-    ],
-  },
-  {
-    title: 'Tehnologija',
-    items: [
-      { icon: <Wifi className="size-5" />, label: 'Besplatni WiFi' },
-      { icon: <Tv className="size-5" />, label: 'TV (3×, uklj. plazma)' },
-    ],
-  },
-  {
-    title: 'Vanjski prostori',
-    items: [
-      { icon: <Waves className="size-5" />, label: 'Vanjski jacuzzi (hot tub na drva)' },
-      { icon: <Flame className="size-5" />, label: 'Roštilj' },
-      { icon: <Utensils className="size-5" />, label: 'Rustikalna pečenjara s roštiljem, loncem za čobanac i ražnjem za janjetinu' },
-      { icon: <TreePine className="size-5" />, label: 'Dvorište 800 m²' },
-      { icon: <Car className="size-5" />, label: 'Besplatno parkiranje' },
-    ],
-  },
-  {
-    title: 'Kupaonica & udobnost',
-    items: [
-      { icon: <ShowerHead className="size-5" />, label: 'Hidromasažni tuševi (2×)' },
-      { icon: <CheckCircle2 className="size-5" />, label: 'Posteljina i ručnici' },
-      { icon: <CheckCircle2 className="size-5" />, label: 'Šamponi, sapun, WC papir' },
-      { icon: <Baby className="size-5" />, label: 'Dječji krevetić' },
-    ],
-  },
-  {
-    title: 'Pravila & info',
-    items: [
-      { icon: <PawPrint className="size-5" />, label: 'Kućni ljubimci (male pasmine)' },
-      { icon: <Cigarette className="size-5" />, label: 'Pušenje u prizemlju/sjenici' },
-      { icon: <Clock className="size-5" />, label: 'Check-in 14:00 / Check-out 11:00' },
-      { icon: <CheckCircle2 className="size-5" />, label: 'Čišćenje uključeno u cijenu' },
-    ],
-  },
-];
+export async function Amenities() {
+  const t = await getTranslations('amenitiesSection');
+  const amenityGroups = [
+    {
+      title: t('groups.kitchen.title'),
+      items: [
+        { icon: <Utensils className="size-5" />, label: t('groups.kitchen.items.induction') },
+        { icon: <Microwave className="size-5" />, label: t('groups.kitchen.items.microwave') },
+        { icon: <Wind className="size-5" />, label: t('groups.kitchen.items.dishwasher') },
+        { icon: <Thermometer className="size-5" />, label: t('groups.kitchen.items.fridge') },
+        { icon: <Coffee className="size-5" />, label: t('groups.kitchen.items.coffee') },
+        { icon: <Coffee className="size-5" />, label: t('groups.kitchen.items.kettle') },
+      ],
+    },
+    {
+      title: t('groups.technology.title'),
+      items: [
+        { icon: <Wifi className="size-5" />, label: t('groups.technology.items.wifi') },
+        { icon: <Tv className="size-5" />, label: t('groups.technology.items.tv') },
+      ],
+    },
+    {
+      title: t('groups.outdoor.title'),
+      items: [
+        { icon: <Waves className="size-5" />, label: t('groups.outdoor.items.jacuzzi') },
+        { icon: <Flame className="size-5" />, label: t('groups.outdoor.items.grill') },
+        { icon: <Utensils className="size-5" />, label: t('groups.outdoor.items.roastery') },
+        { icon: <TreePine className="size-5" />, label: t('groups.outdoor.items.yard') },
+        { icon: <Car className="size-5" />, label: t('groups.outdoor.items.parking') },
+      ],
+    },
+    {
+      title: t('groups.bathroom.title'),
+      items: [
+        { icon: <ShowerHead className="size-5" />, label: t('groups.bathroom.items.showers') },
+        { icon: <CheckCircle2 className="size-5" />, label: t('groups.bathroom.items.linen') },
+        { icon: <CheckCircle2 className="size-5" />, label: t('groups.bathroom.items.toiletries') },
+        { icon: <Baby className="size-5" />, label: t('groups.bathroom.items.crib') },
+      ],
+    },
+    {
+      title: t('groups.rules.title'),
+      items: [
+        { icon: <PawPrint className="size-5" />, label: t('groups.rules.items.pets') },
+        { icon: <Cigarette className="size-5" />, label: t('groups.rules.items.smoking') },
+        { icon: <Clock className="size-5" />, label: t('groups.rules.items.checkin') },
+        { icon: <CheckCircle2 className="size-5" />, label: t('groups.rules.items.cleaning') },
+      ],
+    },
+  ];
 
-export function Amenities() {
   return (
     <SectionWrapper id="sadrzaji" bg="cream">
       <SectionHeading
-        label="Sadržaji i pogodnosti"
-        title="Sve što trebate – bez kompromisa"
-        subtitle="Kuhinja, wellness, tehnologija, vanjski prostori – Villa Velebita je opremljena za potpun komfor."
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
       />
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -85,30 +87,29 @@ export function Amenities() {
         <div className="bg-terracotta text-cream rounded-card p-6 shadow-warm flex flex-col justify-between sm:col-span-2 lg:col-span-1">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-cream/70 mb-2">
-              Kapacitet
+              {t('capacity.eyebrow')}
             </p>
             <p className="font-display text-5xl font-semibold">7+2</p>
             <p className="text-cream/80 mt-2 leading-relaxed">
-              Službeni kapacitet za 7+2 osobe, zahvaljujući dodatnim ležajevima
-              može ugostiti do 9 gostiju.
+              {t('capacity.description')}
             </p>
           </div>
           <div className="mt-6 pt-4 border-t border-cream/20 grid grid-cols-2 gap-3 text-sm">
             <div>
               <p className="font-semibold">155 m²</p>
-              <p className="text-cream/70">Površina kuće</p>
+              <p className="text-cream/70">{t('capacity.stats.houseArea')}</p>
             </div>
             <div>
               <p className="font-semibold">800 m²</p>
-              <p className="text-cream/70">Okućnica</p>
+              <p className="text-cream/70">{t('capacity.stats.yard')}</p>
             </div>
             <div>
-              <p className="font-semibold">3 etaže</p>
-              <p className="text-cream/70">Raspored prostora</p>
+              <p className="font-semibold">{t('capacity.stats.floorsValue')}</p>
+              <p className="text-cream/70">{t('capacity.stats.floors')}</p>
             </div>
             <div>
-              <p className="font-semibold">2 kupaonice</p>
-              <p className="text-cream/70">Hidromasažni tuševi</p>
+              <p className="font-semibold">{t('capacity.stats.bathroomsValue')}</p>
+              <p className="text-cream/70">{t('capacity.stats.bathrooms')}</p>
             </div>
           </div>
         </div>

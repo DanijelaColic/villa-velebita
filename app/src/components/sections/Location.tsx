@@ -1,21 +1,24 @@
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { getTranslations } from 'next-intl/server';
 import { MapPin, Navigation } from 'lucide-react';
 
-export function Location() {
+export async function Location() {
+  const t = await getTranslations('locationSection');
+
   return (
     <SectionWrapper id="lokacija" bg="white">
       <SectionHeading
-        label="Lokacija"
-        title="U srcu svega"
-        subtitle="Rudopolje 124, 53223 Vrhovine – savršena baza za istraživanje Plitvica i cijele Like."
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
       />
 
       <div className="grid lg:grid-cols-2 gap-10 items-start">
         {/* Map embed */}
         <div className="rounded-card overflow-hidden shadow-warm aspect-4/3">
           <iframe
-            title="Villa Velebita – lokacija na karti"
+            title={t('mapTitle')}
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2822.0!2d15.4722284!3d44.8624995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4763e06b24611ead:0xa5a1f0748cbd99bb!2sRudopolje+124%2C+53220+Vrhovine!5e0!3m2!1shr!2shr!4v1743340797000!5m2!1shr!2shr"
             width="100%"
             height="100%"
@@ -33,7 +36,7 @@ export function Location() {
             <MapPin className="size-5 text-terracotta mt-0.5 shrink-0" />
             <div>
               <p className="font-semibold text-oak">Rudopolje 124</p>
-              <p className="text-stone text-sm">53223 Vrhovine, Hrvatska</p>
+              <p className="text-stone text-sm">{t('countryLine')}</p>
               <a
                 href="https://maps.google.com/?q=Rudopolje+124,+53223+Vrhovine"
                 target="_blank"
@@ -41,7 +44,7 @@ export function Location() {
                 className="inline-flex items-center gap-1.5 text-sm text-terracotta hover:text-terracotta-dark font-medium mt-2 transition-colors"
               >
                 <Navigation className="size-3.5" />
-                Otvori u Google Maps
+                {t('openInMaps')}
               </a>
             </div>
           </div>

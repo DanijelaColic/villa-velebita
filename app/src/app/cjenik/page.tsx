@@ -1,21 +1,19 @@
 import type { Metadata } from 'next';
+import { getLocale } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Pricing } from '@/components/sections/Pricing';
+import { getPageMetadata } from '@/i18n/metadata';
 
-const canonical = 'https://villavelebita.hr/cjenik';
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
 
-export const metadata: Metadata = {
-  title: 'Cjenik i uvjeti najma',
-  description:
-    'Cijena noćenja Villa Velebita (cijela kuća), minimalni boravak, popusti, što je uključeno u cijenu i rezervacija bez provizije.',
-  alternates: { canonical },
-  openGraph: {
-    url: canonical,
-    title: 'Cjenik | Villa Velebita',
-    description: 'Transparentne cijene za kuću za odmor u Lici — direktno kod vlasnika.',
-  },
-};
+  return getPageMetadata({
+    locale,
+    pathname: '/cjenik',
+    namespace: 'metadata.pages.pricing',
+  });
+}
 
 export default function CjenikPage() {
   return (

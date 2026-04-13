@@ -77,7 +77,23 @@ export default function AdminDashboard() {
     setToasts((prev) => prev.filter((t) => t.id !== id));
   }, []);
 
-  useEffect(() => { fetchBookings(); }, [fetchBookings]);
+  useEffect(() => {
+    let isCancelled = false;
+
+    const loadInitialBookings = async () => {
+      const res = await fetch('/api/admin/bookings');
+
+      if (isCancelled) return;
+      if (res.ok) setBookings(await res.json());
+      setLoading(false);
+    };
+
+    void loadInitialBookings();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   const handleLogout = async () => {
     await fetch('/api/admin/login', { method: 'DELETE' });
@@ -143,8 +159,15 @@ export default function AdminDashboard() {
     return conflicts;
   }, [bookings]);
 
-  const todayStr = new Date().toISOString().split('T')[0];
-  const in14Str = new Date(Date.now() + 14 * 86400000).toISOString().split('T')[0];
+  const { todayStr, in14Str } = useMemo(() => {
+    const today = new Date();
+    const in14Days = new Date(today.getTime() + 14 * 86400000);
+
+    return {
+      todayStr: today.toISOString().split('T')[0],
+      in14Str: in14Days.toISOString().split('T')[0],
+    };
+  }, []);
   const upcoming = bookings
     .filter((b) => b.status !== 'cancelled' && b.check_in >= todayStr && b.check_in <= in14Str)
     .sort((a, b) => a.check_in.localeCompare(b.check_in));

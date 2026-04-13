@@ -1,18 +1,25 @@
 import type { Metadata } from 'next';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import BookingWidget from '@/modules/booking-admin/components/BookingWidget';
-import { SITE_NAME } from '@/modules/booking-admin/booking.config';
+import { getPageMetadata } from '@/i18n/metadata';
 
-export const metadata: Metadata = {
-  title: `Rezervacija | ${SITE_NAME}`,
-  description: `Rezervirajte Villa Velebita direktno. Bez provizija, direktna komunikacija s vlasnikom.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+
+  return getPageMetadata({
+    locale,
+    pathname: '/booking',
+    namespace: 'metadata.pages.booking',
+  });
+}
 
 type Props = {
   searchParams: Promise<{ apartment?: string }>;
 };
 
 export default async function BookingPage({ searchParams }: Props) {
+  const t = await getTranslations('bookingPage');
   const { apartment } = await searchParams;
 
   return (
@@ -22,14 +29,12 @@ export default async function BookingPage({ searchParams }: Props) {
         <div className="max-w-2xl mx-auto px-4 py-12">
           <div className="mb-8">
             <p className="text-xs font-semibold uppercase tracking-widest text-stone mb-2">
-              Rezervacija
+              {t('eyebrow')}
             </p>
             <h1 className="font-display text-3xl font-semibold text-oak mb-2">
-              Rezervirajte direktno
+              {t('title')}
             </h1>
-            <p className="text-stone">
-              Odaberite datume i pošaljite upit — javimo se u roku 24 sata.
-            </p>
+            <p className="text-stone">{t('description')}</p>
           </div>
           <BookingWidget initialSlug={apartment ?? 'villa-velebita'} />
         </div>

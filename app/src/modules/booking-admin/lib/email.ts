@@ -1,8 +1,11 @@
 import { Resend } from 'resend';
+import { hasLocale } from 'next-intl';
 import { formatDisplayDate, addDays } from './dates';
 import { generateHUB3Buffer, generateEPCBuffer } from './barcode';
 import { createBookingViewToken } from './booking-view-token';
 import { bookingPublicViewUrl } from './site-url';
+import { getMessagesForLocale, getValidLocale } from '@/i18n/messages';
+import { routing, type AppLocale } from '@/i18n/routing';
 import {
   SITE_NAME,
   SITE_LOCATION,
@@ -14,8 +17,6 @@ import {
   RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
   BALANCE_DAYS_BEFORE_CHECK_IN,
-  CANCELLATION_POLICY_LINES_HR,
-  INVOICE_POLICY_HR,
   apartments,
 } from '../booking.config';
 import type { BookingEmailData } from '../types';
@@ -52,19 +53,35 @@ function esc(s: string): string {
     .replace(/"/g, '&quot;');
 }
 
-function balanceDueDateLabel(checkIn: Date): string {
-  return formatDisplayDate(addDays(checkIn, -BALANCE_DAYS_BEFORE_CHECK_IN));
+function fill(template: string, values: Record<string, string | number>): string {
+  return Object.entries(values).reduce(
+    (result, [key, value]) => result.replaceAll(`{${key}}`, String(value)),
+    template,
+  );
 }
 
-function emailTermsHrHtml(): string {
-  const lis = CANCELLATION_POLICY_LINES_HR.map(
+function balanceDueDateLabel(checkIn: Date, locale: AppLocale): string {
+  return formatDisplayDate(addDays(checkIn, -BALANCE_DAYS_BEFORE_CHECK_IN), locale);
+}
+
+function emailTermsHtml(messages: {
+  cancellationTitle: string;
+  cancellationLines: string[];
+  invoiceLabel: string;
+  invoiceText: string;
+}): string {
+  const lis = messages.cancellationLines.map(
     (line) => `<li style="margin:8px 0;line-height:1.55;">${esc(line)}</li>`,
   ).join('');
   return `
       <div style="background:#f8fafc;border-radius:10px;padding:18px 16px;margin:22px 0;border:1px solid #e2e8f0;">
-        <h3 style="margin:0 0 10px;font-size:16px;color:#1c2b35;line-height:1.3;">Otkazivanje (depozit)</h3>
+        <h3 style="margin:0 0 10px;font-size:16px;color:#1c2b35;line-height:1.3;">${esc(
+          messages.cancellationTitle,
+        )}</h3>
         <ul style="margin:0;padding-left:20px;color:#475569;font-size:15px;line-height:1.55;">${lis}</ul>
-        <p style="margin:14px 0 0;color:#475569;font-size:15px;line-height:1.6;"><strong style="color:#1c2b35;">Računi:</strong> ${esc(INVOICE_POLICY_HR)}</p>
+        <p style="margin:14px 0 0;color:#475569;font-size:15px;line-height:1.6;"><strong style="color:#1c2b35;">${esc(
+          messages.invoiceLabel,
+        )}:</strong> ${esc(messages.invoiceText)}</p>
       </div>`;
 }
 
@@ -85,33 +102,41 @@ function emailShell(inner: string, lang = 'hr'): string {
 </html>`;
 }
 
-function publicViewCtaBlock(url: string): string {
+function publicViewCtaBlock(
+  url: string,
+  messages: {
+    button: string;
+    hint: string;
+  },
+): string {
   return `
     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:20px 0 0;">
       <tr>
         <td style="padding:0;">
           <a href="${esc(url)}" style="display:block;background:#1e4a5f;color:#ffffff;padding:16px 20px;border-radius:12px;text-align:center;text-decoration:none;font-size:17px;font-weight:600;line-height:1.35;-webkit-tap-highlight-color:transparent;">
-            Otvori rezervaciju i QR kodove
+            ${esc(messages.button)}
           </a>
         </td>
       </tr>
     </table>
     <p style="margin:14px 0 0;font-size:15px;line-height:1.55;color:#64748b;">
-      Jednim dodirom prikazujete sve podatke o boravku te <strong style="color:#334155;">HUB3</strong> i <strong style="color:#334155;">SEPA QR</strong> za uplatu depozita — prilagođeno čitanju na mobitelu.
+      ${esc(messages.hint)}
     </p>`;
 }
 
 export async function sendNewBookingEmails(data: BookingEmailData) {
   const resend = getResend();
   if (!resend) return;
+  const locale = getValidLocale(data.locale);
+  const emailMessages = await getBookingEmailMessages(locale);
 
-  const checkInStr = formatDisplayDate(data.checkIn);
-  const checkOutStr = formatDisplayDate(data.checkOut);
+  const checkInStr = formatDisplayDate(data.checkIn, locale);
+  const checkOutStr = formatDisplayDate(data.checkOut, locale);
   const reference = data.bookingId
     ? `REZ-${data.bookingId.substring(0, 8).toUpperCase()}`
     : null;
   const viewToken = data.bookingId ? createBookingViewToken(data.bookingId) : null;
-  const publicViewUrl = viewToken ? bookingPublicViewUrl(viewToken) : null;
+  const publicViewUrl = viewToken ? bookingPublicViewUrl(viewToken, locale) : null;
   if (data.bookingId && !publicViewUrl) {
     console.warn(
       '[email] BOOKING_VIEW_SECRET nije postavljen — u mailu gosta nema poveznice na /rezervacija/pregled.',
@@ -119,6 +144,7 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
   }
   const fullData: FullData = {
     ...data,
+    locale,
     checkInStr,
     checkOutStr,
     reference,
@@ -147,15 +173,15 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
     resend.emails.send({
       from: FROM(),
       to: data.guestEmail,
-      subject: `Upit zaprimljen – ${data.apartmentName} | ${SITE_NAME}`,
-      html: guestReceivedHtml(fullData),
+      subject: `${emailMessages.received.subject} – ${data.apartmentName} | ${SITE_NAME}`,
+      html: guestReceivedHtml(fullData, emailMessages),
       ...(attachments.length > 0 && { attachments }),
     }),
     resend.emails.send({
       from: FROM(),
       to: resolveRecipient(OWNER()),
-      subject: `Nova rezervacija – ${data.guestName} | ${data.apartmentName}`,
-      html: ownerNewBookingHtml(fullData),
+      subject: `${emailMessages.owner.subject} – ${data.guestName} | ${data.apartmentName}`,
+      html: ownerNewBookingHtml(fullData, emailMessages),
     }),
   ]);
 
@@ -166,14 +192,16 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
 export async function sendConfirmationEmail(data: BookingEmailData) {
   const resend = getResend();
   if (!resend) return;
+  const locale = getValidLocale(data.locale);
+  const emailMessages = await getBookingEmailMessages(locale);
 
-  const checkInStr = formatDisplayDate(data.checkIn);
-  const checkOutStr = formatDisplayDate(data.checkOut);
+  const checkInStr = formatDisplayDate(data.checkIn, locale);
+  const checkOutStr = formatDisplayDate(data.checkOut, locale);
   const reference = data.bookingId
     ? `REZ-${data.bookingId.substring(0, 8).toUpperCase()}`
     : null;
   const viewToken = data.bookingId ? createBookingViewToken(data.bookingId) : null;
-  const publicViewUrl = viewToken ? bookingPublicViewUrl(viewToken) : null;
+  const publicViewUrl = viewToken ? bookingPublicViewUrl(viewToken, locale) : null;
   if (data.bookingId && !publicViewUrl) {
     console.warn(
       '[email] BOOKING_VIEW_SECRET nije postavljen — u mailu potvrde nema poveznice na /rezervacija/pregled.',
@@ -181,6 +209,7 @@ export async function sendConfirmationEmail(data: BookingEmailData) {
   }
   const fullData: FullData = {
     ...data,
+    locale,
     checkInStr,
     checkOutStr,
     reference,
@@ -204,8 +233,8 @@ export async function sendConfirmationEmail(data: BookingEmailData) {
   const result = await resend.emails.send({
     from: FROM(),
     to: resolveRecipient(data.guestEmail),
-    subject: `Rezervacija potvrđena ✓ – ${data.apartmentName} | ${SITE_NAME}`,
-    html: guestConfirmedHtml(fullData),
+    subject: `${emailMessages.confirmed.subject} ✓ – ${data.apartmentName} | ${SITE_NAME}`,
+    html: guestConfirmedHtml(fullData, emailMessages),
     ...(attachments.length > 0 && { attachments }),
   });
 
@@ -216,27 +245,32 @@ export async function sendContactEmail(opts: {
   senderName: string;
   senderEmail: string;
   message: string;
+  locale?: string;
 }) {
   const resend = getResend();
   if (!resend) return;
+  const locale: AppLocale = hasLocale(routing.locales, opts.locale)
+    ? opts.locale
+    : routing.defaultLocale;
+  const emailMessages = await getContactEmailMessages(locale);
 
   await resend.emails.send({
     from: FROM(),
     to: resolveRecipient(OWNER()),
-    subject: `Nova poruka s weba – ${opts.senderName}`,
-    html: contactEmailHtml(opts),
+    subject: `${emailMessages.subjectPrefix} – ${opts.senderName}`,
+    html: contactEmailHtml(opts, emailMessages),
   });
 }
 
 type FullData = BookingEmailData & {
+  locale: AppLocale;
   checkInStr: string;
   checkOutStr: string;
   reference: string | null;
   publicViewUrl: string | null;
 };
 
-function guestReceivedHtml(d: FullData) {
-  const name = esc(d.guestName);
+function guestReceivedHtml(d: FullData, messages: Awaited<ReturnType<typeof getBookingEmailMessages>>) {
   const apt = esc(d.apartmentName);
   const inner = `
     <div style="background:#1e4a5f;padding:22px 18px;text-align:center;">
@@ -244,27 +278,40 @@ function guestReceivedHtml(d: FullData) {
       ${SITE_LOCATION ? `<p style="color:#d4b896;margin:8px 0 0;font-size:13px;letter-spacing:0.08em;text-transform:uppercase;">${esc(SITE_LOCATION)}</p>` : ''}
     </div>
     <div style="padding:22px 18px 28px;">
-      <p style="font-size:17px;margin:0 0 12px;line-height:1.45;color:#1c2b35;">Poštovani ${name},</p>
-      <p style="color:#475569;font-size:16px;line-height:1.6;margin:0;">Zaprimili smo vaš upit za rezervaciju. Javit ćemo vam se u najkraćem roku s odgovorom i sljedećim koracima.</p>
+      <p style="font-size:17px;margin:0 0 12px;line-height:1.45;color:#1c2b35;">${esc(
+        fill(messages.received.greeting, { name: d.guestName }),
+      )}</p>
+      <p style="color:#475569;font-size:16px;line-height:1.6;margin:0;">${esc(messages.received.intro)}</p>
 
       <div style="background:#fdf8f3;border-radius:10px;padding:18px 16px;margin:20px 0;border-left:4px solid #c4975a;">
-        <h2 style="font-size:15px;margin:0 0 14px;color:#b8860b;text-transform:uppercase;letter-spacing:0.06em;line-height:1.3;">Sažetak</h2>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Smještaj</strong> ${apt}</p>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Dolazak</strong> ${esc(d.checkInStr)} od 14:00</p>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Odlazak</strong> ${esc(d.checkOutStr)} do 11:00</p>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Noćenja</strong> ${d.nights}</p>
-        <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;line-height:1.4;color:#1e4a5f;font-weight:700;">Ukupno: ${d.totalPrice} €</p>
-        <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">Osnovna cijena: ${BASE_PRICE_PER_NIGHT} EUR/noć</p>
+        <h2 style="font-size:15px;margin:0 0 14px;color:#b8860b;text-transform:uppercase;letter-spacing:0.06em;line-height:1.3;">${esc(messages.shared.summaryTitle)}</h2>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.accommodationLabel)}</strong> ${apt}</p>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.checkInLabel)}</strong> ${esc(d.checkInStr)} ${esc(messages.shared.checkInTime)}</p>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.checkOutLabel)}</strong> ${esc(d.checkOutStr)} ${esc(messages.shared.checkOutTime)}</p>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.nightsLabel)}</strong> ${d.nights}</p>
+        <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;line-height:1.4;color:#1e4a5f;font-weight:700;">${esc(messages.shared.totalLabel)}: ${d.totalPrice} €</p>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">${esc(
+          fill(messages.shared.basePrice, { price: BASE_PRICE_PER_NIGHT }),
+        )}</p>
       </div>
 
       ${RECIPIENT_IBAN ? `
       <div style="background:#fffbeb;border-radius:10px;padding:18px 16px;margin:18px 0;">
-        <h3 style="margin:0 0 12px;font-size:16px;color:#1c2b35;line-height:1.3;">Plaćanje</h3>
+        <h3 style="margin:0 0 12px;font-size:16px;color:#1c2b35;line-height:1.3;">${esc(messages.shared.paymentTitle)}</h3>
         <p style="margin:0;font-size:16px;line-height:1.6;color:#475569;">
-          <strong style="color:#1c2b35;">Depozit (${DEPOSIT_PCT_DISPLAY}%):</strong> ${d.deposit} € — plaća se pri potvrdi rezervacije.
+          <strong style="color:#1c2b35;">${esc(
+            fill(messages.shared.depositLabel, { percent: DEPOSIT_PCT_DISPLAY }),
+          )}:</strong> ${d.deposit} € — ${esc(messages.received.depositNote)}
         </p>
         <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#475569;">
-          <strong style="color:#1c2b35;">Ostatak (${BALANCE_PCT_DISPLAY}%):</strong> ${d.totalPrice - d.deposit} € — najkasnije <strong style="color:#1c2b35;">${BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska</strong> (rok oko ${esc(balanceDueDateLabel(d.checkIn))}), na isti IBAN.
+          <strong style="color:#1c2b35;">${esc(
+            fill(messages.shared.balanceLabel, { percent: BALANCE_PCT_DISPLAY }),
+          )}:</strong> ${d.totalPrice - d.deposit} € — ${esc(
+            fill(messages.shared.balanceNote, {
+              days: BALANCE_DAYS_BEFORE_CHECK_IN,
+              dueDate: balanceDueDateLabel(d.checkIn, d.locale),
+            }),
+          )}
         </p>
         <div style="margin:14px 0 0;padding:12px 14px;background:#ffffff;border:1px solid #fde68a;border-radius:8px;font-size:15px;line-height:1.55;word-break:break-word;">
           ${RECIPIENT_NAME ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(RECIPIENT_NAME)}</span>` : ''}
@@ -273,31 +320,32 @@ function guestReceivedHtml(d: FullData) {
         <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:#64748b;">
           ${esc(RECIPIENT_BANK_NAME)} · BIC/SWIFT: <strong style="font-family:ui-monospace,monospace;color:#334155;">${esc(RECIPIENT_BIC)}</strong>
         </p>
-        <p style="margin:8px 0 0;font-size:14px;color:#64748b;">Poziv na broj / model: <strong style="color:#1c2b35;">${esc(d.reference ?? `${d.guestName} — ${d.apartmentName}`)}</strong></p>
+        <p style="margin:8px 0 0;font-size:14px;color:#64748b;">${esc(messages.shared.referenceLabel)}: <strong style="color:#1c2b35;">${esc(d.reference ?? `${d.guestName} — ${d.apartmentName}`)}</strong></p>
         ${d.reference ? `
         <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px 16px;margin-top:16px;font-size:15px;line-height:1.55;color:#1e40af;">
-          <strong style="color:#1e3a8a;">Privitci u ovom e-mailu:</strong> QR kodovi samo za <strong>depozit</strong>.<br>
-          · <em>qr-placanje-hr.png</em> — hrvatske banke (HUB3)<br>
-          · <em>qr-placanje-eu.png</em> — Revolut, N26, Wise, SEPA
+          <strong style="color:#1e3a8a;">${esc(messages.shared.attachmentsTitle)}</strong> ${esc(
+            messages.shared.attachmentsBody,
+          )}<br>
+          · <em>qr-placanje-hr.png</em> — ${esc(messages.shared.hub3Banks)}<br>
+          · <em>qr-placanje-eu.png</em> — ${esc(messages.shared.epcBanks)}
         </div>` : ''}
-        ${d.publicViewUrl ? publicViewCtaBlock(d.publicViewUrl) : ''}
+        ${d.publicViewUrl ? publicViewCtaBlock(d.publicViewUrl, messages.shared.publicView) : ''}
       </div>` : ''}
 
-      ${emailTermsHrHtml()}
+      ${emailTermsHtml(messages.terms)}
 
       ${OWNER_EMAIL ? `
       <p style="color:#64748b;font-size:15px;line-height:1.6;margin:20px 0 0;">
-        Za pitanja: <a href="mailto:${esc(OWNER_EMAIL)}" style="color:#1e4a5f;font-weight:500;">${esc(OWNER_EMAIL)}</a>${OWNER_PHONE ? ` · ${esc(OWNER_PHONE)}` : ''}
+        ${esc(messages.shared.questions)} <a href="mailto:${esc(OWNER_EMAIL)}" style="color:#1e4a5f;font-weight:500;">${esc(OWNER_EMAIL)}</a>${OWNER_PHONE ? ` · ${esc(OWNER_PHONE)}` : ''}
       </p>` : ''}
     </div>
     <div style="background:#e2e8f0;padding:16px 18px;text-align:center;">
       <p style="margin:0;font-size:13px;line-height:1.45;color:#64748b;">${esc(SITE_NAME)}${OWNER_EMAIL ? ` · ${esc(OWNER_EMAIL)}` : ''}</p>
     </div>`;
-  return emailShell(inner);
+  return emailShell(inner, d.locale);
 }
 
-function guestConfirmedHtml(d: FullData) {
-  const name = esc(d.guestName);
+function guestConfirmedHtml(d: FullData, messages: Awaited<ReturnType<typeof getBookingEmailMessages>>) {
   const apt = esc(d.apartmentName);
   const inner = `
     <div style="background:#1e4a5f;padding:22px 18px;text-align:center;">
@@ -306,84 +354,123 @@ function guestConfirmedHtml(d: FullData) {
     </div>
     <div style="padding:22px 18px 28px;">
       <div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:14px 16px;margin-bottom:20px;text-align:center;">
-        <p style="margin:0;font-size:17px;color:#166534;font-weight:700;line-height:1.35;">Rezervacija je potvrđena</p>
+        <p style="margin:0;font-size:17px;color:#166534;font-weight:700;line-height:1.35;">${esc(
+          messages.confirmed.badge,
+        )}</p>
       </div>
-      <p style="font-size:17px;margin:0 0 12px;line-height:1.45;color:#1c2b35;">Poštovani ${name},</p>
-      <p style="color:#475569;font-size:16px;line-height:1.6;margin:0;">Radujemo se vašem dolasku! U nastavku su podaci o boravku i plaćanju.</p>
+      <p style="font-size:17px;margin:0 0 12px;line-height:1.45;color:#1c2b35;">${esc(
+        fill(messages.confirmed.greeting, { name: d.guestName }),
+      )}</p>
+      <p style="color:#475569;font-size:16px;line-height:1.6;margin:0;">${esc(messages.confirmed.intro)}</p>
 
       <div style="background:#fdf8f3;border-radius:10px;padding:18px 16px;margin:20px 0;border-left:4px solid #c4975a;">
-        <h2 style="font-size:15px;margin:0 0 14px;color:#b8860b;text-transform:uppercase;letter-spacing:0.06em;">Sažetak</h2>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Smještaj</strong> ${apt}</p>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Dolazak</strong> ${esc(d.checkInStr)} od 14:00</p>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Odlazak</strong> ${esc(d.checkOutStr)} do 11:00</p>
-        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">Noćenja</strong> ${d.nights}</p>
-        <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;color:#1e4a5f;font-weight:700;">Ukupno: ${d.totalPrice} €</p>
-        <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">Osnovna cijena: ${BASE_PRICE_PER_NIGHT} EUR/noć</p>
+        <h2 style="font-size:15px;margin:0 0 14px;color:#b8860b;text-transform:uppercase;letter-spacing:0.06em;">${esc(messages.shared.summaryTitle)}</h2>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.accommodationLabel)}</strong> ${apt}</p>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.checkInLabel)}</strong> ${esc(d.checkInStr)} ${esc(messages.shared.checkInTime)}</p>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.checkOutLabel)}</strong> ${esc(d.checkOutStr)} ${esc(messages.shared.checkOutTime)}</p>
+        <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.nightsLabel)}</strong> ${d.nights}</p>
+        <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;color:#1e4a5f;font-weight:700;">${esc(messages.shared.totalLabel)}: ${d.totalPrice} €</p>
+        <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">${esc(
+          fill(messages.shared.basePrice, { price: BASE_PRICE_PER_NIGHT }),
+        )}</p>
       </div>
 
       ${RECIPIENT_IBAN ? `
       <div style="background:#fffbeb;border-radius:10px;padding:18px 16px;margin:18px 0;">
-        <h3 style="margin:0 0 10px;font-size:16px;color:#1c2b35;">Plaćanje</h3>
+        <h3 style="margin:0 0 10px;font-size:16px;color:#1c2b35;">${esc(messages.shared.paymentTitle)}</h3>
         <p style="margin:0;font-size:16px;line-height:1.6;color:#475569;">
-          <strong style="color:#1c2b35;">Depozit (${DEPOSIT_PCT_DISPLAY}%):</strong> ${d.deposit} € — ako još nije plaćen, molimo uplatite što prije.
+          <strong style="color:#1c2b35;">${esc(
+            fill(messages.shared.depositLabel, { percent: DEPOSIT_PCT_DISPLAY }),
+          )}:</strong> ${d.deposit} € — ${esc(messages.confirmed.depositNote)}
         </p>
         <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#475569;">
-          <strong style="color:#1c2b35;">Ostatak (${BALANCE_PCT_DISPLAY}%):</strong> ${d.totalPrice - d.deposit} € — najkasnije ${BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska (oko ${esc(balanceDueDateLabel(d.checkIn))}), isti IBAN.
+          <strong style="color:#1c2b35;">${esc(
+            fill(messages.shared.balanceLabel, { percent: BALANCE_PCT_DISPLAY }),
+          )}:</strong> ${d.totalPrice - d.deposit} € — ${esc(
+            fill(messages.shared.balanceNote, {
+              days: BALANCE_DAYS_BEFORE_CHECK_IN,
+              dueDate: balanceDueDateLabel(d.checkIn, d.locale),
+            }),
+          )}
         </p>
         <div style="margin:14px 0 0;padding:12px 14px;background:#ffffff;border:1px solid #fde68a;border-radius:8px;font-size:15px;word-break:break-word;line-height:1.55;">
           ${RECIPIENT_NAME ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(RECIPIENT_NAME)}</span>` : ''}
           <span style="font-family:ui-monospace,monospace;">IBAN: ${esc(RECIPIENT_IBAN)}</span>
         </div>
-        <p style="margin:8px 0 0;font-size:14px;color:#64748b;">Poziv: <strong style="color:#1c2b35;">${esc(d.reference ?? `${d.guestName} — ${d.apartmentName}`)}</strong></p>
+        <p style="margin:8px 0 0;font-size:14px;color:#64748b;">${esc(messages.shared.referenceShort)}: <strong style="color:#1c2b35;">${esc(d.reference ?? `${d.guestName} — ${d.apartmentName}`)}</strong></p>
         ${d.reference ? `
         <div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:8px;padding:14px 16px;margin-top:16px;font-size:15px;line-height:1.55;color:#1e40af;">
-          <strong>Privitci:</strong> QR kodovi za <strong>depozit</strong> — <em>qr-placanje-hr.png</em> (HR banke), <em>qr-placanje-eu.png</em> (SEPA).
+          <strong>${esc(messages.shared.attachmentsShort)}:</strong> ${esc(messages.shared.attachmentsBody)} <em>qr-placanje-hr.png</em> (${esc(messages.shared.hub3Banks)}), <em>qr-placanje-eu.png</em> (${esc(messages.shared.epcBanks)}).
         </div>` : ''}
-        ${d.publicViewUrl ? publicViewCtaBlock(d.publicViewUrl) : ''}
-      </div>` : d.publicViewUrl ? `<div style="padding:0 0 8px;">${publicViewCtaBlock(d.publicViewUrl)}</div>` : ''}
+        ${d.publicViewUrl ? publicViewCtaBlock(d.publicViewUrl, messages.shared.publicView) : ''}
+      </div>` : d.publicViewUrl ? `<div style="padding:0 0 8px;">${publicViewCtaBlock(d.publicViewUrl, messages.shared.publicView)}</div>` : ''}
 
       ${OWNER_EMAIL ? `
       <p style="color:#64748b;font-size:15px;line-height:1.6;margin:18px 0 0;">
-        Pitanja? <a href="mailto:${esc(OWNER_EMAIL)}" style="color:#1e4a5f;font-weight:500;">${esc(OWNER_EMAIL)}</a>${OWNER_PHONE ? ` · ${esc(OWNER_PHONE)}` : ''}
+        ${esc(messages.shared.questions)} <a href="mailto:${esc(OWNER_EMAIL)}" style="color:#1e4a5f;font-weight:500;">${esc(OWNER_EMAIL)}</a>${OWNER_PHONE ? ` · ${esc(OWNER_PHONE)}` : ''}
       </p>` : ''}
     </div>
     <div style="background:#e2e8f0;padding:16px 18px;text-align:center;">
       <p style="margin:0;font-size:13px;color:#64748b;">${esc(SITE_NAME)}${OWNER_EMAIL ? ` · ${esc(OWNER_EMAIL)}` : ''}</p>
     </div>`;
-  return emailShell(inner);
+  return emailShell(inner, d.locale);
 }
 
-function ownerNewBookingHtml(d: FullData) {
+function ownerNewBookingHtml(d: FullData, messages: Awaited<ReturnType<typeof getBookingEmailMessages>>) {
   const inner = `
     <div style="background:#1e4a5f;padding:20px 18px;">
-      <h1 style="color:#ffffff;font-size:19px;margin:0;line-height:1.3;">Nova rezervacija</h1>
+      <h1 style="color:#ffffff;font-size:19px;margin:0;line-height:1.3;">${esc(messages.owner.title)}</h1>
     </div>
     <div style="padding:20px 18px 24px;">
       <p style="margin:0 0 14px;font-size:17px;font-weight:600;color:#c4975a;line-height:1.3;">${esc(d.apartmentName)}</p>
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">Gost</strong> ${esc(d.guestName)}</p>
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">E-pošta</strong> <a href="mailto:${esc(d.guestEmail)}" style="color:#1e4a5f;word-break:break-all;">${esc(d.guestEmail)}</a></p>
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">Telefon</strong> ${esc(d.guestPhone ?? '—')}</p>
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">Dolazak</strong> ${esc(d.checkInStr)}</p>
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">Odlazak</strong> ${esc(d.checkOutStr)}</p>
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">Noćenja</strong> ${d.nights}</p>
-      <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #e2e8f0;font-size:18px;font-weight:700;color:#1e4a5f;">Ukupno: ${d.totalPrice} €</p>
-      <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">Osnovna cijena: ${BASE_PRICE_PER_NIGHT} EUR/noć</p>
-      <p style="margin:10px 0;font-size:15px;color:#475569;">Depozit (${DEPOSIT_PCT_DISPLAY}%): ${d.deposit} €</p>
-      <p style="margin:10px 0;font-size:15px;color:#475569;">Ostatak (${BALANCE_PCT_DISPLAY}%): ${d.totalPrice - d.deposit} € · rok ${BALANCE_DAYS_BEFORE_CHECK_IN} d prije dolaska</p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">${esc(messages.owner.guest)}</strong> ${esc(d.guestName)}</p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">${esc(messages.owner.email)}</strong> <a href="mailto:${esc(d.guestEmail)}" style="color:#1e4a5f;word-break:break-all;">${esc(d.guestEmail)}</a></p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">${esc(messages.owner.phone)}</strong> ${esc(d.guestPhone ?? '—')}</p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">${esc(messages.owner.checkIn)}</strong> ${esc(d.checkInStr)}</p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">${esc(messages.owner.checkOut)}</strong> ${esc(d.checkOutStr)}</p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">${esc(messages.owner.nights)}</strong> ${d.nights}</p>
+      <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #e2e8f0;font-size:18px;font-weight:700;color:#1e4a5f;">${esc(messages.shared.totalLabel)}: ${d.totalPrice} €</p>
+      <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">${esc(
+        fill(messages.shared.basePrice, { price: BASE_PRICE_PER_NIGHT }),
+      )}</p>
+      <p style="margin:10px 0;font-size:15px;color:#475569;">${esc(
+        fill(messages.shared.depositLabel, { percent: DEPOSIT_PCT_DISPLAY }),
+      )}: ${d.deposit} €</p>
+      <p style="margin:10px 0;font-size:15px;color:#475569;">${esc(
+        fill(messages.shared.balanceLabel, { percent: BALANCE_PCT_DISPLAY }),
+      )}: ${d.totalPrice - d.deposit} € · ${esc(
+        fill(messages.owner.balanceDeadline, { days: BALANCE_DAYS_BEFORE_CHECK_IN }),
+      )}</p>
       ${RECIPIENT_IBAN ? `<p style="margin:10px 0;font-size:14px;font-family:ui-monospace,monospace;word-break:break-all;color:#334155;">IBAN: ${esc(RECIPIENT_IBAN)}</p>` : ''}
       ${RECIPIENT_BIC ? `<p style="margin:10px 0;font-size:14px;color:#475569;">BIC: ${esc(RECIPIENT_BIC)} (${esc(RECIPIENT_BANK_NAME)})</p>` : ''}
     </div>`;
-  return emailShell(inner);
+  return emailShell(inner, d.locale);
 }
 
-function contactEmailHtml(d: { senderName: string; senderEmail: string; message: string }) {
+async function getContactEmailMessages(locale: AppLocale) {
+  return getMessagesForLocale(locale).contact.email;
+}
+
+async function getBookingEmailMessages(locale: AppLocale) {
+  return getMessagesForLocale(locale).bookingEmail;
+}
+
+function contactEmailHtml(
+  d: { senderName: string; senderEmail: string; message: string },
+  emailMessages: {
+    subjectPrefix: string;
+    heading: string;
+    nameLabel: string;
+    emailLabel: string;
+  },
+) {
   const inner = `
     <div style="background:#1e4a5f;padding:20px 18px;">
-      <h1 style="color:#ffffff;font-size:19px;margin:0;">Nova poruka s web stranice</h1>
+      <h1 style="color:#ffffff;font-size:19px;margin:0;">${esc(emailMessages.heading)}</h1>
     </div>
     <div style="padding:20px 18px 24px;">
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;"><strong style="color:#64748b;">Ime</strong> ${esc(d.senderName)}</p>
-      <p style="margin:12px 0;font-size:16px;line-height:1.55;"><strong style="color:#64748b;">E-pošta</strong> <a href="mailto:${esc(d.senderEmail)}" style="color:#1e4a5f;">${esc(d.senderEmail)}</a></p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;"><strong style="color:#64748b;">${esc(emailMessages.nameLabel)}</strong> ${esc(d.senderName)}</p>
+      <p style="margin:12px 0;font-size:16px;line-height:1.55;"><strong style="color:#64748b;">${esc(emailMessages.emailLabel)}</strong> <a href="mailto:${esc(d.senderEmail)}" style="color:#1e4a5f;">${esc(d.senderEmail)}</a></p>
       <div style="background:#f8fafc;border-radius:10px;padding:16px;margin-top:16px;border:1px solid #e2e8f0;">
         <p style="margin:0;font-size:16px;color:#334155;line-height:1.65;white-space:pre-wrap;word-break:break-word;">${esc(d.message)}</p>
       </div>

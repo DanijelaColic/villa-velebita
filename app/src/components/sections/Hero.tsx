@@ -1,15 +1,18 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { ChevronDown, MapPin, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
-export function Hero() {
+export async function Hero() {
+  const t = await getTranslations('hero');
+
   return (
-    <section className="relative min-h-screen flex flex-col" aria-label="Hero">
+    <section className="relative min-h-screen flex flex-col" aria-label={t('ariaLabel')}>
       {/* Background image */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/images/hero/exterior-08.jpg"
-          alt="Pogled na Villu Velebita – rustikalna kuća okružena ličkom prirodom"
+          alt={t('imageAlt')}
           fill
           priority
           quality={90}
@@ -26,42 +29,56 @@ export function Hero() {
         {/* Location badge */}
         <div className="flex items-center gap-1.5 text-cream/80 text-sm font-medium mb-6 tracking-wide">
           <MapPin className="size-4 text-terracotta-light" />
-          <span>Rudopolje, Vrhovine · Lika, Hrvatska</span>
+          <span>{t('location')}</span>
         </div>
 
         {/* H1 – inline dark backdrop samo iza teksta */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.3] max-w-4xl">
           <span className="bg-black/55 backdrop-blur-[2px] text-cream px-3 py-1 rounded-lg box-decoration-clone leading-[1.4]">
-            Vaš mir u srcu{' '}
+            {t('titlePrefix')}{' '}
           </span>
           <span className="bg-black/55 backdrop-blur-[2px] text-terracotta-light italic px-3 py-1 rounded-lg box-decoration-clone leading-[1.4]">
-            Like
+            {t('titleAccent')}
           </span>
         </h1>
 
         {/* Subtitle */}
         <p className="mt-6 text-lg md:text-xl text-cream max-w-2xl leading-relaxed [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
-          Zamislite jutro uz šalicu kave na terasi s pogledom na netaknutu ličku
-          prirodu. Rustikalna ljepota, moderni komfor i potpuna tišina – sve na
-          jednom mjestu, 20 minuta od Plitvičkih jezera.
+          {t('subtitle')}
         </p>
 
         {/* CTAs */}
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
           <Button size="lg" asChild>
-            <a href="#rezervacije">Rezervirajte odmor</a>
+            <a href="#rezervacije">{t('cta.booking')}</a>
           </Button>
           <Button size="lg" variant="outline" asChild className="border-cream text-cream hover:bg-cream hover:text-oak">
-            <a href="#o-smjestaju">Upoznajte villu</a>
+            <a href="#o-smjestaju">{t('cta.explore')}</a>
           </Button>
         </div>
 
         {/* Stats row */}
         <div className="mt-14 flex flex-wrap justify-center gap-6 sm:gap-10">
-          <Stat icon={<Users className="size-5" />} value="9 gostiju" label="Max kapacitet" />
-          <Stat icon={<MapPin className="size-5" />} value="20 min" label="Do Plitvičkih jezera" />
-          <Stat icon={<Star className="size-5" />} value="155 m²" label="Površina kuće" />
-          <Stat icon={<Star className="size-5" />} value="840 m" label="Nadmorska visina" />
+          <Stat
+            icon={<Users className="size-5" />}
+            value={t('stats.guests.value')}
+            label={t('stats.guests.label')}
+          />
+          <Stat
+            icon={<MapPin className="size-5" />}
+            value={t('stats.distance.value')}
+            label={t('stats.distance.label')}
+          />
+          <Stat
+            icon={<Star className="size-5" />}
+            value={t('stats.size.value')}
+            label={t('stats.size.label')}
+          />
+          <Stat
+            icon={<Star className="size-5" />}
+            value={t('stats.altitude.value')}
+            label={t('stats.altitude.label')}
+          />
         </div>
       </div>
 

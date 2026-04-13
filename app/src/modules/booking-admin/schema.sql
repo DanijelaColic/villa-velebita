@@ -16,13 +16,15 @@ create table if not exists bookings (
   deposit numeric(10, 2) not null,
   status text not null default 'pending'
     check (status in ('pending', 'confirmed', 'cancelled')),
+  locale text not null default 'hr',
   deposit_paid boolean not null default false,
   notes text,
   created_at timestamptz default now()
 );
 
--- Ako tablica već postoji bez deposit_paid kolone, dodaj je:
+-- Ako tablica već postoji bez novih kolona, dodaj ih:
 -- alter table bookings add column if not exists deposit_paid boolean not null default false;
+-- alter table bookings add column if not exists locale text not null default 'hr';
 
 -- Indexi za brže upite
 create index if not exists bookings_apartment_status_idx

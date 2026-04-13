@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Play } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -22,6 +23,7 @@ export type GallerySection = {
 };
 
 export function GalleryClient({ sections }: { sections: GallerySection[] }) {
+  const t = useTranslations('gallerySection');
   const [activeMediaIndex, setActiveMediaIndex] = useState<Record<string, number>>({});
   const [lightbox, setLightbox] = useState<{ sectionId: string; index: number } | null>(
     null,
@@ -69,9 +71,9 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
     <>
       <SectionWrapper id="galerija" bg="cream-dark">
         <SectionHeading
-          label="Galerija"
-          title="Svaki kutak prica svoju pricu"
-          subtitle="Autentican rustikalni stil spojen s modernim komforom - pogledajte sami."
+          label={t('heading.label')}
+          title={t('heading.title')}
+          subtitle={t('heading.subtitle')}
         />
 
         <div className="space-y-12 md:space-y-14">
@@ -103,7 +105,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                     if (totalMedia === 0) {
                       return (
                         <div className="absolute inset-0 flex items-center justify-center text-stone">
-                          Slike/video nisu pronadeni.
+                          {t('empty')}
                         </div>
                       );
                     }
@@ -118,7 +120,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                             setLightbox({ sectionId: section.id, index: currentIndex })
                           }
                           className="absolute inset-0 z-10 cursor-zoom-in"
-                          aria-label={`Otvori: ${activeMedia.alt}`}
+                          aria-label={t('controls.open', { alt: activeMedia.alt })}
                         />
 
                         {activeMedia.type === 'image' ? (
@@ -160,7 +162,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                               type="button"
                               onClick={showPrevious}
                               className="absolute left-3 top-1/2 z-30 -translate-y-1/2 rounded-full bg-oak/55 p-2 text-cream transition-colors hover:bg-oak/75"
-                              aria-label="Prethodni"
+                              aria-label={t('controls.previous')}
                             >
                               <ChevronLeft className="size-5" />
                             </button>
@@ -168,7 +170,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                               type="button"
                               onClick={showNext}
                               className="absolute right-3 top-1/2 z-30 -translate-y-1/2 rounded-full bg-oak/55 p-2 text-cream transition-colors hover:bg-oak/75"
-                              aria-label="Sljedeci"
+                              aria-label={t('controls.next')}
                             >
                               <ChevronRight className="size-5" />
                             </button>
@@ -185,7 +187,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                                       ? 'bg-cream'
                                       : 'bg-cream/45',
                                   )}
-                                  aria-label={`Prikazi ${mediaIndex + 1}`}
+                                  aria-label={t('controls.show', { index: mediaIndex + 1 })}
                                 />
                               ))}
                             </div>
@@ -211,7 +213,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                               ? 'border-terracotta shadow-warm'
                               : 'border-transparent hover:border-terracotta/50',
                           )}
-                          aria-label={`Prikazi ${mediaIndex + 1}`}
+                          aria-label={t('controls.show', { index: mediaIndex + 1 })}
                         >
                           {item.type === 'image' ? (
                             <Image
@@ -256,7 +258,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
               <button
                 className="absolute top-4 right-4 p-2 text-cream/70 transition-colors hover:text-cream"
                 onClick={close}
-                aria-label="Zatvori"
+                aria-label={t('controls.close')}
               >
                 <X className="size-8" />
               </button>
@@ -267,7 +269,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                   e.stopPropagation();
                   prev();
                 }}
-                aria-label="Prethodni"
+                aria-label={t('controls.previous')}
               >
                 <ChevronLeft className="size-8" />
               </button>
@@ -302,7 +304,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                   e.stopPropagation();
                   next();
                 }}
-                aria-label="Sljedeci"
+                aria-label={t('controls.next')}
               >
                 <ChevronRight className="size-8" />
               </button>

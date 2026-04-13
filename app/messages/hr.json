@@ -1,0 +1,1006 @@
+{
+  "metadata": {
+    "layout": {
+      "title": {
+        "default": "Villa Velebita – Kuća za odmor u srcu Like | Vrhovine",
+        "template": "%s | Villa Velebita"
+      },
+      "description": "Autentična kameno-drvena kuća za odmor u Rudopolju kod Vrhovine. Smještaj za 9 osoba, jacuzzi, roštilj i 20 minuta do Plitvičkih jezera.",
+      "openGraph": {
+        "title": "Villa Velebita – Kuća za odmor u srcu Like",
+        "description": "Autentična kameno-drvena kuća za odmor u Rudopolju. Jacuzzi, roštilj i 20 minuta do Plitvičkih jezera.",
+        "imageAlt": "Villa Velebita – kuća za odmor u Lici"
+      },
+      "twitter": {
+        "title": "Villa Velebita – Kuća za odmor u srcu Like",
+        "description": "Autentična kuća za odmor blizu Plitvičkih jezera. Rezervirajte direktno."
+      }
+    },
+    "structuredData": {
+      "description": "Autentična kameno-drvena kuća za odmor u Rudopolju, Lika. Smještaj za do 9 osoba s jacuzzijem, roštiljem i pečenjarom, 20 minuta od Plitvičkih jezera.",
+      "amenities": {
+        "jacuzzi": "Jacuzzi",
+        "wifi": "Besplatni WiFi",
+        "parking": "Besplatno parkiranje",
+        "grill": "Roštilj",
+        "kitchen": "Potpuno opremljena kuhinja",
+        "linen": "Posteljina i ručnici"
+      }
+    },
+    "pages": {
+      "faq": {
+        "title": "Česta pitanja (FAQ)",
+        "description": "Odgovori o udaljenosti od Plitvica, kapacitetu, cijeni, jacuzziju, plaćanju, ljubimcima i check-inu za Villa Velebita.",
+        "openGraph": {
+          "title": "FAQ | Villa Velebita",
+          "description": "Česta pitanja gostiju o kući za odmor u Rudopolju.",
+          "imageAlt": "Villa Velebita – česta pitanja"
+        }
+      },
+      "gallery": {
+        "title": "Galerija fotografija",
+        "description": "Fotografije unutrašnjosti, soba, jacuzzija, sjenice i okoliša Villa Velebita u Rudopolju kraj Vrhovina.",
+        "openGraph": {
+          "title": "Galerija | Villa Velebita",
+          "description": "Pogledajte kuću za odmor u Lici – sobe, jacuzzi, rustikalni detalji i priroda.",
+          "imageAlt": "Villa Velebita – galerija fotografija"
+        }
+      },
+      "accommodation": {
+        "title": "Smještaj",
+        "description": "Opis Villa Velebita: kameno-drvena kuća za do 9 gostiju, raspored prostorija, jacuzzi i kućni red.",
+        "openGraph": {
+          "title": "Smještaj | Villa Velebita",
+          "description": "Autentična kuća za odmor u Lici: kapacitet, etaže, oprema i pravila boravka.",
+          "imageAlt": "Villa Velebita – smještaj"
+        }
+      },
+      "amenities": {
+        "title": "Sadržaji i aktivnosti",
+        "description": "Pogodnosti Villa Velebita: jacuzzi, kuhinja, WiFi, parkiranje i aktivnosti u Lici, uključujući Plitvice i lokalne preporuke.",
+        "openGraph": {
+          "title": "Sadržaji i aktivnosti | Villa Velebita",
+          "description": "Što kuća nudi i što raditi u okolici – Vrhovine, Lika.",
+          "imageAlt": "Villa Velebita – sadržaji i aktivnosti"
+        }
+      },
+      "pricing": {
+        "title": "Cjenik i uvjeti najma",
+        "description": "Cijena noćenja, minimalni boravak, popusti i uvjeti rezervacije bez provizije za Villa Velebita.",
+        "openGraph": {
+          "title": "Cjenik | Villa Velebita",
+          "description": "Transparentne cijene za kuću za odmor u Lici – direktno kod vlasnika.",
+          "imageAlt": "Villa Velebita – cjenik"
+        }
+      },
+      "location": {
+        "title": "Lokacija i upute",
+        "description": "Villa Velebita, Rudopolje 124, Vrhovine – karta, Google Maps i udaljenost od Plitvičkih jezera i drugih atrakcija u Lici.",
+        "openGraph": {
+          "title": "Lokacija | Villa Velebita",
+          "description": "Pronađite nas u Rudopolju: savršena baza za Plitvice i istraživanje Like.",
+          "imageAlt": "Villa Velebita – lokacija"
+        }
+      },
+      "booking": {
+        "title": "Rezervacija",
+        "description": "Rezervirajte Villa Velebita direktno, bez provizija i uz izravnu komunikaciju s vlasnikom.",
+        "openGraph": {
+          "title": "Rezervacija | Villa Velebita",
+          "description": "Provjerite dostupnost i pošaljite upit direktno vlasnicima.",
+          "imageAlt": "Villa Velebita – rezervacija"
+        }
+      },
+      "bookingReview": {
+        "title": "Pregled rezervacije",
+        "description": "Podaci o rezervaciji i upute za uplatu depozita za Villa Velebita.",
+        "openGraph": {
+          "title": "Pregled rezervacije | Villa Velebita",
+          "description": "Provjerite detalje rezervacije i podatke za uplatu.",
+          "imageAlt": "Villa Velebita – pregled rezervacije"
+        }
+      }
+    }
+  },
+  "navbar": {
+    "brandPrefix": "Villa",
+    "brandAccent": "Velebita",
+    "localeLabel": "Jezik",
+    "menuLabel": "Izbornik",
+    "locales": {
+      "hr": "HR",
+      "en": "EN",
+      "de": "DE",
+      "it": "IT"
+    },
+    "links": {
+      "accommodation": "O smještaju",
+      "gallery": "Galerija",
+      "amenities": "Sadržaji",
+      "pricing": "Cijene",
+      "booking": "Rezervacije",
+      "contact": "Kontakt"
+    },
+    "cta": {
+      "primary": "Rezervirajte",
+      "mobile": "Rezervirajte odmor"
+    }
+  },
+  "hero": {
+    "ariaLabel": "Hero sekcija",
+    "imageAlt": "Pogled na Villu Velebita, rustikalnu kuću okruženu ličkom prirodom",
+    "location": "Rudopolje, Vrhovine · Lika, Hrvatska",
+    "titlePrefix": "Vaš mir u srcu",
+    "titleAccent": "Like",
+    "subtitle": "Zamislite jutro uz šalicu kave na terasi s pogledom na netaknutu ličku prirodu. Rustikalna ljepota, moderni komfor i potpuna tišina na jednom mjestu, 20 minuta od Plitvičkih jezera.",
+    "cta": {
+      "booking": "Rezervirajte odmor",
+      "explore": "Upoznajte villu"
+    },
+    "stats": {
+      "guests": {
+        "value": "9 gostiju",
+        "label": "Max kapacitet"
+      },
+      "distance": {
+        "value": "20 min",
+        "label": "Do Plitvičkih jezera"
+      },
+      "size": {
+        "value": "155 m²",
+        "label": "Površina kuće"
+      },
+      "altitude": {
+        "value": "840 m",
+        "label": "Nadmorska visina"
+      }
+    }
+  },
+  "bookingSection": {
+    "heading": {
+      "label": "Rezervacija",
+      "title": "Rezervirajte direktno",
+      "subtitle": "Bez platformi i bez provizija. Direktno s vlasnikom po najboljoj cijeni."
+    },
+    "rules": {
+      "checkInLabel": "Dolazak (check-in):",
+      "checkOutLabel": "Odlazak (check-out):",
+      "minStayLabel": "Minimalni boravak:",
+      "minStayValue": "{count} noći",
+      "discountLabel": "Popust 7+ noći:",
+      "discountValue": "10% popusta — javite se za ponudu",
+      "paymentNote": "Nakon odabira datuma prikazuju se iznosi depozita i ostatka; podatke za uplatu vidjet ćete tek nakon slanja upita."
+    }
+  },
+  "contact": {
+    "heading": {
+      "label": "Kontakt",
+      "title": "Javite se vlasnicima",
+      "subtitle": "Poruka ili poziv — odgovorimo u najkraćem roku."
+    },
+    "imageAlt": "{name}, vlasnici Ville Velebita",
+    "intro": "Villa Velebita nije samo kuća za odmor. To je mjesto gdje će vas dočekati Ivica i Ivana Ćaćić, bračni par koji s ljubavlju i pažnjom brine o svakom detalju kako bi se svaki gost osjećao opušteno, dobrodošlo i bezbrižno od prvog kontakta do odlaska.",
+    "hostRole": "Vlasnici i domaćini",
+    "addressLabel": "Adresa",
+    "mapTitle": "Lokacija Villa Velebita na Google Kartama",
+    "directionsCta": "Upute do smještaja u Google Kartama",
+    "form": {
+      "name": {
+        "label": "Ime i prezime",
+        "placeholder": "Vaše ime"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "vas@email.com"
+      },
+      "phone": {
+        "label": "Telefon (opcionalno)",
+        "placeholder": "+385 ..."
+      },
+      "message": {
+        "label": "Poruka",
+        "placeholder": "Termin, broj osoba, pitanja…"
+      },
+      "submit": "Pošaljite upit",
+      "status": {
+        "success": "Hvala na upitu. Ivica ili Ivana će vas kontaktirati u najkraćem roku.",
+        "genericError": "Došlo je do greške. Pokušajte ponovno."
+      }
+    },
+    "api": {
+      "validationError": "Ime, email i poruka su obavezni.",
+      "serverError": "Došlo je do greške pri slanju poruke. Pokušajte ponovno."
+    },
+    "email": {
+      "subjectPrefix": "Nova poruka s weba",
+      "heading": "Nova poruka s web stranice",
+      "nameLabel": "Ime",
+      "emailLabel": "E-pošta"
+    }
+  },
+  "faq": {
+    "heading": {
+      "title": "Sve što trebate znati",
+      "subtitle": "Odgovori na najčešće upite gostiju — ako ne nađete odgovor, nazovite nas direktno."
+    },
+    "items": {
+      "distance": {
+        "question": "Koliko je Villa Velebita udaljena od Plitvičkih jezera?",
+        "answer": "Villa Velebita nalazi se u Rudopolju, oko 20 minuta vožnje od Nacionalnog parka Plitvička jezera. Lokacija je odlična baza za jednodnevne izlete na Plitvice, ali i za istraživanje Like, Velebita i okolnih atrakcija."
+      },
+      "capacity": {
+        "question": "Koliko gostiju može boraviti u villi?",
+        "answer": "Kuća je predviđena za do 9 gostiju. Idealna je za obitelji ili manje grupe prijatelja koji žele komforan boravak u privatnom smještaju."
+      },
+      "included": {
+        "question": "Što je uključeno u cijenu najma?",
+        "answer": "U cijenu su uključeni posteljina i ručnici, završno čišćenje, osnovni toaletni pribor, besplatni WiFi, privatno parkiranje, korištenje vanjskog jacuzzija, roštilj i pečenjara."
+      },
+      "minStay": {
+        "question": "Kakav je minimalni boravak?",
+        "answer": "Minimalni boravak je 3 noći. Za duže rezervacije dostupni su povoljniji uvjeti, a za 7 ili više noći odobravamo i dodatni popust."
+      },
+      "pets": {
+        "question": "Prihvaćate li kućne ljubimce?",
+        "answer": "Kućni ljubimci mogu biti dobrodošli uz prethodnu najavu. Javite nam se prije rezervacije kako bismo potvrdili detalje i osigurali ugodan boravak za sve goste."
+      },
+      "checkInOut": {
+        "question": "Kada je check-in, a kada check-out?",
+        "answer": "Check-in je od 14:00, a check-out do 11:00. Ako trebate raniji dolazak ili kasniji odlazak, javite se unaprijed pa ćemo pokušati izaći u susret."
+      },
+      "jacuzzi": {
+        "question": "Kako funkcionira jacuzzi?",
+        "answer": "Vanjski jacuzzi grije se na drva, što boravku daje autentičan lički ugođaj. Za zagrijavanje vode obično je potrebno oko 1,5 do 2 sata, a drva su dostupna na imanju."
+      },
+      "payment": {
+        "question": "Može li se platiti karticom?",
+        "answer": "Rezervacija se potvrđuje uplatom {depositPercent}% depozita bankovnom transakcijom na IBAN {iban} (primatelj {recipientName}, {bankName}). Za uplate iz inozemstva potreban je BIC/SWIFT: {bic}. Preostalih {balancePercent}% ukupne cijene potrebno je uplatiti najkasnije {balanceDays} dana prije dolaska. Kartično plaćanje trenutno nije dostupno."
+      },
+      "cancellation": {
+        "question": "Kako glase uvjeti otkazivanja i kada dobivam račun?",
+        "answer": "Uvjeti otkazivanja i izdavanja računa potvrđuju se prilikom rezervacije i jasno su navedeni u komunikaciji s gostom. Ako trebate detaljno pojašnjenje prije rezervacije, pošaljite nam upit i poslat ćemo sve informacije unaprijed."
+      }
+    }
+  },
+  "footer": {
+    "ariaLabel": "Footer",
+    "brand": "Villa Velebita",
+    "location": "Rudopolje · Lika · Hrvatska",
+    "description": "Autentična kameno-drvena kuća za odmor na 840 m nadmorske visine, 20 minuta od Plitvičkih jezera.",
+    "navTitle": "Navigacija",
+    "navigationAriaLabel": "Footer navigacija",
+    "contactTitle": "Kontakt",
+    "address": {
+      "line1": "Rudopolje 124",
+      "line2": "53223 Vrhovine, Hrvatska"
+    },
+    "copyright": "Sva prava pridržana.",
+    "builtByPrefix": "Stranicu izradio",
+    "builtBySuffix": ".",
+    "whatsappLabel": "WhatsApp",
+    "links": {
+      "accommodation": "O smještaju",
+      "gallery": "Galerija",
+      "amenities": "Sadržaji",
+      "location": "Lokacija",
+      "pricing": "Cijene",
+      "faq": "FAQ",
+      "booking": "Rezervacije",
+      "contact": "Kontakt"
+    }
+  },
+  "gallerySection": {
+    "heading": {
+      "label": "Galerija",
+      "title": "Svaki kutak priča svoju priču",
+      "subtitle": "Autentičan rustikalni stil spojen s modernim komforom."
+    },
+    "sections": {
+      "houseEntrance": {
+        "title": "1) Kuća i ulaz",
+        "description": "Prvi dojam dolaska u Villu Velebita."
+      },
+      "groundFloor": {
+        "title": "2) Prizemlje: priprema obroka i druženje",
+        "description": "Prostor za kuhanje, objed i zajedničke trenutke."
+      },
+      "floorRelax": {
+        "title": "3) Kat za opuštanje",
+        "description": "Sobe i kutci namijenjeni mirnom odmoru."
+      },
+      "attic": {
+        "title": "4) Potkrovlje: odmor duše i pogledi",
+        "description": "Toplina potkrovlja uz poglede na izlaske i zalaske sunca."
+      },
+      "gazebo": {
+        "title": "5) Vanjska sjenica za nezaboravno druženje",
+        "description": "Vanjski kutak za opuštanje i večernja druženja."
+      },
+      "nature": {
+        "title": "7) Pogledi i priroda",
+        "description": "Završne fotografije prirode i ambijenta Like."
+      }
+    },
+    "empty": "Slike ili video nisu pronađeni.",
+    "controls": {
+      "open": "Otvori: {alt}",
+      "previous": "Prethodni",
+      "next": "Sljedeći",
+      "show": "Prikaži {index}",
+      "close": "Zatvori"
+    }
+  },
+  "landingTeasers": {
+    "gallery": {
+      "heading": {
+        "label": "Galerija",
+        "title": "Pogled iznutra i vani",
+        "subtitle": "Rustikalni detalji, sobe, vanjski jacuzzi i lički krajolik u jednom brzom pregledu."
+      },
+      "sections": {
+        "houseEntrance": { "title": "1) Kuća i ulaz", "description": "Prvi dojam dolaska u Villa Velebita." },
+        "groundFloor": { "title": "2) Prizemlje: priprema obroka i druženje", "description": "Prostor za kuhanje, objed i zajedničke trenutke." },
+        "floorRelax": { "title": "3) Kat za opuštanje", "description": "Sobe i kutci namijenjeni mirnom odmoru." },
+        "attic": { "title": "4) Potkrovlje: odmor duše i pogledi", "description": "Toplina potkrovlja uz poglede na izlaske i zalaske sunca." },
+        "gazebo": { "title": "5) Vanjska sjenica za nezaboravno druženje", "description": "Vanjski kutak za opuštanje i večernja druženja." },
+        "nature": { "title": "7) Pogledi i priroda", "description": "Završne fotografije prirode i ambijenta Like." }
+      },
+      "cta": "Otvori cijelu galeriju"
+    },
+    "about": {
+      "heading": { "label": "O smještaju", "title": "Villa Velebita" },
+      "paragraphs": {
+        "p1": "Villa Velebita je kameno-drvena kuća na 840 m nadmorske visine, idealna za do 9 gostiju i savršena baza za istraživanje Plitvica i Like.",
+        "p2": "Na 155 m² nudi tri spavaće sobe, dnevni boravak, prostor za druženje i dvije kupaonice s hidromasažnim tušem."
+      },
+      "cta": {
+        "primary": "Saznajte više o smještaju",
+        "secondary": "Galerija"
+      }
+    },
+    "location": {
+      "heading": {
+        "label": "Lokacija",
+        "title": "Rudopolje, Vrhovine",
+        "subtitle": "Karta, upute i udaljenost od Plitvica na jednom mjestu."
+      },
+      "mapTitle": "Villa Velebita – lokacija (pregled)",
+      "addressLine": "53223 Vrhovine, Hrvatska",
+      "openMaps": "Otvori u Google Maps",
+      "description": "Na punoj stranici lokacije nalaze se detaljne upute, karta i kontekst o okolici.",
+      "cta": "Lokacija i upute"
+    },
+    "amenities": {
+      "heading": {
+        "label": "Sadržaji",
+        "title": "Kuća i okolica",
+        "subtitle": "Kratki pregled opreme kuće i aktivnosti u regiji."
+      },
+      "items": {
+        "jacuzzi": {
+          "title": "Vanjski jacuzzi i pečenjara",
+          "description": "Opuštanje na otvorenom i rustikalna kuhinja pod vedrim nebom."
+        },
+        "house": {
+          "title": "Opremljena kuća",
+          "description": "WiFi, kuhinja, TV i parkiranje za obitelj ili grupu."
+        },
+        "region": {
+          "title": "Lika kao destinacija za aktivni odmor",
+          "description": "Plitvice, rijeka Gacka, planinarenje i lokalni doživljaji na dohvat ruke."
+        }
+      },
+      "cta": "Sadržaji i aktivnosti"
+    },
+    "faq": {
+      "heading": {
+        "label": "FAQ",
+        "title": "Česta pitanja ukratko",
+        "subtitle": "Kratki uvod, a potpuni popis odgovora nalazi se na stranici FAQ."
+      },
+      "items": {
+        "distance": {
+          "question": "Koliko ste udaljeni od Plitvica?",
+          "answer": "Otprilike 20 minuta vožnje do ulaza u park, što je idealno za jednodnevne izlete."
+        },
+        "capacity": {
+          "question": "Koliko gostiju primate?",
+          "answer": "Kuća prima do 9 gostiju (7+2), a detalji o rasporedu i krevetima nalaze se na FAQ-u i stranici smještaja."
+        }
+      },
+      "cta": "Sva česta pitanja"
+    }
+  },
+  "experiencesSection": {
+    "heading": {
+      "label": "Doživljaji i aktivnosti",
+      "title": "Odmor koji se ne zaboravlja",
+      "subtitle": "Priroda, adrenalin, gastronomija i izleti nadohvat su ruke iz Ville Velebita."
+    },
+    "empty": "Slike nisu pronađene.",
+    "controls": {
+      "previous": "Prethodna slika",
+      "next": "Sljedeća slika",
+      "show": "Prikaži sliku {index}"
+    },
+    "categories": {
+      "nature": {
+        "label": "Priroda",
+        "title": "Netaknuta lička divljina",
+        "intro": "Lika je jedna od najočuvanijih regija Hrvatske, s prostranim šumama, livadama i planinskim pejzažima koji se mijenjaju kroz godišnja doba.",
+        "imageAlt": "Netaknute ličke šume i planinski pejzaž",
+        "activities": {
+          "i1": { "name": "Nacionalni park Plitvička jezera", "distance": "20 min vožnje" },
+          "i2": { "name": "Majerovo vrelo – izvor rijeke Gacke", "distance": "10 min" },
+          "i3": { "name": "Rijeka Gacka – kristalno čista voda", "distance": "5 min" },
+          "i4": { "name": "Planinarenje i pješačke staze", "distance": "od kuće" },
+          "i5": { "name": "Vidikovci i panoramski pogledi", "distance": "u blizini" },
+          "i6": { "name": "Šume, livade i svjež planinski zrak", "distance": "840 m n.v." }
+        }
+      },
+      "activities": {
+        "label": "Aktivnosti",
+        "title": "Adrenalin i avantura",
+        "intro": "Rudopolje i okolica nude čitav spektar aktivnih doživljaja, od ziplinea do vožnje kvadovima kroz prirodu.",
+        "imageAlt": "Zipline avantura u prirodi",
+        "activities": {
+          "i1": { "name": "Zipline \"Pazi Medo\" – najduži u Europi", "distance": "tik uz kuću" },
+          "i2": { "name": "Vožnja kvadovima i motorima", "distance": "u okolici" },
+          "i3": { "name": "Biciklističke rute kroz Liku", "distance": "od kuće" },
+          "i4": { "name": "Ribolov na rijeci Gacki", "distance": "5 min" },
+          "i5": { "name": "Skijalište Mukinje (Plitvice)", "distance": "20 min" },
+          "i6": { "name": "Utočište medvjeda Kuterevo", "distance": "30 min" }
+        }
+      },
+      "gastronomy": {
+        "label": "Gastronomija",
+        "title": "Okusi Like",
+        "intro": "Uživajte u autentičnim okusima Like, od janjetine s ražnja do lokalnih sireva i restorana u blizini kuće.",
+        "imageAlt": "Tradicionalna lička hrana na roštilju",
+        "activities": {
+          "i1": { "name": "Restoran Big Bear (kamp)", "distance": "3 min" },
+          "i2": { "name": "Restoran Jelen", "distance": "5 min" },
+          "i3": { "name": "Pizzeria Ruspante", "distance": "20 min" },
+          "i4": { "name": "Restorani u Otočcu", "distance": "20 min" },
+          "i5": { "name": "Vlastiti roštilj i pečenjara u kući", "distance": "u dvorištu" },
+          "i6": { "name": "Konzum (Vrhovine / Otočac)", "distance": "5–20 min" }
+        }
+      },
+      "trips": {
+        "label": "Izleti",
+        "title": "Sve što vrijedi vidjeti",
+        "intro": "Villa Velebita savršena je baza za istraživanje Like i Kvarnera, od UNESCO prirodne baštine do jadranskih plaža.",
+        "imageAlt": "Plitvička jezera – UNESCO svjetska baština",
+        "activities": {
+          "i1": { "name": "Plitvička jezera (UNESCO)", "distance": "20 min" },
+          "i2": { "name": "Lovište jelena lopatara u Ličkom Lešću", "distance": "5 min" },
+          "i3": { "name": "More – Senj / Karlobag", "distance": "55 min" },
+          "i4": { "name": "Grad Otočac", "distance": "20 min" },
+          "i5": { "name": "Pošta Vrhovine", "distance": "5 min" },
+          "i6": { "name": "Dom zdravlja Otočac", "distance": "20 min" }
+        }
+      }
+    }
+  },
+  "floorPlanSection": {
+    "heading": {
+      "label": "Raspored kuće",
+      "title": "Tri etaže, svaka sa svojom pričom",
+      "subtitle": "155 m² pažljivo uređenog prostora za do 9 gostiju."
+    },
+    "smokingNote": "Pušenje dopušteno u prizemlju i sjenici",
+    "floors": {
+      "groundFloor": {
+        "name": "Prizemlje",
+        "badge": "Zajednički prostor",
+        "description": "Srce kuće s velikim hrastovim stolom, opremljenom kuhinjom, WC-om i izlazom na natkrivenu terasu s pogledom na Rudopolje.",
+        "imageAlt": "Prizemlje – prostor za druženje s hrastovim stolom",
+        "rooms": {
+          "room1": { "name": "Prostor za druženje", "detail": "Hrastov stol, plazma TV" },
+          "room2": { "name": "Kuhinja", "detail": "Potpuno opremljena" },
+          "room3": { "name": "WC" },
+          "room4": { "name": "Natkrivena terasa", "detail": "Pogled na Rudopolje i zipline" }
+        }
+      },
+      "firstFloor": {
+        "name": "Prvi kat",
+        "badge": "Dnevni boravak",
+        "description": "Mirniji ambijent za odmor, s prostranim dnevnim boravkom, dodatnom spavaćom sobom i kupaonicom.",
+        "imageAlt": "Dnevni boravak s kutnom garniturom na prvom katu",
+        "rooms": {
+          "room1": { "name": "Dnevni boravak", "detail": "Kutna garnitura 200×270 cm, TV" },
+          "room2": { "name": "Spavaća soba", "detail": "2 odvojena kreveta" },
+          "room3": { "name": "Kupaonica", "detail": "Hidromasažni tuš" },
+          "room4": { "name": "Predsoblje" }
+        }
+      },
+      "attic": {
+        "name": "Potkrovlje",
+        "badge": "Spavaće sobe",
+        "description": "Dvije velike spavaće sobe s masivnim hrastovim krevetima, dječjim krevetićem i dodatnim pomoćnim ležajem.",
+        "imageAlt": "Spavaća soba s masivnim hrastovim krevetom u potkrovlju",
+        "rooms": {
+          "room1": { "name": "Spavaća soba 1", "detail": "Hrastov krevet 2×2 m, pomoćni ležaj, TV" },
+          "room2": { "name": "Spavaća soba 2", "detail": "Hrastov krevet 2×2 m, dječji krevetić" },
+          "room3": { "name": "Kupaonica", "detail": "Hidromasažni tuš" }
+        }
+      }
+    }
+  },
+  "locationPage": {
+    "title": "Lokacija",
+    "description": "Adresa, interaktivna karta i kratak kontekst – Vrhovine, Lika, blizina nacionalnog parka."
+  },
+  "bookingPage": {
+    "eyebrow": "Rezervacija",
+    "title": "Rezervirajte direktno",
+    "description": "Odaberite datume i pošaljite upit — javimo se u roku 24 sata."
+  },
+  "aboutSection": {
+    "heading": {
+      "label": "O smještaju",
+      "title": "Gdje priroda postaje dom"
+    },
+    "paragraphs": {
+      "p1": "Zamislite jutro u tišini ličkih planina, uz šalicu kave i pogled na zelene vrhove. To je jutro u Villi Velebiti.",
+      "p2": "Smještena u mirnom Rudopolju na 840 metara nadmorske visine, autentična kameno-drvena kuća obnovljena je uz puno poštovanje prema ličkoj tradiciji i osjećaju doma.",
+      "p3": "Na 155 m² raspoređenih na tri etaže može ugostiti do 9 gostiju, uz prostrani dnevni boravak, tri spavaće sobe, hidromasažne tuševe i potpuno opremljenu kuhinju.",
+      "p4": "Navečer se opustite u vanjskom jacuzziju na drva ili pripremite večeru u rustikalnoj pečenjari. To su trenuci koji se pamte godinama."
+    },
+    "cta": {
+      "booking": "Rezervirajte odmor",
+      "gallery": "Pogledajte galeriju"
+    },
+    "imageAlt": {
+      "house": "Villa Velebita – autentična kameno-drvena kuća u Rudopolju",
+      "jacuzzi": "Vanjski jacuzzi na drva"
+    },
+    "renovated": "Renovirano",
+    "highlights": {
+      "altitude": {
+        "title": "840 m nadmorske visine",
+        "description": "Svjež planinski zrak i tišina koja se ne može kupiti."
+      },
+      "style": {
+        "title": "Autentični lički stil",
+        "description": "Masivni namještaj od starog hrasta, kamen i drvo u svakom detalju."
+      },
+      "jacuzzi": {
+        "title": "Vanjski jacuzzi na drva",
+        "description": "Upalite vatru, grijte vodu i uživajte pod zvjezdanim nebom."
+      },
+      "grill": {
+        "title": "Rustikalna pečenjara",
+        "description": "Vanjska pečenjara za janjetinu, roštilj i večere uz vatru."
+      }
+    }
+  },
+  "amenitiesSection": {
+    "heading": {
+      "label": "Sadržaji i pogodnosti",
+      "title": "Sve što trebate – bez kompromisa",
+      "subtitle": "Kuhinja, wellness, tehnologija i vanjski prostori opremljeni su za potpun komfor."
+    },
+    "groups": {
+      "kitchen": {
+        "title": "Kuhinja",
+        "items": {
+          "induction": "Indukcijska ploča",
+          "microwave": "Mikrovalna pećnica",
+          "dishwasher": "Perilica za suđe",
+          "fridge": "Hladnjak",
+          "coffee": "Aparat za kavu",
+          "kettle": "Kuhalo za vodu"
+        }
+      },
+      "technology": {
+        "title": "Tehnologija",
+        "items": {
+          "wifi": "Besplatni WiFi",
+          "tv": "TV (3×, uklj. plazma)"
+        }
+      },
+      "outdoor": {
+        "title": "Vanjski prostori",
+        "items": {
+          "jacuzzi": "Vanjski jacuzzi (hot tub na drva)",
+          "grill": "Roštilj",
+          "roastery": "Rustikalna pečenjara s roštiljem, loncem za čobanac i ražnjem za janjetinu",
+          "yard": "Dvorište 800 m²",
+          "parking": "Besplatno parkiranje"
+        }
+      },
+      "bathroom": {
+        "title": "Kupaonica i udobnost",
+        "items": {
+          "showers": "Hidromasažni tuševi (2×)",
+          "linen": "Posteljina i ručnici",
+          "toiletries": "Šamponi, sapun, WC papir",
+          "crib": "Dječji krevetić"
+        }
+      },
+      "rules": {
+        "title": "Pravila i info",
+        "items": {
+          "pets": "Kućni ljubimci (male pasmine)",
+          "smoking": "Pušenje u prizemlju/sjenici",
+          "checkin": "Check-in 14:00 / Check-out 11:00",
+          "cleaning": "Čišćenje uključeno u cijenu"
+        }
+      }
+    },
+    "capacity": {
+      "eyebrow": "Kapacitet",
+      "description": "Službeni kapacitet je 7+2 osobe, a zahvaljujući dodatnim ležajevima može ugostiti do 9 gostiju.",
+      "stats": {
+        "houseArea": "Površina kuće",
+        "yard": "Okućnica",
+        "floorsValue": "3 etaže",
+        "floors": "Raspored prostora",
+        "bathroomsValue": "2 kupaonice",
+        "bathrooms": "Hidromasažni tuševi"
+      }
+    }
+  },
+  "locationSection": {
+    "heading": {
+      "label": "Lokacija",
+      "title": "U srcu svega",
+      "subtitle": "Rudopolje 124, 53223 Vrhovine – savršena baza za istraživanje Plitvica i cijele Like."
+    },
+    "mapTitle": "Villa Velebita – lokacija na karti",
+    "countryLine": "53223 Vrhovine, Hrvatska",
+    "openInMaps": "Otvori u Google Maps"
+  },
+  "pricingSection": {
+    "heading": {
+      "label": "Cijene i uvjeti",
+      "title": "Transparentne cijene, bez skrivenih troškova",
+      "subtitle": "Iznajmljujete cijelu kuću – sve što vidite je vaše."
+    },
+    "stats": {
+      "capacity": {
+        "label": "Kapacitet",
+        "value": "7+2 osobe (do 9)"
+      },
+      "minStay": {
+        "label": "Min. boravak",
+        "value": "3 noći"
+      },
+      "pricePerNight": {
+        "label": "Cijena/noć",
+        "value": "490 € (cijela kuća)"
+      },
+      "discount": {
+        "label": "Popust 7+ noći",
+        "value": "10% popusta"
+      }
+    },
+    "priceCard": {
+      "eyebrow": "Cijena najma",
+      "note": "Cijela kuća · do 9 osoba · 54,44 € po osobi (490/9)"
+    },
+    "discountBadge": {
+      "title": "Rezerviraj 7+ noći",
+      "note": "= 441 € / noć"
+    },
+    "includedTitle": "Uključeno u cijenu",
+    "included": {
+      "linen": "Posteljina i ručnici",
+      "cleaning": "Završno čišćenje",
+      "toiletries": "Šamponi, sapun, WC papir",
+      "wifi": "Besplatni WiFi",
+      "parking": "Besplatno parkiranje",
+      "jacuzzi": "Vanjski jacuzzi",
+      "grill": "Roštilj i pečenjara",
+      "crib": "Krevetić za bebu (besplatno, na upit)"
+    },
+    "cta": {
+      "title": "Rezervirajte direktno",
+      "description": "Rezervacijom direktno kod nas dobivate najnižu cijenu i personaliziranu uslugu.",
+      "benefits": {
+        "noFees": "Bez provizija platformi",
+        "directContact": "Direktna komunikacija s vlasnikom",
+        "flexibility": "Fleksibilnost oko dolaska",
+        "localTips": "Savjeti o lokalnoj ponudi"
+      },
+      "checkAvailability": "Provjerite dostupnost",
+      "whatsapp": "Pišite na WhatsApp"
+    },
+    "disclaimer": "Cijene su iskazane u eurima. Osnovna cijena je 490 € po noći za cijelu kuću do 9 osoba. Minimalni boravak je 3 noći, a za 7 i više noći odobravamo 10% popusta."
+  },
+  "houseRulesSection": {
+    "heading": {
+      "label": "Kućni red",
+      "title": "Malo pravila za savršen odmor",
+      "subtitle": "Poštivanjem kućnog reda pomažete nam u očuvanju ljepote ovog mjesta i za buduće goste."
+    },
+    "cards": {
+      "checkin": {
+        "title": "Check-in i check-out",
+        "items": {
+          "i1": "Check-in od 14:00 h",
+          "i2": "Check-out do 11:00 h",
+          "i3": "Kasni check-in moguć uz dogovor"
+        }
+      },
+      "pets": {
+        "title": "Kućni ljubimci",
+        "items": {
+          "i1": "Kućni ljubimci dobrodošli (male pasmine)",
+          "i2": "Molimo najaviti unaprijed",
+          "i3": "Velike pasmine nisu dozvoljene"
+        }
+      },
+      "smoking": {
+        "title": "Pušenje",
+        "items": {
+          "i1": "Pušenje dozvoljeno u prizemlju",
+          "i2": "Pušenje dozvoljeno u sjenici (vani)",
+          "i3": "Pušenje nije dozvoljeno na katovima"
+        }
+      },
+      "noise": {
+        "title": "Glasna zabava",
+        "items": {
+          "i1": "Glazba i zabava do 24:00 h",
+          "i2": "Noćni mir od ponoći",
+          "i3": "Glasna glazba nakon ponoći nije dopuštena"
+        }
+      }
+    },
+    "note": "Zbog blizine Nacionalnog parka Plitvička jezera i očuvanja prirode, molimo goste da se pridržavaju kućnog reda. Hvala na razumijevanju."
+  },
+  "specialRecommendation": {
+    "heading": {
+      "label": "Posebna preporuka",
+      "title": "Caffe bar Plitvice",
+      "subtitle": "Mali kutak s velikom toplinom domaćina na putu kroz prirodne ljepote Like."
+    },
+    "paragraphs": {
+      "p1": "Na putu kroz ličke krajolike nalazi se jedno posebno mjesto koje gosti dugo pamte – Caffe bar Plitvice.",
+      "p2": "Tamo vas dočekuju nasmijana gazdarica Sniježa i obitelj Gačević-Čakarić, uz toplinu domaćeg ambijenta i miris svježe kave.",
+      "p3": "Uz pokaz boravka, Villa Velebita časti svakog gosta besplatnom kavom ili čašicom domaće rakije kao znakom dobrodošlice.",
+      "p4": "Ovdje niste samo prolaznik – ovdje ste gost kojeg se dočekuje kao prijatelja."
+    },
+    "controls": {
+      "previous": "Prethodna slika",
+      "next": "Sljedeća slika",
+      "showImage": "Prikaži sliku {index}"
+    },
+    "empty": {
+      "title": "Dodaj fotografije caffe bara",
+      "description": "Ubaci slike u folder"
+    }
+  },
+  "bookingWidget": {
+    "description": "Villa Velebita je autentična kameno-drvena kuća za odmor površine 155 m², smještena u mirnom Rudopolju. Idealna je za obitelji i manje grupe koje žele privatnost, prirodu i direktnu rezervaciju bez provizija.",
+    "labels": {
+      "night": {
+        "one": "1 noć",
+        "other": "{count} noći"
+      }
+    },
+    "steps": {
+      "dates": "1. Odabir datuma",
+      "summary": "2. Sažetak cijene",
+      "details": "3. Vaši podaci"
+    },
+    "paymentTerms": {
+      "title": "Uvjeti plaćanja i otkazivanja",
+      "depositLabel": "Depozit ({percent}%)",
+      "depositNote": "plaća se pri samoj rezervaciji.",
+      "balanceLabel": "Ostatak ({percent}%)",
+      "balanceNote": "plaća se najkasnije {days} dana prije dolaska",
+      "cancellationTitle": "Otkazivanje (depozit)"
+    },
+    "summary": {
+      "line": "{nights}× noć ({label}) · {pricePerNight} €",
+      "discount": "Popust {nights}+ noći ({percent}%)",
+      "total": "Ukupno"
+    },
+    "form": {
+      "name": "Ime i prezime",
+      "namePlaceholder": "Ana Horvat",
+      "email": "E-pošta",
+      "emailPlaceholder": "ana@primjer.hr",
+      "phone": "Mobitel / WhatsApp",
+      "phonePlaceholder": "+385 91 234 5678",
+      "adults": "Odrasli",
+      "children": "Djeca",
+      "maxGuests": "Najviše {capacity} gostiju ukupno",
+      "notes": "Napomena (nije obavezno)",
+      "notesPlaceholder": "Posebne želje ili pitanja…",
+      "rules": {
+        "checkIn": "Dolazak (check-in)",
+        "checkOut": "Odlazak (check-out)"
+      },
+      "agreeRules": "Slažem se s pravilima kuće i uvjetima rezervacije.",
+      "submitting": "Šaljem…",
+      "submit": "Pošalji upit za rezervaciju · {totalPrice} €"
+    },
+    "success": {
+      "title": "Upit za rezervaciju zaprimljen!",
+      "description": "Hvala vam, <name></name>! Poslali smo potvrdu na <email></email>. Javit ćemo vam se u najkraćem roku.",
+      "newBooking": "Nova rezervacija",
+      "summary": {
+        "accommodation": "Smještaj",
+        "checkIn": "Dolazak",
+        "checkOut": "Odlazak",
+        "nights": "Noćenja",
+        "total": "Ukupno",
+        "deposit": "Depozit ({percent}%)",
+        "depositNote": "plaća se pri samoj rezervaciji.",
+        "balance": "Ostatak ({percent}%)",
+        "balanceNote": "plaća se najkasnije {days} dana prije dolaska",
+        "cancellationTitle": "Otkazivanje (depozit)",
+        "bankLabel": "Banka",
+        "internationalPayments": "uplate iz inozemstva",
+        "qrTitle": "Brzo plaćanje QR kodom (iznos = depozit)",
+        "generatingQr": "Generiram QR kodove…",
+        "hub3Title": "Hrvatske banke",
+        "hub3Alt": "HUB3 PDF417 barkod",
+        "hub3Hint": "m-zaba, m-keks, Erste, OTP, PBZ…",
+        "epcTitle": "EU / inozemstvo",
+        "epcAlt": "EPC SEPA QR kod",
+        "epcHint": "Revolut, N26, Wise, SEPA…"
+      }
+    },
+    "errors": {
+      "maxGuests": "{apartmentName}: maksimalno {capacity} gostiju.",
+      "submitFailed": "Slanje upita za rezervaciju nije uspjelo."
+    },
+    "policies": {
+      "cancellation": {
+        "line1": "Do 14 dana prije dolaska — povrat 100% uplaćenog depozita.",
+        "line2": "7–14 dana prije dolaska — povrat 50% depozita.",
+        "line3": "Manje od 7 dana prije dolaska — depozit se ne vraća."
+      }
+    },
+    "api": {
+      "missingFields": "Nedostaju obavezni podaci.",
+      "apartmentNotFound": "Smještaj nije pronađen.",
+      "unavailable": "Ovaj smještaj trenutačno nije dostupan za rezervaciju.",
+      "minStay": "Minimalni boravak je {count} noći.",
+      "maxGuests": "{apartmentName} prima maksimalno {capacity} gostiju.",
+      "datesUnavailable": "Odabrani datumi su već zauzeti. Molimo odaberite druge datume.",
+      "serverError": "Greška pri spremanju rezervacije. Pokušajte ponovno ili nas kontaktirajte."
+    },
+    "calendar": {
+      "loading": "Učitavam kalendar…",
+      "previousMonth": "Prethodni mjesec",
+      "nextMonth": "Sljedeći mjesec",
+      "reset": "Poništi odabir",
+      "errors": {
+        "loadAvailability": "Greška pri učitavanju dostupnosti.",
+        "loadDates": "Greška pri učitavanju slobodnih datuma."
+      },
+      "legend": {
+        "available": "Slobodno",
+        "booked": "Zauzeto",
+        "selected": "Odabrano",
+        "pickCheckIn": "Odaberite datum dolaska",
+        "pickCheckOut": "Odaberite datum odlaska (min. {minNights} noći)"
+      },
+      "tooltips": {
+        "booked": "Zauzeto",
+        "minStay": "Minimalni boravak: {minNights} noći"
+      }
+    }
+  },
+  "bookingReview": {
+    "missingLink": {
+      "title": "Nedostaje poveznica",
+      "description": "Otvorite poveznicu iz e-pošte koju ste dobili nakon rezervacije."
+    },
+    "invalidLink": {
+      "title": "Poveznica nije valjana",
+      "description": "Link je možda istekao ili je korišten pogrešan URL. Ako trebate pomoć, javite nam se e-poštom."
+    },
+    "eyebrow": "Vaša rezervacija",
+    "status": {
+      "pending": "Na čekanju",
+      "confirmed": "Potvrđena",
+      "cancelled": "Otkazana"
+    },
+    "labels": {
+      "guest": "Gost",
+      "checkIn": "Dolazak",
+      "checkOut": "Odlazak",
+      "nights": "Noćenja",
+      "total": "Ukupno",
+      "deposit": "Depozit ({percent}%)",
+      "balance": "Ostatak ({percent}%)"
+    },
+    "times": {
+      "checkIn": "od 14:00",
+      "checkOut": "do 11:00"
+    },
+    "balanceNotice": "Ostatak platite najkasnije {days} dana prije dolaska.",
+    "payment": {
+      "title": "Plaćanje depozita",
+      "reference": "Model / poziv na broj",
+      "bank": "Banka",
+      "international": "uplate iz inozemstva",
+      "hub3Title": "Hrvatske banke (HUB3)",
+      "hub3Alt": "HUB3 barkod za uplatu depozita",
+      "epcTitle": "EU / SEPA (QR)",
+      "epcAlt": "SEPA QR za uplatu depozita"
+    }
+  },
+  "bookingEmail": {
+    "terms": {
+      "cancellationTitle": "Otkazivanje (depozit)",
+      "cancellationLines": [
+        "Do 14 dana prije dolaska — povrat 100% uplaćenog depozita.",
+        "7–14 dana prije dolaska — povrat 50% depozita.",
+        "Manje od 7 dana prije dolaska — depozit se ne vraća."
+      ],
+      "invoiceLabel": "Računi",
+      "invoiceText": "Računi se izdaju prilikom dolaska ili odlaska gostiju."
+    },
+    "shared": {
+      "summaryTitle": "Sažetak",
+      "accommodationLabel": "Smještaj",
+      "checkInLabel": "Dolazak",
+      "checkOutLabel": "Odlazak",
+      "checkInTime": "od 14:00",
+      "checkOutTime": "do 11:00",
+      "nightsLabel": "Noćenja",
+      "totalLabel": "Ukupno",
+      "basePrice": "Osnovna cijena: {price} EUR/noć",
+      "paymentTitle": "Plaćanje",
+      "depositLabel": "Depozit ({percent}%)",
+      "balanceLabel": "Ostatak ({percent}%)",
+      "balanceNote": "najkasnije {days} dana prije dolaska (rok oko {dueDate}), na isti IBAN.",
+      "referenceLabel": "Poziv na broj / model",
+      "referenceShort": "Poziv",
+      "attachmentsTitle": "Privitci u ovom e-mailu:",
+      "attachmentsShort": "Privitci",
+      "attachmentsBody": "QR kodovi samo za depozit.",
+      "hub3Banks": "hrvatske banke (HUB3)",
+      "epcBanks": "Revolut, N26, Wise, SEPA",
+      "questions": "Za pitanja:",
+      "publicView": {
+        "button": "Otvori rezervaciju i QR kodove",
+        "hint": "Jednim dodirom prikazujete sve podatke o boravku te HUB3 i SEPA QR za uplatu depozita."
+      }
+    },
+    "received": {
+      "subject": "Upit zaprimljen",
+      "greeting": "Poštovani {name},",
+      "intro": "Zaprimili smo vaš upit za rezervaciju. Javit ćemo vam se u najkraćem roku s odgovorom i sljedećim koracima.",
+      "depositNote": "plaća se pri potvrdi rezervacije."
+    },
+    "confirmed": {
+      "subject": "Rezervacija potvrđena",
+      "badge": "Rezervacija je potvrđena",
+      "greeting": "Poštovani {name},",
+      "intro": "Radujemo se vašem dolasku. U nastavku su podaci o boravku i plaćanju.",
+      "depositNote": "ako još nije plaćen, molimo uplatite što prije."
+    },
+    "owner": {
+      "subject": "Nova rezervacija",
+      "title": "Nova rezervacija",
+      "guest": "Gost",
+      "email": "E-pošta",
+      "phone": "Telefon",
+      "checkIn": "Dolazak",
+      "checkOut": "Odlazak",
+      "nights": "Noćenja",
+      "balanceDeadline": "rok {days} d prije dolaska"
+    }
+  },
+  "common": {
+    "loading": "Učitavanje...",
+    "localeLabel": "Jezik"
+  },
+  "errors": {
+    "generic": "Došlo je do greške. Pokušajte ponovno."
+  },
+  "aria": {
+    "menu": "Izbornik",
+    "footer": "Footer",
+    "footerNavigation": "Footer navigacija"
+  }
+}

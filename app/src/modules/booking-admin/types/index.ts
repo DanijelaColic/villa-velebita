@@ -15,6 +15,7 @@ export type Booking = {
   total_price: number;
   deposit: number;
   status: 'pending' | 'confirmed' | 'cancelled';
+  locale: string | null;
   notes: string | null;
   deposit_paid: boolean;
   created_at: string;
@@ -70,6 +71,7 @@ export type BookingEmailData = {
   guestName: string;
   guestEmail: string;
   guestPhone?: string | null;
+  locale?: string;
   apartmentName: string;
   checkIn: Date;
   checkOut: Date;

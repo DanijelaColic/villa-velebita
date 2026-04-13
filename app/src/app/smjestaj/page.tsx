@@ -1,23 +1,21 @@
 import type { Metadata } from 'next';
+import { getLocale } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { About } from '@/components/sections/About';
 import { FloorPlan } from '@/components/sections/FloorPlan';
 import { HouseRules } from '@/components/sections/HouseRules';
+import { getPageMetadata } from '@/i18n/metadata';
 
-const canonical = 'https://villavelebita.hr/smjestaj';
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
 
-export const metadata: Metadata = {
-  title: 'Smještaj',
-  description:
-    'Opis Villa Velebita: kameno-drvena kuća za do 9 gostiju, tri etaže, jacuzzi, raspored prostorija i kućni red — Rudopolje, Vrhovine.',
-  alternates: { canonical },
-  openGraph: {
-    url: canonical,
-    title: 'Smještaj | Villa Velebita',
-    description: 'Autentična kuća za odmor u Lici: kapacitet, etaže, oprema i pravila boravka.',
-  },
-};
+  return getPageMetadata({
+    locale,
+    pathname: '/smjestaj',
+    namespace: 'metadata.pages.accommodation',
+  });
+}
 
 export default function SmjestajPage() {
   return (

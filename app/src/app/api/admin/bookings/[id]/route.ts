@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/modules/booking-admin/lib/supabase';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
+import { getValidLocale } from '@/i18n/messages';
 import {
   getApartment,
 } from '@/modules/booking-admin/booking.config';
@@ -30,6 +31,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
         guestName: booking.guest_name,
         guestEmail: booking.guest_email,
         guestPhone: booking.guest_phone,
+        locale: getValidLocale(booking.locale),
         apartmentName: apt.name,
         checkIn: parseLocalDate(booking.check_in),
         checkOut: parseLocalDate(booking.check_out),
@@ -82,20 +84,22 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
 
-  if (needsConfirmEmail && existing) {
-    const apt = getApartment(existing.apartment_slug);
-    if (apt && existing.guest_email) {
+  if (needsConfirmEmail) {
+    const bookingForEmail = data as Booking;
+    const apt = getApartment(bookingForEmail.apartment_slug);
+    if (apt && bookingForEmail.guest_email) {
       await sendConfirmationEmail({
-        guestName: existing.guest_name,
-        guestEmail: existing.guest_email,
-        guestPhone: existing.guest_phone,
+        guestName: bookingForEmail.guest_name,
+        guestEmail: bookingForEmail.guest_email,
+        guestPhone: bookingForEmail.guest_phone,
+        locale: getValidLocale(bookingForEmail.locale),
         apartmentName: apt.name,
-        checkIn: parseLocalDate(existing.check_in),
-        checkOut: parseLocalDate(existing.check_out),
-        nights: existing.nights,
-        totalPrice: existing.total_price,
-        deposit: existing.deposit,
-        bookingId: existing.id,
+        checkIn: parseLocalDate(bookingForEmail.check_in),
+        checkOut: parseLocalDate(bookingForEmail.check_out),
+        nights: bookingForEmail.nights,
+        totalPrice: bookingForEmail.total_price,
+        deposit: bookingForEmail.deposit,
+        bookingId: bookingForEmail.id,
       }).catch((err) => console.error('Confirmation email failed:', err));
     }
   }

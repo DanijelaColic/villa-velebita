@@ -1,5 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
 import { ADMIN_COOKIE_NAME } from '@/modules/booking-admin/booking.config';
+import { routing } from '@/i18n/routing';
+
+const handleI18nRouting = createMiddleware(routing);
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -23,11 +27,15 @@ export function proxy(request: NextRequest) {
     }
   }
 
-  return NextResponse.next();
+  if (pathname.startsWith('/admin')) {
+    return NextResponse.next();
+  }
+
+  return handleI18nRouting(request);
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/((?!api|trpc|_next|_vercel|.*\\..*).*)'],
 };
 
 export default proxy;

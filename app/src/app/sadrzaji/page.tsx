@@ -1,23 +1,21 @@
 import type { Metadata } from 'next';
+import { getLocale } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Amenities } from '@/components/sections/Amenities';
 import { Experiences } from '@/components/sections/Experiences';
 import { CaffeBarPlitvice } from '@/components/sections/CaffeBarPlitvice';
+import { getPageMetadata } from '@/i18n/metadata';
 
-const canonical = 'https://villavelebita.hr/sadrzaji';
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
 
-export const metadata: Metadata = {
-  title: 'Sadržaji i aktivnosti',
-  description:
-    'Pogodnosti Villa Velebita: jacuzzi, kuhinja, WiFi, parkiranje, pečenjara. Aktivnosti u Lici: Plitvice, Gacka, planinarenje, zipline i lokalne preporuke.',
-  alternates: { canonical },
-  openGraph: {
-    url: canonical,
-    title: 'Sadržaji i aktivnosti | Villa Velebita',
-    description: 'Što kuća nudi i što raditi u okolici — Vrhovine, Lika.',
-  },
-};
+  return getPageMetadata({
+    locale,
+    pathname: '/sadrzaji',
+    namespace: 'metadata.pages.amenities',
+  });
+}
 
 export default function SadrzajiPage() {
   return (

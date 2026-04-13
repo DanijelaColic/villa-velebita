@@ -1,37 +1,38 @@
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
+import { getTranslations } from 'next-intl/server';
 import { CheckCircle2, Tag, Users, CalendarDays, Sparkles } from 'lucide-react';
-
-const included = [
-  'Posteljina i ručnici',
-  'Završno čišćenje',
-  'Šamponi, sapun, WC papir',
-  'Besplatni WiFi',
-  'Besplatno parkiranje',
-  'Vanjski jacuzzi',
-  'Roštilj i pečenjara',
-  'Krevetić za bebu (besplatno, na upit)',
-];
-
-const rules = [
-  { icon: <Users className="size-4" />, label: 'Kapacitet', value: '7+2 osobe (do 9)' },
-  { icon: <CalendarDays className="size-4" />, label: 'Min. boravak', value: '3 noći' },
-  { icon: <Tag className="size-4" />, label: 'Cijena/noć', value: '490 € (cijela kuća)' },
-  { icon: <Sparkles className="size-4" />, label: 'Popust 7+ noći', value: '10% popusta' },
-];
 
 type PricingProps = {
   bookingHref?: string;
 };
 
-export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
+export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
+  const t = await getTranslations('pricingSection');
+  const included = [
+    t('included.linen'),
+    t('included.cleaning'),
+    t('included.toiletries'),
+    t('included.wifi'),
+    t('included.parking'),
+    t('included.jacuzzi'),
+    t('included.grill'),
+    t('included.crib'),
+  ];
+  const rules = [
+    { icon: <Users className="size-4" />, label: t('stats.capacity.label'), value: t('stats.capacity.value') },
+    { icon: <CalendarDays className="size-4" />, label: t('stats.minStay.label'), value: t('stats.minStay.value') },
+    { icon: <Tag className="size-4" />, label: t('stats.pricePerNight.label'), value: t('stats.pricePerNight.value') },
+    { icon: <Sparkles className="size-4" />, label: t('stats.discount.label'), value: t('stats.discount.value') },
+  ];
+
   return (
     <SectionWrapper id="cijene" bg="oak">
       <SectionHeading
-        label="Cijene i uvjeti"
-        title="Transparentne cijene, bez skrivenih troškova"
-        subtitle="Iznajmljujete cijelu kuću – sve što vidite je vaše."
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
         light
       />
 
@@ -41,20 +42,20 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
           <div className="flex flex-wrap items-start justify-between gap-6 mb-8">
             <div>
               <p className="text-sm font-semibold uppercase tracking-widest text-stone mb-2">
-                Cijena najma
+                {t('priceCard.eyebrow')}
               </p>
               <div className="flex items-end gap-2">
                 <span className="font-display text-6xl font-semibold text-oak">490</span>
                 <span className="text-xl text-stone mb-2">€ / noć</span>
               </div>
-              <p className="text-stone text-sm mt-1">Cijela kuća · do 9 osoba · 54,44 € po osobi (490/9)</p>
+              <p className="text-stone text-sm mt-1">{t('priceCard.note')}</p>
             </div>
             <div className="bg-terracotta/10 border border-terracotta/20 rounded-card px-5 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-terracotta mb-1">
-                Rezerviraj 7+ noći
+                {t('discountBadge.title')}
               </p>
               <p className="font-display text-3xl font-semibold text-terracotta">−10%</p>
-              <p className="text-xs text-stone mt-1">= 441 € / noć</p>
+              <p className="text-xs text-stone mt-1">{t('discountBadge.note')}</p>
             </div>
           </div>
 
@@ -74,7 +75,7 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
           {/* What's included */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-stone mb-4">
-              Uključeno u cijenu
+              {t('includedTitle')}
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {included.map(item => (
@@ -91,19 +92,13 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
         <div className="bg-terracotta text-cream rounded-card p-8 shadow-warm flex flex-col justify-between">
           <div>
             <p className="font-display text-2xl font-semibold mb-3">
-              Rezervirajte direktno
+              {t('cta.title')}
             </p>
             <p className="text-cream/80 text-sm leading-relaxed mb-6">
-              Rezervacijom direktno kod nas dobivate najnižu cijenu i
-              personaliziranu uslugu.
+              {t('cta.description')}
             </p>
             <ul className="space-y-2 mb-8">
-              {[
-                'Bez provizija platformi',
-                'Direktna komunikacija s vlasnikom',
-                'Fleksibilnost oko dolaska',
-                'Savjeti o lokalnoj ponudi',
-              ].map(item => (
+              {[t('cta.benefits.noFees'), t('cta.benefits.directContact'), t('cta.benefits.flexibility'), t('cta.benefits.localTips')].map(item => (
                 <li key={item} className="flex items-center gap-2 text-sm text-cream/90">
                   <CheckCircle2 className="size-4 shrink-0 text-cream" />
                   {item}
@@ -116,7 +111,7 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
               asChild
               className="w-full bg-cream text-terracotta hover:bg-cream-dark font-semibold"
             >
-              <a href={bookingHref}>Provjerite dostupnost</a>
+              <a href={bookingHref}>{t('cta.checkAvailability')}</a>
             </Button>
             <Button
               asChild
@@ -124,7 +119,7 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
               className="w-full text-cream hover:bg-cream/10"
             >
               <a href="https://wa.me/385919295907" target="_blank" rel="noopener noreferrer">
-                Pišite na WhatsApp
+                {t('cta.whatsapp')}
               </a>
             </Button>
           </div>
@@ -133,9 +128,7 @@ export function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
 
       {/* Disclaimer */}
       <p className="mt-6 text-center text-xs text-stone-light">
-        Cijene su iskazane u eurima. Osnovna cijena je 490 € po noći za cijelu kuću (do 9 osoba), odnosno
-        54,44 € po osobi (490/9). Minimalni boravak 3 noći. Popust od 10% za rezervacije 7 i više noći.
-        Krevetić za bebu je besplatan (na upit), a za posebne zahtjeve (kućni ljubimci) javite se unaprijed.
+        {t('disclaimer')}
       </p>
     </SectionWrapper>
   );

@@ -1,88 +1,85 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { getTranslations } from 'next-intl/server';
 import { ExperiencesClient, type ExperienceCategory } from './ExperiencesClient';
 
 type CategoryWithFolder = Omit<ExperienceCategory, 'images'> & {
   folder: string;
 };
 
-const categories: CategoryWithFolder[] = [
-  {
-    id: 'priroda',
-    label: 'Priroda',
-    color: 'bg-forest',
-    title: 'Netaknuta lička divljina',
-    intro:
-      'Lika je jedna od najočuvanijih regija Hrvatske – ovdje je priroda još uvijek na prvom mjestu. Oko kuće se rasprostiru prostrane šume, livade i planinski pejzaži koji mijenjaju lice sa svakim godišnjim dobom.',
-    imageAlt: 'Netaknuta ličke šume i planinski pejzaž',
-    folder: 'netaknuta-licka-divljina',
-    activities: [
-      { name: 'Nacionalni park Plitvička jezera', distance: '20 min vožnje', highlight: true },
-      { name: 'Majerovo vrelo – izvor rijeke Gacke', distance: '10 min' },
-      { name: 'Rijeka Gacka – kristalno čista voda', distance: '5 min' },
-      { name: 'Planinarenje i pješačke staze', distance: 'od kuće' },
-      { name: 'Vidikovci i panoramski pogledi', distance: 'u blizini' },
-      { name: 'Šume, livade, svjež planinski zrak', distance: '840 m n.v.' },
-    ],
-  },
-  {
-    id: 'aktivnosti',
-    label: 'Aktivnosti',
-    color: 'bg-terracotta',
-    title: 'Adrenalin i avantura',
-    intro:
-      'Za one koji traže više od pasivnog odmora – Rudopolje i okolica nude čitav spektar aktivnih doživljaja. Od najduljeg ziplinea u Europi do vožnje kvadovima kroz netaknutu prirodu.',
-    imageAlt: 'Zipline avantura u prirodi',
-    folder: 'adrenalin-i-avantura',
-    activities: [
-      { name: 'Zipline "Pazi Medo" – najduži u Europi', distance: 'tik uz kuću', highlight: true },
-      { name: 'Vožnja kvadovima i motorima', distance: 'u okolici' },
-      { name: 'Biciklističke rute kroz Liku', distance: 'od kuće' },
-      { name: 'Ribolov na rijeci Gacki', distance: '5 min' },
-      { name: 'Skijalište Mukinje (Plitvice)', distance: '20 min' },
-      { name: 'Utočište medvjeda Kuterevo', distance: '30 min' },
-    ],
-  },
-  {
-    id: 'gastronomija',
-    label: 'Gastronomija',
-    color: 'bg-gold',
-    title: 'Okusi Like',
-    intro:
-      'Uživajte u autentičnim okusima Like – lička mlada janjetina s ražnja, tradicionalna peka, domaći škripavac i basa, uz nezaobilaznu ličku kalju. U blizini kuće nalaze se restorani koje svakako vrijedi posjetiti i doživjeti pravu gastronomiju ovog kraja.',
-    imageAlt: 'Tradicionalna lička hrana na roštilju',
-    folder: 'okusi-like',
-    activities: [
-      { name: 'Restoran Big Bear (kamp)', distance: '3 min', highlight: true },
-      { name: 'Restoran Jelen', distance: '5 min' },
-      { name: 'Pizzeria Ruspante', distance: '20 min' },
-      { name: 'Restorani u Otočcu', distance: '20 min' },
-      { name: 'Vlastiti roštilj i pečenjara u kući', distance: 'u dvorištu' },
-      { name: 'Konzum (Vrhovine / Otočac)', distance: '5–20 min' },
-    ],
-  },
-  {
-    id: 'izleti',
-    label: 'Izleti',
-    color: 'bg-oak',
-    title: 'Sve što vrijedi vidjeti',
-    intro:
-      'Villa Velebita savršena je baza za istraživanje cijele regije. U sat vremena vožnje dostupne su najpopularnije atrakcije Like i Kvarnera – od UNESCO prirodne baštine do jadranskih plaža.',
-    imageAlt: 'Plitvička jezera – UNESCO svjetska baština',
-    folder: 'sve-sto-vrijedi-vidjeti',
-    activities: [
-      { name: 'Plitvička jezera (UNESCO)', distance: '20 min', highlight: true },
-      { name: 'Lovište jelena lopatara u Ličkom Lešću', distance: '5 min' },
-      { name: 'More – Senj / Karlobag', distance: '55 min' },
-      { name: 'Grad Otočac', distance: '20 min' },
-      { name: 'Pošta Vrhovine', distance: '5 min' },
-      { name: 'Dom zdravlja Otočac', distance: '20 min' },
-    ],
-  },
-];
-
-export function Experiences() {
+export async function Experiences() {
+  const t = await getTranslations('experiencesSection');
   const basePublicDir = path.join(process.cwd(), 'public', 'images', 'experiences');
+  const categories: CategoryWithFolder[] = [
+    {
+      id: 'priroda',
+      label: t('categories.nature.label'),
+      color: 'bg-forest',
+      title: t('categories.nature.title'),
+      intro: t('categories.nature.intro'),
+      imageAlt: t('categories.nature.imageAlt'),
+      folder: 'netaknuta-licka-divljina',
+      activities: [
+        { name: t('categories.nature.activities.i1.name'), distance: t('categories.nature.activities.i1.distance'), highlight: true },
+        { name: t('categories.nature.activities.i2.name'), distance: t('categories.nature.activities.i2.distance') },
+        { name: t('categories.nature.activities.i3.name'), distance: t('categories.nature.activities.i3.distance') },
+        { name: t('categories.nature.activities.i4.name'), distance: t('categories.nature.activities.i4.distance') },
+        { name: t('categories.nature.activities.i5.name'), distance: t('categories.nature.activities.i5.distance') },
+        { name: t('categories.nature.activities.i6.name'), distance: t('categories.nature.activities.i6.distance') },
+      ],
+    },
+    {
+      id: 'aktivnosti',
+      label: t('categories.activities.label'),
+      color: 'bg-terracotta',
+      title: t('categories.activities.title'),
+      intro: t('categories.activities.intro'),
+      imageAlt: t('categories.activities.imageAlt'),
+      folder: 'adrenalin-i-avantura',
+      activities: [
+        { name: t('categories.activities.activities.i1.name'), distance: t('categories.activities.activities.i1.distance'), highlight: true },
+        { name: t('categories.activities.activities.i2.name'), distance: t('categories.activities.activities.i2.distance') },
+        { name: t('categories.activities.activities.i3.name'), distance: t('categories.activities.activities.i3.distance') },
+        { name: t('categories.activities.activities.i4.name'), distance: t('categories.activities.activities.i4.distance') },
+        { name: t('categories.activities.activities.i5.name'), distance: t('categories.activities.activities.i5.distance') },
+        { name: t('categories.activities.activities.i6.name'), distance: t('categories.activities.activities.i6.distance') },
+      ],
+    },
+    {
+      id: 'gastronomija',
+      label: t('categories.gastronomy.label'),
+      color: 'bg-gold',
+      title: t('categories.gastronomy.title'),
+      intro: t('categories.gastronomy.intro'),
+      imageAlt: t('categories.gastronomy.imageAlt'),
+      folder: 'okusi-like',
+      activities: [
+        { name: t('categories.gastronomy.activities.i1.name'), distance: t('categories.gastronomy.activities.i1.distance'), highlight: true },
+        { name: t('categories.gastronomy.activities.i2.name'), distance: t('categories.gastronomy.activities.i2.distance') },
+        { name: t('categories.gastronomy.activities.i3.name'), distance: t('categories.gastronomy.activities.i3.distance') },
+        { name: t('categories.gastronomy.activities.i4.name'), distance: t('categories.gastronomy.activities.i4.distance') },
+        { name: t('categories.gastronomy.activities.i5.name'), distance: t('categories.gastronomy.activities.i5.distance') },
+        { name: t('categories.gastronomy.activities.i6.name'), distance: t('categories.gastronomy.activities.i6.distance') },
+      ],
+    },
+    {
+      id: 'izleti',
+      label: t('categories.trips.label'),
+      color: 'bg-oak',
+      title: t('categories.trips.title'),
+      intro: t('categories.trips.intro'),
+      imageAlt: t('categories.trips.imageAlt'),
+      folder: 'sve-sto-vrijedi-vidjeti',
+      activities: [
+        { name: t('categories.trips.activities.i1.name'), distance: t('categories.trips.activities.i1.distance'), highlight: true },
+        { name: t('categories.trips.activities.i2.name'), distance: t('categories.trips.activities.i2.distance') },
+        { name: t('categories.trips.activities.i3.name'), distance: t('categories.trips.activities.i3.distance') },
+        { name: t('categories.trips.activities.i4.name'), distance: t('categories.trips.activities.i4.distance') },
+        { name: t('categories.trips.activities.i5.name'), distance: t('categories.trips.activities.i5.distance') },
+        { name: t('categories.trips.activities.i6.name'), distance: t('categories.trips.activities.i6.distance') },
+      ],
+    },
+  ];
 
   const categoriesWithImages: ExperienceCategory[] = categories.map(cat => {
     const diskDir = path.join(basePublicDir, cat.folder);

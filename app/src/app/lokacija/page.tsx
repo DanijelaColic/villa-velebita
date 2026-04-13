@@ -1,31 +1,31 @@
 import type { Metadata } from 'next';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { SubpageHeader } from '@/components/SubpageHeader';
 import { Location } from '@/components/sections/Location';
+import { getPageMetadata } from '@/i18n/metadata';
 
-const canonical = 'https://villavelebita.hr/lokacija';
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
 
-export const metadata: Metadata = {
-  title: 'Lokacija i upute',
-  description:
-    'Villa Velebita, Rudopolje 124, Vrhovine — karta, Google Maps i udaljenost od Plitvičkih jezera i ostalih atrakcija u Lici.',
-  alternates: { canonical },
-  openGraph: {
-    url: canonical,
-    title: 'Lokacija | Villa Velebita',
-    description: 'Pronađite nas u Rudopolju: savršena baza za Plitvice i istraživanje Like.',
-  },
-};
+  return getPageMetadata({
+    locale,
+    pathname: '/lokacija',
+    namespace: 'metadata.pages.location',
+  });
+}
 
-export default function LokacijaPage() {
+export default async function LokacijaPage() {
+  const t = await getTranslations('locationPage');
+
   return (
     <>
       <Navbar />
       <main className="min-h-screen bg-cream pt-20">
         <SubpageHeader
-          title="Lokacija"
-          description="Adresa, interaktivna karta i kratki kontekst — Vrhovine, Lika, blizina nacionalnog parka."
+          title={t('title')}
+          description={t('description')}
         />
         <Location />
       </main>

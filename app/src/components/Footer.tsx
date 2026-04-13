@@ -1,55 +1,67 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
-
-/** Isti kao OWNER_EMAIL u .env (mapiran u next.config.ts). */
-const OWNER_DISPLAY_EMAIL = process.env.NEXT_PUBLIC_OWNER_EMAIL?.trim() ?? '';
+import { getLocale, getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
+import { localizePath } from '@/i18n/pathnames';
+import { getValidLocale } from '@/i18n/messages';
 
 const NAV_LINKS = [
-  { href: '/smjestaj', label: 'O smještaju' },
-  { href: '/galerija', label: 'Galerija' },
-  { href: '/sadrzaji', label: 'Sadržaji' },
-  { href: '/lokacija', label: 'Lokacija' },
-  { href: '/cjenik', label: 'Cijene' },
-  { href: '/faq', label: 'FAQ' },
-  { href: '/booking', label: 'Rezervacije' },
-  { href: '/#kontakt', label: 'Kontakt' },
+  { href: '/smjestaj', labelKey: 'accommodation' },
+  { href: '/galerija', labelKey: 'gallery' },
+  { href: '/sadrzaji', labelKey: 'amenities' },
+  { href: '/lokacija', labelKey: 'location' },
+  { href: '/cjenik', labelKey: 'pricing' },
+  { href: '/faq', labelKey: 'faq' },
+  { href: '/booking', labelKey: 'booking' },
+  { href: '/#kontakt', labelKey: 'contact' },
 ];
 
-export function Footer() {
+export async function Footer() {
+  const locale = getValidLocale(await getLocale());
+  const t = await getTranslations('footer');
   const year = new Date().getFullYear();
+  const contactHref = `${localizePath('/', locale)}#kontakt`;
 
   return (
-    <footer className="bg-oak text-cream" aria-label="Footer">
+    <footer className="bg-oak text-cream" aria-label={t('ariaLabel')}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
           {/* Brand column */}
           <div className="lg:col-span-1">
             <p className="font-display text-2xl font-semibold text-cream mb-2">
-              Villa Velebita
+              {t('brand')}
             </p>
             <p className="text-sm text-cream/60 uppercase tracking-widest mb-4">
-              Rudopolje · Lika · Hrvatska
+              {t('location')}
             </p>
             <p className="text-stone-light text-sm leading-relaxed max-w-xs">
-              Autentična kameno-drvena kuća za odmor na 840 m nadmorske visine, 20 minuta
-              od Plitvičkih jezera.
+              {t('description')}
             </p>
           </div>
 
           {/* Navigation */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-cream/50 mb-4">
-              Navigacija
+              {t('navTitle')}
             </p>
-            <nav aria-label="Footer navigacija">
+            <nav aria-label={t('navigationAriaLabel')}>
               <ul className="space-y-2">
                 {NAV_LINKS.map(link => (
                   <li key={link.href}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-stone-light hover:text-cream transition-colors duration-150"
-                    >
-                      {link.label}
-                    </a>
+                    {link.href === '/#kontakt' ? (
+                      <a
+                        href={contactHref}
+                        className="text-sm text-stone-light hover:text-cream transition-colors duration-150"
+                      >
+                        {t(`links.${link.labelKey}`)}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-stone-light hover:text-cream transition-colors duration-150"
+                      >
+                        {t(`links.${link.labelKey}`)}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -59,15 +71,15 @@ export function Footer() {
           {/* Contact */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-cream/50 mb-4">
-              Kontakt
+              {t('contactTitle')}
             </p>
             <address className="not-italic space-y-3">
               <div className="flex items-start gap-2.5">
                 <MapPin className="size-4 text-terracotta mt-0.5 shrink-0" />
                 <div className="text-sm text-stone-light leading-snug">
-                  <span className="font-medium text-cream">Rudopolje 124</span>
+                  <span className="font-medium text-cream">{t('address.line1')}</span>
                   <br />
-                  53223 Vrhovine, Hrvatska
+                  {t('address.line2')}
                 </div>
               </div>
 
@@ -98,10 +110,10 @@ export function Footer() {
         <div className="mt-12 pt-6 border-t border-cream/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-center sm:text-left">
             <p className="text-xs text-cream/40">
-              © {year} Villa Velebita. Sva prava pridržana.
+              © {year} {t('brand')}. {t('copyright')}
             </p>
             <p className="text-xs text-cream/40 mt-1">
-              Stranicu izradio{' '}
+              {t('builtByPrefix')}{' '}
               <a
                 href="https://www.enkr.hr"
                 target="_blank"
@@ -110,7 +122,7 @@ export function Footer() {
               >
                 ENKR
               </a>
-              .
+              {t('builtBySuffix')}
             </p>
           </div>
           <a
@@ -119,7 +131,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="text-xs text-stone-light hover:text-cream transition-colors duration-150"
           >
-            WhatsApp: 091 929 5907
+            {t('whatsappLabel')}: 091 929 5907
           </a>
         </div>
       </div>

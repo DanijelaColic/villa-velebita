@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { cn } from '@/lib/utils';
@@ -19,6 +20,7 @@ export type ExperienceCategory = {
 };
 
 export function ExperiencesClient({ categories }: { categories: ExperienceCategory[] }) {
+  const t = useTranslations('experiencesSection');
   const [activeImageIndex, setActiveImageIndex] = useState<Record<string, number>>({});
 
   function getActiveIndex(category: ExperienceCategory) {
@@ -33,9 +35,9 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
   return (
     <SectionWrapper id="aktivnosti" bg="cream-dark">
       <SectionHeading
-        label="Doživljaji i aktivnosti"
-        title="Odmor koji se ne zaboravlja"
-        subtitle="Priroda, adrenalin, gastronomija i kultura – sve na dohvat ruke iz Ville Velebita."
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
       />
 
       <div className="space-y-16 md:space-y-24">
@@ -69,7 +71,7 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
                   if (totalImages === 0) {
                     return (
                       <div className="absolute inset-0 flex items-center justify-center text-stone">
-                        Slike nisu pronađene.
+                        {t('empty')}
                       </div>
                     );
                   }
@@ -90,7 +92,7 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
                             type="button"
                             onClick={showPrevious}
                             className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-oak/55 text-cream p-2 hover:bg-oak/75 transition-colors"
-                            aria-label="Prethodna slika"
+                            aria-label={t('controls.previous')}
                           >
                             <ChevronLeft className="size-5" />
                           </button>
@@ -98,7 +100,7 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
                             type="button"
                             onClick={showNext}
                             className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-oak/55 text-cream p-2 hover:bg-oak/75 transition-colors"
-                            aria-label="Sljedeća slika"
+                            aria-label={t('controls.next')}
                           >
                             <ChevronRight className="size-5" />
                           </button>
@@ -113,7 +115,7 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
                                   'size-2.5 rounded-full transition-colors',
                                   imageIndex === currentIndex ? 'bg-cream' : 'bg-cream/45',
                                 )}
-                                aria-label={`Prikaži sliku ${imageIndex + 1}`}
+                                aria-label={t('controls.show', { index: imageIndex + 1 })}
                               />
                             ))}
                           </div>
@@ -150,7 +152,7 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
                             ? 'border-terracotta shadow-warm'
                             : 'border-transparent hover:border-terracotta/50',
                         )}
-                        aria-label={`Prikaži sliku ${imageIndex + 1}`}
+                        aria-label={t('controls.show', { index: imageIndex + 1 })}
                       >
                         <Image
                           src={img}

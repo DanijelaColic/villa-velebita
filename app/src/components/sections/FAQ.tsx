@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { ChevronDown } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -12,66 +13,43 @@ import {
   RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
   BALANCE_DAYS_BEFORE_CHECK_IN,
-  CANCELLATION_POLICY_LINES_HR,
-  INVOICE_POLICY_HR,
 } from '@/modules/booking-admin/booking.config';
 
 const DEPOSIT_PCT_FAQ = Math.round(DEPOSIT_PERCENT * 100);
 const BALANCE_PCT_FAQ = 100 - DEPOSIT_PCT_FAQ;
 
-const FAQ_ITEMS = [
-  {
-    question: 'Koliko je Villa Velebita udaljena od Plitvičkih jezera?',
-    answer:
-      'Villa Velebita se nalazi u Rudopolju, svega 20 minuta vožnje od ulaza u Nacionalni park Plitvička jezera (Ulaz 1). Lokacija je savršena kao baza za jednodnevne izlete na Plitvice, ali i za istraživanje Like, Velebita i okolnih atrakcija.',
-  },
-  {
-    question: 'Koliko gostiju može boraviti u villi?',
-    answer:
-      'Kuća je predviđena za do 13 gostiju — tri spavaće sobe, razvlačna garnitura u dnevnom boravku i dodatni ležajevi. Pogodna je za veće obitelji ili grupe prijatelja.',
-  },
-  {
-    question: 'Što je uključeno u cijenu najma?',
-    answer:
-      'U cijenu su uključeni: posteljina i ručnici, završno čišćenje, šamponi i toaletni pribor, besplatni WiFi, besplatno parkiranje, korištenje vanjskog jacuzzija, roštilj i rustikalna pečenjara. Nema skrivenih troškova.',
-  },
-  {
-    question: 'Kakav je minimalni boravak?',
-    answer:
-      'Minimalni boravak su 3 noći. Osnovna cijena je 490 € po noći za cijelu kuću (do 13 osoba). Za rezervacije od 7 ili više noći dobivate popust od 10%.',
-  },
-  {
-    question: 'Prihvaćate li kućne ljubimce?',
-    answer:
-      'Naravno, kućni ljubimci su dobrodošli 😊Primamo manje pasmine uz prethodnu najavu, kako bismo osigurali ugodan boravak za sve goste.',
-  },
-  {
-    question: 'Kada je check-in, a kada check-out?',
-    answer:
-      'Check-in je od 14:00, a check-out do 11:00. Za raniji dolazak ili kasniji odlazak, javite se unaprijed — nastojimo izaći u susret prema mogućnostima.',
-  },
-  {
-    question: 'Kako funkcionira jacuzzi?',
-    answer:
-      'Vanjski jacuzzi se grije na drva — ekološki i autentičan ličko iskustvo. Paljenje vatre i grijanje vode traje otprilike 1,5–2 sata. Drva su dostupna na imanju.',
-  },
-  {
-    question: 'Može li se platiti karticom?',
-    answer: `Rezervacija se potvrđuje uplatom ${DEPOSIT_PCT_FAQ}% depozita bankovnom transakcijom na IBAN ${RECIPIENT_IBAN} (primatelj ${RECIPIENT_NAME}, ${RECIPIENT_BANK_NAME}). Za uplate iz inozemstva potreban je BIC/SWIFT: ${RECIPIENT_BIC}. Preostalih ${BALANCE_PCT_FAQ}% ukupne cijene potrebno je uplatiti najkasnije ${BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska, također na isti IBAN. Kartično plaćanje nije u ponudi.`,
-  },
-  {
-    question: 'Kako glase uvjeti otkazivanja i kada dobivam račun?',
-    answer: `${CANCELLATION_POLICY_LINES_HR.join(' ')} ${INVOICE_POLICY_HR}`,
-  },
-];
+const FAQ_ITEM_KEYS = [
+  'distance',
+  'capacity',
+  'included',
+  'minStay',
+  'pets',
+  'checkInOut',
+  'jacuzzi',
+  'payment',
+  'cancellation',
+] as const;
 
 export function FAQ() {
+  const t = useTranslations('faq');
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const faqItems = FAQ_ITEM_KEYS.map((key) => ({
+    question: t(`items.${key}.question`),
+    answer: t(`items.${key}.answer`, {
+      depositPercent: DEPOSIT_PCT_FAQ,
+      iban: RECIPIENT_IBAN,
+      recipientName: RECIPIENT_NAME,
+      bankName: RECIPIENT_BANK_NAME,
+      bic: RECIPIENT_BIC,
+      balancePercent: BALANCE_PCT_FAQ,
+      balanceDays: BALANCE_DAYS_BEFORE_CHECK_IN,
+    }),
+  }));
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: FAQ_ITEMS.map(item => ({
+    mainEntity: faqItems.map(item => ({
       '@type': 'Question',
       name: item.question,
       acceptedAnswer: {
@@ -90,12 +68,12 @@ export function FAQ() {
 
       <SectionHeading
         titleAs="h1"
-        title="Sve što trebate znati"
-        subtitle="Odgovori na najčešće upite gostiju — ako ne nađete odgovor, nazovite nas direktno."
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
       />
 
       <div className="max-w-3xl mx-auto divide-y divide-stone-pale">
-        {FAQ_ITEMS.map((item, index) => {
+        {faqItems.map((item, index) => {
           const isOpen = openIndex === index;
           return (
             <div key={index}>

@@ -1,0 +1,988 @@
+{
+  "metadata": {
+    "layout": {
+      "title": {
+        "default": "Villa Velebita - Holiday House in the Heart of Lika | Vrhovine",
+        "template": "%s | Villa Velebita"
+      },
+      "description": "Authentic stone-and-wood holiday house in Rudopolje near Vrhovine. Accommodation for 9 guests, jacuzzi, barbecue and only 20 minutes from Plitvice Lakes.",
+      "openGraph": {
+        "title": "Villa Velebita - Holiday House in the Heart of Lika",
+        "description": "Authentic holiday house in Rudopolje with jacuzzi, barbecue and fast access to Plitvice Lakes.",
+        "imageAlt": "Villa Velebita - holiday house in Lika"
+      },
+      "twitter": {
+        "title": "Villa Velebita - Holiday House in the Heart of Lika",
+        "description": "Authentic holiday house near Plitvice Lakes. Book directly."
+      }
+    },
+    "structuredData": {
+      "description": "Authentic stone-and-wood holiday house in Rudopolje, Lika. Accommodation for up to 9 guests with jacuzzi, barbecue area and direct access to nature, 20 minutes from Plitvice Lakes.",
+      "amenities": {
+        "jacuzzi": "Jacuzzi",
+        "wifi": "Free WiFi",
+        "parking": "Free parking",
+        "grill": "Barbecue",
+        "kitchen": "Fully equipped kitchen",
+        "linen": "Bed linen and towels"
+      }
+    },
+    "pages": {
+      "faq": {
+        "title": "Frequently Asked Questions",
+        "description": "Answers about distance to Plitvice, guest capacity, pricing, jacuzzi, payments, pets and check-in at Villa Velebita.",
+        "openGraph": {
+          "title": "FAQ | Villa Velebita",
+          "description": "Frequently asked questions from guests planning their stay in Rudopolje.",
+          "imageAlt": "Villa Velebita - frequently asked questions"
+        }
+      },
+      "gallery": {
+        "title": "Photo Gallery",
+        "description": "Browse photos of the interior, rooms, jacuzzi, outdoor areas and surroundings of Villa Velebita near Vrhovine.",
+        "openGraph": {
+          "title": "Gallery | Villa Velebita",
+          "description": "See the house, rooms, jacuzzi, rustic details and nature around Villa Velebita.",
+          "imageAlt": "Villa Velebita - photo gallery"
+        }
+      },
+      "accommodation": {
+        "title": "Accommodation",
+        "description": "Discover Villa Velebita: a stone-and-wood holiday house for up to 9 guests with room layout, jacuzzi and house rules.",
+        "openGraph": {
+          "title": "Accommodation | Villa Velebita",
+          "description": "Authentic holiday house in Lika with capacity, amenities and stay details.",
+          "imageAlt": "Villa Velebita - accommodation"
+        }
+      },
+      "amenities": {
+        "title": "Amenities and Activities",
+        "description": "Explore the amenities of Villa Velebita and nearby experiences in Lika, including Plitvice Lakes and local recommendations.",
+        "openGraph": {
+          "title": "Amenities and Activities | Villa Velebita",
+          "description": "What the house offers and what to do nearby in Vrhovine and Lika.",
+          "imageAlt": "Villa Velebita - amenities and activities"
+        }
+      },
+      "pricing": {
+        "title": "Pricing and Rental Terms",
+        "description": "Nightly rates, minimum stay, discounts and direct booking terms for Villa Velebita without platform fees.",
+        "openGraph": {
+          "title": "Pricing | Villa Velebita",
+          "description": "Transparent pricing for a holiday house in Lika - book directly with the owners.",
+          "imageAlt": "Villa Velebita - pricing"
+        }
+      },
+      "location": {
+        "title": "Location and Directions",
+        "description": "Villa Velebita, Rudopolje 124, Vrhovine - map, Google Maps directions and distances to Plitvice Lakes and other attractions.",
+        "openGraph": {
+          "title": "Location | Villa Velebita",
+          "description": "Find us in Rudopolje, the ideal base for Plitvice and exploring Lika.",
+          "imageAlt": "Villa Velebita - location"
+        }
+      },
+      "booking": {
+        "title": "Booking",
+        "description": "Book Villa Velebita directly, without commissions and with direct communication with the owners.",
+        "openGraph": {
+          "title": "Booking | Villa Velebita",
+          "description": "Check availability and send a booking request directly to the owners.",
+          "imageAlt": "Villa Velebita - booking"
+        }
+      },
+      "bookingReview": {
+        "title": "Booking Overview",
+        "description": "Review your booking details and payment instructions for Villa Velebita.",
+        "openGraph": {
+          "title": "Booking Overview | Villa Velebita",
+          "description": "Review reservation details and deposit payment information.",
+          "imageAlt": "Villa Velebita - booking overview"
+        }
+      }
+    }
+  },
+  "navbar": {
+    "brandPrefix": "Villa",
+    "brandAccent": "Velebita",
+    "localeLabel": "Language",
+    "menuLabel": "Menu",
+    "locales": {
+      "hr": "HR",
+      "en": "EN",
+      "de": "DE",
+      "it": "IT"
+    },
+    "links": {
+      "accommodation": "Accommodation",
+      "gallery": "Gallery",
+      "amenities": "Amenities",
+      "pricing": "Pricing",
+      "booking": "Booking",
+      "contact": "Contact"
+    },
+    "cta": {
+      "primary": "Book now",
+      "mobile": "Book your stay"
+    }
+  },
+  "hero": {
+    "ariaLabel": "Hero section",
+    "imageAlt": "View of Villa Velebita, a rustic house surrounded by the nature of Lika",
+    "location": "Rudopolje, Vrhovine · Lika, Croatia",
+    "titlePrefix": "Your peace in the heart of",
+    "titleAccent": "Lika",
+    "subtitle": "Imagine a morning coffee on the terrace overlooking untouched nature. Rustic charm, modern comfort and complete peace, all in one place just 20 minutes from Plitvice Lakes.",
+    "cta": {
+      "booking": "Book your stay",
+      "explore": "Discover the villa"
+    },
+    "stats": {
+      "guests": {
+        "value": "9 guests",
+        "label": "Max capacity"
+      },
+      "distance": {
+        "value": "20 min",
+        "label": "To Plitvice Lakes"
+      },
+      "size": {
+        "value": "155 m²",
+        "label": "House size"
+      },
+      "altitude": {
+        "value": "840 m",
+        "label": "Altitude"
+      }
+    }
+  },
+  "bookingSection": {
+    "heading": {
+      "label": "Booking",
+      "title": "Book directly",
+      "subtitle": "No platforms and no commissions. Direct contact with the owners at the best rate."
+    },
+    "rules": {
+      "checkInLabel": "Check-in:",
+      "checkOutLabel": "Check-out:",
+      "minStayLabel": "Minimum stay:",
+      "minStayValue": "{count} nights",
+      "discountLabel": "7+ night discount:",
+      "discountValue": "10% discount — contact us for an offer",
+      "paymentNote": "After selecting your dates, you will see the deposit and remaining balance. Payment details are shown only after you send the inquiry."
+    }
+  },
+  "contact": {
+    "heading": {
+      "label": "Contact",
+      "title": "Get in touch with the owners",
+      "subtitle": "Send a message or give us a call — we reply as quickly as possible."
+    },
+    "imageAlt": "{name}, owners of Villa Velebita",
+    "intro": "Villa Velebita is more than a holiday house. It is a place where Ivica and Ivana Cacic welcome guests with genuine care and attention to detail so every stay feels relaxed, warm and worry-free from the very first contact.",
+    "hostRole": "Owners and hosts",
+    "addressLabel": "Address",
+    "mapTitle": "Villa Velebita location on Google Maps",
+    "directionsCta": "Directions in Google Maps",
+    "form": {
+      "name": {
+        "label": "Full name",
+        "placeholder": "Your name"
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "you@email.com"
+      },
+      "phone": {
+        "label": "Phone (optional)",
+        "placeholder": "+385 ..."
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Dates, number of guests, questions..."
+      },
+      "submit": "Send inquiry",
+      "status": {
+        "success": "Thank you for your inquiry. Ivica or Ivana will get back to you shortly.",
+        "genericError": "Something went wrong. Please try again."
+      }
+    },
+    "api": {
+      "validationError": "Name, email and message are required.",
+      "serverError": "There was an error sending your message. Please try again."
+    },
+    "email": {
+      "subjectPrefix": "New website message",
+      "heading": "New message from the website",
+      "nameLabel": "Name",
+      "emailLabel": "Email"
+    }
+  },
+  "faq": {
+    "heading": {
+      "title": "Everything you need to know",
+      "subtitle": "Answers to the most common guest questions. If you do not find what you need, contact us directly."
+    },
+    "items": {
+      "distance": {
+        "question": "How far is Villa Velebita from Plitvice Lakes?",
+        "answer": "Villa Velebita is located in Rudopolje, about 20 minutes by car from Plitvice Lakes National Park. It is an excellent base for day trips to Plitvice as well as for exploring Lika and Velebit."
+      },
+      "capacity": {
+        "question": "How many guests can stay in the villa?",
+        "answer": "The house accommodates up to 9 guests. It is ideal for families or smaller groups of friends looking for a private and comfortable stay."
+      },
+      "included": {
+        "question": "What is included in the rental price?",
+        "answer": "The price includes bed linen and towels, final cleaning, basic toiletries, free WiFi, private parking, use of the outdoor jacuzzi, barbecue and outdoor cooking area."
+      },
+      "minStay": {
+        "question": "What is the minimum stay?",
+        "answer": "The minimum stay is 3 nights. Better conditions are available for longer reservations, and stays of 7 nights or more receive an additional discount."
+      },
+      "pets": {
+        "question": "Are pets allowed?",
+        "answer": "Pets may be welcome with prior notice. Contact us before booking so we can confirm the details and ensure a comfortable stay for everyone."
+      },
+      "checkInOut": {
+        "question": "What time are check-in and check-out?",
+        "answer": "Check-in starts at 14:00 and check-out is until 11:00. If you need an earlier arrival or later departure, let us know in advance and we will do our best to help."
+      },
+      "jacuzzi": {
+        "question": "How does the jacuzzi work?",
+        "answer": "The outdoor jacuzzi is heated with wood, which adds an authentic Lika experience to your stay. Heating the water usually takes about 1.5 to 2 hours, and the wood is available on site."
+      },
+      "payment": {
+        "question": "Can I pay by card?",
+        "answer": "Your reservation is confirmed by paying a {depositPercent}% deposit via bank transfer to IBAN {iban} (recipient {recipientName}, {bankName}). For international payments, the required BIC/SWIFT is {bic}. The remaining {balancePercent}% must be paid no later than {balanceDays} days before arrival. Card payments are currently not available."
+      },
+      "cancellation": {
+        "question": "What are the cancellation terms and when do I receive the invoice?",
+        "answer": "Cancellation and invoicing terms are confirmed during the booking process and clearly outlined in the communication with each guest. If you would like the details in advance, send us an inquiry and we will provide them before booking."
+      }
+    }
+  },
+  "footer": {
+    "ariaLabel": "Footer",
+    "brand": "Villa Velebita",
+    "location": "Rudopolje · Lika · Croatia",
+    "description": "Authentic stone-and-wood holiday house at 840 m altitude, only 20 minutes from Plitvice Lakes.",
+    "navTitle": "Navigation",
+    "navigationAriaLabel": "Footer navigation",
+    "contactTitle": "Contact",
+    "address": {
+      "line1": "Rudopolje 124",
+      "line2": "53223 Vrhovine, Croatia"
+    },
+    "copyright": "All rights reserved.",
+    "builtByPrefix": "Website by",
+    "builtBySuffix": ".",
+    "whatsappLabel": "WhatsApp",
+    "links": {
+      "accommodation": "Accommodation",
+      "gallery": "Gallery",
+      "amenities": "Amenities",
+      "location": "Location",
+      "pricing": "Pricing",
+      "faq": "FAQ",
+      "booking": "Booking",
+      "contact": "Contact"
+    }
+  },
+  "gallerySection": {
+    "heading": {
+      "label": "Gallery",
+      "title": "Every corner tells its own story",
+      "subtitle": "Authentic rustic style paired with modern comfort."
+    },
+    "sections": {
+      "houseEntrance": { "title": "1) House and entrance", "description": "The first impression of arriving at Villa Velebita." },
+      "groundFloor": { "title": "2) Ground floor: cooking and gathering", "description": "A space for cooking, dining and shared moments." },
+      "floorRelax": { "title": "3) Floor for relaxation", "description": "Rooms and corners designed for calm rest." },
+      "attic": { "title": "4) Attic: views and quiet moments", "description": "A warm attic with sunrise and sunset views." },
+      "gazebo": { "title": "5) Outdoor gazebo for memorable evenings", "description": "An outdoor corner for relaxation and evening gatherings." },
+      "nature": { "title": "7) Views and nature", "description": "Closing scenes of the nature and atmosphere of Lika." }
+    },
+    "empty": "Images or videos were not found.",
+    "controls": {
+      "open": "Open: {alt}",
+      "previous": "Previous",
+      "next": "Next",
+      "show": "Show {index}",
+      "close": "Close"
+    }
+  },
+  "landingTeasers": {
+    "gallery": {
+      "heading": {
+        "label": "Gallery",
+        "title": "A look inside and out",
+        "subtitle": "Rustic details, rooms, outdoor jacuzzi and the landscape of Lika in one quick overview."
+      },
+      "sections": {
+        "houseEntrance": { "title": "1) House and entrance", "description": "The first impression of arriving at Villa Velebita." },
+        "groundFloor": { "title": "2) Ground floor: cooking and gathering", "description": "A space for cooking, dining and shared moments." },
+        "floorRelax": { "title": "3) Floor for relaxation", "description": "Rooms and corners designed for peaceful rest." },
+        "attic": { "title": "4) Attic: quiet moments and views", "description": "A warm attic with sunrise and sunset views." },
+        "gazebo": { "title": "5) Outdoor gazebo for memorable evenings", "description": "An outdoor corner for relaxation and evening gatherings." },
+        "nature": { "title": "7) Views and nature", "description": "Closing scenes of the atmosphere and nature of Lika." }
+      },
+      "cta": "Open full gallery"
+    },
+    "about": {
+      "heading": { "label": "About the house", "title": "Villa Velebita" },
+      "paragraphs": {
+        "p1": "Villa Velebita is a stone-and-wood house at 840 m above sea level, ideal for up to 9 guests and a perfect base for exploring Plitvice and Lika.",
+        "p2": "Across 155 m² it offers three bedrooms, a living room, a gathering area and two bathrooms with hydromassage showers."
+      },
+      "cta": {
+        "primary": "Learn more about the house",
+        "secondary": "Gallery"
+      }
+    },
+    "location": {
+      "heading": {
+        "label": "Location",
+        "title": "Rudopolje, Vrhovine",
+        "subtitle": "Map, directions and distance to Plitvice in one place."
+      },
+      "mapTitle": "Villa Velebita - location preview",
+      "addressLine": "53223 Vrhovine, Croatia",
+      "openMaps": "Open in Google Maps",
+      "description": "The full location page includes detailed directions, the map and local context.",
+      "cta": "Location and directions"
+    },
+    "amenities": {
+      "heading": {
+        "label": "Amenities",
+        "title": "House and surroundings",
+        "subtitle": "A quick overview of the house equipment and what to do in the region."
+      },
+      "items": {
+        "jacuzzi": {
+          "title": "Outdoor jacuzzi and barbecue area",
+          "description": "Outdoor relaxation and a rustic kitchen under the open sky."
+        },
+        "house": {
+          "title": "Fully equipped house",
+          "description": "WiFi, kitchen, TV and parking for a family or group."
+        },
+        "region": {
+          "title": "Lika as an active holiday destination",
+          "description": "Plitvice, the Gacka River, hiking and authentic local experiences close at hand."
+        }
+      },
+      "cta": "Amenities and activities"
+    },
+    "faq": {
+      "heading": {
+        "label": "FAQ",
+        "title": "Frequently asked questions at a glance",
+        "subtitle": "A short intro here, with the full list of answers on the FAQ page."
+      },
+      "items": {
+        "distance": {
+          "question": "How far are you from Plitvice?",
+          "answer": "About 20 minutes by car to the park entrance, which makes it ideal for day trips."
+        },
+        "capacity": {
+          "question": "How many guests do you accept?",
+          "answer": "The house accommodates up to 9 guests (7+2), with full bed layout details on the FAQ and accommodation pages."
+        }
+      },
+      "cta": "All frequently asked questions"
+    }
+  },
+  "experiencesSection": {
+    "heading": {
+      "label": "Experiences and activities",
+      "title": "A stay you will remember",
+      "subtitle": "Nature, adrenaline, gastronomy and day trips are all within easy reach from Villa Velebita."
+    },
+    "empty": "Images were not found.",
+    "controls": {
+      "previous": "Previous image",
+      "next": "Next image",
+      "show": "Show image {index}"
+    },
+    "categories": {
+      "nature": {
+        "label": "Nature",
+        "title": "Untouched wilderness of Lika",
+        "intro": "Lika is one of Croatia's best preserved regions, with forests, meadows and mountain landscapes all around the house.",
+        "imageAlt": "Untouched forests of Lika and mountain scenery",
+        "activities": {
+          "i1": { "name": "Plitvice Lakes National Park", "distance": "20 min drive" },
+          "i2": { "name": "Majerovo vrelo - source of the Gacka River", "distance": "10 min" },
+          "i3": { "name": "Gacka River - crystal clear water", "distance": "5 min" },
+          "i4": { "name": "Hiking and walking trails", "distance": "from the house" },
+          "i5": { "name": "Viewpoints and scenic panoramas", "distance": "nearby" },
+          "i6": { "name": "Forests, meadows and fresh mountain air", "distance": "840 m a.s.l." }
+        }
+      },
+      "activities": {
+        "label": "Activities",
+        "title": "Adrenaline and adventure",
+        "intro": "Rudopolje and the surrounding area offer active experiences ranging from zipline rides to quad adventures in untouched nature.",
+        "imageAlt": "Zipline adventure in nature",
+        "activities": {
+          "i1": { "name": "Pazi Medo zipline - the longest in Europe", "distance": "next to the house" },
+          "i2": { "name": "Quad and motorbike rides", "distance": "nearby" },
+          "i3": { "name": "Cycling routes through Lika", "distance": "from the house" },
+          "i4": { "name": "Fishing on the Gacka River", "distance": "5 min" },
+          "i5": { "name": "Mukinje ski area (Plitvice)", "distance": "20 min" },
+          "i6": { "name": "Kuterevo bear sanctuary", "distance": "30 min" }
+        }
+      },
+      "gastronomy": {
+        "label": "Gastronomy",
+        "title": "Flavours of Lika",
+        "intro": "Enjoy authentic flavours of Lika, from spit-roasted lamb to local cheese, with excellent restaurants close to the house.",
+        "imageAlt": "Traditional Lika food on the grill",
+        "activities": {
+          "i1": { "name": "Big Bear restaurant (camp)", "distance": "3 min" },
+          "i2": { "name": "Jelen restaurant", "distance": "5 min" },
+          "i3": { "name": "Ruspante pizzeria", "distance": "20 min" },
+          "i4": { "name": "Restaurants in Otocac", "distance": "20 min" },
+          "i5": { "name": "Private grill and roasting area at the house", "distance": "in the yard" },
+          "i6": { "name": "Konzum (Vrhovine / Otocac)", "distance": "5–20 min" }
+        }
+      },
+      "trips": {
+        "label": "Trips",
+        "title": "Everything worth seeing",
+        "intro": "Villa Velebita is a perfect base for exploring Lika and the Kvarner region, from UNESCO nature to Adriatic beaches.",
+        "imageAlt": "Plitvice Lakes - UNESCO World Heritage",
+        "activities": {
+          "i1": { "name": "Plitvice Lakes (UNESCO)", "distance": "20 min" },
+          "i2": { "name": "Fallow deer area in Licko Lesce", "distance": "5 min" },
+          "i3": { "name": "Sea - Senj / Karlobag", "distance": "55 min" },
+          "i4": { "name": "Town of Otocac", "distance": "20 min" },
+          "i5": { "name": "Vrhovine post office", "distance": "5 min" },
+          "i6": { "name": "Otocac health centre", "distance": "20 min" }
+        }
+      }
+    }
+  },
+  "floorPlanSection": {
+    "heading": {
+      "label": "House layout",
+      "title": "Three levels, each with its own story",
+      "subtitle": "155 m² of carefully arranged space for up to 9 guests."
+    },
+    "smokingNote": "Smoking allowed on the ground floor and in the gazebo",
+    "floors": {
+      "groundFloor": {
+        "name": "Ground floor",
+        "badge": "Shared area",
+        "description": "The heart of the house with a large oak table, equipped kitchen, toilet and a covered terrace overlooking Rudopolje.",
+        "imageAlt": "Ground floor gathering space with large oak table",
+        "rooms": {
+          "room1": { "name": "Gathering area", "detail": "Oak table, plasma TV" },
+          "room2": { "name": "Kitchen", "detail": "Fully equipped" },
+          "room3": { "name": "Toilet" },
+          "room4": { "name": "Covered terrace", "detail": "View of Rudopolje and the zipline" }
+        }
+      },
+      "firstFloor": {
+        "name": "First floor",
+        "badge": "Living room",
+        "description": "A calmer level for rest, with a spacious living room, an extra bedroom and a bathroom.",
+        "imageAlt": "Living room with corner sofa on the first floor",
+        "rooms": {
+          "room1": { "name": "Living room", "detail": "Corner sofa 200×270 cm, TV" },
+          "room2": { "name": "Bedroom", "detail": "2 separate beds" },
+          "room3": { "name": "Bathroom", "detail": "Hydromassage shower" },
+          "room4": { "name": "Hallway" }
+        }
+      },
+      "attic": {
+        "name": "Attic",
+        "badge": "Bedrooms",
+        "description": "Two large bedrooms with solid oak beds, a baby cot and an extra auxiliary bed.",
+        "imageAlt": "Bedroom with a solid oak bed in the attic",
+        "rooms": {
+          "room1": { "name": "Bedroom 1", "detail": "Oak bed 2×2 m, extra bed, TV" },
+          "room2": { "name": "Bedroom 2", "detail": "Oak bed 2×2 m, baby cot" },
+          "room3": { "name": "Bathroom", "detail": "Hydromassage shower" }
+        }
+      }
+    }
+  },
+  "locationPage": {
+    "title": "Location",
+    "description": "Address, interactive map and short context - Vrhovine, Lika, close to the national park."
+  },
+  "bookingPage": {
+    "eyebrow": "Booking",
+    "title": "Book direct",
+    "description": "Choose your dates and send an inquiry - we reply within 24 hours."
+  },
+  "aboutSection": {
+    "heading": {
+      "label": "About the house",
+      "title": "Where nature feels like home"
+    },
+    "paragraphs": {
+      "p1": "Imagine a quiet morning in the mountains of Lika with a cup of coffee and a view of green peaks. That is a morning at Villa Velebita.",
+      "p2": "Located in peaceful Rudopolje at 840 meters above sea level, this authentic stone-and-wood house was restored with deep respect for local tradition and the feeling of home.",
+      "p3": "With 155 m² across three levels, it can host up to 9 guests and offers a spacious living area, three bedrooms, hydromassage showers and a fully equipped kitchen.",
+      "p4": "In the evening, relax in the outdoor wood-fired jacuzzi or prepare dinner in the rustic barbecue area. These are the moments that stay with you."
+    },
+    "cta": {
+      "booking": "Book your stay",
+      "gallery": "View gallery"
+    },
+    "imageAlt": {
+      "house": "Villa Velebita - authentic stone and wood house in Rudopolje",
+      "jacuzzi": "Outdoor wood-fired jacuzzi"
+    },
+    "renovated": "Renovated",
+    "highlights": {
+      "altitude": {
+        "title": "840 m above sea level",
+        "description": "Fresh mountain air and a kind of silence money cannot buy."
+      },
+      "style": {
+        "title": "Authentic Lika style",
+        "description": "Solid old-oak furniture, stone and wood in every detail."
+      },
+      "jacuzzi": {
+        "title": "Outdoor wood-fired jacuzzi",
+        "description": "Light the fire, warm the water and enjoy the stars."
+      },
+      "grill": {
+        "title": "Rustic barbecue area",
+        "description": "An outdoor setup for lamb, barbecue and memorable dinners by the fire."
+      }
+    }
+  },
+  "amenitiesSection": {
+    "heading": {
+      "label": "Amenities",
+      "title": "Everything you need, no compromises",
+      "subtitle": "Kitchen, wellness, technology and outdoor spaces are all prepared for complete comfort."
+    },
+    "groups": {
+      "kitchen": {
+        "title": "Kitchen",
+        "items": {
+          "induction": "Induction cooktop",
+          "microwave": "Microwave oven",
+          "dishwasher": "Dishwasher",
+          "fridge": "Refrigerator",
+          "coffee": "Coffee machine",
+          "kettle": "Electric kettle"
+        }
+      },
+      "technology": {
+        "title": "Technology",
+        "items": {
+          "wifi": "Free WiFi",
+          "tv": "TV (3×, including plasma)"
+        }
+      },
+      "outdoor": {
+        "title": "Outdoor spaces",
+        "items": {
+          "jacuzzi": "Outdoor jacuzzi (wood-fired hot tub)",
+          "grill": "Barbecue",
+          "roastery": "Rustic barbecue area with grill, stew pot and lamb spit",
+          "yard": "800 m² yard",
+          "parking": "Free parking"
+        }
+      },
+      "bathroom": {
+        "title": "Bathroom and comfort",
+        "items": {
+          "showers": "Hydromassage showers (2×)",
+          "linen": "Bed linen and towels",
+          "toiletries": "Shampoo, soap, toilet paper",
+          "crib": "Baby crib"
+        }
+      },
+      "rules": {
+        "title": "Rules and info",
+        "items": {
+          "pets": "Pets allowed (small breeds)",
+          "smoking": "Smoking on ground floor/gazebo",
+          "checkin": "Check-in 14:00 / Check-out 11:00",
+          "cleaning": "Cleaning included"
+        }
+      }
+    },
+    "capacity": {
+      "eyebrow": "Capacity",
+      "description": "The official capacity is 7+2 guests, and with extra beds the house can host up to 9 guests.",
+      "stats": {
+        "houseArea": "House size",
+        "yard": "Outdoor area",
+        "floorsValue": "3 floors",
+        "floors": "Layout",
+        "bathroomsValue": "2 bathrooms",
+        "bathrooms": "Hydromassage showers"
+      }
+    }
+  },
+  "locationSection": {
+    "heading": {
+      "label": "Location",
+      "title": "In the heart of it all",
+      "subtitle": "Rudopolje 124, 53223 Vrhovine - the perfect base for exploring Plitvice and all of Lika."
+    },
+    "mapTitle": "Villa Velebita - map location",
+    "countryLine": "53223 Vrhovine, Croatia",
+    "openInMaps": "Open in Google Maps"
+  },
+  "pricingSection": {
+    "heading": {
+      "label": "Pricing and terms",
+      "title": "Transparent prices, no hidden costs",
+      "subtitle": "You rent the whole house - everything you see is yours."
+    },
+    "stats": {
+      "capacity": {
+        "label": "Capacity",
+        "value": "7+2 guests (up to 9)"
+      },
+      "minStay": {
+        "label": "Min stay",
+        "value": "3 nights"
+      },
+      "pricePerNight": {
+        "label": "Price/night",
+        "value": "490 € (entire house)"
+      },
+      "discount": {
+        "label": "7+ night stay",
+        "value": "10% discount"
+      }
+    },
+    "priceCard": {
+      "eyebrow": "Rental rate",
+      "note": "Entire house · up to 9 guests · 54.44 € per guest (490/9)"
+    },
+    "discountBadge": {
+      "title": "Book 7+ nights",
+      "note": "= 441 € / night"
+    },
+    "includedTitle": "Included in the price",
+    "included": {
+      "linen": "Bed linen and towels",
+      "cleaning": "Final cleaning",
+      "toiletries": "Shampoo, soap, toilet paper",
+      "wifi": "Free WiFi",
+      "parking": "Free parking",
+      "jacuzzi": "Outdoor jacuzzi",
+      "grill": "Barbecue and roasting area",
+      "crib": "Baby crib (free, on request)"
+    },
+    "cta": {
+      "title": "Book direct",
+      "description": "Booking directly with us gives you the best rate and a more personal experience.",
+      "benefits": {
+        "noFees": "No platform fees",
+        "directContact": "Direct contact with the owner",
+        "flexibility": "Flexible arrival arrangements",
+        "localTips": "Local recommendations"
+      },
+      "checkAvailability": "Check availability",
+      "whatsapp": "Write on WhatsApp"
+    },
+    "disclaimer": "Prices are listed in euros. The base rate is 490 € per night for the entire house for up to 9 guests. Minimum stay is 3 nights, with a 10% discount for stays of 7 nights or more."
+  },
+  "houseRulesSection": {
+    "heading": {
+      "label": "House rules",
+      "title": "A few rules for a perfect stay",
+      "subtitle": "By respecting the house rules, you help us preserve the beauty of this place for future guests as well."
+    },
+    "cards": {
+      "checkin": {
+        "title": "Check-in and check-out",
+        "items": {
+          "i1": "Check-in from 14:00",
+          "i2": "Check-out until 11:00",
+          "i3": "Late check-in possible by arrangement"
+        }
+      },
+      "pets": {
+        "title": "Pets",
+        "items": {
+          "i1": "Pets welcome (small breeds)",
+          "i2": "Please announce in advance",
+          "i3": "Large breeds are not allowed"
+        }
+      },
+      "smoking": {
+        "title": "Smoking",
+        "items": {
+          "i1": "Smoking allowed on the ground floor",
+          "i2": "Smoking allowed in the gazebo (outside)",
+          "i3": "Smoking is not allowed on upper floors"
+        }
+      },
+      "noise": {
+        "title": "Loud parties",
+        "items": {
+          "i1": "Music and gatherings until midnight",
+          "i2": "Quiet hours from midnight",
+          "i3": "Loud music after midnight is not allowed"
+        }
+      }
+    },
+    "note": "Because of the nearby Plitvice Lakes National Park and the preserved natural environment, we kindly ask guests to respect the house rules. Thank you for your understanding."
+  },
+  "specialRecommendation": {
+    "heading": {
+      "label": "Special recommendation",
+      "title": "Caffe Bar Plitvice",
+      "subtitle": "A small place with a big heart on your route through the natural beauty of Lika."
+    },
+    "paragraphs": {
+      "p1": "Along the road through the landscapes of Lika, there is a special place guests remember for a long time - Caffe Bar Plitvice.",
+      "p2": "You are welcomed there by the smiling host Snijeza and the Gacevic-Cakaric family, with warm local hospitality and the aroma of fresh coffee.",
+      "p3": "With proof of stay, every Villa Velebita guest receives a complimentary coffee or a small glass of homemade rakija as a sincere welcome.",
+      "p4": "Here you are not just passing through - here you are welcomed like a friend."
+    },
+    "controls": {
+      "previous": "Previous image",
+      "next": "Next image",
+      "showImage": "Show image {index}"
+    },
+    "empty": {
+      "title": "Add photos of the cafe",
+      "description": "Add images to the folder"
+    }
+  },
+  "bookingWidget": {
+    "description": "Villa Velebita is an authentic 155 m² stone-and-wood holiday house in peaceful Rudopolje. It is ideal for families and small groups who want privacy, nature and direct booking without platform fees.",
+    "labels": {
+      "night": {
+        "one": "1 night",
+        "other": "{count} nights"
+      }
+    },
+    "steps": {
+      "dates": "1. Select dates",
+      "summary": "2. Price summary",
+      "details": "3. Your details"
+    },
+    "paymentTerms": {
+      "title": "Payment and cancellation terms",
+      "depositLabel": "Deposit ({percent}%)",
+      "depositNote": "paid at the time of booking.",
+      "balanceLabel": "Remaining balance ({percent}%)",
+      "balanceNote": "must be paid no later than {days} days before arrival",
+      "cancellationTitle": "Cancellation (deposit)"
+    },
+    "summary": {
+      "line": "{nights}× night ({label}) · {pricePerNight} €",
+      "discount": "Discount for {nights}+ nights ({percent}%)",
+      "total": "Total"
+    },
+    "form": {
+      "name": "Full name",
+      "namePlaceholder": "Anna Horvat",
+      "email": "Email",
+      "emailPlaceholder": "anna@example.com",
+      "phone": "Phone / WhatsApp",
+      "phonePlaceholder": "+385 91 234 5678",
+      "adults": "Adults",
+      "children": "Children",
+      "maxGuests": "Maximum {capacity} guests in total",
+      "notes": "Notes (optional)",
+      "notesPlaceholder": "Special requests or questions…",
+      "rules": {
+        "checkIn": "Check-in",
+        "checkOut": "Check-out"
+      },
+      "agreeRules": "I agree with the house rules and booking terms.",
+      "submitting": "Sending…",
+      "submit": "Send booking inquiry · {totalPrice} €"
+    },
+    "success": {
+      "title": "Booking inquiry received!",
+      "description": "Thank you, <name></name>! We have sent a confirmation to <email></email>. We will get back to you as soon as possible.",
+      "newBooking": "New booking",
+      "summary": {
+        "accommodation": "Accommodation",
+        "checkIn": "Check-in",
+        "checkOut": "Check-out",
+        "nights": "Nights",
+        "total": "Total",
+        "deposit": "Deposit ({percent}%)",
+        "depositNote": "paid at the time of booking.",
+        "balance": "Remaining balance ({percent}%)",
+        "balanceNote": "must be paid no later than {days} days before arrival",
+        "cancellationTitle": "Cancellation (deposit)",
+        "bankLabel": "Bank",
+        "internationalPayments": "international payments",
+        "qrTitle": "Quick QR payment (amount = deposit)",
+        "generatingQr": "Generating QR codes…",
+        "hub3Title": "Croatian banks",
+        "hub3Alt": "HUB3 PDF417 barcode",
+        "hub3Hint": "m-zaba, m-keks, Erste, OTP, PBZ…",
+        "epcTitle": "EU / international",
+        "epcAlt": "EPC SEPA QR code",
+        "epcHint": "Revolut, N26, Wise, SEPA…"
+      }
+    },
+    "errors": {
+      "maxGuests": "{apartmentName}: maximum {capacity} guests.",
+      "submitFailed": "Sending the booking inquiry failed."
+    },
+    "policies": {
+      "cancellation": {
+        "line1": "Up to 14 days before arrival - 100% deposit refund.",
+        "line2": "7-14 days before arrival - 50% deposit refund.",
+        "line3": "Less than 7 days before arrival - deposit is non-refundable."
+      }
+    },
+    "api": {
+      "missingFields": "Required fields are missing.",
+      "apartmentNotFound": "Accommodation not found.",
+      "unavailable": "This accommodation is currently unavailable for booking.",
+      "minStay": "Minimum stay is {count} nights.",
+      "maxGuests": "{apartmentName} can accommodate a maximum of {capacity} guests.",
+      "datesUnavailable": "The selected dates are already booked. Please choose different dates.",
+      "serverError": "There was an error saving the booking. Please try again or contact us directly."
+    },
+    "calendar": {
+      "loading": "Loading calendar…",
+      "previousMonth": "Previous month",
+      "nextMonth": "Next month",
+      "reset": "Reset selection",
+      "errors": {
+        "loadAvailability": "Error loading availability.",
+        "loadDates": "Error loading available dates."
+      },
+      "legend": {
+        "available": "Available",
+        "booked": "Booked",
+        "selected": "Selected",
+        "pickCheckIn": "Select check-in date",
+        "pickCheckOut": "Select check-out date (min. {minNights} nights)"
+      },
+      "tooltips": {
+        "booked": "Booked",
+        "minStay": "Minimum stay: {minNights} nights"
+      }
+    }
+  },
+  "bookingReview": {
+    "missingLink": {
+      "title": "Missing link",
+      "description": "Open the link from the email you received after making your booking."
+    },
+    "invalidLink": {
+      "title": "Invalid link",
+      "description": "The link may have expired or the wrong URL was used. If you need help, contact us by email."
+    },
+    "eyebrow": "Your booking",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "cancelled": "Cancelled"
+    },
+    "labels": {
+      "guest": "Guest",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "nights": "Nights",
+      "total": "Total",
+      "deposit": "Deposit ({percent}%)",
+      "balance": "Balance ({percent}%)"
+    },
+    "times": {
+      "checkIn": "from 14:00",
+      "checkOut": "until 11:00"
+    },
+    "balanceNotice": "Please pay the remaining amount no later than {days} days before arrival.",
+    "payment": {
+      "title": "Deposit payment",
+      "reference": "Reference / payment model",
+      "bank": "Bank",
+      "international": "international payments",
+      "hub3Title": "Croatian banks (HUB3)",
+      "hub3Alt": "HUB3 barcode for deposit payment",
+      "epcTitle": "EU / SEPA (QR)",
+      "epcAlt": "SEPA QR for deposit payment"
+    }
+  },
+  "bookingEmail": {
+    "terms": {
+      "cancellationTitle": "Cancellation (deposit)",
+      "cancellationLines": [
+        "Up to 14 days before arrival - 100% deposit refund.",
+        "7-14 days before arrival - 50% deposit refund.",
+        "Less than 7 days before arrival - deposit is non-refundable."
+      ],
+      "invoiceLabel": "Invoices",
+      "invoiceText": "Invoices are issued at check-in or check-out."
+    },
+    "shared": {
+      "summaryTitle": "Summary",
+      "accommodationLabel": "Accommodation",
+      "checkInLabel": "Check-in",
+      "checkOutLabel": "Check-out",
+      "checkInTime": "from 14:00",
+      "checkOutTime": "until 11:00",
+      "nightsLabel": "Nights",
+      "totalLabel": "Total",
+      "basePrice": "Base price: {price} EUR/night",
+      "paymentTitle": "Payment",
+      "depositLabel": "Deposit ({percent}%)",
+      "balanceLabel": "Balance ({percent}%)",
+      "balanceNote": "no later than {days} days before arrival (around {dueDate}), to the same IBAN.",
+      "referenceLabel": "Reference / model",
+      "referenceShort": "Reference",
+      "attachmentsTitle": "Attachments in this email:",
+      "attachmentsShort": "Attachments",
+      "attachmentsBody": "QR codes for the deposit only.",
+      "hub3Banks": "Croatian banks (HUB3)",
+      "epcBanks": "Revolut, N26, Wise, SEPA",
+      "questions": "Questions?",
+      "publicView": {
+        "button": "Open booking details and QR codes",
+        "hint": "With one tap you can view your stay details together with HUB3 and SEPA QR codes for the deposit."
+      }
+    },
+    "received": {
+      "subject": "Inquiry received",
+      "greeting": "Dear {name},",
+      "intro": "We have received your booking inquiry and will get back to you shortly with the next steps.",
+      "depositNote": "paid when the booking is confirmed."
+    },
+    "confirmed": {
+      "subject": "Booking confirmed",
+      "badge": "Your booking is confirmed",
+      "greeting": "Dear {name},",
+      "intro": "We are looking forward to your arrival. Below you will find your stay and payment details.",
+      "depositNote": "if it has not yet been paid, please complete it as soon as possible."
+    },
+    "owner": {
+      "subject": "New booking",
+      "title": "New booking",
+      "guest": "Guest",
+      "email": "Email",
+      "phone": "Phone",
+      "checkIn": "Check-in",
+      "checkOut": "Check-out",
+      "nights": "Nights",
+      "balanceDeadline": "deadline {days} days before arrival"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "localeLabel": "Language"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again."
+  },
+  "aria": {
+    "menu": "Menu",
+    "footer": "Footer",
+    "footerNavigation": "Footer navigation"
+  }
+}

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServerSupabaseClient } from '@/modules/booking-admin/lib/supabase';
 import { getApartment } from '@/modules/booking-admin/booking.config';
+import { getMessagesForLocale, getValidLocale } from '@/i18n/messages';
 import {
   parseLocalDate,
   isRangeAvailable,
@@ -49,6 +50,9 @@ export async function GET(request: NextRequest) {
 // POST /api/bookings
 // Kreira novu rezervaciju (javna forma)
 export async function POST(request: NextRequest) {
+  let locale = 'hr';
+  let bookingMessages = getMessagesForLocale('hr').bookingWidget.api;
+
   try {
     const body = await request.json();
     const {
@@ -61,20 +65,23 @@ export async function POST(request: NextRequest) {
       adults,
       children,
       notes,
+      locale: requestedLocale,
     } = body;
+    locale = getValidLocale(requestedLocale);
+    bookingMessages = getMessagesForLocale(locale).bookingWidget.api;
 
     if (!apartment_slug || !check_in || !check_out || !guest_name || !guest_email) {
-      return NextResponse.json({ error: 'Nedostaju obavezni podaci.' }, { status: 400 });
+      return NextResponse.json({ error: bookingMessages.missingFields }, { status: 400 });
     }
 
     const apt = getApartment(apartment_slug);
     if (!apt) {
-      return NextResponse.json({ error: 'Smještaj nije pronađen.' }, { status: 404 });
+      return NextResponse.json({ error: bookingMessages.apartmentNotFound }, { status: 404 });
     }
 
     if (apt.fullyBooked) {
       return NextResponse.json(
-        { error: 'Ovaj smještaj trenutačno nije dostupan za rezervaciju.' },
+        { error: bookingMessages.unavailable },
         { status: 400 },
       );
     }
@@ -85,7 +92,7 @@ export async function POST(request: NextRequest) {
 
     if (nights < MIN_NIGHTS) {
       return NextResponse.json(
-        { error: `Minimum stay is ${MIN_NIGHTS} nights` },
+        { error: bookingMessages.minStay.replace('{count}', String(MIN_NIGHTS)) },
         { status: 400 },
       );
     }
@@ -93,7 +100,11 @@ export async function POST(request: NextRequest) {
     const totalGuests = (adults ?? 1) + (children ?? 0);
     if (totalGuests > apt.capacity) {
       return NextResponse.json(
-        { error: `${apt.name} accommodates a maximum of ${apt.capacity} guests.` },
+        {
+          error: bookingMessages.maxGuests
+            .replace('{apartmentName}', apt.name)
+            .replace('{capacity}', String(apt.capacity)),
+        },
         { status: 400 },
       );
     }
@@ -108,7 +119,7 @@ export async function POST(request: NextRequest) {
 
     if (!isRangeAvailable(checkInDate, checkOutDate, existing ?? [])) {
       return NextResponse.json(
-        { error: 'Odabrani datumi su već zauzeti. Molimo odaberite druge datume.' },
+        { error: bookingMessages.datesUnavailable },
         { status: 409 },
       );
     }
@@ -134,6 +145,7 @@ export async function POST(request: NextRequest) {
         total_price: totalPrice,
         deposit,
         status: 'pending',
+        locale,
         notes: notes || null,
       })
       .select()
@@ -152,13 +164,19 @@ export async function POST(request: NextRequest) {
       totalPrice,
       deposit,
       bookingId: booking.id,
+      locale: booking.locale ?? locale,
     });
 
     return NextResponse.json({ success: true, bookingId: booking.id }, { status: 201 });
   } catch (err) {
     console.error('Booking error:', err);
     return NextResponse.json(
-      { error: 'Greška pri spremanju rezervacije. Pokušajte ponovno ili nas kontaktirajte.' },
+      {
+        error:
+          err instanceof Error && err.message
+            ? err.message
+            : bookingMessages.serverError,
+      },
       { status: 500 },
     );
   }

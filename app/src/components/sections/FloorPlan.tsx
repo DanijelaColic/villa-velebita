@@ -1,68 +1,67 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { cn } from '@/lib/utils';
 
-const floors = [
-  {
-    level: '00',
-    name: 'Prizemlje',
-    badge: 'Zajednički prostor',
-    badgeColor: 'bg-terracotta',
-    description:
-      'Srce kuće – prostrani prostor za druženje s velikim hrastovim stolom idealnim za zajedničke obroke i večernja slavlja. Potpuno opremljena kuhinja, WC i plazma TV. Direktan izlaz na natkrivenu terasu s pogledom na cijelo Rudopolje.',
-    smoking: true,
-    rooms: [
-      { name: 'Prostor za druženje', detail: 'Hrastov stol, plazma TV' },
-      { name: 'Kuhinja', detail: 'Potpuno opremljena (indukcijska ploča, mikrovalna pećnica, perilica za suđe, hladnjak, aparat za kavu, kuhalo za vodu)' },
-      { name: 'WC' , detail: null },
-      { name: 'Natkrivena terasa', detail: 'Pogled na Rudopolje i zipline' },
-    ],
-    image: '/images/Prizemlje/WhatsApp Image 2026-03-25 at 08.59.25 (1).jpeg',
-    imageAlt: 'Prizemlje – prostor za druženje s hrastovim stolom',
-  },
-  {
-    level: '01',
-    name: 'Prvi kat',
-    badge: 'Dnevni boravak',
-    badgeColor: 'bg-forest',
-    description:
-      'Mirniji, opuštajući ambijent rezerviran za odmor. Prostrani dnevni boravak s velikom udobnom kutnom garniturom (200×270 cm) idealna za filmske večeri ili jutarnju kavu. Spavaća soba s dva odvojena kreveta nudi privatnost unutar grupe.',
-    smoking: false,
-    rooms: [
-      { name: 'Dnevni boravak', detail: 'Kutna garnitura 200×270 cm, TV' },
-      { name: 'Spavaća soba', detail: '2 odvojena kreveta' },
-      { name: 'Kupaonica', detail: 'Hidromasažni tuš' },
-      { name: 'Predsoblje', detail: null },
-    ],
-    image: '/images/rooms/dnevni-boravak.jpg',
-    imageAlt: 'Dnevni boravak s kutnom garniturom na prvom katu',
-  },
-  {
-    level: '02',
-    name: 'Potkrovlje',
-    badge: 'Spavaće sobe',
-    badgeColor: 'bg-oak',
-    description:
-      'Privatno utočište za odmor i san. Dvije velike spavaće sobe s masivnim hrastovim krevetima dimenzija 2×2 metra pružaju luksuznu udobnost. Jedna soba opremljena je dječjim krevetićem, a u drugoj je dodatni pomoćni ležaj.',
-    smoking: false,
-    rooms: [
-      { name: 'Spavaća soba 1', detail: 'Hrastov krevet 2×2 m, pomoćni ležaj, TV' },
-      { name: 'Spavaća soba 2', detail: 'Hrastov krevet 2×2 m, dječji krevetić' },
-      { name: 'Kupaonica', detail: 'Hidromasažni tuš' },
-    ],
-    image: '/images/rooms/spavaca-2b.jpg',
-    imageAlt: 'Spavaća soba s masivnim hrastovim krevetom u potkrovlju',
-  },
-];
+export async function FloorPlan() {
+  const t = await getTranslations('floorPlanSection');
+  const floors = [
+    {
+      level: '00',
+      name: t('floors.groundFloor.name'),
+      badge: t('floors.groundFloor.badge'),
+      badgeColor: 'bg-terracotta',
+      description: t('floors.groundFloor.description'),
+      smoking: true,
+      rooms: [
+        { name: t('floors.groundFloor.rooms.room1.name'), detail: t('floors.groundFloor.rooms.room1.detail') },
+        { name: t('floors.groundFloor.rooms.room2.name'), detail: t('floors.groundFloor.rooms.room2.detail') },
+        { name: t('floors.groundFloor.rooms.room3.name'), detail: null },
+        { name: t('floors.groundFloor.rooms.room4.name'), detail: t('floors.groundFloor.rooms.room4.detail') },
+      ],
+      image: '/images/Prizemlje/WhatsApp Image 2026-03-25 at 08.59.25 (1).jpeg',
+      imageAlt: t('floors.groundFloor.imageAlt'),
+    },
+    {
+      level: '01',
+      name: t('floors.firstFloor.name'),
+      badge: t('floors.firstFloor.badge'),
+      badgeColor: 'bg-forest',
+      description: t('floors.firstFloor.description'),
+      smoking: false,
+      rooms: [
+        { name: t('floors.firstFloor.rooms.room1.name'), detail: t('floors.firstFloor.rooms.room1.detail') },
+        { name: t('floors.firstFloor.rooms.room2.name'), detail: t('floors.firstFloor.rooms.room2.detail') },
+        { name: t('floors.firstFloor.rooms.room3.name'), detail: t('floors.firstFloor.rooms.room3.detail') },
+        { name: t('floors.firstFloor.rooms.room4.name'), detail: null },
+      ],
+      image: '/images/rooms/dnevni-boravak.jpg',
+      imageAlt: t('floors.firstFloor.imageAlt'),
+    },
+    {
+      level: '02',
+      name: t('floors.attic.name'),
+      badge: t('floors.attic.badge'),
+      badgeColor: 'bg-oak',
+      description: t('floors.attic.description'),
+      smoking: false,
+      rooms: [
+        { name: t('floors.attic.rooms.room1.name'), detail: t('floors.attic.rooms.room1.detail') },
+        { name: t('floors.attic.rooms.room2.name'), detail: t('floors.attic.rooms.room2.detail') },
+        { name: t('floors.attic.rooms.room3.name'), detail: t('floors.attic.rooms.room3.detail') },
+      ],
+      image: '/images/rooms/spavaca-2b.jpg',
+      imageAlt: t('floors.attic.imageAlt'),
+    },
+  ];
 
-export function FloorPlan() {
   return (
     <SectionWrapper id="raspored" bg="white">
       <SectionHeading
-        label="Raspored kuće"
-        title="Tri etaže, svaka sa svojom pričom"
-        subtitle="155 m² pažljivo uređenog prostora za do 9 gostiju – udobnost i privatnost za sve."
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
       />
 
       <div className="space-y-10 md:space-y-14">
@@ -113,7 +112,7 @@ export function FloorPlan() {
 
               {floor.smoking && (
                 <p className="mt-4 text-xs text-stone-light italic">
-                  * Pušenje dopušteno u prizemlju i sjenici
+                  * {t('smokingNote')}
                 </p>
               )}
             </div>

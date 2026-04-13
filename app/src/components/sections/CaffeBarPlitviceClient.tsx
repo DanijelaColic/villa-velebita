@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -12,6 +13,7 @@ type CaffeBarPlitviceClientProps = {
 };
 
 export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) {
+  const t = useTranslations('specialRecommendation');
   const [activeIndex, setActiveIndex] = useState(0);
   const totalImages = images.length;
   const safeIndex = Math.min(Math.max(activeIndex, 0), Math.max(totalImages - 1, 0));
@@ -29,30 +31,24 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
   return (
     <SectionWrapper id="caffe-bar-plitvice" bg="cream">
       <SectionHeading
-        label="Posebna preporuka"
-        title="Caffe bar Plitvice"
-        subtitle="Mali kutak s velikom toplinom domaćina na putu kroz prirodne ljepote Like."
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
       />
 
       <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
         <div className="lg:col-span-7 space-y-4 text-stone leading-relaxed">
           <p>
-          Na putu kroz ličke krajolike, nalazi se jedno posebno
-            mjesto koje gosti dugo pamte - Caffe bar Plitvice.
+            {t('paragraphs.p1')}
           </p>
           <p>
-            Tamo vas uvijek dočekuje nasmijana gazdarica Sniježa i obitelj Gačević-Čakarić, 
-            uz toplinu domaćeg ličkog ambijenta i miris svježe Sniježine kavice. No ono
-            što ovo mjesto čini još posebnijim je pažnja prema gostima - svi koji odsjednu u Villa Velebita imaju posebnu
-            dobrodošlicu.
+            {t('paragraphs.p2')}
           </p>
           <p>
-            Uz pokaz boravka, Villa Velebita časti svakog gosta besplatnom kavom ili
-            čašicom domaće rakije - iskrenim znakom dobrodošlice koji dolazi od srca.
+            {t('paragraphs.p3')}
           </p>
           <p className="font-medium text-oak">
-            Jer ovdje niste samo prolaznik - ovdje ste gost kojeg se dočekuje kao
-            prijatelja.
+            {t('paragraphs.p4')}
           </p>
         </div>
 
@@ -75,7 +71,7 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
                       type="button"
                       onClick={showPrevious}
                       className="absolute left-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-oak/55 text-cream p-2 hover:bg-oak/75 transition-colors"
-                      aria-label="Prethodna slika"
+                      aria-label={t('controls.previous')}
                     >
                       <ChevronLeft className="size-5" />
                     </button>
@@ -83,7 +79,7 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
                       type="button"
                       onClick={showNext}
                       className="absolute right-3 top-1/2 -translate-y-1/2 z-10 rounded-full bg-oak/55 text-cream p-2 hover:bg-oak/75 transition-colors"
-                      aria-label="Sljedeća slika"
+                      aria-label={t('controls.next')}
                     >
                       <ChevronRight className="size-5" />
                     </button>
@@ -98,7 +94,7 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
                             'size-2.5 rounded-full transition-colors',
                             imageIndex === safeIndex ? 'bg-cream' : 'bg-cream/45',
                           )}
-                          aria-label={`Prikaži sliku ${imageIndex + 1}`}
+                          aria-label={t('controls.showImage', { index: imageIndex + 1 })}
                         />
                       ))}
                     </div>
@@ -121,7 +117,7 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
                           ? 'border-terracotta shadow-warm'
                           : 'border-transparent hover:border-terracotta/50',
                       )}
-                      aria-label={`Prikaži sliku ${imageIndex + 1}`}
+                      aria-label={t('controls.showImage', { index: imageIndex + 1 })}
                     >
                       <Image
                         src={img}
@@ -137,10 +133,10 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
             </>
           ) : (
             <div className="rounded-card border border-stone/20 bg-white p-6 text-sm text-stone">
-              <p className="font-medium text-oak mb-2">Dodaj fotografije caffe bara</p>
+              <p className="font-medium text-oak mb-2">{t('empty.title')}</p>
               <p>
-                Ubaci slike u folder <code>/public/images/caffe-bar-plitvice/</code>, pa
-                će se automatski prikazati u ovoj sekciji.
+                {t('empty.description')}{' '}
+                <code>/public/images/caffe-bar-plitvice/</code>.
               </p>
             </div>
           )}

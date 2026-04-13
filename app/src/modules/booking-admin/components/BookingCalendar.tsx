@@ -1,11 +1,10 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useLocale, useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import clsx from 'clsx';
 import {
-  MONTHS_HR,
-  DAYS_HR,
   startOfToday,
   addDays,
   isSameDay,
@@ -51,29 +50,91 @@ export default function BookingCalendar({
   bookingsApiPath = '/api/bookings',
   minNights = 2,
 }: Props) {
+  const locale = useLocale();
+  const t = useTranslations('bookingWidget.calendar');
   const today = startOfToday();
-  const [bookedRanges, setBookedRanges] = useState<BookedRange[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [availability, setAvailability] = useState<{
+    requestKey: string | null;
+    bookedRanges: BookedRange[];
+    error: string | null;
+  }>({
+    requestKey: null,
+    bookedRanges: [],
+    error: null,
+  });
   const [hoverDate, setHoverDate] = useState<Date | null>(null);
   const [monthOffset, setMonthOffset] = useState(0);
+  const requestKey = `${bookingsApiPath}:${apartmentSlug}`;
 
   useEffect(() => {
-    setLoading(true);
-    setError(null);
+    let isCancelled = false;
+
     fetch(`${bookingsApiPath}?apartment=${apartmentSlug}`)
       .then((r) => r.json())
       .then((data) => {
-        if (Array.isArray(data)) setBookedRanges(data);
-        else setError('Greška pri učitavanju dostupnosti.');
-      })
-      .catch(() => setError('Greška pri učitavanju slobodnih datuma.'))
-      .finally(() => setLoading(false));
-  }, [apartmentSlug, bookingsApiPath]);
+        if (isCancelled) return;
 
-  useEffect(() => {
-    if (checkOut) setHoverDate(null);
-  }, [checkOut]);
+        if (Array.isArray(data)) {
+          setAvailability({
+            requestKey,
+            bookedRanges: data,
+            error: null,
+          });
+          return;
+        }
+
+        setAvailability({
+          requestKey,
+          bookedRanges: [],
+          error: t('errors.loadAvailability'),
+        });
+      })
+      .catch(() => {
+        if (isCancelled) return;
+
+        setAvailability({
+          requestKey,
+          bookedRanges: [],
+          error: t('errors.loadDates'),
+        });
+      });
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [apartmentSlug, bookingsApiPath, requestKey, t]);
+
+  const loading = availability.requestKey !== requestKey;
+  const error = loading ? null : availability.error;
+  const bookedRanges = useMemo(
+    () => (loading ? [] : availability.bookedRanges),
+    [loading, availability.bookedRanges],
+  );
+  const effectiveHoverDate = checkOut ? null : hoverDate;
+  const monthFormatter = useMemo(
+    () =>
+      new Intl.DateTimeFormat(locale, {
+        month: 'long',
+      }),
+    [locale],
+  );
+  const weekdayFormatter = useMemo(
+    () =>
+      new Intl.DateTimeFormat(locale, {
+        weekday: 'short',
+      }),
+    [locale],
+  );
+  const weekdays = useMemo(() => {
+    const baseMonday = new Date(Date.UTC(2024, 0, 1));
+
+    return Array.from({ length: 7 }, (_, index) => {
+      const day = new Date(baseMonday);
+      day.setUTCDate(baseMonday.getUTCDate() + index);
+
+      return weekdayFormatter.format(day);
+    });
+  }, [weekdayFormatter]);
 
   const firstBlocked = checkIn && !checkOut
     ? getFirstBlockedAfter(checkIn, bookedRanges)
@@ -96,12 +157,14 @@ export default function BookingCalendar({
           return 'blocked-for-checkout';
         }
         if (isSameDay(day, addDays(checkIn, minNights - 1))) return 'too-close';
-        if (hoverDate && day > checkIn && day < hoverDate) return 'hover-range';
+        if (effectiveHoverDate && day > checkIn && day < effectiveHoverDate) {
+          return 'hover-range';
+        }
       }
 
       return 'available';
     },
-    [today, bookedRanges, checkIn, checkOut, hoverDate, firstBlocked, minNights],
+    [today, bookedRanges, checkIn, checkOut, effectiveHoverDate, firstBlocked, minNights],
   );
 
   const handleDayClick = useCallback(
@@ -162,7 +225,7 @@ export default function BookingCalendar({
   if (loading) {
     return (
       <div className="flex items-center justify-center py-20 text-muted text-sm">
-        <span className="animate-pulse">Učitavam kalendar…</span>
+        <span className="animate-pulse">{t('loading')}</span>
       </div>
     );
   }
@@ -177,22 +240,22 @@ export default function BookingCalendar({
       <div className="flex flex-wrap items-center gap-4 mb-6 text-xs text-muted">
         <span className="flex items-center gap-1.5">
           <span className="w-3.5 h-3.5 rounded-sm bg-green-100 border border-green-300 inline-block" />
-          Slobodno
+          {t('legend.available')}
         </span>
         <span className="flex items-center gap-1.5">
           <span className="w-3.5 h-3.5 rounded-sm bg-red-100 border border-red-300 inline-block" />
-          Zauzeto
+          {t('legend.booked')}
         </span>
         <span className="flex items-center gap-1.5">
           <span className="w-3.5 h-3.5 rounded-sm bg-primary inline-block" />
-          Odabrano
+          {t('legend.selected')}
         </span>
         {!checkIn && (
-          <span className="ml-auto text-secondary font-medium">Odaberite datum dolaska</span>
+          <span className="ml-auto text-secondary font-medium">{t('legend.pickCheckIn')}</span>
         )}
         {checkIn && !checkOut && (
           <span className="ml-auto text-secondary font-medium">
-            Odaberite datum odlaska (min. {minNights} {minNights === 1 ? 'noć' : 'noći'})
+            {t('legend.pickCheckOut', { minNights })}
           </span>
         )}
       </div>
@@ -203,14 +266,14 @@ export default function BookingCalendar({
           onClick={() => setMonthOffset((o) => Math.max(0, o - 1))}
           disabled={monthOffset === 0}
           className="p-2 rounded-full hover:bg-sand disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
-          aria-label="Prethodni mjesec"
+          aria-label={t('previousMonth')}
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={() => setMonthOffset((o) => o + 2)}
           className="p-2 rounded-full hover:bg-sand transition-colors"
-          aria-label="Sljedeći mjesec"
+          aria-label={t('nextMonth')}
         >
           <ChevronRight size={20} />
         </button>
@@ -224,6 +287,9 @@ export default function BookingCalendar({
             year={year}
             month={month}
             minNights={minNights}
+            monthFormatter={monthFormatter}
+            weekdays={weekdays}
+            t={t}
             getDayState={getDayState}
             onDayClick={handleDayClick}
             onDayHover={handleDayHover}
@@ -237,7 +303,7 @@ export default function BookingCalendar({
             onClick={onReset}
             className="text-sm text-muted hover:text-primary underline underline-offset-2 transition-colors"
           >
-            Poništi odabir
+            {t('reset')}
           </button>
         </div>
       )}
@@ -251,22 +317,36 @@ type MonthGridProps = {
   year: number;
   month: number;
   minNights: number;
+  monthFormatter: Intl.DateTimeFormat;
+  weekdays: string[];
+  t: ReturnType<typeof useTranslations<'bookingWidget.calendar'>>;
   getDayState: (day: Date) => DayState;
   onDayClick: (day: Date) => void;
   onDayHover: (day: Date) => void;
 };
 
-function MonthGrid({ year, month, minNights, getDayState, onDayClick, onDayHover }: MonthGridProps) {
+function MonthGrid({
+  year,
+  month,
+  minNights,
+  monthFormatter,
+  weekdays,
+  t,
+  getDayState,
+  onDayClick,
+  onDayHover,
+}: MonthGridProps) {
   const grid = getMonthGrid(year, month);
+  const monthName = monthFormatter.format(new Date(year, month, 1));
 
   return (
     <div>
       <h3 className="text-center font-serif font-semibold text-text mb-4">
-        {MONTHS_HR[month]} {year}
+        {monthName} {year}
       </h3>
 
       <div className="grid grid-cols-7 mb-1">
-        {DAYS_HR.map((d) => (
+        {weekdays.map((d) => (
           <div key={d} className="text-center text-xs text-muted font-medium py-1">
             {d}
           </div>
@@ -308,9 +388,9 @@ function MonthGrid({ year, month, minNights, getDayState, onDayClick, onDayHover
               )}
               title={
                 state === 'booked'
-                  ? 'Zauzeto'
+                  ? t('tooltips.booked')
                   : state === 'too-close'
-                    ? `Minimalni boravak: ${minNights} ${minNights === 1 ? 'noć' : 'noći'}`
+                    ? t('tooltips.minStay', { minNights })
                     : undefined
               }
             >

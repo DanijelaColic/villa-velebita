@@ -1,5 +1,6 @@
 import { createServerSupabaseClient } from './supabase';
 import { verifyBookingViewToken } from './booking-view-token';
+import { getMessagesForLocale, getValidLocale } from '@/i18n/messages';
 import {
   getApartment,
   RECIPIENT_IBAN,
@@ -32,9 +33,12 @@ export type BookingPublicViewData = {
 
 export async function loadBookingPublicView(
   token: string,
+  locale?: string,
 ): Promise<BookingPublicViewData | null> {
   const bookingId = verifyBookingViewToken(token);
   if (!bookingId) return null;
+  const validLocale = getValidLocale(locale);
+  const reviewMessages = getMessagesForLocale(validLocale).bookingReview;
 
   const supabase = createServerSupabaseClient();
   const { data: row, error } = await supabase.from('bookings').select('*').eq('id', bookingId).single();
@@ -50,10 +54,10 @@ export async function loadBookingPublicView(
 
   const statusLabel =
     row.status === 'confirmed'
-      ? 'Potvrđena'
+      ? reviewMessages.status.confirmed
       : row.status === 'cancelled'
-        ? 'Otkazana'
-        : 'Na čekanju';
+        ? reviewMessages.status.cancelled
+        : reviewMessages.status.pending;
 
   let hub3: string | null = null;
   let epc: string | null = null;
@@ -69,8 +73,8 @@ export async function loadBookingPublicView(
   return {
     guestName: row.guest_name,
     apartmentName,
-    checkInStr: formatDisplayDate(checkIn),
-    checkOutStr: formatDisplayDate(checkOut),
+    checkInStr: formatDisplayDate(checkIn, validLocale),
+    checkOutStr: formatDisplayDate(checkOut, validLocale),
     nights: row.nights,
     totalPrice: row.total_price,
     deposit: row.deposit,

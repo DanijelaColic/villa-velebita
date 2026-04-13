@@ -5,44 +5,12 @@ import type { GallerySection } from '@/components/sections/GalleryClient';
 const mediaExtensions = /\.(jpe?g|png|webp|gif|avif|mp4|webm|mov)$/i;
 const videoExtensions = /\.(mp4|webm|mov)$/i;
 
-const sectionMeta = [
-  {
-    id: 'kuca-ulaz',
-    folder: '01-kuca-i-ulaz',
-    title: '1) Kuca i ulaz',
-    description: 'Prvi dojam dolaska u Villa Velebita.',
-  },
-  {
-    id: 'prizemlje',
-    folder: '02-prizemlje-priprema-obroka-i-druzenje',
-    title: '2) Prizemlje: priprema obroka i druzenje',
-    description: 'Prostor za kuhanje, objed i zajednicke trenutke.',
-  },
-  {
-    id: 'kat-opustanje',
-    folder: '03-kat-za-opustanje',
-    title: '3) Kat za opustanje',
-    description: 'Sobe i kutci namijenjeni mirnom odmoru.',
-  },
-  {
-    id: 'potkrovlje',
-    folder: '04-potkrovlje-pogledi-izlasci-zalasci',
-    title: '4) Potkrovlje: odmor duse i pogledi',
-    description: 'Toplina potkrovlja uz poglede na izlaske i zalaske sunca.',
-  },
-  {
-    id: 'vanjska-sjenica',
-    folder: '05-vanjska-sjenica-druzenje',
-    title: '5) Vanjska sjenica za nezaboravno druzenje',
-    description: 'Vanjski kutak za opustanje i vecernja druzenja.',
-  },
-  {
-    id: 'pogledi-priroda',
-    folder: '07-pogledi-i-priroda',
-    title: '7) Pogledi i priroda',
-    description: 'Zavrsne fotografije prirode i ambijenta Like.',
-  },
-] as const;
+export type GallerySectionMeta = {
+  id: string;
+  folder: string;
+  title: string;
+  description: string;
+};
 
 function fileSort(a: string, b: string) {
   const aCover = /^cover\./i.test(a);
@@ -62,7 +30,7 @@ function fileSort(a: string, b: string) {
 }
 
 /** Učitava sve sekcije galerije s diska (isto kao prije refaktora u Gallery.tsx). */
-export function getGallerySections(): GallerySection[] {
+export function getGallerySections(sectionMeta: GallerySectionMeta[]): GallerySection[] {
   const baseDir = path.join(process.cwd(), 'public', 'images', 'gallery');
 
   return sectionMeta.map(section => {

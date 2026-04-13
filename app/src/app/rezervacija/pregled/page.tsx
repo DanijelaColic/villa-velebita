@@ -1,17 +1,23 @@
 import type { Metadata } from 'next';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import {
-  SITE_NAME,
   DEPOSIT_PERCENT,
   BALANCE_DAYS_BEFORE_CHECK_IN,
 } from '@/modules/booking-admin/booking.config';
 import { loadBookingPublicView } from '@/modules/booking-admin/lib/booking-public-view';
+import { getPageMetadata } from '@/i18n/metadata';
 
-export const metadata: Metadata = {
-  title: `Pregled rezervacije | ${SITE_NAME}`,
-  description: 'Podaci o rezervaciji i QR kodovi za uplatu depozita.',
-  robots: { index: false, follow: false },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+
+  return getPageMetadata({
+    locale,
+    pathname: '/rezervacija/pregled',
+    namespace: 'metadata.pages.bookingReview',
+    robots: { index: false, follow: false },
+  });
+}
 
 const DEP_PCT = Math.round(DEPOSIT_PERCENT * 100);
 const BAL_PCT = 100 - DEP_PCT;
@@ -21,6 +27,8 @@ type Props = {
 };
 
 export default async function RezervacijaPregledPage({ searchParams }: Props) {
+  const locale = await getLocale();
+  const t = await getTranslations('bookingReview');
   const { token } = await searchParams;
 
   if (!token?.trim()) {
@@ -29,9 +37,11 @@ export default async function RezervacijaPregledPage({ searchParams }: Props) {
         <Navbar />
         <main className="min-h-screen bg-cream pt-20 px-4 pb-16">
           <div className="max-w-lg mx-auto py-10">
-            <h1 className="font-display text-2xl font-semibold text-oak mb-3">Nedostaje poveznica</h1>
+            <h1 className="font-display text-2xl font-semibold text-oak mb-3">
+              {t('missingLink.title')}
+            </h1>
             <p className="text-stone text-base leading-relaxed">
-              Otvorite poveznicu iz e-pošte koju ste dobili nakon rezervacije.
+              {t('missingLink.description')}
             </p>
           </div>
         </main>
@@ -39,7 +49,7 @@ export default async function RezervacijaPregledPage({ searchParams }: Props) {
     );
   }
 
-  const data = await loadBookingPublicView(token);
+  const data = await loadBookingPublicView(token, locale);
 
   if (!data) {
     return (
@@ -48,11 +58,10 @@ export default async function RezervacijaPregledPage({ searchParams }: Props) {
         <main className="min-h-screen bg-cream pt-20 px-4 pb-16">
           <div className="max-w-lg mx-auto py-10">
             <h1 className="font-display text-2xl font-semibold text-oak mb-3">
-              Poveznica nije valjana
+              {t('invalidLink.title')}
             </h1>
             <p className="text-stone text-base leading-relaxed">
-              Link je možda istekao ili je već korišten pogrešan URL. Ako trebate pomoć, javite nam se
-              e-poštom.
+              {t('invalidLink.description')}
             </p>
           </div>
         </main>
@@ -66,7 +75,7 @@ export default async function RezervacijaPregledPage({ searchParams }: Props) {
       <main className="min-h-screen bg-cream pt-20 px-4 pb-16">
         <div className="max-w-lg mx-auto py-8 sm:py-10">
           <p className="text-xs font-semibold uppercase tracking-widest text-stone mb-2">
-            Vaša rezervacija
+            {t('eyebrow')}
           </p>
           <h1 className="font-display text-2xl sm:text-3xl font-semibold text-oak mb-2">
             {data.apartmentName}
@@ -85,64 +94,64 @@ export default async function RezervacijaPregledPage({ searchParams }: Props) {
 
           <div className="bg-white border border-stone-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-3 text-stone text-base leading-relaxed">
             <div className="flex flex-col gap-1 border-b border-stone-100 pb-3">
-              <span className="text-sm text-stone/80">Gost</span>
+              <span className="text-sm text-stone/80">{t('labels.guest')}</span>
               <span className="font-medium text-oak text-lg">{data.guestName}</span>
             </div>
-            <Row label="Dolazak" value={`${data.checkInStr} (od 14:00)`} />
-            <Row label="Odlazak" value={`${data.checkOutStr} (do 11:00)`} />
-            <Row label="Noćenja" value={String(data.nights)} />
+            <Row label={t('labels.checkIn')} value={`${data.checkInStr} (${t('times.checkIn')})`} />
+            <Row label={t('labels.checkOut')} value={`${data.checkOutStr} (${t('times.checkOut')})`} />
+            <Row label={t('labels.nights')} value={String(data.nights)} />
             <div className="border-t border-stone-100 pt-3 mt-2 flex justify-between items-baseline gap-4">
-              <span className="text-stone/80">Ukupno</span>
+              <span className="text-stone/80">{t('labels.total')}</span>
               <span className="font-semibold text-oak text-xl">{data.totalPrice} €</span>
             </div>
             <div className="flex justify-between gap-4 text-sm sm:text-base">
-              <span className="text-stone/80">Depozit ({DEP_PCT}%)</span>
+              <span className="text-stone/80">{t('labels.deposit', { percent: DEP_PCT })}</span>
               <span className="font-semibold text-secondary">{data.deposit} €</span>
             </div>
             <div className="flex justify-between gap-4 text-sm sm:text-base">
-              <span className="text-stone/80">Ostatak ({BAL_PCT}%)</span>
+              <span className="text-stone/80">{t('labels.balance', { percent: BAL_PCT })}</span>
               <span className="font-medium text-oak">{data.balance} €</span>
             </div>
             <p className="text-xs text-stone/70 pt-1">
-              Ostatak platite najkasnije {BALANCE_DAYS_BEFORE_CHECK_IN} dana prije dolaska.
+              {t('balanceNotice', { days: BALANCE_DAYS_BEFORE_CHECK_IN })}
             </p>
           </div>
 
           {data.status !== 'cancelled' && (
             <div className="mt-8 space-y-4">
-              <h2 className="font-display text-lg font-semibold text-oak">Plaćanje depozita</h2>
+              <h2 className="font-display text-lg font-semibold text-oak">{t('payment.title')}</h2>
               <p className="text-stone text-sm leading-relaxed">
-                Model / poziv na broj: <strong className="text-oak">{data.reference}</strong>
+                {t('payment.reference')}: <strong className="text-oak">{data.reference}</strong>
               </p>
 
               <div className="bg-white border border-stone-200 rounded-2xl p-4 sm:p-5 text-sm space-y-2">
                 <p className="font-medium text-oak">{data.recipientName}</p>
                 <p className="font-mono break-all">IBAN: {data.recipientIban}</p>
-                <p>Banka: {data.recipientBank}</p>
+                <p>{t('payment.bank')}: {data.recipientBank}</p>
                 <p>
                   BIC/SWIFT {data.recipientBic}{' '}
-                  <span className="text-stone/80">(uplate iz inozemstva)</span>
+                  <span className="text-stone/80">({t('payment.international')})</span>
                 </p>
               </div>
 
               {data.hub3 && (
                 <div className="bg-white border border-stone-200 rounded-2xl p-4 text-center">
-                  <p className="text-xs font-semibold text-oak mb-3">Hrvatske banke (HUB3)</p>
+                  <p className="text-xs font-semibold text-oak mb-3">{t('payment.hub3Title')}</p>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={data.hub3}
-                    alt="HUB3 barkod za uplatu depozita"
+                    alt={t('payment.hub3Alt')}
                     className="max-w-full h-auto mx-auto"
                   />
                 </div>
               )}
               {data.epc && (
                 <div className="bg-white border border-stone-200 rounded-2xl p-4 text-center">
-                  <p className="text-xs font-semibold text-oak mb-3">EU / SEPA (QR)</p>
+                  <p className="text-xs font-semibold text-oak mb-3">{t('payment.epcTitle')}</p>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={data.epc}
-                    alt="SEPA QR za uplatu depozita"
+                    alt={t('payment.epcAlt')}
                     className="w-full max-w-[280px] h-auto mx-auto"
                   />
                 </div>

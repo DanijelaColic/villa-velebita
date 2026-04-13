@@ -1,15 +1,18 @@
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+import { getTranslations } from 'next-intl/server';
 import BookingWidget from '@/modules/booking-admin/components/BookingWidget';
 import { MIN_NIGHTS } from '@/modules/booking-admin/booking.config';
 
-export function Booking() {
+export async function Booking() {
+  const t = await getTranslations('bookingSection');
+
   return (
     <SectionWrapper id="rezervacije" bg="cream">
       <SectionHeading
-        label="Rezervacija"
-        title="Rezervirajte direktno"
-        subtitle="Bez platformi, bez provizija. Direktno s vlasnikom po najboljoj cijeni."
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
       />
 
       {/* Inline rules text prilagođen za Villa Velebita */}
@@ -19,20 +22,20 @@ export function Booking() {
           rulesText={
             <div className="bg-cream-dark rounded-xl p-4 text-xs text-stone space-y-1">
               <p>
-                <strong className="text-oak">Dolazak (check-in):</strong> 14:00 – 23:00
+                <strong className="text-oak">{t('rules.checkInLabel')}</strong> 14:00 – 23:00
                 &nbsp;|&nbsp;
-                <strong className="text-oak">Odlazak (check-out):</strong> 09:00 – 11:00
+                <strong className="text-oak">{t('rules.checkOutLabel')}</strong> 09:00 – 11:00
               </p>
               <p>
-                <strong className="text-oak">Minimalni boravak:</strong> {MIN_NIGHTS} noći
+                <strong className="text-oak">{t('rules.minStayLabel')}</strong>{' '}
+                {t('rules.minStayValue', { count: MIN_NIGHTS })}
               </p>
               <p>
-                <strong className="text-oak">Popust 7+ noći:</strong> 10% popusta — javite se za
-                ponudu
+                <strong className="text-oak">{t('rules.discountLabel')}</strong>{' '}
+                {t('rules.discountValue')}
               </p>
               <p className="text-stone/90">
-                Nakon odabira datuma prikazuju se iznosi depozita i ostatka; podatke za uplatu
-                (primatelj i broj računa) vidjet ćete tek nakon slanja upita.
+                {t('rules.paymentNote')}
               </p>
             </div>
           }

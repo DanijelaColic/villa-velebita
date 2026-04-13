@@ -55,23 +55,24 @@ export function parseLocalDate(str: string): Date {
   return new Date(y, m - 1, d);
 }
 
-export function formatDate(date: Date): string {
+export function formatDate(date: Date, locale = 'hr'): string {
+  void locale;
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, '0');
   const d = String(date.getDate()).padStart(2, '0');
   return `${y}-${m}-${d}`;
 }
 
-export function formatDisplayDate(date: Date): string {
-  return date.toLocaleDateString('hr-HR', {
+export function formatDisplayDate(date: Date, locale = 'hr'): string {
+  return date.toLocaleDateString(locale, {
     day: 'numeric',
     month: 'long',
     year: 'numeric',
   });
 }
 
-export function formatShortDate(date: Date): string {
-  return date.toLocaleDateString('hr-HR', { day: 'numeric', month: 'short' });
+export function formatShortDate(date: Date, locale = 'hr'): string {
+  return date.toLocaleDateString(locale, { day: 'numeric', month: 'short' });
 }
 
 // ── Dostupnost ────────────────────────────────────────────────────

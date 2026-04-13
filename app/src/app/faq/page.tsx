@@ -1,21 +1,19 @@
 import type { Metadata } from 'next';
+import { getLocale } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { FAQ } from '@/components/sections/FAQ';
+import { getPageMetadata } from '@/i18n/metadata';
 
-const canonical = 'https://villavelebita.hr/faq';
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
 
-export const metadata: Metadata = {
-  title: 'Česta pitanja (FAQ)',
-  description:
-    'Odgovori o udaljenosti od Plitvica, kapacitetu, cijeni, jacuzziju, plaćanju, ljubimcima i check-inu — Villa Velebita, Vrhovine.',
-  alternates: { canonical },
-  openGraph: {
-    url: canonical,
-    title: 'FAQ | Villa Velebita',
-    description: 'Česta pitanja gostiju o kući za odmor u Rudopolju.',
-  },
-};
+  return getPageMetadata({
+    locale,
+    pathname: '/faq',
+    namespace: 'metadata.pages.faq',
+  });
+}
 
 export default function FaqPage() {
   return (
