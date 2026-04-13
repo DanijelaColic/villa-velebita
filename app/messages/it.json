@@ -777,7 +777,7 @@
       "cancellationTitle": "Cancellazione (deposito)"
     },
     "summary": {
-      "line": "{nights}× notte ({label}) · {pricePerNight} €",
+      "line": "{nights, plural, one {{nights}× notte} other {{nights}× notti}} · {pricePerNight} €",
       "discount": "Sconto per {nights}+ notti ({percent}%)",
       "total": "Totale"
     },

@@ -777,7 +777,7 @@
       "cancellationTitle": "Stornierung (Anzahlung)"
     },
     "summary": {
-      "line": "{nights}× Nacht ({label}) · {pricePerNight} €",
+      "line": "{nights, plural, one {{nights}× Nacht} other {{nights}× Nächte}} · {pricePerNight} €",
       "discount": "Rabatt für {nights}+ Nächte ({percent}%)",
       "total": "Gesamt"
     },

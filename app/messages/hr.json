@@ -795,7 +795,7 @@
       "cancellationTitle": "Otkazivanje (depozit)"
     },
     "summary": {
-      "line": "{nights}× noć ({label}) · {pricePerNight} €",
+      "line": "{nights, plural, one {{nights}× noć} few {{nights}× noći} other {{nights}× noći}} · {pricePerNight} €",
       "discount": "Popust {nights}+ noći ({percent}%)",
       "total": "Ukupno"
     },
