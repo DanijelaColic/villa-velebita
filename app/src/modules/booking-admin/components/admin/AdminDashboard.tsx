@@ -14,6 +14,7 @@ import { formatDisplayDate, parseLocalDate, calculatePrice } from '../../lib/dat
 import type { Booking } from '../../types';
 import BookingTimeline from './BookingTimeline';
 import { ToastContainer, type ToastItem } from './Toast';
+import AdminGalleryManager from './AdminGalleryManager';
 
 const MONTHS_HR_SHORT = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -52,7 +53,7 @@ export default function AdminDashboard() {
   const [filterDateTo, setFilterDateTo] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('check_in');
   const [sortAsc, setSortAsc] = useState(false);
-  const [view, setView] = useState<'table' | 'timeline'>('table');
+  const [view, setView] = useState<'table' | 'timeline' | 'gallery'>('table');
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingBooking, setEditingBooking] = useState<Booking | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -304,6 +305,16 @@ export default function AdminDashboard() {
               <GanttChartSquare size={14} />
               <span className="hidden sm:inline">Timeline</span>
             </button>
+            <button
+              onClick={() => setView('gallery')}
+              title="Gallery"
+              className={clsx(
+                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
+                view === 'gallery' ? 'bg-white text-primary' : 'text-white/70 hover:text-white',
+              )}
+            >
+              <span className="hidden sm:inline">Gallery</span>
+            </button>
           </div>
 
           <button
@@ -313,13 +324,15 @@ export default function AdminDashboard() {
           >
             <RefreshCw size={16} />
           </button>
-          <button
-            onClick={() => setShowAddForm(true)}
-            className="flex items-center gap-1.5 bg-secondary hover:bg-secondary-light text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
-          >
-            <Plus size={15} />
-            <span className="hidden sm:inline">New booking</span>
-          </button>
+          {view !== 'gallery' && (
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="flex items-center gap-1.5 bg-secondary hover:bg-secondary-light text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
+            >
+              <Plus size={15} />
+              <span className="hidden sm:inline">New booking</span>
+            </button>
+          )}
           <button
             onClick={handleLogout}
             className="text-white/70 hover:text-white flex items-center gap-1.5 text-sm transition-colors"
@@ -331,23 +344,24 @@ export default function AdminDashboard() {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        {/* Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-          {[
-            { label: 'Total bookings', value: stats.total, color: 'text-primary' },
-            { label: 'Pending', value: stats.pending, color: 'text-yellow-600' },
-            { label: 'Confirmed', value: stats.confirmed, color: 'text-green-600' },
-            { label: 'Revenue', value: `${stats.revenue}€`, color: 'text-secondary' },
-          ].map(({ label, value, color }) => (
-            <div key={label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
-              <p className="text-xs text-gray-500 mb-1">{label}</p>
-              <p className={clsx('text-2xl font-bold', color)}>{value}</p>
-            </div>
-          ))}
-        </div>
+        {view !== 'gallery' && (
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+            {[
+              { label: 'Total bookings', value: stats.total, color: 'text-primary' },
+              { label: 'Pending', value: stats.pending, color: 'text-yellow-600' },
+              { label: 'Confirmed', value: stats.confirmed, color: 'text-green-600' },
+              { label: 'Revenue', value: `${stats.revenue}€`, color: 'text-secondary' },
+            ].map(({ label, value, color }) => (
+              <div key={label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+                <p className="text-xs text-gray-500 mb-1">{label}</p>
+                <p className={clsx('text-2xl font-bold', color)}>{value}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Overlap warning */}
-        {overlaps.length > 0 && (
+        {view !== 'gallery' && overlaps.length > 0 && (
           <div className="mb-6 bg-red-50 border border-red-200 rounded-xl px-5 py-4">
             <div className="flex items-start gap-3">
               <AlertTriangle size={18} className="text-red-500 shrink-0 mt-0.5" />
@@ -374,7 +388,8 @@ export default function AdminDashboard() {
         )}
 
         {/* Godišnje statistike — collapsible */}
-        <div className="mb-6 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        {view !== 'gallery' && (
+          <div className="mb-6 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
           <button
             onClick={() => setShowMonthlyStats((v) => !v)}
             className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors"
@@ -464,7 +479,10 @@ export default function AdminDashboard() {
               </div>
             </div>
           )}
-        </div>
+          </div>
+        )}
+
+        {view === 'gallery' && <AdminGalleryManager showToast={showToast} />}
 
         {/* Timeline view */}
         {view === 'timeline' && (

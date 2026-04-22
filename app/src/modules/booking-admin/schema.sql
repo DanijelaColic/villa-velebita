@@ -42,3 +42,59 @@ create policy "Service role full access"
   on bookings
   using (true)
   with check (true);
+
+-- ------------------------------------------------------------
+-- GALERIJA (admin upload + frontend prikaz iz baze/storage)
+-- ------------------------------------------------------------
+
+create table if not exists gallery_items (
+  id uuid default gen_random_uuid() primary key,
+  storage_path text not null unique,
+  category_key text not null default 'exterior-entrance',
+  media_type text not null check (media_type in ('image', 'video')),
+  alt_text text,
+  title text,
+  sort_order integer not null default 0,
+  created_at timestamptz not null default now()
+);
+
+alter table gallery_items
+  add constraint if not exists gallery_items_category_key_check
+  check (
+    category_key in (
+      'exterior-entrance',
+      'ground-floor',
+      'first-floor',
+      'attic',
+      'gazebo',
+      'nature'
+    )
+  );
+
+create index if not exists gallery_items_sort_idx
+  on gallery_items (sort_order asc, created_at asc);
+
+alter table gallery_items enable row level security;
+
+create policy "Service role full access gallery_items"
+  on gallery_items
+  using (true)
+  with check (true);
+
+-- Storage bucket za galeriju (public read)
+insert into storage.buckets (id, name, public)
+values ('gallery-media', 'gallery-media', true)
+on conflict (id) do nothing;
+
+-- Javnosti dopusti čitanje media fileova (frontend)
+create policy "Public can read gallery media"
+  on storage.objects
+  for select
+  using (bucket_id = 'gallery-media');
+
+-- Upload/brisanje prepusti samo service role ključu (server API)
+create policy "Service role can write gallery media"
+  on storage.objects
+  for all
+  using (bucket_id = 'gallery-media')
+  with check (bucket_id = 'gallery-media');

@@ -5,56 +5,19 @@ import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { MapPin, Navigation, Mountain, Waves, Wifi } from 'lucide-react';
-import { getGallerySections } from '@/lib/gallery-sections';
+import { getGalleryItems, getPublicMediaUrl } from '@/lib/gallery';
 
 /** Početna: uži izrez galerije + jedinstveni uvod (puna galerija na /galerija). */
 export async function GalleryTeaser() {
   const t = await getTranslations('landingTeasers.gallery');
-  const sections = getGallerySections([
-    {
-      id: 'kuca-ulaz',
-      folder: '01-kuca-i-ulaz',
-      title: t('sections.houseEntrance.title'),
-      description: t('sections.houseEntrance.description'),
-    },
-    {
-      id: 'prizemlje',
-      folder: '02-prizemlje-priprema-obroka-i-druzenje',
-      title: t('sections.groundFloor.title'),
-      description: t('sections.groundFloor.description'),
-    },
-    {
-      id: 'kat-opustanje',
-      folder: '03-kat-za-opustanje',
-      title: t('sections.floorRelax.title'),
-      description: t('sections.floorRelax.description'),
-    },
-    {
-      id: 'potkrovlje',
-      folder: '04-potkrovlje-pogledi-izlasci-zalasci',
-      title: t('sections.attic.title'),
-      description: t('sections.attic.description'),
-    },
-    {
-      id: 'vanjska-sjenica',
-      folder: '05-vanjska-sjenica-druzenje',
-      title: t('sections.gazebo.title'),
-      description: t('sections.gazebo.description'),
-    },
-    {
-      id: 'pogledi-priroda',
-      folder: '07-pogledi-i-priroda',
-      title: t('sections.nature.title'),
-      description: t('sections.nature.description'),
-    },
-  ]);
+  const items = await getGalleryItems();
   const picks: { src: string; alt: string }[] = [];
-  for (const s of sections) {
-    for (const m of s.media) {
-      if (m.type === 'image' && picks.length < 6) {
-        picks.push({ src: m.src, alt: m.alt });
-      }
-      if (picks.length >= 6) break;
+  for (const item of items) {
+    if (item.media_type === 'image' && picks.length < 6) {
+      picks.push({
+        src: getPublicMediaUrl(item.storage_path),
+        alt: item.alt_text || item.title || t('heading.label'),
+      });
     }
     if (picks.length >= 6) break;
   }

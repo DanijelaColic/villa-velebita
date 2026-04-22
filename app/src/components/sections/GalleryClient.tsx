@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Play } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { cn } from '@/lib/utils';
 
 export type GalleryMedia = {
   src: string;
@@ -24,22 +23,9 @@ export type GallerySection = {
 
 export function GalleryClient({ sections }: { sections: GallerySection[] }) {
   const t = useTranslations('gallerySection');
-  const [activeMediaIndex, setActiveMediaIndex] = useState<Record<string, number>>({});
   const [lightbox, setLightbox] = useState<{ sectionId: string; index: number } | null>(
     null,
   );
-
-  const getActiveIndex = useCallback(
-    (section: GallerySection) => {
-      const idx = activeMediaIndex[section.id] ?? 0;
-      return Math.min(Math.max(idx, 0), Math.max(section.media.length - 1, 0));
-    },
-    [activeMediaIndex],
-  );
-
-  const setIndex = useCallback((sectionId: string, nextIndex: number) => {
-    setActiveMediaIndex(prev => ({ ...prev, [sectionId]: nextIndex }));
-  }, []);
 
   const close = useCallback(() => setLightbox(null), []);
 
@@ -87,150 +73,49 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
               </div>
 
               <div className="space-y-3">
-                <div className="relative aspect-4/3 rounded-card overflow-hidden shadow-warm group bg-cream">
-                  {(() => {
-                    const currentIndex = getActiveIndex(section);
-                    const totalMedia = section.media.length;
-
-                    const showPrevious = () => {
-                      if (totalMedia <= 1) return;
-                      setIndex(section.id, (currentIndex - 1 + totalMedia) % totalMedia);
-                    };
-
-                    const showNext = () => {
-                      if (totalMedia <= 1) return;
-                      setIndex(section.id, (currentIndex + 1) % totalMedia);
-                    };
-
-                    if (totalMedia === 0) {
-                      return (
-                        <div className="absolute inset-0 flex items-center justify-center text-stone">
-                          {t('empty')}
-                        </div>
-                      );
-                    }
-
-                    const activeMedia = section.media[currentIndex];
-
-                    return (
-                      <>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setLightbox({ sectionId: section.id, index: currentIndex })
-                          }
-                          className="absolute inset-0 z-10 cursor-zoom-in"
-                          aria-label={t('controls.open', { alt: activeMedia.alt })}
-                        />
-
-                        {activeMedia.type === 'image' ? (
+                {section.media.length === 0 ? (
+                  <div className="rounded-card border border-dashed border-stone/30 bg-cream px-4 py-8 text-center text-stone">
+                    {t('empty')}
+                  </div>
+                ) : (
+                  <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory">
+                    {section.media.map((item, mediaIndex) => (
+                      <button
+                        key={`${section.id}-media-${mediaIndex}`}
+                        type="button"
+                        onClick={() =>
+                          setLightbox({ sectionId: section.id, index: mediaIndex })
+                        }
+                        className="group relative h-36 w-52 shrink-0 snap-start overflow-hidden rounded-card shadow-warm bg-cream cursor-zoom-in"
+                        aria-label={t('controls.open', { alt: item.alt })}
+                      >
+                        {item.type === 'image' ? (
                           <Image
-                            src={activeMedia.src}
-                            alt={activeMedia.alt}
+                            src={item.src}
+                            alt={`${item.alt} ${mediaIndex + 1}`}
                             fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            sizes="(max-width: 768px) 100vw, 70vw"
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            sizes="208px"
                           />
                         ) : (
                           <video
-                            src={activeMedia.src}
+                            src={item.src}
                             className="h-full w-full object-cover"
-                            controls
                             preload="metadata"
                             playsInline
                             muted
                           />
                         )}
-
-                        <div className="absolute inset-0 z-20 pointer-events-none flex items-center justify-center bg-oak/0 transition-all duration-300 group-hover:bg-oak/30">
-                          {activeMedia.type === 'video' ? (
-                            <Play className="size-8 text-cream" />
+                        <div className="absolute inset-0 bg-oak/0 group-hover:bg-oak/30 transition-colors" />
+                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                          {item.type === 'video' ? (
+                            <Play className="size-7 text-cream drop-shadow-lg" />
                           ) : (
-                            <ZoomIn className="size-8 text-cream opacity-0 group-hover:opacity-100 transition-opacity duration-200 drop-shadow-lg" />
+                            <ZoomIn className="size-7 text-cream opacity-0 group-hover:opacity-100 transition-opacity drop-shadow-lg" />
                           )}
                         </div>
-
-                        <div className="absolute bottom-0 left-0 right-0 z-20 pointer-events-none bg-linear-to-t from-oak/80 to-transparent p-3">
-                          <p className="text-cream text-sm font-medium">
-                            {activeMedia.caption}
-                          </p>
-                        </div>
-
-                        {totalMedia > 1 && (
-                          <>
-                            <button
-                              type="button"
-                              onClick={showPrevious}
-                              className="absolute left-3 top-1/2 z-30 -translate-y-1/2 rounded-full bg-oak/55 p-2 text-cream transition-colors hover:bg-oak/75"
-                              aria-label={t('controls.previous')}
-                            >
-                              <ChevronLeft className="size-5" />
-                            </button>
-                            <button
-                              type="button"
-                              onClick={showNext}
-                              className="absolute right-3 top-1/2 z-30 -translate-y-1/2 rounded-full bg-oak/55 p-2 text-cream transition-colors hover:bg-oak/75"
-                              aria-label={t('controls.next')}
-                            >
-                              <ChevronRight className="size-5" />
-                            </button>
-
-                            <div className="absolute bottom-4 left-1/2 z-30 flex -translate-x-1/2 items-center gap-2">
-                              {section.media.map((_, mediaIndex) => (
-                                <button
-                                  key={`${section.id}-dot-${mediaIndex}`}
-                                  type="button"
-                                  onClick={() => setIndex(section.id, mediaIndex)}
-                                  className={cn(
-                                    'size-2.5 rounded-full transition-colors',
-                                    mediaIndex === currentIndex
-                                      ? 'bg-cream'
-                                      : 'bg-cream/45',
-                                  )}
-                                  aria-label={t('controls.show', { index: mediaIndex + 1 })}
-                                />
-                              ))}
-                            </div>
-                          </>
-                        )}
-                      </>
-                    );
-                  })()}
-                </div>
-
-                {section.media.length > 1 && (
-                  <div className="grid grid-cols-4 gap-2 sm:grid-cols-6">
-                    {section.media.map((item, mediaIndex) => {
-                      const isActive = mediaIndex === getActiveIndex(section);
-                      return (
-                        <button
-                          key={`${section.id}-thumb-${mediaIndex}`}
-                          type="button"
-                          onClick={() => setIndex(section.id, mediaIndex)}
-                          className={cn(
-                            'relative aspect-square overflow-hidden rounded-md border-2 transition-all',
-                            isActive
-                              ? 'border-terracotta shadow-warm'
-                              : 'border-transparent hover:border-terracotta/50',
-                          )}
-                          aria-label={t('controls.show', { index: mediaIndex + 1 })}
-                        >
-                          {item.type === 'image' ? (
-                            <Image
-                              src={item.src}
-                              alt={`${item.alt} ${mediaIndex + 1}`}
-                              fill
-                              className="object-cover"
-                              sizes="120px"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 bg-oak/80 flex items-center justify-center">
-                              <Play className="size-6 text-cream" />
-                            </div>
-                          )}
-                        </button>
-                      );
-                    })}
+                      </button>
+                    ))}
                   </div>
                 )}
               </div>
