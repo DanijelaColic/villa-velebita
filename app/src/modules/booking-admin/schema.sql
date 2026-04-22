@@ -67,7 +67,8 @@ alter table gallery_items
       'first-floor',
       'attic',
       'gazebo',
-      'nature'
+      'nature',
+      'tastes-of-lika'
     )
   );
 

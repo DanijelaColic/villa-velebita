@@ -1,10 +1,8 @@
 import { getGalleryItems, getPublicMediaUrl } from '@/lib/gallery';
 import { GALLERY_CATEGORIES, getGalleryCategoryLabel } from '@/lib/gallery-categories';
-import { getTranslations } from 'next-intl/server';
 import { GalleryClient } from './GalleryClient';
 
 export async function Gallery() {
-  const t = await getTranslations('gallerySection');
   const items = await getGalleryItems();
   const sections = GALLERY_CATEGORIES.map((category) => {
     const mediaInCategory = items.filter((item) => item.category_key === category.key);

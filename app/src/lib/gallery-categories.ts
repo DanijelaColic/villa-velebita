@@ -5,6 +5,7 @@ export const GALLERY_CATEGORIES = [
   { key: 'attic', label: 'Potkrovlje – odmor i pogledi' },
   { key: 'gazebo', label: 'Sjenica – druženje na otvorenom' },
   { key: 'nature', label: 'Priroda i panoramski pogledi' },
+  { key: 'tastes-of-lika', label: 'Okusi Like' },
 ] as const;
 
 export type GalleryCategoryKey = (typeof GALLERY_CATEGORIES)[number]['key'];
