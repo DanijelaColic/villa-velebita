@@ -11,7 +11,7 @@ export async function Gallery() {
     return {
       id: category.key,
       title: getGalleryCategoryLabel(category.key),
-      description: mediaInCategory.length > 0 ? t('heading.subtitle') : t('empty'),
+      description: '',
       media: mediaInCategory.map((item, index) => ({
         src: getPublicMediaUrl(item.storage_path),
         type: item.media_type,
