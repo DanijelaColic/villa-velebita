@@ -96,7 +96,7 @@
         "description": "Prüfen Sie Ihre Buchungsdetails und Zahlungsanweisungen für Villa Velebita.",
         "openGraph": {
           "title": "Buchungsübersicht | Villa Velebita",
-          "description": "Reservierungsdetails und Informationen zur Anzahlung ansehen.",
+        "description": "Reservierungsdetails und Informationen zur vollständigen Zahlung ansehen.",
           "imageAlt": "Villa Velebita - Buchungsübersicht"
         }
       }
@@ -169,7 +169,7 @@
       "minStayValue": "{count} Nächte",
       "discountLabel": "Rabatt ab 7 Nächten:",
       "discountValue": "10 % Rabatt — kontaktieren Sie uns für ein Angebot",
-      "paymentNote": "Nach Auswahl der Daten werden Anzahlung und Restbetrag angezeigt. Die Zahlungsdaten sehen Sie erst nach dem Absenden der Anfrage."
+      "paymentNote": "Nach Auswahl der Daten wird der gesamte Zahlungsbetrag angezeigt. Die Zahlungsdaten sehen Sie erst nach dem Absenden der Anfrage."
     }
   },
   "contact": {
@@ -234,11 +234,11 @@
       },
       "included": {
         "question": "Was ist im Mietpreis enthalten?",
-        "answer": "Im Preis enthalten sind Bettwäsche und Handtücher, Endreinigung, grundlegende Pflegeprodukte, kostenloses WLAN, privates Parken, die Nutzung des Außenjacuzzis, Grill und Außenküche."
+        "answer": "Im Preis enthalten sind Bettwäsche und Handtücher, grundlegende Pflegeprodukte, kostenloses WLAN, privates Parken, die Nutzung des Außenjacuzzis, Grill und Außenküche. Der Reinigungsservice wird zusätzlich mit 100 EUR pro Buchung berechnet."
       },
       "minStay": {
         "question": "Wie lange ist der Mindestaufenthalt?",
-        "answer": "Der Mindestaufenthalt beträgt 3 Nächte. Für längere Reservierungen gelten bessere Konditionen, und ab 7 Nächten gibt es einen zusätzlichen Rabatt."
+        "answer": "Der Mindestaufenthalt beträgt 2 Nächte. Für längere Reservierungen gelten bessere Konditionen, und ab 7 Nächten gibt es einen zusätzlichen Rabatt."
       },
       "pets": {
         "question": "Sind Haustiere erlaubt?",
@@ -254,11 +254,11 @@
       },
       "payment": {
         "question": "Kann ich mit Karte bezahlen?",
-        "answer": "Die Reservierung wird durch die Zahlung einer Anzahlung von {depositPercent}% per Banküberweisung auf IBAN {iban} bestätigt (Empfänger {recipientName}, {bankName}). Für internationale Überweisungen ist der BIC/SWIFT {bic} erforderlich. Die restlichen {balancePercent}% müssen spätestens {balanceDays} Tage vor der Anreise bezahlt werden. Kartenzahlung ist derzeit nicht verfügbar."
+        "answer": "Die Reservierung wird durch die Zahlung von 100% des Gesamtbetrags per Banküberweisung auf IBAN {iban} bestätigt (Empfänger {recipientName}, {bankName}). Für internationale Überweisungen ist der BIC/SWIFT {bic} erforderlich. Kartenzahlung ist derzeit nicht verfügbar."
       },
       "cancellation": {
         "question": "Wie lauten die Stornierungsbedingungen und wann erhalte ich die Rechnung?",
-        "answer": "Stornierungs- und Rechnungsbedingungen werden im Rahmen des Buchungsprozesses bestätigt und in der Kommunikation mit dem Gast klar erläutert. Wenn Sie die Details vorab erhalten möchten, senden Sie uns einfach eine Anfrage."
+        "answer": "Gäste können bis 5 Tage vor der geplanten Anreise kostenlos stornieren. Bei Stornierung innerhalb von 5 Tagen vor Anreise ist der volle Buchungsbetrag nicht erstattbar. Die Rechnung wird beim Check-in oder Check-out ausgestellt."
       }
     }
   },
@@ -607,7 +607,7 @@
           "pets": "Haustiere erlaubt (kleine Rassen)",
           "smoking": "Rauchen im Erdgeschoss/Pavillon",
           "checkin": "Check-in 14:00 / Check-out 11:00",
-          "cleaning": "Reinigung inklusive"
+          "cleaning": "Reinigungsservice: 100 EUR"
         }
       }
     },
@@ -647,11 +647,11 @@
       },
       "minStay": {
         "label": "Mindestaufenthalt",
-        "value": "3 Nächte"
+        "value": "2 Nächte"
       },
       "pricePerNight": {
         "label": "Preis/Nacht",
-        "value": "490 € (ganzes Haus)"
+        "value": "270 € (ganzes Haus)"
       },
       "discount": {
         "label": "Ab 7 Nächten",
@@ -660,16 +660,16 @@
     },
     "priceCard": {
       "eyebrow": "Mietpreis",
-      "note": "Ganzes Haus · bis zu 9 Gäste · 54,44 € pro Person (490/9)"
+      "note": "Ganzes Haus · bis zu 9 Gäste · 30 € pro Person (270/9)"
     },
     "discountBadge": {
       "title": "7+ Nächte buchen",
-      "note": "= 441 € / Nacht"
+      "note": "= 243 € / Nacht"
     },
-    "includedTitle": "Im Preis enthalten",
+    "includedTitle": "Inklusive und Zusatzleistungen",
     "included": {
       "linen": "Bettwäsche und Handtücher",
-      "cleaning": "Endreinigung",
+      "cleaning": "Reinigungsservice (+100 EUR)",
       "toiletries": "Shampoo, Seife, Toilettenpapier",
       "wifi": "Kostenloses WLAN",
       "parking": "Kostenlose Parkplätze",
@@ -689,7 +689,7 @@
       "checkAvailability": "Verfügbarkeit prüfen",
       "whatsapp": "Per WhatsApp schreiben"
     },
-    "disclaimer": "Alle Preise sind in Euro angegeben. Der Grundpreis beträgt 490 € pro Nacht für das gesamte Haus bis 9 Personen. Mindestaufenthalt 3 Nächte, 10 % Rabatt ab 7 Nächten."
+    "disclaimer": "Alle Preise sind in Euro angegeben. Der Grundpreis beträgt 270 € pro Nacht für das gesamte Haus, der Mindestaufenthalt beträgt 2 Nächte und der Reinigungsservice kostet 100 EUR pro Buchung. Ab 7 Nächten gilt ein Rabatt von 10 %."
   },
   "houseRulesSection": {
     "heading": {
@@ -770,15 +770,16 @@
     },
     "paymentTerms": {
       "title": "Zahlungs- und Stornobedingungen",
-      "depositLabel": "Anzahlung ({percent}%)",
-      "depositNote": "wird bei der Reservierung bezahlt.",
+      "depositLabel": "Zahlung ({percent}%)",
+      "depositNote": "wird sofort bei der Reservierung bezahlt.",
       "balanceLabel": "Restbetrag ({percent}%)",
       "balanceNote": "spätestens {days} Tage vor Anreise zu bezahlen",
-      "cancellationTitle": "Stornierung (Anzahlung)"
+      "cancellationTitle": "Stornierung"
     },
     "summary": {
       "line": "{nights, plural, one {{nights}× Nacht} other {{nights}× Nächte}} · {pricePerNight} €",
       "discount": "Rabatt für {nights}+ Nächte ({percent}%)",
+      "cleaningFee": "Reinigungsservice",
       "total": "Gesamt"
     },
     "form": {
@@ -811,14 +812,14 @@
         "checkOut": "Check-out",
         "nights": "Nächte",
         "total": "Gesamt",
-        "deposit": "Anzahlung ({percent}%)",
-        "depositNote": "wird bei der Reservierung bezahlt.",
+        "deposit": "Zahlung ({percent}%)",
+        "depositNote": "wird sofort bei der Reservierung bezahlt.",
         "balance": "Restbetrag ({percent}%)",
         "balanceNote": "spätestens {days} Tage vor Anreise zu bezahlen",
-        "cancellationTitle": "Stornierung (Anzahlung)",
+        "cancellationTitle": "Stornierung",
         "bankLabel": "Bank",
         "internationalPayments": "Auslandszahlungen",
-        "qrTitle": "Schnelle QR-Zahlung (Betrag = Anzahlung)",
+        "qrTitle": "Schnelle QR-Zahlung (Betrag = Gesamtbetrag)",
         "generatingQr": "QR-Codes werden erzeugt…",
         "hub3Title": "Kroatische Banken",
         "hub3Alt": "HUB3 PDF417-Barcode",
@@ -834,9 +835,9 @@
     },
     "policies": {
       "cancellation": {
-        "line1": "Bis 14 Tage vor Anreise - 100% Rückerstattung der Anzahlung.",
-        "line2": "7-14 Tage vor Anreise - 50% Rückerstattung der Anzahlung.",
-        "line3": "Weniger als 7 Tage vor Anreise - keine Rückerstattung der Anzahlung."
+        "line1": "Kostenlose Stornierung bis 5 Tage vor geplanter Anreise.",
+        "line2": "Bei Stornierung innerhalb von 5 Tagen vor Anreise ist der volle Buchungsbetrag nicht erstattbar.",
+        "line3": "Für Sonderfälle kontaktieren Sie uns bitte direkt."
       }
     },
     "api": {
@@ -891,7 +892,7 @@
       "checkOut": "Abreise",
       "nights": "Nächte",
       "total": "Gesamt",
-      "deposit": "Anzahlung ({percent}%)",
+      "deposit": "Zahlung ({percent}%)",
       "balance": "Restbetrag ({percent}%)"
     },
     "times": {
@@ -900,23 +901,22 @@
     },
     "balanceNotice": "Bitte zahlen Sie den Restbetrag spätestens {days} Tage vor der Anreise.",
     "payment": {
-      "title": "Anzahlung",
+      "title": "Zahlung",
       "reference": "Verwendungszweck / Referenz",
       "bank": "Bank",
       "international": "Auslandszahlungen",
       "hub3Title": "Kroatische Banken (HUB3)",
-      "hub3Alt": "HUB3-Barcode für die Anzahlung",
+      "hub3Alt": "HUB3-Barcode für die Zahlung",
       "epcTitle": "EU / SEPA (QR)",
-      "epcAlt": "SEPA-QR für die Anzahlung"
+      "epcAlt": "SEPA-QR für die Zahlung"
     }
   },
   "bookingEmail": {
     "terms": {
-      "cancellationTitle": "Stornierung (Anzahlung)",
+      "cancellationTitle": "Stornierung",
       "cancellationLines": [
-        "Bis 14 Tage vor Anreise - 100% Rückerstattung der Anzahlung.",
-        "7-14 Tage vor Anreise - 50% Rückerstattung der Anzahlung.",
-        "Weniger als 7 Tage vor Anreise - keine Rückerstattung der Anzahlung."
+        "Kostenlose Stornierung bis 5 Tage vor geplanter Anreise.",
+        "Bei Stornierung innerhalb von 5 Tagen vor Anreise ist der volle Buchungsbetrag nicht erstattbar."
       ],
       "invoiceLabel": "Rechnungen",
       "invoiceText": "Rechnungen werden beim Check-in oder Check-out ausgestellt."
@@ -932,27 +932,27 @@
       "totalLabel": "Gesamt",
       "basePrice": "Grundpreis: {price} EUR/Nacht",
       "paymentTitle": "Zahlung",
-      "depositLabel": "Anzahlung ({percent}%)",
+      "depositLabel": "Zahlung ({percent}%)",
       "balanceLabel": "Restbetrag ({percent}%)",
       "balanceNote": "spätestens {days} Tage vor Anreise (etwa {dueDate}) auf dasselbe IBAN.",
       "referenceLabel": "Referenz / Modell",
       "referenceShort": "Referenz",
       "attachmentsTitle": "Anhänge in dieser E-Mail:",
       "attachmentsShort": "Anhänge",
-      "attachmentsBody": "QR-Codes nur für die Anzahlung.",
+      "attachmentsBody": "QR-Codes für die vollständige Zahlung.",
       "hub3Banks": "kroatische Banken (HUB3)",
       "epcBanks": "Revolut, N26, Wise, SEPA",
       "questions": "Fragen?",
       "publicView": {
         "button": "Buchungsdetails und QR-Codes öffnen",
-        "hint": "Mit einem Tipp sehen Sie Aufenthaltsdaten sowie HUB3- und SEPA-QR-Codes für die Anzahlung."
+        "hint": "Mit einem Tipp sehen Sie Aufenthaltsdaten sowie HUB3- und SEPA-QR-Codes für die vollständige Zahlung."
       }
     },
     "received": {
       "subject": "Anfrage eingegangen",
       "greeting": "Guten Tag {name},",
       "intro": "Wir haben Ihre Buchungsanfrage erhalten und melden uns in Kürze mit den nächsten Schritten.",
-      "depositNote": "wird bei Bestätigung der Buchung bezahlt."
+      "depositNote": "wird bei Bestätigung der Buchung sofort bezahlt."
     },
     "confirmed": {
       "subject": "Buchung bestätigt",

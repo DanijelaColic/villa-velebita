@@ -93,7 +93,7 @@
       },
       "bookingReview": {
         "title": "Pregled rezervacije",
-        "description": "Podaci o rezervaciji i upute za uplatu depozita za Villa Velebita.",
+        "description": "Podaci o rezervaciji i upute za uplatu punog iznosa za Villa Velebita.",
         "openGraph": {
           "title": "Pregled rezervacije | Villa Velebita",
           "description": "Provjerite detalje rezervacije i podatke za uplatu.",
@@ -169,7 +169,7 @@
       "minStayValue": "{count} noći",
       "discountLabel": "Popust 7+ noći:",
       "discountValue": "10% popusta — javite se za ponudu",
-      "paymentNote": "Nakon odabira datuma prikazuju se iznosi depozita i ostatka; podatke za uplatu vidjet ćete tek nakon slanja upita."
+      "paymentNote": "Nakon odabira datuma prikazuje se ukupan iznos za uplatu; podatke za uplatu vidjet ćete tek nakon slanja upita."
     }
   },
   "contact": {
@@ -234,11 +234,11 @@
       },
       "included": {
         "question": "Što je uključeno u cijenu najma?",
-        "answer": "U cijenu su uključeni posteljina i ručnici, završno čišćenje, osnovni toaletni pribor, besplatni WiFi, privatno parkiranje, korištenje vanjskog jacuzzija, roštilj i pečenjara."
+        "answer": "U cijenu su uključeni posteljina i ručnici, osnovni toaletni pribor, besplatni WiFi, privatno parkiranje, korištenje vanjskog jacuzzija, roštilj i pečenjara. Usluga čišćenja obračunava se dodatno 100 EUR po rezervaciji."
       },
       "minStay": {
         "question": "Kakav je minimalni boravak?",
-        "answer": "Minimalni boravak je 3 noći. Za duže rezervacije dostupni su povoljniji uvjeti, a za 7 ili više noći odobravamo i dodatni popust."
+        "answer": "Minimalni boravak je 2 noći. Za duže rezervacije dostupni su povoljniji uvjeti, a za 7 ili više noći odobravamo i dodatni popust."
       },
       "pets": {
         "question": "Prihvaćate li kućne ljubimce?",
@@ -254,11 +254,11 @@
       },
       "payment": {
         "question": "Može li se platiti karticom?",
-        "answer": "Rezervacija se potvrđuje uplatom {depositPercent}% depozita bankovnom transakcijom na IBAN {iban} (primatelj {recipientName}, {bankName}). Za uplate iz inozemstva potreban je BIC/SWIFT: {bic}. Preostalih {balancePercent}% ukupne cijene potrebno je uplatiti najkasnije {balanceDays} dana prije dolaska. Kartično plaćanje trenutno nije dostupno."
+        "answer": "Rezervacija se potvrđuje uplatom 100% ukupnog iznosa bankovnom transakcijom na IBAN {iban} (primatelj {recipientName}, {bankName}). Za uplate iz inozemstva potreban je BIC/SWIFT: {bic}. Kartično plaćanje trenutno nije dostupno."
       },
       "cancellation": {
         "question": "Kako glase uvjeti otkazivanja i kada dobivam račun?",
-        "answer": "Uvjeti otkazivanja i izdavanja računa potvrđuju se prilikom rezervacije i jasno su navedeni u komunikaciji s gostom. Ako trebate detaljno pojašnjenje prije rezervacije, pošaljite nam upit i poslat ćemo sve informacije unaprijed."
+        "answer": "Gostima omogućujemo besplatno otkazivanje do 5 dana prije planiranog dolaska. U slučaju otkazivanja unutar 5 dana prije dolaska, zadržava se puni iznos rezervacije. Račun izdamo prilikom dolaska ili odlaska."
       }
     }
   },
@@ -625,7 +625,7 @@
           "pets": "Kućni ljubimci (male pasmine)",
           "smoking": "Pušenje u prizemlju/sjenici",
           "checkin": "Check-in 14:00 / Check-out 11:00",
-          "cleaning": "Čišćenje uključeno u cijenu"
+          "cleaning": "Usluga čišćenja: 100 EUR"
         }
       }
     },
@@ -665,11 +665,11 @@
       },
       "minStay": {
         "label": "Min. boravak",
-        "value": "3 noći"
+        "value": "2 noći"
       },
       "pricePerNight": {
         "label": "Cijena/noć",
-        "value": "490 € (cijela kuća)"
+        "value": "270 € (cijela kuća)"
       },
       "discount": {
         "label": "Popust 7+ noći",
@@ -678,16 +678,16 @@
     },
     "priceCard": {
       "eyebrow": "Cijena najma",
-      "note": "Cijela kuća · do 9 osoba · 54,44 € po osobi (490/9)"
+      "note": "Cijela kuća · do 9 osoba · 30 € po osobi (270/9)"
     },
     "discountBadge": {
       "title": "Rezerviraj 7+ noći",
-      "note": "= 441 € / noć"
+      "note": "= 243 € / noć"
     },
-    "includedTitle": "Uključeno u cijenu",
+    "includedTitle": "Uključeno i dodatne usluge",
     "included": {
       "linen": "Posteljina i ručnici",
-      "cleaning": "Završno čišćenje",
+      "cleaning": "Usluga čišćenja (+100 EUR)",
       "toiletries": "Šamponi, sapun, WC papir",
       "wifi": "Besplatni WiFi",
       "parking": "Besplatno parkiranje",
@@ -707,7 +707,7 @@
       "checkAvailability": "Provjerite dostupnost",
       "whatsapp": "Pišite na WhatsApp"
     },
-    "disclaimer": "Cijene su iskazane u eurima. Osnovna cijena je 490 € po noći za cijelu kuću do 9 osoba. Minimalni boravak je 3 noći, a za 7 i više noći odobravamo 10% popusta."
+    "disclaimer": "Cijene su iskazane u eurima. Osnovna cijena je 270 € po noći za cijelu kuću, minimalni boravak je 2 noći, a usluga čišćenja iznosi 100 EUR po rezervaciji. Za 7 i više noći odobravamo 10% popusta."
   },
   "houseRulesSection": {
     "heading": {
@@ -788,15 +788,16 @@
     },
     "paymentTerms": {
       "title": "Uvjeti plaćanja i otkazivanja",
-      "depositLabel": "Depozit ({percent}%)",
-      "depositNote": "plaća se pri samoj rezervaciji.",
+      "depositLabel": "Uplata ({percent}%)",
+      "depositNote": "plaća se odmah pri rezervaciji.",
       "balanceLabel": "Ostatak ({percent}%)",
       "balanceNote": "plaća se najkasnije {days} dana prije dolaska",
-      "cancellationTitle": "Otkazivanje (depozit)"
+      "cancellationTitle": "Otkazivanje"
     },
     "summary": {
       "line": "{nights, plural, one {{nights}× noć} few {{nights}× noći} other {{nights}× noći}} · {pricePerNight} €",
       "discount": "Popust {nights}+ noći ({percent}%)",
+      "cleaningFee": "Usluga čišćenja",
       "total": "Ukupno"
     },
     "form": {
@@ -829,14 +830,14 @@
         "checkOut": "Odlazak",
         "nights": "Noćenja",
         "total": "Ukupno",
-        "deposit": "Depozit ({percent}%)",
-        "depositNote": "plaća se pri samoj rezervaciji.",
+        "deposit": "Uplata ({percent}%)",
+        "depositNote": "plaća se odmah pri rezervaciji.",
         "balance": "Ostatak ({percent}%)",
         "balanceNote": "plaća se najkasnije {days} dana prije dolaska",
-        "cancellationTitle": "Otkazivanje (depozit)",
+        "cancellationTitle": "Otkazivanje",
         "bankLabel": "Banka",
         "internationalPayments": "uplate iz inozemstva",
-        "qrTitle": "Brzo plaćanje QR kodom (iznos = depozit)",
+        "qrTitle": "Brzo plaćanje QR kodom (iznos = ukupno)",
         "generatingQr": "Generiram QR kodove…",
         "hub3Title": "Hrvatske banke",
         "hub3Alt": "HUB3 PDF417 barkod",
@@ -852,9 +853,9 @@
     },
     "policies": {
       "cancellation": {
-        "line1": "Do 14 dana prije dolaska — povrat 100% uplaćenog depozita.",
-        "line2": "7–14 dana prije dolaska — povrat 50% depozita.",
-        "line3": "Manje od 7 dana prije dolaska — depozit se ne vraća."
+        "line1": "Besplatno otkazivanje do 5 dana prije planiranog dolaska.",
+        "line2": "U slučaju otkazivanja unutar 5 dana prije dolaska, zadržava se puni iznos rezervacije.",
+        "line3": "Za detalje i posebne slučajeve javite nam se direktno."
       }
     },
     "api": {
@@ -909,7 +910,7 @@
       "checkOut": "Odlazak",
       "nights": "Noćenja",
       "total": "Ukupno",
-      "deposit": "Depozit ({percent}%)",
+      "deposit": "Uplata ({percent}%)",
       "balance": "Ostatak ({percent}%)"
     },
     "times": {
@@ -918,23 +919,22 @@
     },
     "balanceNotice": "Ostatak platite najkasnije {days} dana prije dolaska.",
     "payment": {
-      "title": "Plaćanje depozita",
+      "title": "Plaćanje",
       "reference": "Model / poziv na broj",
       "bank": "Banka",
       "international": "uplate iz inozemstva",
       "hub3Title": "Hrvatske banke (HUB3)",
-      "hub3Alt": "HUB3 barkod za uplatu depozita",
+      "hub3Alt": "HUB3 barkod za uplatu",
       "epcTitle": "EU / SEPA (QR)",
-      "epcAlt": "SEPA QR za uplatu depozita"
+      "epcAlt": "SEPA QR za uplatu"
     }
   },
   "bookingEmail": {
     "terms": {
-      "cancellationTitle": "Otkazivanje (depozit)",
+      "cancellationTitle": "Otkazivanje",
       "cancellationLines": [
-        "Do 14 dana prije dolaska — povrat 100% uplaćenog depozita.",
-        "7–14 dana prije dolaska — povrat 50% depozita.",
-        "Manje od 7 dana prije dolaska — depozit se ne vraća."
+        "Besplatno otkazivanje do 5 dana prije planiranog dolaska.",
+        "U slučaju otkazivanja unutar 5 dana prije dolaska, zadržava se puni iznos rezervacije."
       ],
       "invoiceLabel": "Računi",
       "invoiceText": "Računi se izdaju prilikom dolaska ili odlaska gostiju."
@@ -950,34 +950,34 @@
       "totalLabel": "Ukupno",
       "basePrice": "Osnovna cijena: {price} EUR/noć",
       "paymentTitle": "Plaćanje",
-      "depositLabel": "Depozit ({percent}%)",
+      "depositLabel": "Uplata ({percent}%)",
       "balanceLabel": "Ostatak ({percent}%)",
       "balanceNote": "najkasnije {days} dana prije dolaska (rok oko {dueDate}), na isti IBAN.",
       "referenceLabel": "Poziv na broj / model",
       "referenceShort": "Poziv",
       "attachmentsTitle": "Privitci u ovom e-mailu:",
       "attachmentsShort": "Privitci",
-      "attachmentsBody": "QR kodovi samo za depozit.",
+      "attachmentsBody": "QR kodovi za puni iznos uplate.",
       "hub3Banks": "hrvatske banke (HUB3)",
       "epcBanks": "Revolut, N26, Wise, SEPA",
       "questions": "Za pitanja:",
       "publicView": {
         "button": "Otvori rezervaciju i QR kodove",
-        "hint": "Jednim dodirom prikazujete sve podatke o boravku te HUB3 i SEPA QR za uplatu depozita."
+        "hint": "Jednim dodirom prikazujete sve podatke o boravku te HUB3 i SEPA QR za uplatu punog iznosa."
       }
     },
     "received": {
       "subject": "Upit zaprimljen",
       "greeting": "Poštovani {name},",
       "intro": "Zaprimili smo vaš upit za rezervaciju. Javit ćemo vam se u najkraćem roku s odgovorom i sljedećim koracima.",
-      "depositNote": "plaća se pri potvrdi rezervacije."
+      "depositNote": "plaća se odmah pri potvrdi rezervacije."
     },
     "confirmed": {
       "subject": "Rezervacija potvrđena",
       "badge": "Rezervacija je potvrđena",
       "greeting": "Poštovani {name},",
       "intro": "Radujemo se vašem dolasku. U nastavku su podaci o boravku i plaćanju.",
-      "depositNote": "ako još nije plaćen, molimo uplatite što prije."
+      "depositNote": "ako još nije plaćeno, molimo uplatite što prije."
     },
     "owner": {
       "subject": "Nova rezervacija",

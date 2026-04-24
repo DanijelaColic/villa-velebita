@@ -42,7 +42,8 @@ function resolveRecipient(actualTo: string): string {
 
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
 const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
-const BASE_PRICE_PER_NIGHT = apartments[0]?.priceOffSeason ?? 490;
+const HAS_BALANCE_PAYMENT = BALANCE_PCT_DISPLAY > 0;
+const BASE_PRICE_PER_NIGHT = apartments[0]?.priceOffSeason ?? 270;
 
 /** Osnovna zaštita od HTML u korisničkim poljima u predlošcima. */
 function esc(s: string): string {
@@ -319,7 +320,7 @@ function guestReceivedHtml(d: FullData, messages: Awaited<ReturnType<typeof getB
             fill(messages.shared.depositLabel, { percent: DEPOSIT_PCT_DISPLAY }),
           )}:</strong> ${d.deposit} € — ${esc(messages.received.depositNote)}
         </p>
-        <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#475569;">
+        ${HAS_BALANCE_PAYMENT ? `<p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#475569;">
           <strong style="color:#1c2b35;">${esc(
             fill(messages.shared.balanceLabel, { percent: BALANCE_PCT_DISPLAY }),
           )}:</strong> ${d.totalPrice - d.deposit} € — ${esc(
@@ -328,7 +329,7 @@ function guestReceivedHtml(d: FullData, messages: Awaited<ReturnType<typeof getB
               dueDate: balanceDueDateLabel(d.checkIn, d.locale),
             }),
           )}
-        </p>
+        </p>` : ''}
         <div style="margin:14px 0 0;padding:12px 14px;background:#ffffff;border:1px solid #fde68a;border-radius:8px;font-size:15px;line-height:1.55;word-break:break-word;">
           ${RECIPIENT_NAME ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(RECIPIENT_NAME)}</span>` : ''}
           <span style="font-family:ui-monospace,monospace;">IBAN: ${esc(RECIPIENT_IBAN)}</span>
@@ -399,7 +400,7 @@ function guestConfirmedHtml(d: FullData, messages: Awaited<ReturnType<typeof get
             fill(messages.shared.depositLabel, { percent: DEPOSIT_PCT_DISPLAY }),
           )}:</strong> ${d.deposit} € — ${esc(messages.confirmed.depositNote)}
         </p>
-        <p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#475569;">
+        ${HAS_BALANCE_PAYMENT ? `<p style="margin:12px 0 0;font-size:16px;line-height:1.6;color:#475569;">
           <strong style="color:#1c2b35;">${esc(
             fill(messages.shared.balanceLabel, { percent: BALANCE_PCT_DISPLAY }),
           )}:</strong> ${d.totalPrice - d.deposit} € — ${esc(
@@ -408,7 +409,7 @@ function guestConfirmedHtml(d: FullData, messages: Awaited<ReturnType<typeof get
               dueDate: balanceDueDateLabel(d.checkIn, d.locale),
             }),
           )}
-        </p>
+        </p>` : ''}
         <div style="margin:14px 0 0;padding:12px 14px;background:#ffffff;border:1px solid #fde68a;border-radius:8px;font-size:15px;word-break:break-word;line-height:1.55;">
           ${RECIPIENT_NAME ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(RECIPIENT_NAME)}</span>` : ''}
           <span style="font-family:ui-monospace,monospace;">IBAN: ${esc(RECIPIENT_IBAN)}</span>
@@ -452,11 +453,11 @@ function ownerNewBookingHtml(d: FullData, messages: Awaited<ReturnType<typeof ge
       <p style="margin:10px 0;font-size:15px;color:#475569;">${esc(
         fill(messages.shared.depositLabel, { percent: DEPOSIT_PCT_DISPLAY }),
       )}: ${d.deposit} €</p>
-      <p style="margin:10px 0;font-size:15px;color:#475569;">${esc(
+      ${HAS_BALANCE_PAYMENT ? `<p style="margin:10px 0;font-size:15px;color:#475569;">${esc(
         fill(messages.shared.balanceLabel, { percent: BALANCE_PCT_DISPLAY }),
       )}: ${d.totalPrice - d.deposit} € · ${esc(
         fill(messages.owner.balanceDeadline, { days: BALANCE_DAYS_BEFORE_CHECK_IN }),
-      )}</p>
+      )}</p>` : ''}
       ${RECIPIENT_IBAN ? `<p style="margin:10px 0;font-size:14px;font-family:ui-monospace,monospace;word-break:break-all;color:#334155;">IBAN: ${esc(RECIPIENT_IBAN)}</p>` : ''}
       ${RECIPIENT_BIC ? `<p style="margin:10px 0;font-size:14px;color:#475569;">BIC: ${esc(RECIPIENT_BIC)} (${esc(RECIPIENT_BANK_NAME)})</p>` : ''}
     </div>`;

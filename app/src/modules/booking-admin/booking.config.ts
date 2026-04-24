@@ -26,9 +26,8 @@ export const RECIPIENT_BANK_NAME =
 
 /** Uvjeti otkazivanja — depozit (HR, jedan izvor za web + FAQ) */
 export const CANCELLATION_POLICY_LINES_HR = [
-  'Do 14 dana prije dolaska — povrat 100% uplaćenog depozita.',
-  '7–14 dana prije dolaska — povrat 50% depozita.',
-  'Manje od 7 dana prije dolaska — depozit se ne vraća.',
+  'Besplatno otkazivanje do 5 dana prije planiranog dolaska.',
+  'U slučaju otkazivanja unutar 5 dana prije dolaska, zadržava se puni iznos rezervacije.',
 ] as const;
 
 export const INVOICE_POLICY_HR =
@@ -40,30 +39,32 @@ export const BOOKING_VILLA_LONG_DESCRIPTION_HR =
 
 /** Isti smisao za gostiju e-mail (EN) */
 export const CANCELLATION_POLICY_LINES_EN = [
-  'Up to 14 days before arrival — 100% refund of the deposit paid.',
-  '7–14 days before arrival — 50% of the deposit refunded.',
-  'Less than 7 days before arrival — deposit is non-refundable.',
+  'Free cancellation up to 5 days before the planned arrival date.',
+  'For cancellations made within 5 days before arrival, the full booking amount is non-refundable.',
 ] as const;
 
 export const INVOICE_POLICY_EN =
   'Invoices are issued at guest check-in or check-out.';
 
 // ── Poslovni uvjeti ───────────────────────────────────────────────
-/** 30% depozit pri rezervaciji */
-export const DEPOSIT_PERCENT = 0.3;
+/** 100% uplata pri rezervaciji (nema odgođenog ostatka) */
+export const DEPOSIT_PERCENT = 1;
 
 /** Ostatak (70% = ukupno − depozit) — uplatiti najkasnije ovoliko dana prije dolaska */
 export const BALANCE_DAYS_BEFORE_CHECK_IN = 3;
 
-/** Minimalni boravak: 3 noći */
-export const MIN_NIGHTS = 3;
+/** Minimalni boravak: 2 noći */
+export const MIN_NIGHTS = 2;
+
+/** Fiksna naknada za završno čišćenje */
+export const CLEANING_FEE = 100;
 
 /** Dug boravak: od 7 noći odobrava se 10% popusta na ukupan iznos */
 export const LONG_STAY_DISCOUNT_NIGHTS = 7;
 export const LONG_STAY_DISCOUNT_RATE = 0.1;
 
 /**
- * Visoka sezona: prazno jer je cijena ista cijele godine (490 €/noć flat rate).
+ * Visoka sezona: prazno jer je cijena ista cijele godine (270 €/noć flat rate).
  * Za sezonske razlike dodaj npr. [7, 8].
  */
 export const HIGH_SEASON_MONTHS: number[] = [];
@@ -95,8 +96,8 @@ export const apartments: Apartment[] = [
     view: false,
     balcony: false,
     floors: 3,
-    priceOffSeason: 490,
-    priceHighSeason: 490,
+    priceOffSeason: 270,
+    priceHighSeason: 270,
     fullyBooked: false,
     amenities: [
       'Besplatni WiFi',

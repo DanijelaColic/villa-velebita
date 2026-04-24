@@ -96,7 +96,7 @@
         "description": "Controlla i dettagli della prenotazione e le istruzioni di pagamento per Villa Velebita.",
         "openGraph": {
           "title": "Riepilogo Prenotazione | Villa Velebita",
-          "description": "Controlla i dettagli della prenotazione e le informazioni per il deposito.",
+        "description": "Controlla i dettagli della prenotazione e le informazioni per il pagamento completo.",
           "imageAlt": "Villa Velebita - riepilogo prenotazione"
         }
       }
@@ -169,7 +169,7 @@
       "minStayValue": "{count} notti",
       "discountLabel": "Sconto per 7+ notti:",
       "discountValue": "10% di sconto — contattaci per un'offerta",
-      "paymentNote": "Dopo aver selezionato le date vedrai deposito e saldo residuo. I dati di pagamento saranno visibili solo dopo l'invio della richiesta."
+      "paymentNote": "Dopo aver selezionato le date vedrai l'importo totale da pagare. I dati di pagamento saranno visibili solo dopo l'invio della richiesta."
     }
   },
   "contact": {
@@ -234,11 +234,11 @@
       },
       "included": {
         "question": "Cosa è incluso nel prezzo?",
-        "answer": "Il prezzo include biancheria da letto e asciugamani, pulizia finale, prodotti base da bagno, WiFi gratuito, parcheggio privato, uso della jacuzzi esterna, barbecue e area cucina esterna."
+        "answer": "Il prezzo include biancheria da letto e asciugamani, prodotti base da bagno, WiFi gratuito, parcheggio privato, uso della jacuzzi esterna, barbecue e area cucina esterna. Il servizio di pulizia viene addebitato separatamente a 100 EUR per prenotazione."
       },
       "minStay": {
         "question": "Qual è il soggiorno minimo?",
-        "answer": "Il soggiorno minimo è di 3 notti. Per prenotazioni più lunghe sono disponibili condizioni più vantaggiose e per 7 o più notti offriamo uno sconto aggiuntivo."
+        "answer": "Il soggiorno minimo è di 2 notti. Per prenotazioni più lunghe sono disponibili condizioni più vantaggiose e per 7 o più notti offriamo uno sconto aggiuntivo."
       },
       "pets": {
         "question": "Accettate animali domestici?",
@@ -254,11 +254,11 @@
       },
       "payment": {
         "question": "È possibile pagare con carta?",
-        "answer": "La prenotazione viene confermata con il pagamento di un deposito del {depositPercent}% tramite bonifico bancario all'IBAN {iban} (beneficiario {recipientName}, {bankName}). Per i pagamenti internazionali è richiesto il BIC/SWIFT {bic}. Il restante {balancePercent}% deve essere versato entro {balanceDays} giorni dall'arrivo. Il pagamento con carta non è attualmente disponibile."
+        "answer": "La prenotazione viene confermata con il pagamento del 100% dell'importo totale tramite bonifico bancario all'IBAN {iban} (beneficiario {recipientName}, {bankName}). Per i pagamenti internazionali è richiesto il BIC/SWIFT {bic}. Il pagamento con carta non è attualmente disponibile."
       },
       "cancellation": {
         "question": "Quali sono le condizioni di cancellazione e quando ricevo la fattura?",
-        "answer": "Le condizioni di cancellazione e fatturazione vengono confermate durante il processo di prenotazione e indicate chiaramente nella comunicazione con l'ospite. Se desideri ricevere i dettagli in anticipo, inviaci una richiesta."
+        "answer": "Gli ospiti possono cancellare gratuitamente fino a 5 giorni prima dell'arrivo previsto. In caso di cancellazione entro 5 giorni dall'arrivo, l'intero importo della prenotazione non è rimborsabile. La fattura viene emessa al check-in o al check-out."
       }
     }
   },
@@ -607,7 +607,7 @@
           "pets": "Animali ammessi (piccole taglie)",
           "smoking": "Fumo consentito al piano terra/gazebo",
           "checkin": "Check-in 14:00 / Check-out 11:00",
-          "cleaning": "Pulizia inclusa"
+          "cleaning": "Servizio di pulizia: 100 EUR"
         }
       }
     },
@@ -647,11 +647,11 @@
       },
       "minStay": {
         "label": "Soggiorno min.",
-        "value": "3 notti"
+        "value": "2 notti"
       },
       "pricePerNight": {
         "label": "Prezzo/notte",
-        "value": "490 € (intera casa)"
+        "value": "270 € (intera casa)"
       },
       "discount": {
         "label": "Sconto 7+ notti",
@@ -660,16 +660,16 @@
     },
     "priceCard": {
       "eyebrow": "Tariffa",
-      "note": "Intera casa · fino a 9 ospiti · 54,44 € a persona (490/9)"
+      "note": "Intera casa · fino a 9 ospiti · 30 € a persona (270/9)"
     },
     "discountBadge": {
       "title": "Prenota 7+ notti",
-      "note": "= 441 € / notte"
+      "note": "= 243 € / notte"
     },
-    "includedTitle": "Incluso nel prezzo",
+    "includedTitle": "Incluso e servizi aggiuntivi",
     "included": {
       "linen": "Biancheria da letto e asciugamani",
-      "cleaning": "Pulizia finale",
+      "cleaning": "Servizio di pulizia (+100 EUR)",
       "toiletries": "Shampoo, sapone, carta igienica",
       "wifi": "WiFi gratuito",
       "parking": "Parcheggio gratuito",
@@ -689,7 +689,7 @@
       "checkAvailability": "Controlla disponibilità",
       "whatsapp": "Scrivi su WhatsApp"
     },
-    "disclaimer": "I prezzi sono espressi in euro. Il prezzo base è 490 € a notte per l'intera casa fino a 9 persone. Soggiorno minimo 3 notti, con sconto del 10% per 7 o più notti."
+    "disclaimer": "I prezzi sono espressi in euro. La tariffa base è 270 € a notte per l'intera casa, il soggiorno minimo è di 2 notti e il servizio di pulizia è 100 EUR per prenotazione. Per soggiorni di 7 o più notti applichiamo uno sconto del 10%."
   },
   "houseRulesSection": {
     "heading": {
@@ -770,15 +770,16 @@
     },
     "paymentTerms": {
       "title": "Condizioni di pagamento e cancellazione",
-      "depositLabel": "Deposito ({percent}%)",
-      "depositNote": "si paga al momento della prenotazione.",
+      "depositLabel": "Pagamento ({percent}%)",
+      "depositNote": "si paga subito al momento della prenotazione.",
       "balanceLabel": "Saldo ({percent}%)",
       "balanceNote": "da pagare entro {days} giorni prima dell'arrivo",
-      "cancellationTitle": "Cancellazione (deposito)"
+      "cancellationTitle": "Cancellazione"
     },
     "summary": {
       "line": "{nights, plural, one {{nights}× notte} other {{nights}× notti}} · {pricePerNight} €",
       "discount": "Sconto per {nights}+ notti ({percent}%)",
+      "cleaningFee": "Servizio di pulizia",
       "total": "Totale"
     },
     "form": {
@@ -811,14 +812,14 @@
         "checkOut": "Check-out",
         "nights": "Notti",
         "total": "Totale",
-        "deposit": "Deposito ({percent}%)",
-        "depositNote": "si paga al momento della prenotazione.",
+        "deposit": "Pagamento ({percent}%)",
+        "depositNote": "si paga subito al momento della prenotazione.",
         "balance": "Saldo ({percent}%)",
         "balanceNote": "da pagare entro {days} giorni prima dell'arrivo",
-        "cancellationTitle": "Cancellazione (deposito)",
+        "cancellationTitle": "Cancellazione",
         "bankLabel": "Banca",
         "internationalPayments": "pagamenti internazionali",
-        "qrTitle": "Pagamento rapido con QR (importo = deposito)",
+        "qrTitle": "Pagamento rapido con QR (importo = totale)",
         "generatingQr": "Sto generando i codici QR…",
         "hub3Title": "Banche croate",
         "hub3Alt": "Barcode HUB3 PDF417",
@@ -834,9 +835,9 @@
     },
     "policies": {
       "cancellation": {
-        "line1": "Fino a 14 giorni prima dell'arrivo - rimborso del 100% del deposito.",
-        "line2": "7-14 giorni prima dell'arrivo - rimborso del 50% del deposito.",
-        "line3": "Meno di 7 giorni prima dell'arrivo - il deposito non è rimborsabile."
+        "line1": "Cancellazione gratuita fino a 5 giorni prima dell'arrivo previsto.",
+        "line2": "In caso di cancellazione entro 5 giorni dall'arrivo, l'intero importo della prenotazione non è rimborsabile.",
+        "line3": "Per casi particolari contattaci direttamente."
       }
     },
     "api": {
@@ -891,7 +892,7 @@
       "checkOut": "Partenza",
       "nights": "Notti",
       "total": "Totale",
-      "deposit": "Deposito ({percent}%)",
+      "deposit": "Pagamento ({percent}%)",
       "balance": "Saldo ({percent}%)"
     },
     "times": {
@@ -900,23 +901,22 @@
     },
     "balanceNotice": "Ti preghiamo di pagare il saldo entro {days} giorni prima dell'arrivo.",
     "payment": {
-      "title": "Pagamento del deposito",
+      "title": "Pagamento",
       "reference": "Causale / riferimento",
       "bank": "Banca",
       "international": "pagamenti internazionali",
       "hub3Title": "Banche croate (HUB3)",
-      "hub3Alt": "Codice HUB3 per il deposito",
+      "hub3Alt": "Codice HUB3 per il pagamento",
       "epcTitle": "UE / SEPA (QR)",
-      "epcAlt": "QR SEPA per il deposito"
+      "epcAlt": "QR SEPA per il pagamento"
     }
   },
   "bookingEmail": {
     "terms": {
-      "cancellationTitle": "Cancellazione (deposito)",
+      "cancellationTitle": "Cancellazione",
       "cancellationLines": [
-        "Fino a 14 giorni prima dell'arrivo - rimborso del 100% del deposito.",
-        "7-14 giorni prima dell'arrivo - rimborso del 50% del deposito.",
-        "Meno di 7 giorni prima dell'arrivo - il deposito non è rimborsabile."
+        "Cancellazione gratuita fino a 5 giorni prima dell'arrivo previsto.",
+        "In caso di cancellazione entro 5 giorni dall'arrivo, l'intero importo della prenotazione non è rimborsabile."
       ],
       "invoiceLabel": "Fatture",
       "invoiceText": "Le fatture vengono emesse al check-in o al check-out."
@@ -932,27 +932,27 @@
       "totalLabel": "Totale",
       "basePrice": "Prezzo base: {price} EUR/notte",
       "paymentTitle": "Pagamento",
-      "depositLabel": "Deposito ({percent}%)",
+      "depositLabel": "Pagamento ({percent}%)",
       "balanceLabel": "Saldo ({percent}%)",
       "balanceNote": "entro {days} giorni prima dell'arrivo (circa {dueDate}), sullo stesso IBAN.",
       "referenceLabel": "Riferimento / modello",
       "referenceShort": "Riferimento",
       "attachmentsTitle": "Allegati in questa email:",
       "attachmentsShort": "Allegati",
-      "attachmentsBody": "codici QR solo per il deposito.",
+      "attachmentsBody": "codici QR per il pagamento completo.",
       "hub3Banks": "banche croate (HUB3)",
       "epcBanks": "Revolut, N26, Wise, SEPA",
       "questions": "Domande?",
       "publicView": {
         "button": "Apri i dettagli della prenotazione e i codici QR",
-        "hint": "Con un tocco puoi vedere i dettagli del soggiorno insieme ai codici HUB3 e SEPA QR per il deposito."
+        "hint": "Con un tocco puoi vedere i dettagli del soggiorno insieme ai codici HUB3 e SEPA QR per il pagamento completo."
       }
     },
     "received": {
       "subject": "Richiesta ricevuta",
       "greeting": "Gentile {name},",
       "intro": "Abbiamo ricevuto la tua richiesta di prenotazione e ti risponderemo al più presto con i prossimi passi.",
-      "depositNote": "si paga alla conferma della prenotazione."
+      "depositNote": "si paga subito alla conferma della prenotazione."
     },
     "confirmed": {
       "subject": "Prenotazione confermata",

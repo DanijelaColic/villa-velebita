@@ -7,6 +7,7 @@ import {
   DEPOSIT_PERCENT,
   LONG_STAY_DISCOUNT_NIGHTS,
   LONG_STAY_DISCOUNT_RATE,
+  CLEANING_FEE,
 } from '../booking.config';
 import type { PriceBreakdown } from '../types';
 
@@ -169,7 +170,7 @@ export function calculatePrice(
     nights >= LONG_STAY_DISCOUNT_NIGHTS
       ? Math.round(rawTotalPrice * LONG_STAY_DISCOUNT_RATE)
       : 0;
-  const totalPrice = rawTotalPrice - discountAmount;
+  const totalPrice = rawTotalPrice - discountAmount + CLEANING_FEE;
   const deposit = Math.round(totalPrice * DEPOSIT_PERCENT);
 
   return {
@@ -178,5 +179,6 @@ export function calculatePrice(
     deposit,
     lines,
     discountAmount,
+    cleaningFee: CLEANING_FEE,
   };
 }

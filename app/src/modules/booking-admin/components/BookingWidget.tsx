@@ -20,6 +20,7 @@ import {
 
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
 const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
+const HAS_BALANCE_PAYMENT = BALANCE_PCT_DISPLAY > 0;
 
 type FormData = {
   name: string;
@@ -242,20 +243,22 @@ export default function BookingWidget({
               <span className="text-secondary font-semibold">{priceData.deposit} €</span>
               <span className="text-muted"> — {t('success.summary.depositNote')}</span>
             </p>
-            <p className="text-muted">
-              <strong className="text-text">
-                {t('success.summary.balance', { percent: BALANCE_PCT_DISPLAY })}:
-              </strong>{' '}
-              <span className="text-text font-medium">
-                {priceData.totalPrice - priceData.deposit} €
-              </span>
-              <span className="text-muted">
-                {' '}
-                — {t('success.summary.balanceNote', {
-                  days: BALANCE_DAYS_BEFORE_CHECK_IN,
-                })}
-              </span>
-            </p>
+            {HAS_BALANCE_PAYMENT && (
+              <p className="text-muted">
+                <strong className="text-text">
+                  {t('success.summary.balance', { percent: BALANCE_PCT_DISPLAY })}:
+                </strong>{' '}
+                <span className="text-text font-medium">
+                  {priceData.totalPrice - priceData.deposit} €
+                </span>
+                <span className="text-muted">
+                  {' '}
+                  — {t('success.summary.balanceNote', {
+                    days: BALANCE_DAYS_BEFORE_CHECK_IN,
+                  })}
+                </span>
+              </p>
+            )}
 
             <div className="border-t border-sand pt-3 space-y-2 text-muted text-xs leading-relaxed">
               <p>
@@ -402,20 +405,22 @@ export default function BookingWidget({
               <span className="text-secondary font-semibold">{priceData.deposit} €</span>
               <span className="text-muted"> — {t('paymentTerms.depositNote')}</span>
             </p>
-            <p>
-              <strong className="text-text">
-                {t('paymentTerms.balanceLabel', { percent: BALANCE_PCT_DISPLAY })}:
-              </strong>{' '}
-              <span className="text-text font-medium">
-                {priceData.totalPrice - priceData.deposit} €
-              </span>
-              <span className="text-muted">
-                {' '}
-                — {t('paymentTerms.balanceNote', {
-                  days: BALANCE_DAYS_BEFORE_CHECK_IN,
-                })}
-              </span>
-            </p>
+            {HAS_BALANCE_PAYMENT && (
+              <p>
+                <strong className="text-text">
+                  {t('paymentTerms.balanceLabel', { percent: BALANCE_PCT_DISPLAY })}:
+                </strong>{' '}
+                <span className="text-text font-medium">
+                  {priceData.totalPrice - priceData.deposit} €
+                </span>
+                <span className="text-muted">
+                  {' '}
+                  — {t('paymentTerms.balanceNote', {
+                    days: BALANCE_DAYS_BEFORE_CHECK_IN,
+                  })}
+                </span>
+              </p>
+            )}
             <div className="pt-1 text-xs leading-relaxed space-y-2">
               <p>
                 <strong className="text-text">{t('paymentTerms.cancellationTitle')}:</strong>
@@ -468,6 +473,12 @@ export default function BookingWidget({
                 <span className="text-forest font-medium shrink-0">- {priceData.discountAmount} €</span>
               </div>
             ) : null}
+              {priceData.cleaningFee ? (
+                <div className="flex justify-between text-sm mb-1 gap-2">
+                  <span className="text-muted">{t('summary.cleaningFee')}</span>
+                  <span className="text-text font-medium shrink-0">+ {priceData.cleaningFee} €</span>
+                </div>
+              ) : null}
 
               <div className="border-t border-sand mt-3 pt-3 flex justify-between items-center">
                 <span className="font-semibold text-text">{t('summary.total')}</span>

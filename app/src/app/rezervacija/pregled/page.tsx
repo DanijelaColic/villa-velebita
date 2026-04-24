@@ -21,6 +21,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 const DEP_PCT = Math.round(DEPOSIT_PERCENT * 100);
 const BAL_PCT = 100 - DEP_PCT;
+const HAS_BALANCE_PAYMENT = BAL_PCT > 0;
 
 type Props = {
   searchParams: Promise<{ token?: string }>;
@@ -108,13 +109,17 @@ export default async function RezervacijaPregledPage({ searchParams }: Props) {
               <span className="text-stone/80">{t('labels.deposit', { percent: DEP_PCT })}</span>
               <span className="font-semibold text-secondary">{data.deposit} €</span>
             </div>
-            <div className="flex justify-between gap-4 text-sm sm:text-base">
-              <span className="text-stone/80">{t('labels.balance', { percent: BAL_PCT })}</span>
-              <span className="font-medium text-oak">{data.balance} €</span>
-            </div>
-            <p className="text-xs text-stone/70 pt-1">
-              {t('balanceNotice', { days: BALANCE_DAYS_BEFORE_CHECK_IN })}
-            </p>
+            {HAS_BALANCE_PAYMENT && (
+              <>
+                <div className="flex justify-between gap-4 text-sm sm:text-base">
+                  <span className="text-stone/80">{t('labels.balance', { percent: BAL_PCT })}</span>
+                  <span className="font-medium text-oak">{data.balance} €</span>
+                </div>
+                <p className="text-xs text-stone/70 pt-1">
+                  {t('balanceNotice', { days: BALANCE_DAYS_BEFORE_CHECK_IN })}
+                </p>
+              </>
+            )}
           </div>
 
           {data.status !== 'cancelled' && (
