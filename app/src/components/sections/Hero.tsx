@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { getTranslations } from 'next-intl/server';
 import { ChevronDown, MapPin, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
@@ -18,7 +18,7 @@ export async function Hero() {
           quality={90}
           className="object-cover object-center"
           sizes="100vw"
-          unoptimized={false}
+          unoptimized
         />
         {/* Gradient overlay – darker at top for navbar, lighter at bottom for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-oak/70 via-oak/40 to-oak/75" />

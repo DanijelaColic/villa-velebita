@@ -9,7 +9,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { Loader2, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import clsx from 'clsx';
 import { SITE_NAME, LOGO_PATH } from 'MODULE_ROOT/booking.config';
@@ -56,6 +56,7 @@ export default function AdminLoginPage() {
               width={72}
               height={72}
               className="mx-auto mb-4 object-contain"
+              unoptimized
             />
           )}
           <h1 className="font-serif text-2xl font-semibold text-text">{SITE_NAME}</h1>

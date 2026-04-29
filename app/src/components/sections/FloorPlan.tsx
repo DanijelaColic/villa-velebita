@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { getTranslations } from 'next-intl/server';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -125,6 +125,7 @@ export async function FloorPlan() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
+                unoptimized
               />
             </div>
           </div>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import Link from 'next/link';
 import clsx from 'clsx';
 import {
@@ -365,6 +365,7 @@ export default function AdminGalleryManager({ showToast }: Props) {
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
+                    unoptimized
                   />
                 ) : (
                   <video

@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
@@ -63,6 +63,7 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="(max-width: 1024px) 100vw, 33vw"
+                  unoptimized
                 />
 
                 {totalImages > 1 && (
@@ -125,6 +126,7 @@ export function CaffeBarPlitviceClient({ images }: CaffeBarPlitviceClientProps) 
                         fill
                         className="object-cover"
                         sizes="120px"
+                        unoptimized
                       />
                     </button>
                   );

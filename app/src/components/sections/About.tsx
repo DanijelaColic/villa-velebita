@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { getTranslations } from 'next-intl/server';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -76,6 +76,7 @@ export async function About({
               fill
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 50vw"
+              unoptimized
             />
           </div>
           {/* Floating accent card */}
@@ -91,6 +92,7 @@ export async function About({
               fill
               className="object-cover"
               sizes="160px"
+              unoptimized
             />
           </div>
         </div>

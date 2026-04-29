@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { FormEvent, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Mail, MapPin, Navigation, Phone } from 'lucide-react';
@@ -115,6 +115,7 @@ export function Contact() {
                 sizes="(max-width: 1024px) 100vw, 384px"
                 priority
                 onError={() => setOwnerPhotoVisible(false)}
+                unoptimized
               />
             </div>
           )}

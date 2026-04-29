@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { useTranslations } from 'next-intl';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Play } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
@@ -96,6 +96,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
                             sizes="208px"
+                            unoptimized
                           />
                         ) : (
                           <video
@@ -171,6 +172,7 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                     className="object-contain"
                     sizes="100vw"
                     priority
+                    unoptimized
                   />
                 ) : (
                   <video

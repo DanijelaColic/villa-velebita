@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
@@ -74,6 +74,7 @@ export function Gallery() {
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 50vw, 33vw"
+                unoptimized
               />
               {/* Overlay */}
               <div className="absolute inset-0 bg-oak/0 group-hover:bg-oak/30 transition-all duration-300 flex items-center justify-center">
@@ -126,6 +127,7 @@ export function Gallery() {
               className="object-contain"
               sizes="100vw"
               priority
+              unoptimized
             />
           </div>
 

@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import { AppImage as Image } from '@/components/ui/AppImage';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
@@ -84,6 +84,7 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
                         fill
                         className="object-cover transition-transform duration-700 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 50vw"
+                        unoptimized
                       />
 
                       {totalImages > 1 && (
@@ -160,6 +161,7 @@ export function ExperiencesClient({ categories }: { categories: ExperienceCatego
                           fill
                           className="object-cover"
                           sizes="120px"
+                          unoptimized
                         />
                       </button>
                     );
