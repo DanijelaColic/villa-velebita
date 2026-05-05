@@ -709,6 +709,63 @@
     },
     "disclaimer": "Cijene su iskazane u eurima. Osnovna cijena je 270 € po noći za cijelu kuću, minimalni boravak je 2 noći, a usluga čišćenja iznosi 100 EUR po rezervaciji. Za 7 i više noći odobravamo 10% popusta."
   },
+  "villaPlitviceLanding": {
+    "heroPromo": "Uštedite do 15% rezervacijom direktno",
+    "benefits": {
+      "fastCheckIn": {
+        "title": "Brz check-in",
+        "text": "Dolazak i smještaj bez čekanja."
+      },
+      "bookDirect": {
+        "title": "Book direct i ušteda",
+        "text": "Najbolja cijena bez posredničkih provizija."
+      },
+      "comfort": {
+        "title": "Premium komfor",
+        "text": "Privatna villa blizu Plitvica."
+      },
+      "availability": {
+        "title": "Brza dostupnost",
+        "text": "Odaberite datume i rezervirajte u par minuta."
+      }
+    },
+    "pricing": {
+      "label": "Cijena",
+      "perNight": "/ noć",
+      "description": "Book direct = bez provizije i najbolja finalna cijena.",
+      "bestPriceNote": "Najbolja cijena – bez provizije",
+      "directTitle": "Book direct prednost",
+      "directItems": {
+        "noFees": "Bez OTA naknada",
+        "fastConfirm": "Brza potvrda termina",
+        "directContact": "Direktan kontakt vlasnika"
+      }
+    },
+    "gallery": {
+      "label": "Kratka galerija",
+      "title": "Pogledaj 6 fotografija"
+    },
+    "amenities": {
+      "label": "Što dobivaš",
+      "title": "Sve spremno za opušten boravak",
+      "items": {
+        "jacuzzi": "Jacuzzi",
+        "grillTerrace": "Roštilj i terasa",
+        "wifi": "Brzi WiFi",
+        "parking": "Parking uključen"
+      }
+    },
+    "finalCta": {
+      "title": "Spremni za rezervaciju termina?",
+      "description": "Provjerite dostupnost ili rezervirajte odmah preko WhatsAppa."
+    },
+    "cta": {
+      "checkAvailability": "Check availability",
+      "bookDirect": "Book direct",
+      "whatsapp": "WhatsApp"
+    },
+    "bookingIntro": "Odaberite datume i rezervirajte u nekoliko minuta"
+  },
   "houseRulesSection": {
     "heading": {
       "label": "Kućni red",

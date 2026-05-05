@@ -691,6 +691,63 @@
     },
     "disclaimer": "Alle Preise sind in Euro angegeben. Der Grundpreis beträgt 270 € pro Nacht für das gesamte Haus, der Mindestaufenthalt beträgt 2 Nächte und der Reinigungsservice kostet 100 EUR pro Buchung. Ab 7 Nächten gilt ein Rabatt von 10 %."
   },
+  "villaPlitviceLanding": {
+    "heroPromo": "Sparen Sie bis zu 15% bei Direktbuchung",
+    "benefits": {
+      "fastCheckIn": {
+        "title": "Schneller Check-in",
+        "text": "Ankommen und ohne Wartezeit einziehen."
+      },
+      "bookDirect": {
+        "title": "Direkt buchen und sparen",
+        "text": "Bester Endpreis ohne Plattformgebühren."
+      },
+      "comfort": {
+        "title": "Premium-Komfort",
+        "text": "Privates Ferienhaus in der Nähe von Plitvice."
+      },
+      "availability": {
+        "title": "Schnelle Verfügbarkeit",
+        "text": "Daten wählen und in wenigen Minuten buchen."
+      }
+    },
+    "pricing": {
+      "label": "Preis",
+      "perNight": "/ Nacht",
+      "description": "Direkt buchen heißt: keine Provision und bester Endpreis.",
+      "bestPriceNote": "Bester Preis - ohne Provision",
+      "directTitle": "Vorteile der Direktbuchung",
+      "directItems": {
+        "noFees": "Keine OTA-Gebühren",
+        "fastConfirm": "Schnelle Buchungsbestätigung",
+        "directContact": "Direkter Kontakt mit dem Eigentümer"
+      }
+    },
+    "gallery": {
+      "label": "Kurze Galerie",
+      "title": "6 Fotos ansehen"
+    },
+    "amenities": {
+      "label": "Was Sie bekommen",
+      "title": "Alles für einen entspannten Aufenthalt",
+      "items": {
+        "jacuzzi": "Jacuzzi",
+        "grillTerrace": "Grill und Terrasse",
+        "wifi": "Schnelles WLAN",
+        "parking": "Parkplatz inklusive"
+      }
+    },
+    "finalCta": {
+      "title": "Bereit, Ihre Termine zu sichern?",
+      "description": "Verfügbarkeit prüfen oder direkt per WhatsApp buchen."
+    },
+    "cta": {
+      "checkAvailability": "Verfügbarkeit prüfen",
+      "bookDirect": "Direkt buchen",
+      "whatsapp": "WhatsApp"
+    },
+    "bookingIntro": "Waehlen Sie Ihre Daten und buchen Sie in wenigen Minuten"
+  },
   "houseRulesSection": {
     "heading": {
       "label": "Hausregeln",

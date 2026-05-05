@@ -3,7 +3,11 @@ import { getTranslations } from 'next-intl/server';
 import { ChevronDown, MapPin, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 
-export async function Hero() {
+type HeroProps = {
+  promoText?: string;
+};
+
+export async function Hero({ promoText }: HeroProps = {}) {
   const t = await getTranslations('hero');
 
   return (
@@ -31,6 +35,12 @@ export async function Hero() {
           <MapPin className="size-4 text-terracotta-light" />
           <span>{t('location')}</span>
         </div>
+
+        {promoText ? (
+          <p className="mb-5 inline-flex rounded-full bg-terracotta/90 text-cream px-4 py-2 text-xs sm:text-sm font-semibold tracking-wide shadow-warm">
+            {promoText}
+          </p>
+        ) : null}
 
         {/* H1 – inline dark backdrop samo iza teksta */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.3] max-w-4xl">

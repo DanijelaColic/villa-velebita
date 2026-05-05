@@ -691,6 +691,63 @@
     },
     "disclaimer": "Prices are listed in euros. The base rate is 270 € per night for the entire house, minimum stay is 2 nights, and cleaning service is 100 EUR per booking. A 10% discount applies for stays of 7 nights or more."
   },
+  "villaPlitviceLanding": {
+    "heroPromo": "Save up to 15% by booking direct",
+    "benefits": {
+      "fastCheckIn": {
+        "title": "Fast check-in",
+        "text": "Arrive and settle in without waiting."
+      },
+      "bookDirect": {
+        "title": "Book direct and save",
+        "text": "Best final rate with no platform fees."
+      },
+      "comfort": {
+        "title": "Premium comfort",
+        "text": "Private villa stay close to Plitvice."
+      },
+      "availability": {
+        "title": "Quick availability",
+        "text": "Pick dates and book in minutes."
+      }
+    },
+    "pricing": {
+      "label": "Price",
+      "perNight": "/ night",
+      "description": "Book direct means no commission and the best final rate.",
+      "bestPriceNote": "Best price - no commission",
+      "directTitle": "Book direct advantages",
+      "directItems": {
+        "noFees": "No OTA fees",
+        "fastConfirm": "Fast booking confirmation",
+        "directContact": "Direct contact with the owner"
+      }
+    },
+    "gallery": {
+      "label": "Quick gallery",
+      "title": "See 6 photos"
+    },
+    "amenities": {
+      "label": "What you get",
+      "title": "Everything ready for a relaxing stay",
+      "items": {
+        "jacuzzi": "Jacuzzi",
+        "grillTerrace": "Grill and terrace",
+        "wifi": "Fast WiFi",
+        "parking": "Parking included"
+      }
+    },
+    "finalCta": {
+      "title": "Ready to secure your dates?",
+      "description": "Check availability now or book instantly via WhatsApp."
+    },
+    "cta": {
+      "checkAvailability": "Check availability",
+      "bookDirect": "Book direct",
+      "whatsapp": "WhatsApp"
+    },
+    "bookingIntro": "Choose your dates and book in a few minutes"
+  },
   "houseRulesSection": {
     "heading": {
       "label": "House rules",

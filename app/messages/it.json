@@ -691,6 +691,63 @@
     },
     "disclaimer": "I prezzi sono espressi in euro. La tariffa base è 270 € a notte per l'intera casa, il soggiorno minimo è di 2 notti e il servizio di pulizia è 100 EUR per prenotazione. Per soggiorni di 7 o più notti applichiamo uno sconto del 10%."
   },
+  "villaPlitviceLanding": {
+    "heroPromo": "Risparmia fino al 15% con prenotazione diretta",
+    "benefits": {
+      "fastCheckIn": {
+        "title": "Check-in rapido",
+        "text": "Arrivo e sistemazione senza attese."
+      },
+      "bookDirect": {
+        "title": "Prenota diretto e risparmia",
+        "text": "Miglior prezzo finale senza commissioni di piattaforma."
+      },
+      "comfort": {
+        "title": "Comfort premium",
+        "text": "Villa privata vicino ai Laghi di Plitvice."
+      },
+      "availability": {
+        "title": "Disponibilità immediata",
+        "text": "Scegli le date e prenota in pochi minuti."
+      }
+    },
+    "pricing": {
+      "label": "Prezzo",
+      "perNight": "/ notte",
+      "description": "Prenotazione diretta = zero commissioni e miglior prezzo finale.",
+      "bestPriceNote": "Miglior prezzo - senza commissioni",
+      "directTitle": "Vantaggi direct booking",
+      "directItems": {
+        "noFees": "Nessuna commissione OTA",
+        "fastConfirm": "Conferma rapida",
+        "directContact": "Contatto diretto con il proprietario"
+      }
+    },
+    "gallery": {
+      "label": "Galleria veloce",
+      "title": "Guarda 6 foto"
+    },
+    "amenities": {
+      "label": "Cosa ottieni",
+      "title": "Tutto pronto per il tuo soggiorno",
+      "items": {
+        "jacuzzi": "Jacuzzi",
+        "grillTerrace": "Barbecue e terrazza",
+        "wifi": "WiFi veloce",
+        "parking": "Parcheggio incluso"
+      }
+    },
+    "finalCta": {
+      "title": "Pronto a bloccare le tue date?",
+      "description": "Verifica le date o prenota subito via WhatsApp."
+    },
+    "cta": {
+      "checkAvailability": "Verifica date",
+      "bookDirect": "Prenota diretto",
+      "whatsapp": "WhatsApp"
+    },
+    "bookingIntro": "Scegli le date e prenota in pochi minuti"
+  },
   "houseRulesSection": {
     "heading": {
       "label": "Regole della casa",
