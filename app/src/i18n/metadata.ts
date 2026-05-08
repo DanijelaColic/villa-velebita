@@ -68,9 +68,12 @@ function getLocalizedPath(locale: Locale, pathname: string) {
 }
 
 function getLanguageAlternates(pathname: string) {
-  return Object.fromEntries(
-    routing.locales.map((locale) => [locale, getLocalizedPath(locale, pathname)]),
-  );
+  return {
+    ...Object.fromEntries(
+      routing.locales.map((locale) => [locale, getLocalizedPath(locale, pathname)]),
+    ),
+    'x-default': getLocalizedPath(routing.defaultLocale, pathname),
+  };
 }
 
 function getOpenGraphLocale(locale: Locale) {
@@ -150,6 +153,11 @@ type PageMetadataOptions = {
   robots?: Metadata['robots'];
 };
 
+type BreadcrumbItem = {
+  name: string;
+  pathname: string;
+};
+
 export async function getPageMetadata({
   locale,
   pathname,
@@ -173,6 +181,22 @@ export async function getPageMetadata({
       ...getSharedImageMetadata(locale, t('openGraph.imageAlt')),
     },
     ...(robots ? {robots} : {}),
+  };
+}
+
+export function getBreadcrumbStructuredData(
+  locale: Locale,
+  items: BreadcrumbItem[],
+) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: `${SITE_URL}${getLocalizedPath(locale, item.pathname)}`,
+    })),
   };
 }
 
