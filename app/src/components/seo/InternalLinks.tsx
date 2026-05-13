@@ -2,7 +2,7 @@ import { getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 
 type InternalLinksProps = {
-  currentPath: '/smjestaj' | '/lokacija' | '/cjenik' | '/faq';
+  currentPath: string;
 };
 
 const LINK_ITEMS = [
