@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Obitelj u prirodi  placeholder">
+  <rect width="960" height="540" fill="#dfe8d8"/>
+  <circle cx="380" cy="280" r="40" fill="#c45c3e" opacity="0.25"/>
+  <circle cx="460" cy="270" r="32" fill="#8b7355" opacity="0.3"/>
+  <circle cx="540" cy="285" r="36" fill="#4a6741" opacity="0.25"/>
+  <path d="M200 420 Q480 360 760 420" stroke="#6b7d62" stroke-width="4" fill="none" opacity="0.5"/>
+  <text x="480" y="100" text-anchor="middle" fill="#3d3429" font-family="Georgia,serif" font-size="22">Obiteljski odmor u prirodi</text>
+  <text x="480" y="128" text-anchor="middle" fill="#5c5348" font-family="system-ui,sans-serif" font-size="14">aetnje, mir, zajedni
+ko vrijeme</text>
+</svg>

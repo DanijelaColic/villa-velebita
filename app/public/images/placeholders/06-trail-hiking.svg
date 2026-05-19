@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Planinarska staza  placeholder">
+  <rect width="960" height="540" fill="#c8d4c4"/>
+  <path d="M0 380 Q200 300 400 340 T800 280 L960 320 L960 540 L0 540 Z" fill="#5a6b52" opacity="0.45"/>
+  <line x1="200" y1="380" x2="760" y2="260" stroke="#3d3429" stroke-width="3" stroke-dasharray="12 8" opacity="0.25"/>
+  <text x="480" y="95" text-anchor="middle" fill="#3d3429" font-family="Georgia,serif" font-size="22">Staze i vidikovci</text>
+  <text x="480" y="123" text-anchor="middle" fill="#5c5348" font-family="system-ui,sans-serif" font-size="14">aktivnosti u okolici Plitvica</text>
+</svg>

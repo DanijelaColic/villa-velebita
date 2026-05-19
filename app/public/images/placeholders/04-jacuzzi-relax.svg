@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Jacuzzi i opuatanje  placeholder">
+  <rect width="960" height="540" fill="#2d3a35"/>
+  <ellipse cx="480" cy="360" rx="200" ry="70" fill="#4a7c8c" opacity="0.5"/>
+  <ellipse cx="480" cy="350" rx="180" ry="55" fill="#6bb3c7" opacity="0.35"/>
+  <text x="480" y="160" text-anchor="middle" fill="#e8e4dc" font-family="Georgia,serif" font-size="22">Jacuzzi &amp; ve
+ernji mir</text>
+  <text x="480" y="190" text-anchor="middle" fill="#c5bdb0" font-family="system-ui,sans-serif" font-size="14">placeholder za wellness / vanjski prostor</text>
+</svg>

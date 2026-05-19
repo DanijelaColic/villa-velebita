@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Plitvi
+ka jezera  ilustrativni placeholder">
+  <defs><linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#c5d9e8"/><stop offset="100%" style="stop-color:#e8e4dc"/></linearGradient></defs>
+  <rect width="960" height="540" fill="url(#sky)"/>
+  <ellipse cx="480" cy="420" rx="380" ry="90" fill="#6b8f71" opacity="0.35"/>
+  <path d="M120 380 Q240 320 360 360 T600 340 T840 380 L840 540 L120 540 Z" fill="#4a7c8c" opacity="0.45"/>
+  <text x="480" y="100" text-anchor="middle" fill="#3d3429" font-family="Georgia,serif" font-size="22">Plitvi
+ka jezera</text>
+  <text x="480" y="130" text-anchor="middle" fill="#5c5348" font-family="system-ui,sans-serif" font-size="14">ilustrativni prikaz za SEO sadr~aj</text>
+</svg>

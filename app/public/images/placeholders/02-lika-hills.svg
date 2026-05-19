@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Li
+ki krajolik  placeholder">
+  <rect width="960" height="540" fill="#d4cfc4"/>
+  <path d="M0 400 L200 220 L400 320 L560 180 L760 280 L960 200 L960 540 L0 540 Z" fill="#8a9b7e" opacity="0.6"/>
+  <path d="M0 440 L280 300 L520 380 L720 260 L960 340 L960 540 L0 540 Z" fill="#6b7d62" opacity="0.5"/>
+  <text x="480" y="90" text-anchor="middle" fill="#3d3429" font-family="Georgia,serif" font-size="22">Lika i Velebit</text>
+  <text x="480" y="118" text-anchor="middle" fill="#5c5348" font-family="system-ui,sans-serif" font-size="14">mir, aume i otvoreni krajolik</text>
+</svg>

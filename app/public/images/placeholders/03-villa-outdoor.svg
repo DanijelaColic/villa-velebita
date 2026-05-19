@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="540" viewBox="0 0 960 540" role="img" aria-label="Vanjski prostor vile  placeholder">
+  <rect width="960" height="540" fill="#e8e4dc"/>
+  <rect x="280" y="200" width="400" height="220" rx="8" fill="#8b7355" opacity="0.35"/>
+  <rect x="320" y="240" width="120" height="100" fill="#c4a882" opacity="0.5"/>
+  <circle cx="680" cy="380" r="48" fill="#c45c3e" opacity="0.4"/>
+  <text x="480" y="120" text-anchor="middle" fill="#3d3429" font-family="Georgia,serif" font-size="22">Villa &amp; terasa</text>
+  <text x="480" y="148" text-anchor="middle" fill="#5c5348" font-family="system-ui,sans-serif" font-size="14">placeholder za fotografiju objekta</text>
+</svg>

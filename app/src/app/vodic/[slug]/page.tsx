@@ -3,11 +3,14 @@ import { notFound } from 'next/navigation';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { AppImage } from '@/components/ui/AppImage';
 import { Link } from '@/i18n/navigation';
 import { getBreadcrumbStructuredData } from '@/i18n/metadata';
 import { getGuideBySlug } from '@/modules/seo/guides/get-guide-by-slug';
 import { GUIDE_SECONDARY_CTA } from '@/modules/seo/guides/guide-cta-copy';
 import { getValidLocale } from '@/i18n/messages';
+import { getLandingPageContent } from '@/modules/seo/landing-pages/content';
+import { parseLandingPageKeyFromPath } from '@/modules/seo/landing-pages/landing-enriched-types';
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -89,6 +92,19 @@ export default async function VodicArticlePage({ params }: Props) {
     mainEntityOfPage: `https://villavelebita.hr${basePath}/vodic/${guide.slug}`,
   };
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: guide.faqs.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <>
       <Navbar />
@@ -101,9 +117,13 @@ export default async function VodicArticlePage({ params }: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
         <article className="mx-auto max-w-3xl py-8 sm:py-10">
           <p className="text-xs font-semibold uppercase tracking-widest text-stone mb-2">
-            Guide
+            {guide.eyebrow}
           </p>
           <h1 className="font-display text-3xl sm:text-4xl font-semibold text-oak mb-3">
             {guide.title}
@@ -112,6 +132,19 @@ export default async function VodicArticlePage({ params }: Props) {
           <p className="text-xs text-stone mb-8">
             {guide.publishedAt} · {guide.readingTime}
           </p>
+
+          <div className="mb-10 overflow-hidden rounded-card border border-stone-pale bg-white shadow-card">
+            <div className="relative aspect-[21/9] w-full bg-stone-pale">
+              <AppImage
+                src={guide.coverImage.src}
+                alt={guide.coverImage.alt}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 768px"
+                priority
+              />
+            </div>
+          </div>
 
           <div className="space-y-8">
             {guide.sections.map((section) => (
@@ -128,21 +161,92 @@ export default async function VodicArticlePage({ params }: Props) {
             ))}
           </div>
 
-          <div className="mt-10 rounded-card border border-stone-pale bg-white p-5 shadow-card">
-            <h2 className="font-display text-xl text-oak mb-2">
-              Povezane stranice za rezervaciju
+          <section className="mt-12">
+            <h2 className="font-display text-2xl font-semibold text-oak mb-4">
+              {guide.activitiesSectionTitle}
             </h2>
-            <ul className="flex flex-wrap gap-2.5">
-              {guide.relatedLandingPages.map((path) => (
-                <li key={path}>
-                  <Link
-                    href={path}
-                    className="inline-flex rounded-full border border-stone-pale px-3 py-1.5 text-sm text-oak transition-colors hover:border-terracotta hover:text-terracotta"
-                  >
-                    {path.replace('/', '')}
-                  </Link>
-                </li>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {guide.activities.map((card) => (
+                <div
+                  key={card.title}
+                  className="overflow-hidden rounded-card border border-stone-pale bg-white shadow-card"
+                >
+                  <div className="relative aspect-[16/10] w-full bg-stone-pale">
+                    <AppImage
+                      src={card.image}
+                      alt={card.imageAlt}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 640px) 100vw, 360px"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-display text-lg font-semibold text-oak mb-2">{card.title}</h3>
+                    <p className="text-sm text-stone leading-relaxed">{card.description}</p>
+                  </div>
+                </div>
               ))}
+            </div>
+          </section>
+
+          <section className="mt-12 rounded-card border border-terracotta/25 bg-white p-6 shadow-card sm:p-8">
+            <h2 className="font-display text-2xl font-semibold text-oak mb-3">{guide.midCtaTitle}</h2>
+            <p className="text-stone leading-relaxed mb-5">{guide.midCtaBody}</p>
+            <div className="flex flex-wrap gap-2.5">
+              <Link
+                href="/booking"
+                className="inline-flex rounded-full bg-terracotta px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-terracotta-dark"
+              >
+                {guide.midCtaBookingLabel}
+              </Link>
+              <Link
+                href="/galerija"
+                className="inline-flex rounded-full border border-stone-pale px-5 py-2.5 text-sm font-semibold text-oak transition-colors hover:border-terracotta hover:text-terracotta"
+              >
+                {guide.midCtaGalleryLabel}
+              </Link>
+            </div>
+          </section>
+
+          <section className="mt-12">
+            <h2 className="font-display text-2xl font-semibold text-oak mb-3">{guide.faqSectionTitle}</h2>
+            <div className="space-y-2">
+              {guide.faqs.map((item) => (
+                <details
+                  key={item.question}
+                  className="group rounded-card border border-stone-pale bg-white px-4 py-3 shadow-card open:border-terracotta/30"
+                >
+                  <summary className="cursor-pointer list-none font-semibold text-oak pr-6 marker:content-none [&::-webkit-details-marker]:hidden">
+                    {item.question}
+                  </summary>
+                  <p className="mt-3 text-sm text-stone leading-relaxed border-t border-stone-pale pt-3">
+                    {item.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </section>
+
+          <div className="mt-10 rounded-card border border-stone-pale bg-white p-5 shadow-card">
+            <h2 className="font-display text-xl text-oak mb-2">{guide.relatedLandingsTitle}</h2>
+            <p className="text-stone text-sm leading-relaxed mb-4">{guide.relatedLandingsIntro}</p>
+            <ul className="flex flex-wrap gap-2.5">
+              {guide.relatedLandingPages.map((path) => {
+                const key = parseLandingPageKeyFromPath(path);
+                const label = key
+                  ? getLandingPageContent(key, locale).breadcrumbLabel
+                  : path.replace(/^\//, '');
+                return (
+                  <li key={path}>
+                    <Link
+                      href={path}
+                      className="inline-flex rounded-full border border-stone-pale px-3 py-1.5 text-sm text-oak transition-colors hover:border-terracotta hover:text-terracotta"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
