@@ -7,19 +7,19 @@ export const GUIDE_HUB_BY_LOCALE = {
       'Praktični savjeti za planiranje boravka, izlete i aktivnosti uz direktnu rezervaciju smještaja.',
   },
   en: {
-    title: 'Plitvice and Lika Travel Guide',
+    title: 'Guide to Plitvice and Lika',
     description:
-      'Practical tips for planning your stay, nearby trips, and activities with direct booking options.',
+      'Practical tips for planning your stay, day trips, and activities with direct accommodation booking.',
   },
   de: {
-    title: 'Reiseführer für Plitvicer Seen und Lika',
+    title: 'Reiseführer für Plitvice und Lika',
     description:
-      'Praktische Tipps für die Reiseplanung, Ausflüge und Aktivitäten mit direkter Buchung.',
+      'Praktische Tipps zur Planung des Aufenthalts, Tagesausflügen und Aktivitäten mit direkter Unterkunftsbuchung.',
   },
   it: {
     title: 'Guida a Plitvice e alla Lika',
     description:
-      'Consigli pratici per pianificare il soggiorno, escursioni e attività con prenotazione diretta.',
+      'Consigli pratici per pianificare il soggiorno, gite giornaliere e attività con prenotazione diretta dell’alloggio.',
   },
 } as const;
 
@@ -215,24 +215,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Top places worth visiting near Plitvice',
+        heading: 'The best places to visit near Plitvice',
         paragraphs: [
-          'Plitvice Lakes are the main attraction, but nearby Lika offers many additional places worth exploring. You can combine scenic viewpoints, short trails, and authentic local spots in one trip.',
-          'A balanced daily rhythm works best: one main activity in the morning and a lighter one in the afternoon.',
+          'Plitvice Lakes are the main reason to come, but the surrounding area offers more than the national park alone. Nearby you can combine short walks, viewpoints, and local spots that keep Lika’s calm, authentic feel.',
+          'If you want a relaxed schedule, plan one main activity in the morning and a shorter one in the afternoon. That way you avoid fatigue and still have time to unwind.',
         ],
       },
       {
         heading: 'Half-day and full-day trip ideas',
         paragraphs: [
-          'For half-day plans, pick one nature route and add a relaxed food stop. For full-day plans, combine the national park with another local destination.',
-          'Families and small groups usually benefit from flexible itineraries adapted to weather and energy levels.',
+          'For a half-day trip, pick one nature route and add a pause for local food. For a full day, combine Plitvice Lakes National Park with another stop in Lika.',
+          'Families and smaller groups usually do best with a flexible plan that adapts to weather and travel pace.',
         ],
       },
       {
-        heading: 'How to plan without stress',
+        heading: 'How to plan a stay without stress',
         paragraphs: [
-          'Starting early helps avoid peak crowds and gives you more quality time outdoors.',
-          'Choosing accommodation close to Plitvice also makes daily logistics easier and more efficient.',
+          'The biggest crowds often arrive later in the day, so an early start is a real advantage. A well-located stay saves time and simplifies daily logistics.',
+          'If you are looking for accommodation near Plitvice, check prices in advance so you can pick dates that suit you.',
         ],
       },
     ],
@@ -258,24 +258,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Outdoor and adventure-friendly options',
+        heading: 'Nature activities and adventure-friendly options',
         paragraphs: [
-          'Lika offers a strong mix of active exploration and peaceful downtime. That balance is ideal for guests who want both movement and recovery on the same trip.',
-          'When planning multi-day travel, split activities by intensity so each day stays enjoyable.',
+          'Lika offers a strong balance between an active day and a calm evening. During your stay you can combine walks, viewpoints, and local outdoor activities.',
+          'If you are planning several days, spread activities by intensity so each day has a clear theme and enough time to recover.',
         ],
       },
       {
         heading: 'How to plan for couples, families, and groups',
         paragraphs: [
-          'Couples often prefer flexible plans, while families and groups benefit from a clearer structure.',
-          'Choosing a practical base location makes coordination easier for everyone.',
+          'Couples often prefer a looser itinerary with room for spontaneity; families and groups usually do better with a plan agreed in advance.',
+          'For group travel it matters to align pace and choose a stay that makes logistics easier for everyone.',
         ],
       },
       {
-        heading: 'Simple tips for better day planning',
+        heading: 'Practical tips for a better daily rhythm',
         paragraphs: [
-          'Visit high-demand spots early and leave lighter activities for later in the day.',
-          'Booking your stay and dates in advance helps keep the trip smooth.',
+          'Start early at the busiest spots and keep the afternoon for lighter activities. That helps you avoid crowds and save energy.',
+          'If you want a base from which activities are easy to organise, check accommodation and book ahead.',
         ],
       },
     ],
@@ -301,24 +301,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'What matters most for family stays',
+        heading: 'What matters most in family accommodation',
         paragraphs: [
-          'Families usually prioritize safety, practical comfort, and enough space for daily routines.',
-          'Checking pricing and availability early helps align travel with school and work schedules.',
+          'For families, safety, enough space, and a clear daily rhythm come first. A stay that offers privacy and practicality makes the whole trip easier.',
+          'When planning, it helps to check pricing and availability early so travel fits school and work schedules.',
         ],
       },
       {
-        heading: 'Kid-friendly and parent-friendly activities',
+        heading: 'Activities suited to children and parents',
         paragraphs: [
-          'The best plan combines shorter nature activities with regular breaks.',
-          'Nearby routes around Plitvice make it easier to avoid long transfers with children.',
+          'The best schedule mixes shorter nature activities with plenty of breaks so children and adults stay happy through the day.',
+          'Around Plitvice it is easy to plan simple trips without long drives—especially important for families with younger children.',
         ],
       },
       {
-        heading: 'How to reduce stress before the trip',
+        heading: 'How to reduce stress when planning the trip',
         paragraphs: [
-          'Keep the itinerary realistic and leave room for rest.',
-          'Direct booking and clear communication simplify all logistics.',
+          'Spread activities across days, plan flexibly, and leave time to rest. An overloaded schedule is the most common cause of fatigue on family trips.',
+          'Direct booking and clear communication about stay details simplify organisation further.',
         ],
       },
     ],
@@ -344,24 +344,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: '1 day vs 2 days vs 3 days in Plitvice',
+        heading: '1 day, 2 days, or 3 days at Plitvice',
         paragraphs: [
-          'One day can work for a focused visit, but two days provide a better balance.',
-          'Three days are ideal when you also want to explore the wider Lika region.',
+          'With only one day, focus on one main route and avoid packing the schedule. For a deeper experience of nature, at least two days are recommended.',
+          'Three days give enough room for Plitvice Lakes National Park and extra activities in Lika without rushing.',
         ],
       },
       {
-        heading: 'Sample itineraries by trip length',
+        heading: 'Sample itineraries by length of stay',
         paragraphs: [
-          'For weekend travel, use a simple structure: arrival day, main park day, and light departure day.',
-          'Longer stays should include additional local experiences around Plitvice.',
+          'For a weekend stay, a simple pattern works well: easy arrival and rest, main outing the next day, shorter visit and departure on the third.',
+          'For a longer stay, add local trips so the holiday feels more varied and worthwhile.',
         ],
       },
       {
-        heading: 'Where to stay for easier logistics',
+        heading: 'Where to stay for the best logistics',
         paragraphs: [
-          'A nearby base saves driving time and keeps daily planning easier.',
-          'Advance booking is recommended for better date and pricing options.',
+          'Staying near Plitvice shortens drive time and simplifies each day of the trip—especially for families and larger groups.',
+          'If you are planning several days, book dates in advance and align them with available rates and capacity.',
         ],
       },
     ],
@@ -371,14 +371,14 @@ export const GUIDES: GuideArticle[] = [
     locale: 'de',
     title: 'Was man nahe den Plitvicer Seen besuchen kann',
     description:
-      'Praktischer Leitfaden mit Ausflugszielen, Tagesideen und Planungstipps fur Aufenthalte nahe den Plitvicer Seen.',
+      'Praktischer Leitfaden zu den schönsten Orten und Ausflügen rund um Plitvice, mit Tipps zur Planung eines Aufenthalts in der Lika.',
     publishedAt: '2026-05-08',
     updatedAt: '2026-05-08',
     readingTime: '7 min',
     keywords: [
       'was besuchen nahe plitvicer seen',
-      'ausfluge plitvice',
-      'lika sehenswurdigkeiten',
+      'ausflüge plitvice',
+      'lika natur',
     ],
     relatedLandingPages: [
       '/smjestaj-plitvicka-jezera',
@@ -386,24 +386,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Die wichtigsten Orte rund um Plitvice',
+        heading: 'Die schönsten Orte rund um Plitvice',
         paragraphs: [
-          'Neben dem Nationalpark gibt es in Lika viele ruhige und authentische Orte. So entsteht ein abwechslungsreicher Aufenthalt.',
-          'Ein ausgewogener Tagesplan mit einer Hauptaktivitat und einem leichteren Programmpunkt ist meist ideal.',
+          'Die Plitvicer Seen sind der Hauptgrund für die Anreise, doch die Umgebung bietet mehr als nur den Nationalpark. In der Nähe verbinden sich kurze Wege, Aussichtspunkte und authentische Orte mit der ruhigen Atmosphäre der Lika.',
+          'Für einen entspannten Rhythmus eignet sich ein Hauptprogramm am Morgen und ein kürzerer Punkt am Nachmittag—so vermeiden Sie Ermüdung und behalten Zeit zum Ausruhen.',
         ],
       },
       {
-        heading: 'Halbtags- und Ganztagsideen',
+        heading: 'Ideen für Halbtages- und Ganztagesausflüge',
         paragraphs: [
-          'Halbtags: Naturroute plus lokale Pause. Ganztags: Nationalpark plus ein weiteres Ziel in der Region.',
-          'Familien und kleinere Gruppen profitieren besonders von flexiblen Planen.',
+          'Für einen Halbtagesausflug wählen Sie eine Naturroute und eine Pause mit lokaler Gastronomie. Für einen ganzen Tag kombinieren Sie den Nationalpark Plitvicer Seen mit einem weiteren Ziel in der Lika.',
+          'Familien und kleinere Gruppen profitieren am meisten von einem flexiblen Plan, der sich Wetter und Reisetempo anpasst.',
         ],
       },
       {
-        heading: 'Planung ohne Stress',
+        heading: 'Aufenthalt ohne Stress planen',
         paragraphs: [
-          'Fruher Start reduziert Wartezeiten und verbessert den Tagesrhythmus.',
-          'Eine Unterkunft nahe Plitvice vereinfacht die gesamte Logistik.',
+          'Die größten Menschenmengen kommen oft später am Tag—ein früher Start ist ein großer Vorteil. Eine gut gelegene Unterkunft spart Zeit und erleichtert die tägliche Logistik.',
+          'Wer Unterkunft nahe Plitvice sucht, sollte Preise vorab prüfen, um passende Termine leichter zu wählen.',
         ],
       },
     ],
@@ -411,16 +411,16 @@ export const GUIDES: GuideArticle[] = [
   {
     slug: 'najbolje-aktivnosti-u-lici',
     locale: 'de',
-    title: 'Die besten Aktivitaten in Lika',
+    title: 'Die besten Aktivitäten in der Lika',
     description:
-      'Empfehlungen fur Aktivitaten in Lika mit Fokus auf Natur, Tagesplanung und einen ausgewogenen Aufenthalt nahe Plitvice.',
+      'Ideen für aktiven und entspannten Urlaub in der Lika: Natur, Ausflüge und einfache Planung nahe Plitvice.',
     publishedAt: '2026-05-09',
     updatedAt: '2026-05-09',
     readingTime: '8 min',
     keywords: [
-      'beste aktivitaten in lika',
+      'beste aktivitäten in lika',
       'was tun in lika',
-      'plitvice aktivitaten',
+      'plitvice aktivitäten',
     ],
     relatedLandingPages: [
       '/villa-jacuzzi-plitvice',
@@ -429,24 +429,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Natur und aktive Erlebnisse',
+        heading: 'Aktivitäten in der Natur und mit Adrenalin',
         paragraphs: [
-          'Lika verbindet aktive Tagesprogramme mit ruhiger Erholung am Abend.',
-          'Bei mehrtagigen Reisen lohnt es sich, die Intensitat der Tage gezielt zu variieren.',
+          'Die Lika bietet eine gute Balance zwischen aktivem Tag und ruhigem Abend. Während des Aufenthalts lassen sich Spaziergänge, Aussichtspunkte und lokale Outdoor-Aktivitäten kombinieren.',
+          'Bei mehrtägigen Reisen lohnt es sich, Aktivitäten nach Intensität zu verteilen, damit jeder Tag ein klares Thema und genug Erholungszeit hat.',
         ],
       },
       {
-        heading: 'Planung fur Paare, Familien und Gruppen',
+        heading: 'Plan für Paare, Familien und Gruppen',
         paragraphs: [
-          'Paare bevorzugen oft flexible Routen, Gruppen eher klare Ablaufe.',
-          'Eine gute Unterkunftslage erleichtert Abstimmung und Tagesplanung.',
+          'Paaren passen lockerere Pläne mit mehr Spontanität; Familien und Gruppen profitieren von einem vorab abgestimmten Ablauf.',
+          'Bei Gruppenreisen sind einheitliches Tempo und eine Unterkunft mit einfacher Logistik für alle wichtig.',
         ],
       },
       {
-        heading: 'Praktische Tipps fur den Tagesrhythmus',
+        heading: 'Praktische Tipps für einen besseren Tagesrhythmus',
         paragraphs: [
-          'Beliebte Orte morgens besuchen und den Nachmittag lockerer gestalten.',
-          'Fruhe Terminplanung verbessert Verfugbarkeit und Ablauf.',
+          'Starten Sie früh an beliebten Orten und lassen Sie den Nachmittag für leichtere Aktivitäten. So vermeiden Sie Andrang und behalten Energie.',
+          'Wer eine Basis für einfache Aktivitätenplanung sucht, sollte Unterkunft und Buchung vorab prüfen.',
         ],
       },
     ],
@@ -456,13 +456,13 @@ export const GUIDES: GuideArticle[] = [
     locale: 'de',
     title: 'Familienurlaub nahe Plitvice',
     description:
-      'Wie man einen Familienurlaub nahe Plitvice organisiert: Unterkunft, Tagesstruktur und praktische Tipps fur Reisen mit Kindern.',
+      'So organisieren Sie einen Familienurlaub nahe Plitvice: Unterkunft, Tagesrhythmus, Aktivitäten für Kinder und praktische Tipps für einen sorgenfreien Aufenthalt.',
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readingTime: '7 min',
     keywords: [
       'familienurlaub plitvice',
-      'unterkunft familie plitvice',
+      'unterkunft familie nahe plitvice',
       'urlaub mit kindern lika',
     ],
     relatedLandingPages: [
@@ -472,24 +472,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Worauf Familien bei der Unterkunft achten sollten',
+        heading: 'Was bei Familienunterkunft am wichtigsten ist',
         paragraphs: [
-          'Wichtige Faktoren sind Sicherheit, Platz und alltagstaugliche Ausstattung.',
-          'Fruhe Prufung von Preisen und Terminen erleichtert die Planung deutlich.',
+          'Für Familien zählen Sicherheit, genug Platz und eine klare Tagesorganisation. Unterkunft mit Privatsphäre und Funktionalität erleichtert den gesamten Aufenthalt.',
+          'Bei der Planung hilft es, Preise und Verfügbarkeit früh zu prüfen, damit die Reise zu Schul- und Arbeitszeiten passt.',
         ],
       },
       {
-        heading: 'Aktivitaten fur Kinder und Eltern',
+        heading: 'Aktivitäten für Kinder und Eltern',
         paragraphs: [
-          'Kurze Naturaktivitaten mit regelmaBigen Pausen funktionieren meist am besten.',
-          'Kurze Wege rund um Plitvice machen den Tagesablauf entspannter.',
+          'Der beste Plan mischt kürzere Naturaktivitäten mit ausreichend Pausen—so sind Kinder und Erwachsene zufriedener.',
+          'Rund um Plitvice lassen sich einfache Ausflüge ohne lange Fahrten planen—besonders wichtig mit kleineren Kindern.',
         ],
       },
       {
-        heading: 'Stressfreie Vorbereitung',
+        heading: 'Stress bei der Reiseplanung reduzieren',
         paragraphs: [
-          'Ein realistischer Plan mit Pufferzeiten verhindert Uberlastung.',
-          'Direkte Buchung sorgt fur klare Kommunikation und sichere Organisation.',
+          'Aktivitäten auf die Tage verteilen, flexibel planen und Zeit zum Ausruhen lassen. Ein überladener Plan ist die häufigste Ursache für Ermüdung auf Familienreisen.',
+          'Direktbuchung und klare Kommunikation zu den Unterkunftsdetails vereinfachen die Organisation zusätzlich.',
         ],
       },
     ],
@@ -497,9 +497,9 @@ export const GUIDES: GuideArticle[] = [
   {
     slug: 'koliko-dana-treba-za-plitvice',
     locale: 'de',
-    title: 'Wie viele Tage braucht man fur Plitvice?',
+    title: 'Wie viele Tage braucht man für Plitvice?',
     description:
-      'Leitfaden fur 1, 2 oder 3 Tage in Plitvice mit Routenideen und Tipps zur Unterkunftsplanung.',
+      'Praktischer Leitfaden für 1, 2 oder 3 Tage an den Plitvicer Seen: Tagesplan, Routenideen und wo man für die beste Logistik übernachtet.',
     publishedAt: '2026-05-11',
     updatedAt: '2026-05-11',
     readingTime: '6 min',
@@ -515,24 +515,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: '1, 2 oder 3 Tage in Plitvice',
+        heading: '1, 2 oder 3 Tage an den Plitvicer Seen',
         paragraphs: [
-          'Ein Tag reicht fur einen kompakten Besuch, zwei Tage bieten mehr Balance.',
-          'Drei Tage sind optimal, wenn zusatzlich Lika erkundet werden soll.',
+          'Mit nur einem Tag fokussieren Sie sich auf eine Hauptroute und vermeiden ein überladenes Programm. Für ein tieferes Naturerlebnis empfehlen sich mindestens zwei Tage.',
+          'Drei Tage geben genug Raum für den Nationalpark Plitvicer Seen und zusätzliche Aktivitäten in der Lika—ohne Hast.',
         ],
       },
       {
-        heading: 'Beispielplan nach Aufenthaltsdauer',
+        heading: 'Beispiel-Itinerar nach Aufenthaltsdauer',
         paragraphs: [
-          'Wochenendmodell: Anreise, Haupttag im Park, entspannter Abreisetag.',
-          'Bei langeren Aufenthalten lohnen zusatzliche regionale Ausfluge.',
+          'Für ein Wochenende funktioniert: leichte Anreise und Ruhe, Hauptausflug am zweiten Tag, kürzerer Besuch und Abreise am dritten.',
+          'Bei längerem Aufenthalt lokale Ausflüge einbauen—so wird die Reise abwechslungsreicher und lohnender.',
         ],
       },
       {
-        heading: 'Die richtige Unterkunft fur gute Logistik',
+        heading: 'Wo übernachten für die beste Logistik',
         paragraphs: [
-          'Eine nahe Unterkunft spart Zeit und vereinfacht jeden Reisetag.',
-          'Fruh buchen verbessert Termin- und Preisoptionen.',
+          'Unterkunft nahe Plitvice verkürzt Fahrzeiten und vereinfacht jeden Reisetag—besonders für Familien und größere Gruppen.',
+          'Bei mehreren Tagen Termin früh reservieren und mit verfügbaren Preisen und Kapazität abstimmen.',
         ],
       },
     ],
@@ -542,14 +542,14 @@ export const GUIDES: GuideArticle[] = [
     locale: 'it',
     title: 'Cosa visitare vicino ai Laghi di Plitvice',
     description:
-      'Guida pratica con idee di escursioni, luoghi consigliati e suggerimenti per organizzare il soggiorno vicino a Plitvice.',
+      'Guida pratica ai luoghi più interessanti e alle gite nei dintorni di Plitvice, con consigli per pianificare il soggiorno in Lika.',
     publishedAt: '2026-05-08',
     updatedAt: '2026-05-08',
     readingTime: '7 min',
     keywords: [
-      'cosa visitare vicino plitvice',
+      'cosa visitare vicino laghi di plitvice',
       'escursioni plitvice',
-      'attrazioni lika',
+      'natura lika',
     ],
     relatedLandingPages: [
       '/smjestaj-plitvicka-jezera',
@@ -557,24 +557,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Luoghi consigliati nei dintorni di Plitvice',
+        heading: 'I luoghi più belli nei dintorni di Plitvice',
         paragraphs: [
-          'Oltre al parco nazionale, la Lika offre molti luoghi naturali e autentici da scoprire.',
-          'Un ritmo giornaliero equilibrato aiuta a godersi meglio l esperienza.',
+          'I Laghi di Plitvice sono il motivo principale del viaggio, ma la zona offre più del solo parco nazionale. Qui potete combinare brevi passeggiate, belvedere e luoghi locali che conservano la calma e l’autenticità della Lika.',
+          'Per un ritmo rilassato conviene un’attività principale al mattino e una più breve al pomeriggio—così evitate la stanchezza e avete tempo per riposare.',
         ],
       },
       {
-        heading: 'Idee per mezze giornate e giornate intere',
+        heading: 'Idee per gite di mezza giornata e giornata intera',
         paragraphs: [
-          'Per mezza giornata scegli un percorso naturale e una pausa locale. Per la giornata intera combina il parco con un altra meta della zona.',
-          'Famiglie e piccoli gruppi ottengono spesso risultati migliori con programmi flessibili.',
+          'Per una mezza giornata scegliete un percorso nella natura e una pausa con gastronomia locale. Per un giorno intero unite il Parco nazionale dei Laghi di Plitvice a un’altra tappa in Lika.',
+          'Famiglie e piccoli gruppi ottengono i migliori risultati con un programma flessibile che si adatta al meteo e al ritmo di viaggio.',
         ],
       },
       {
-        heading: 'Come pianificare senza stress',
+        heading: 'Come pianificare il soggiorno senza stress',
         paragraphs: [
-          'Partire presto aiuta a evitare le ore piu affollate.',
-          'Un alloggio vicino a Plitvice semplifica tutta la logistica quotidiana.',
+          'Le folle più grandi arrivano spesso più tardi nel giorno—partire presto è un grande vantaggio. Un alloggio ben posizionato fa risparmiare tempo e semplifica la logistica quotidiana.',
+          'Se cercate alloggio vicino a Plitvice, controllate i prezzi in anticipo per scegliere più facilmente le date adatte a voi.',
         ],
       },
     ],
@@ -582,16 +582,16 @@ export const GUIDES: GuideArticle[] = [
   {
     slug: 'najbolje-aktivnosti-u-lici',
     locale: 'it',
-    title: 'Le migliori attivita in Lika',
+    title: 'Le migliori attività in Lika',
     description:
-      'Idee per attivita in Lika tra natura, esperienze locali e consigli pratici per organizzare il soggiorno vicino a Plitvice.',
+      'Idee per un soggiorno attivo e rilassato in Lika: natura, escursioni e pianificazione pratica vicino a Plitvice.',
     publishedAt: '2026-05-09',
     updatedAt: '2026-05-09',
     readingTime: '8 min',
     keywords: [
-      'migliori attivita lika',
+      'migliori attività in lika',
       'cosa fare in lika',
-      'attivita plitvice',
+      'attività plitvice',
     ],
     relatedLandingPages: [
       '/villa-jacuzzi-plitvice',
@@ -600,24 +600,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Natura e attivita dinamiche',
+        heading: 'Attività nella natura e esperienze più dinamiche',
         paragraphs: [
-          'La Lika permette di combinare giornate attive e serate rilassanti.',
-          'Per soggiorni di piu giorni conviene alternare attivita intense e leggere.',
+          'La Lika offre un ottimo equilibrio tra giornata attiva e riposo serale. Durante il soggiorno potete combinare passeggiate, belvedere e attività outdoor locali.',
+          'Se pianificate più giorni, distribuite le attività per intensità così ogni giornata ha un tema chiaro e tempo sufficiente per recuperare.',
         ],
       },
       {
-        heading: 'Pianificazione per coppie, famiglie e gruppi',
+        heading: 'Come organizzare il programma per coppie, famiglie e gruppi',
         paragraphs: [
-          'Le coppie preferiscono spesso flessibilita, mentre i gruppi funzionano meglio con una struttura chiara.',
-          'Una base ben posizionata riduce tempi morti e rende il viaggio piu semplice.',
+          'Le coppie preferiscono spesso itinerari più liberi con spazio per la spontaneità; famiglie e gruppi funzionano meglio con un piano concordato in anticipo.',
+          'Nei viaggi di gruppo è importante allineare il ritmo e scegliere un alloggio che semplifichi la logistica per tutti.',
         ],
       },
       {
-        heading: 'Suggerimenti pratici per giornate migliori',
+        heading: 'Consigli pratici per un miglior ritmo giornaliero',
         paragraphs: [
-          'Visita i luoghi piu richiesti al mattino e lascia il pomeriggio per attivita piu leggere.',
-          'Prenotare in anticipo facilita tutto il percorso di viaggio.',
+          'Partite presto nei luoghi più richiesti e lasciate il pomeriggio per attività più leggere. Così evitate la folla e conservate energia.',
+          'Se cercate una base da cui organizzare facilmente le attività, controllate alloggio e prenotazione in anticipo.',
         ],
       },
     ],
@@ -627,13 +627,13 @@ export const GUIDES: GuideArticle[] = [
     locale: 'it',
     title: 'Vacanza in famiglia vicino a Plitvice',
     description:
-      'Come organizzare una vacanza in famiglia vicino a Plitvice: alloggio, attivita adatte ai bambini e consigli pratici.',
+      'Come organizzare una vacanza in famiglia vicino a Plitvice: alloggio, ritmo giornaliero, attività per bambini e consigli pratici.',
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readingTime: '7 min',
     keywords: [
-      'vacanza famiglia plitvice',
-      'alloggio famiglia plitvice',
+      'vacanza in famiglia plitvice',
+      'alloggio famiglia vicino plitvice',
       'viaggio con bambini lika',
     ],
     relatedLandingPages: [
@@ -643,24 +643,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Cosa conta davvero per le famiglie',
+        heading: 'Cosa conta di più nell’alloggio per famiglie',
         paragraphs: [
-          'Sicurezza, spazio e comfort pratico sono i tre elementi principali per un soggiorno sereno.',
-          'Controllare disponibilita e prezzi in anticipo aiuta a pianificare meglio.',
+          'Per le famiglie contano sicurezza, spazio sufficiente e organizzazione chiara della giornata. Un alloggio con privacy e funzionalità semplifica tutto il soggiorno.',
+          'In fase di pianificazione è utile controllare prezzi e disponibilità in anticipo per allineare il viaggio a scuola e lavoro.',
         ],
       },
       {
-        heading: 'Attivita adatte a bambini e genitori',
+        heading: 'Attività adatte a bambini e genitori',
         paragraphs: [
-          'Le giornate migliori alternano attivita brevi nella natura e pause regolari.',
-          'Le distanze ridotte vicino a Plitvice semplificano gli spostamenti con i bambini.',
+          'Il programma migliore mescola attività brevi nella natura con pause sufficienti così bambini e adulti restano contenti durante la giornata.',
+          'Nei dintorni di Plitvice è facile organizzare gite semplici senza lunghi tragitti—importante soprattutto con bambini piccoli.',
         ],
       },
       {
-        heading: 'Come ridurre lo stress organizzativo',
+        heading: 'Come ridurre lo stress nella pianificazione',
         paragraphs: [
-          'Programmi realistici con margine di flessibilita funzionano meglio per tutta la famiglia.',
-          'Prenotazione diretta e comunicazione chiara rendono la preparazione piu semplice.',
+          'Distribuite le attività sui giorni, pianificate con flessibilità e lasciate tempo per riposare. Un programma sovraccarico è la causa più comune di stanchezza nei viaggi in famiglia.',
+          'Prenotazione diretta e comunicazione chiara sui dettagli dell’alloggio semplificano ulteriormente l’organizzazione.',
         ],
       },
     ],
@@ -670,14 +670,14 @@ export const GUIDES: GuideArticle[] = [
     locale: 'it',
     title: 'Quanti giorni servono per Plitvice?',
     description:
-      'Guida pratica per pianificare 1, 2 o 3 giorni a Plitvice con esempi di itinerario e consigli su dove alloggiare.',
+      'Guida pratica per 1, 2 o 3 giorni a Plitvice: come organizzare il programma e dove alloggiare per una logistica migliore.',
     publishedAt: '2026-05-11',
     updatedAt: '2026-05-11',
     readingTime: '6 min',
     keywords: [
-      'quanti giorni plitvice',
+      'quanti giorni per plitvice',
       'itinerario plitvice',
-      'alloggio vicino plitvice piu giorni',
+      'alloggio vicino plitvice più giorni',
     ],
     relatedLandingPages: [
       '/smjestaj-plitvicka-jezera',
@@ -686,24 +686,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: '1 giorno, 2 giorni o 3 giorni a Plitvice',
+        heading: '1, 2 o 3 giorni ai Laghi di Plitvice',
         paragraphs: [
-          'Un giorno basta per una visita rapida, ma due giorni offrono un esperienza piu completa.',
-          'Tre giorni sono ideali se vuoi includere anche altre tappe in Lika.',
+          'Con un solo giorno concentratevi su un percorso principale ed evitate di riempire troppo il programma. Per vivere meglio la natura servono almeno due giorni.',
+          'Tre giorni danno spazio sufficiente per il Parco nazionale dei Laghi di Plitvice e attività aggiuntive in Lika senza fretta.',
         ],
       },
       {
-        heading: 'Esempio di itinerario per durata del soggiorno',
+        heading: 'Esempi di itinerario per durata del soggiorno',
         paragraphs: [
-          'Per un weekend: arrivo leggero, giornata principale al parco, partenza rilassata.',
-          'Per soggiorni piu lunghi, aggiungi escursioni locali per aumentare la varieta.',
+          'Per un weekend funziona: arrivo leggero e riposo, escursione principale il secondo giorno, visita breve e partenza il terzo.',
+          'Per un soggiorno più lungo aggiungete gite locali così il viaggio è più vario e conveniente.',
         ],
       },
       {
-        heading: 'Dove alloggiare per una logistica migliore',
+        heading: 'Dove alloggiare per la migliore logistica',
         paragraphs: [
-          'Un alloggio vicino a Plitvice riduce i tempi di viaggio e semplifica ogni giornata.',
-          'Prenotare in anticipo migliora le opzioni su date e prezzo.',
+          'Un alloggio vicino a Plitvice accorcia i tempi di viaggio e semplifica ogni giornata—soprattutto per famiglie e gruppi numerosi.',
+          'Se pianificate più giorni, prenotate in anticipo e allineate le date a prezzi e capienza disponibili.',
         ],
       },
     ],

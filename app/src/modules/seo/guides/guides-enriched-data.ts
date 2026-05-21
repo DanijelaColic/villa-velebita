@@ -83,185 +83,205 @@ export const GUIDES_ENRICHED: Record<
       eyebrow: "Guide",
       coverImage: {
         src: "/images/placeholders/01-plitvice-lakes.svg",
-        alt: "Placeholder lakes illustration for the nearby attractions guide.",
+        alt: "Placeholder lakes and waterfalls visual for the article about the Plitvice area.",
       },
-      activitiesSectionTitle: "Activities travelers often combine",
+      activitiesSectionTitle: "Activities and sights often combined",
       activities: [
         {
           title: "Plitvice Lakes National Park",
-          description: "The headline visit—plan entry timing and walking pace.",
+          description:
+            "The main reason to visit—plan entry and walking pace.",
           image: "/images/placeholders/01-plitvice-lakes.svg",
           imageAlt: "Placeholder lakes.",
         },
         {
-          title: "Viewpoints and short routes",
-          description: "Lower crowds and fresh air as a lighter add-on.",
+          title: "Viewpoints and shorter routes",
+          description:
+            "Fewer crowds, more fresh air—a good add-on to the main day.",
           image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder hills.",
+          imageAlt: "Placeholder Lika.",
         },
         {
-          title: "Local half-day ideas",
-          description: "Food stops and slower pacing between outings.",
+          title: "Local day trips",
+          description: "A half-day plan with food and rest.",
           image: "/images/placeholders/06-trail-hiking.svg",
           imageAlt: "Placeholder trail.",
         },
         {
-          title: "Evenings at your base",
-          description: "Privacy and jacuzzi recovery if that matters to you.",
+          title: "Evening at your stay",
+          description:
+            "Privacy and a jacuzzi if that matters for the end of the day.",
           image: "/images/placeholders/04-jacuzzi-relax.svg",
           imageAlt: "Placeholder jacuzzi.",
         },
       ],
-      midCtaTitle: "Want a stay that fits this itinerary?",
+      midCtaTitle: "Want accommodation that fits this itinerary?",
       midCtaBody:
-        "Check availability and pricing, then book directly for simpler trip logistics.",
-      midCtaBookingLabel: "Book now",
+        "Check availability and pricing, then book directly for simpler logistics around your trips.",
+      midCtaBookingLabel: "Booking",
       midCtaGalleryLabel: "Gallery",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Frequently asked questions",
       faqs: [
         {
-          question: "Can I see everything in one day?",
-          answer: "It depends on pace; pick priorities or extend your stay.",
+          question: "Can I fit everything into one day?",
+          answer:
+            "It depends on pace; it is more realistic to choose priorities or extend your stay.",
         },
         {
           question: "Do I need a car?",
-          answer: "For most nearby combinations, having a car is practical.",
+          answer:
+            "For most combinations in the area, your own transport is practical.",
         },
         {
-          question: "When are crowds highest?",
-          answer: "Often late morning—earlier starts usually help.",
+          question: "When are the biggest crowds?",
+          answer:
+            "Often later in the morning and earlier in the afternoon—an earlier start helps.",
         },
         {
           question: "Where should I stay?",
-          answer: "A Lika base often means quieter nights and shorter drives.",
+          answer:
+            "Accommodation in Lika often means a quieter night and shorter drives to the park.",
         },
       ],
-      relatedLandingsTitle: "Related booking pages",
+      relatedLandingsTitle: "Related pages for booking",
       relatedLandingsIntro:
-        "Choose accommodation that matches your Plitvice plans.",
+        "Choose accommodation that matches your plan around Plitvice.",
     },
     de: {
       eyebrow: "Reiseführer",
       coverImage: {
         src: "/images/placeholders/01-plitvice-lakes.svg",
-        alt: "Platzhalter Seen-Motiv für den Leitfaden.",
+        alt: "Platzhalter-Motiv Seen und Wasserfälle für den Artikel über die Umgebung von Plitvice.",
       },
-      activitiesSectionTitle: "Häufig kombinierte Aktivitäten",
+      activitiesSectionTitle: "Aktivitäten und Sehenswürdigkeiten, die oft kombiniert werden",
       activities: [
         {
           title: "Nationalpark Plitvicer Seen",
-          description: "Hauptmotiv—Eintritt und Tempo planen.",
+          description:
+            "Hauptgrund der Anreise—Eintritt und Wandertempo planen.",
           image: "/images/placeholders/01-plitvice-lakes.svg",
           imageAlt: "Platzhalter Seen.",
         },
         {
-          title: "Aussichtspunkte und kurze Routen",
-          description: "Weniger Trubel, mehr Natur.",
+          title: "Aussichtspunkte und kürzere Routen",
+          description:
+            "Weniger Andrang, mehr frische Luft—gute Ergänzung zum Haupttag.",
           image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Platzhalter Hügel.",
+          imageAlt: "Platzhalter Lika.",
         },
         {
-          title: "Halbtagsideen",
-          description: "Genusspausen zwischen den Ausflügen.",
+          title: "Lokale Tagesausflüge",
+          description: "Halbtagesplan mit Essen und Pause.",
           image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Platzhalter Trail.",
+          imageAlt: "Platzhalter Weg.",
         },
         {
-          title: "Abende in der Unterkunft",
-          description: "Privatsphäre und Jacuzzi-Erholung.",
+          title: "Abend an der Unterkunft",
+          description:
+            "Privatsphäre und Jacuzzi, wenn das für den Tagesausklang wichtig ist.",
           image: "/images/placeholders/04-jacuzzi-relax.svg",
           imageAlt: "Platzhalter Jacuzzi.",
         },
       ],
-      midCtaTitle: "Passende Unterkunft zum Plan?",
-      midCtaBody: "Verfügbarkeit und Preise prüfen, dann direkt buchen.",
-      midCtaBookingLabel: "Jetzt buchen",
+      midCtaTitle: "Unterkunft, die zu diesem Itinerar passt?",
+      midCtaBody:
+        "Verfügbarkeit und Preise prüfen, dann direkt buchen – für einfachere Logistik rund um Ausflüge.",
+      midCtaBookingLabel: "Buchung",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Häufig gestellte Fragen",
       faqs: [
         {
-          question: "Alles an einem Tag?",
+          question: "Schaffe ich alles an einem Tag?",
           answer:
-            "Nur bei sehr straffem Programm realistisch—lieber priorisieren.",
+            "Das hängt vom Tempo ab; realistischer sind Prioritäten oder ein längerer Aufenthalt.",
         },
         {
-          question: "Auto nötig?",
-          answer: "Für die meisten Kombinationen sehr praktisch.",
+          question: "Brauche ich ein Auto?",
+          answer:
+            "Für die meisten Kombinationen in der Umgebung ist eigenes Transportmittel praktisch.",
         },
         {
-          question: "Wann ist am vollsten?",
-          answer: "Oft später vormittags—früher starten hilft.",
+          question: "Wann ist am meisten los?",
+          answer:
+            "Oft später am Morgen und früher am Nachmittag—ein früher Start hilft.",
         },
         {
           question: "Wo übernachten?",
-          answer: "Lika bietet oft ruhigere Nächte und kurze Fahrten.",
+          answer:
+            "Unterkunft in der Lika bedeutet oft ruhigere Nächte und kürzere Fahrten zum Park.",
         },
       ],
-      relatedLandingsTitle: "Verwandte Buchungsseiten",
-      relatedLandingsIntro: "Unterkunft passend zu Ihrem Plitvice-Plan wählen.",
+      relatedLandingsTitle: "Verwandte Seiten zur Buchung",
+      relatedLandingsIntro:
+        "Unterkunft wählen, die zu Ihrem Plan rund um Plitvice passt.",
     },
     it: {
       eyebrow: "Guida",
       coverImage: {
         src: "/images/placeholders/01-plitvice-lakes.svg",
-        alt: "Illustrazione placeholder laghi per la guida.",
+        alt: "Placeholder laghi e cascate per l’articolo sulla zona di Plitvice.",
       },
-      activitiesSectionTitle: "Attività spesso abbinate",
+      activitiesSectionTitle: "Attività e attrazioni spesso combinate",
       activities: [
         {
-          title: "Parco di Plitvice",
+          title: "Parco nazionale dei Laghi di Plitvice",
           description:
-            "Motivo principale del viaggio—pianificare ingressi e ritmi.",
+            "Motivo principale della visita—pianificate ingresso e ritmo della passeggiata.",
           image: "/images/placeholders/01-plitvice-lakes.svg",
           imageAlt: "Placeholder laghi.",
         },
         {
-          title: "Belvedere e percorsi brevi",
-          description: "Meno affluenza, più aria aperta.",
+          title: "Belvedere e percorsi più corti",
+          description:
+            "Meno folla, più aria fresca—buon complemento alla giornata principale.",
           image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder colline.",
+          imageAlt: "Placeholder Lika.",
         },
         {
-          title: "Mezze giornate locali",
-          description: "Pause gastronomiche tra un’uscita e l’altra.",
+          title: "Gite locali",
+          description: "Programma di mezza giornata con cibo e riposo.",
           image: "/images/placeholders/06-trail-hiking.svg",
           imageAlt: "Placeholder sentiero.",
         },
         {
-          title: "Sere nella base",
-          description: "Privacy e recupero in jacuzzi se fa al caso vostro.",
+          title: "Sera presso l’alloggio",
+          description:
+            "Privacy e jacuzzi se conta per chiudere bene la giornata.",
           image: "/images/placeholders/04-jacuzzi-relax.svg",
           imageAlt: "Placeholder jacuzzi.",
         },
       ],
-      midCtaTitle: "Volete un alloggio adatto a questo itinerario?",
+      midCtaTitle: "Cercate un alloggio adatto a questo itinerario?",
       midCtaBody:
-        "Controllate disponibilità e prezzi, poi prenotate direttamente.",
-      midCtaBookingLabel: "Prenota",
+        "Controllate disponibilità e prezzi, poi prenotate direttamente per una logistica più semplice intorno alle gite.",
+      midCtaBookingLabel: "Prenotazione",
       midCtaGalleryLabel: "Galleria",
       faqSectionTitle: "Domande frequenti",
       faqs: [
         {
-          question: "Si può fare tutto in un giorno?",
-          answer: "Dipende dal ritmo; meglio priorità o soggiorno più lungo.",
+          question: "Si riesce a vedere tutto in un giorno?",
+          answer:
+            "Dipende dal ritmo; è più realistico scegliere priorità o prolungare il soggiorno.",
         },
         {
           question: "Serve l’auto?",
-          answer: "Per molte combinazioni è la scelta più pratica.",
+          answer:
+            "Per la maggior parte delle combinazioni nella zona il proprio mezzo è pratico.",
         },
         {
           question: "Quando c’è più affluenza?",
-          answer: "Spesso a metà mattina—partenza anticipata aiuta.",
+          answer:
+            "Spesso più tardi al mattino e all’inizio del pomeriggio—partire presto aiuta.",
         },
         {
           question: "Dove alloggiare?",
           answer:
-            "La Lika offre spesso notti più tranquille e trasferimenti brevi.",
+            "Un alloggio in Lika spesso significa notti più tranquille e tragitti brevi verso il parco.",
         },
       ],
-      relatedLandingsTitle: "Pagine collegate per prenotare",
+      relatedLandingsTitle: "Pagine collegate per la prenotazione",
       relatedLandingsIntro:
-        "Scegliete l’alloggio in linea con il vostro piano su Plitvice.",
+        "Scegliete l’alloggio in linea con il vostro piano intorno a Plitvice.",
     },
   },
   "najbolje-aktivnosti-u-lici": {
@@ -361,152 +381,161 @@ export const GUIDES_ENRICHED: Record<
           imageAlt: "Placeholder jacuzzi.",
         },
       ],
-      midCtaTitle: "Need a base for active days?",
-      midCtaBody: "Villa Velebita focuses on nature, calm, and direct booking.",
-      midCtaBookingLabel: "Book now",
+      midCtaTitle: "Looking for a base for active days?",
+      midCtaBody:
+        "Villa Velebita is a stay focused on nature, calm, and direct booking.",
+      midCtaBookingLabel: "Booking",
       midCtaGalleryLabel: "Gallery",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Frequently asked questions",
       faqs: [
         {
-          question: "Is Lika only Plitvice?",
-          answer: "No—there are quieter nature corners for balance.",
+          question: "Is Lika only about Plitvice?",
+          answer:
+            "No—there are quieter nature spots too for a balanced programme.",
         },
         {
-          question: "How do I avoid burnout?",
-          answer: "Mix intensity and schedule real rest.",
+          question: "How do I avoid overdoing it?",
+          answer: "Mix intensity levels and always build in rest.",
         },
         {
-          question: "Rainy day options?",
-          answer: "Slower plans at the house or shorter nearby outings.",
+          question: "What if it rains?",
+          answer: "Lighter plans at the house or shorter trips nearby.",
         },
         {
-          question: "What about jacuzzi?",
-          answer: "See the dedicated jacuzzi villa landing for that emphasis.",
+          question: "Does the jacuzzi matter?",
+          answer:
+            "For a wellness focus, see the dedicated villa with jacuzzi page.",
         },
       ],
-      relatedLandingsTitle: "Related booking pages",
+      relatedLandingsTitle: "Related pages for booking",
       relatedLandingsIntro:
-        "Choose accommodation that matches your Plitvice plans.",
+        "Choose accommodation that matches your plan around Plitvice.",
     },
     de: {
       eyebrow: "Reiseführer",
       coverImage: {
         src: "/images/placeholders/06-trail-hiking.svg",
-        alt: "Platzhalter Wanderweg für Aktivitäten in Lika.",
+        alt: "Platzhalter Spaziergang in der Natur für den Artikel über Aktivitäten in der Lika.",
       },
       activitiesSectionTitle: "Ideen nach Intensität",
       activities: [
         {
-          title: "Leichte Wanderungen",
-          description: "Erholungstage zwischen intensiveren Programmen.",
+          title: "Leichte Spaziergänge",
+          description: "Erholungstage zwischen intensiveren Ausflügen.",
           image: "/images/placeholders/02-lika-hills.svg",
           imageAlt: "Platzhalter Hügel.",
         },
         {
           title: "Nationalpark Plitvicer Seen",
-          description: "Klassiker—Ausrüstung und Wasser mitdenken.",
+          description: "Aktiver Klassiker—Schuhe und Wasser einplanen.",
           image: "/images/placeholders/01-plitvice-lakes.svg",
           imageAlt: "Platzhalter Seen.",
         },
         {
           title: "Familientempo",
-          description: "Kurze Aktivitäten plus Pausen.",
+          description: "Kurze Aktivitäten plus Pausen—weniger Stress.",
           image: "/images/placeholders/05-family-nature.svg",
           imageAlt: "Platzhalter Familie.",
         },
         {
-          title: "Abend im Jacuzzi",
-          description: "Warm und ruhig ausklingen lassen.",
+          title: "Jacuzzi am Abend",
+          description: "Warmes Bad und Ruhe zum Tagesausklang.",
           image: "/images/placeholders/04-jacuzzi-relax.svg",
           imageAlt: "Platzhalter Jacuzzi.",
         },
       ],
       midCtaTitle: "Basis für aktive Tage gesucht?",
-      midCtaBody: "Villa Velebita setzt auf Natur, Ruhe und Direktbuchung.",
-      midCtaBookingLabel: "Jetzt buchen",
+      midCtaBody:
+        "Villa Velebita ist eine Unterkunft mit Fokus auf Natur, Ruhe und Direktbuchung.",
+      midCtaBookingLabel: "Buchung",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Häufig gestellte Fragen",
       faqs: [
         {
-          question: "Ist Lika nur Plitvice?",
-          answer: "Nein—es gibt ruhigere Naturabschnitte für Balance.",
+          question: "Ist die Lika nur Plitvice?",
+          answer:
+            "Nein—es gibt auch ruhigere Naturwinkel für ein ausgewogenes Programm.",
         },
         {
-          question: "Burnout vermeiden?",
-          answer: "Intensität mischen und echte Pausen einplanen.",
+          question: "Wie Überforderung vermeiden?",
+          answer: "Intensität mischen und immer Pausen einbauen.",
         },
         {
-          question: "Bei Regen?",
-          answer: "Langsamere Pläne im Haus oder kurze Ausflüge.",
+          question: "Was bei Regen?",
+          answer: "Leichtere Pläne am Haus oder kürzere Ausflüge in der Nähe.",
         },
         {
-          question: "Jacuzzi?",
-          answer: "Siehe Landingpage Villa mit Jacuzzi.",
+          question: "Ist der Jacuzzi wichtig?",
+          answer:
+            "Für Wellness-Fokus siehe die Themenseite Villa mit Jacuzzi.",
         },
       ],
-      relatedLandingsTitle: "Verwandte Buchungsseiten",
-      relatedLandingsIntro: "Unterkunft passend zu Ihrem Plitvice-Plan wählen.",
+      relatedLandingsTitle: "Verwandte Seiten zur Buchung",
+      relatedLandingsIntro:
+        "Unterkunft wählen, die zu Ihrem Plan rund um Plitvice passt.",
     },
     it: {
       eyebrow: "Guida",
       coverImage: {
         src: "/images/placeholders/06-trail-hiking.svg",
-        alt: "Placeholder sentiero per attività in Lika.",
+        alt: "Placeholder passeggiata in natura per l’articolo sulle attività in Lika.",
       },
       activitiesSectionTitle: "Idee per intensità",
       activities: [
         {
           title: "Passeggiate leggere",
-          description: "Giorni di recupero tra uscite più intense.",
+          description: "Giorni di recupero tra escursioni più intense.",
           image: "/images/placeholders/02-lika-hills.svg",
           imageAlt: "Placeholder colline.",
         },
         {
-          title: "Parco di Plitvice",
-          description: "Classico attivo—scarpe e acqua.",
+          title: "Parco nazionale dei Laghi di Plitvice",
+          description: "Classico attivo—scarpe e acqua da pianificare.",
           image: "/images/placeholders/01-plitvice-lakes.svg",
           imageAlt: "Placeholder laghi.",
         },
         {
-          title: "Ritmo famiglia",
-          description: "Attività brevi e pause.",
+          title: "Ritmo per famiglie",
+          description: "Attività brevi e pause—meno stress.",
           image: "/images/placeholders/05-family-nature.svg",
           imageAlt: "Placeholder famiglia.",
         },
         {
           title: "Jacuzzi la sera",
-          description: "Chiudere la giornata con calore e silenzio.",
+          description: "Bagno caldo e silenzio per chiudere la giornata.",
           image: "/images/placeholders/04-jacuzzi-relax.svg",
           imageAlt: "Placeholder jacuzzi.",
         },
       ],
-      midCtaTitle: "Vi serve una base per giornate attive?",
+      midCtaTitle: "Cercate una base per giornate attive?",
       midCtaBody:
-        "Villa Velebita punta su natura, calma e prenotazione diretta.",
-      midCtaBookingLabel: "Prenota",
+        "Villa Velebita è un alloggio con focus su natura, calma e prenotazione diretta.",
+      midCtaBookingLabel: "Prenotazione",
       midCtaGalleryLabel: "Galleria",
       faqSectionTitle: "Domande frequenti",
       faqs: [
         {
           question: "La Lika è solo Plitvice?",
-          answer: "No—ci sono angoli più tranquilli per bilanciare.",
+          answer:
+            "No—ci sono anche angoli naturali più tranquilli per un programma equilibrato.",
         },
         {
-          question: "Come evitare stanchezza?",
-          answer: "Alternare intensità e prevedere riposo.",
+          question: "Come evitare di esagerare?",
+          answer: "Alternare intensità e inserire sempre momenti di riposo.",
         },
         {
           question: "E se piove?",
-          answer: "Giornate lente in casa o uscite brevi.",
+          answer: "Programmi più leggeri in casa o gite brevi nei dintorni.",
         },
         {
-          question: "Jacuzzi?",
-          answer: "Vedete la landing dedicata villa con jacuzzi.",
+          question: "La jacuzzi è importante?",
+          answer:
+            "Per un focus wellness vedete la pagina tematica villa con jacuzzi.",
         },
       ],
-      relatedLandingsTitle: "Pagine collegate per prenotare",
+      relatedLandingsTitle: "Pagine collegate per la prenotazione",
       relatedLandingsIntro:
-        "Scegliete l’alloggio in linea con il vostro piano su Plitvice.",
+        "Scegliete l’alloggio in linea con il vostro piano intorno a Plitvice.",
     },
   },
   "obiteljski-odmor-blizu-plitvica": {
@@ -604,34 +633,35 @@ export const GUIDES_ENRICHED: Record<
           imageAlt: "Placeholder hills.",
         },
       ],
-      midCtaTitle: "Looking for a calm family base?",
+      midCtaTitle: "Looking for a calm stay for your family?",
       midCtaBody:
-        "A holiday house and larger capacities help logistics—check availability directly.",
-      midCtaBookingLabel: "Book now",
+        "A holiday house and larger capacity options help with organisation—check availability directly.",
+      midCtaBookingLabel: "Booking",
       midCtaGalleryLabel: "Gallery",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Frequently asked questions",
       faqs: [
         {
-          question: "How do I reduce stress for kids?",
-          answer: "Shorter day segments and predictable timing.",
+          question: "How do I lower stress for children?",
+          answer: "Shorter parts of the day and a predictable schedule.",
         },
         {
-          question: "Is there enough space?",
+          question: "Is the stay spacious enough?",
           answer:
-            "For bigger families, also check the up-to-nine guest option.",
+            "For larger families, also look at the option for up to nine guests.",
         },
         {
-          question: "When should we visit the park?",
-          answer: "Often mornings work best—add breaks.",
+          question: "When is the best time to go to the park?",
+          answer: "Often in the morning, with breaks and realistic expectations.",
         },
         {
           question: "Do we need a jacuzzi?",
-          answer: "Not required, but popular for parents’ evening recovery.",
+          answer:
+            "Not essential, but popular for parents’ evening relaxation.",
         },
       ],
-      relatedLandingsTitle: "Related booking pages",
+      relatedLandingsTitle: "Related pages for booking",
       relatedLandingsIntro:
-        "Choose accommodation that matches your Plitvice plans.",
+        "Choose accommodation that matches your plan around Plitvice.",
     },
     de: {
       eyebrow: "Reiseführer",
@@ -666,94 +696,98 @@ export const GUIDES_ENRICHED: Record<
           imageAlt: "Platzhalter Hügel.",
         },
       ],
-      midCtaTitle: "Ruhige Familienbasis gesucht?",
+      midCtaTitle: "Ruhige Unterkunft für die Familie gesucht?",
       midCtaBody:
-        "Ferienhaus und größere Kapazitäten helfen—direkt Verfügbarkeit prüfen.",
-      midCtaBookingLabel: "Jetzt buchen",
+        "Ferienhaus und größere Kapazitäten helfen bei der Organisation—Verfügbarkeit direkt prüfen.",
+      midCtaBookingLabel: "Buchung",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Häufig gestellte Fragen",
       faqs: [
         {
-          question: "Weniger Stress für Kinder?",
-          answer: "Kürzere Tagesabschnitte und klare Zeiten.",
+          question: "Wie Stress für Kinder reduzieren?",
+          answer: "Kürzere Tagesabschnitte und ein vorhersehbarer Plan.",
         },
         {
-          question: "Genug Platz?",
-          answer: "Für größere Familien auch Option bis neun Personen prüfen.",
+          question: "Ist die Unterkunft groß genug?",
+          answer:
+            "Für größere Familien auch die Option bis neun Personen prüfen.",
         },
         {
-          question: "Wann in den Park?",
-          answer: "Oft vormittags—mit Pausen.",
+          question: "Wann in den Park fahren?",
+          answer: "Oft am Morgen, mit Pausen und realistischen Erwartungen.",
         },
         {
-          question: "Jacuzzi nötig?",
-          answer: "Nicht nötig, aber beliebt für Eltern abends.",
+          question: "Brauchen wir einen Jacuzzi?",
+          answer:
+            "Nicht zwingend, aber beliebt für die Abendruhe der Eltern.",
         },
       ],
-      relatedLandingsTitle: "Verwandte Buchungsseiten",
-      relatedLandingsIntro: "Unterkunft passend zu Ihrem Plitvice-Plan wählen.",
+      relatedLandingsTitle: "Verwandte Seiten zur Buchung",
+      relatedLandingsIntro:
+        "Unterkunft wählen, die zu Ihrem Plan rund um Plitvice passt.",
     },
     it: {
       eyebrow: "Guida",
       coverImage: {
         src: "/images/placeholders/05-family-nature.svg",
-        alt: "Placeholder famiglia per guida viaggio.",
+        alt: "Placeholder famiglia in natura per l’articolo sulla vacanza in famiglia.",
       },
-      activitiesSectionTitle: "Schemi adatti alle famiglie",
+      activitiesSectionTitle: "Attività che funzionano bene per le famiglie",
       activities: [
         {
-          title: "Passeggiate brevi",
-          description: "Meno auto, più gioco all’aperto.",
+          title: "Passeggiate più brevi",
+          description: "Meno tempo in auto, più gioco all’aperto.",
           image: "/images/placeholders/06-trail-hiking.svg",
           imageAlt: "Placeholder sentiero.",
         },
         {
-          title: "Parco di Plitvice",
-          description: "Pause e ritmi realistici per i bambini.",
+          title: "Parco nazionale dei Laghi di Plitvice",
+          description: "Pianificate pause e un ritmo realistico per i bambini.",
           image: "/images/placeholders/01-plitvice-lakes.svg",
           imageAlt: "Placeholder laghi.",
         },
         {
-          title: "Giornata in casa",
-          description: "Giochi, riposo, cena semplice.",
+          title: "Giornata presso l’alloggio",
+          description: "Giochi, riposo, cena semplice—reset per tutti.",
           image: "/images/placeholders/03-villa-outdoor.svg",
           imageAlt: "Placeholder casa.",
         },
         {
-          title: "Uscita leggera in Lika",
-          description: "Cambia ritmo senza lunghi trasferimenti.",
+          title: "Gita leggera in Lika",
+          description: "Cambio di ritmo senza lunghi trasferimenti.",
           image: "/images/placeholders/02-lika-hills.svg",
           imageAlt: "Placeholder colline.",
         },
       ],
-      midCtaTitle: "Cercate una base tranquilla per la famiglia?",
+      midCtaTitle: "Cercate un alloggio tranquillo per la famiglia?",
       midCtaBody:
-        "Casa vacanze e capienze maggiori aiutano la logistica—controllate la disponibilità direttamente.",
-      midCtaBookingLabel: "Prenota",
+        "Casa vacanze e capienze maggiori aiutano l’organizzazione—controllate la disponibilità direttamente.",
+      midCtaBookingLabel: "Prenotazione",
       midCtaGalleryLabel: "Galleria",
       faqSectionTitle: "Domande frequenti",
       faqs: [
         {
-          question: "Come ridurre lo stress dei bambini?",
-          answer: "Segmenti più corti e orari chiari.",
+          question: "Come ridurre lo stress per i bambini?",
+          answer: "Segmenti di giornata più corti e un programma prevedibile.",
         },
         {
-          question: "C’è abbastanza spazio?",
+          question: "L’alloggio è abbastanza spazioso?",
           answer:
             "Per famiglie numerose valutate anche l’opzione fino a nove ospiti.",
         },
         {
           question: "Quando andare al parco?",
-          answer: "Spesso la mattina, con pause.",
+          answer: "Spesso al mattino, con pause e aspettative realistiche.",
         },
         {
           question: "Serve la jacuzzi?",
-          answer: "Non obbligatoria, ma apprezzata la sera dai genitori.",
+          answer:
+            "Non è indispensabile, ma è molto apprezzata la sera dai genitori.",
         },
       ],
-      relatedLandingsTitle: "Pagine collegate per prenotare",
+      relatedLandingsTitle: "Pagine collegate per la prenotazione",
       relatedLandingsIntro:
-        "Scegliete l’alloggio in linea con il vostro piano su Plitvice.",
+        "Scegliete l’alloggio in linea con il vostro piano intorno a Plitvice.",
     },
   },
   "koliko-dana-treba-za-plitvice": {
@@ -851,33 +885,35 @@ export const GUIDES_ENRICHED: Record<
           imageAlt: "Placeholder jacuzzi.",
         },
       ],
-      midCtaTitle: "Planning multiple nights near Plitvice?",
+      midCtaTitle: "Planning several nights near Plitvice?",
       midCtaBody:
-        "Direct booking helps align dates and pricing before peak demand.",
-      midCtaBookingLabel: "Book now",
+        "Direct booking helps you align dates and pricing before peak-season crowds.",
+      midCtaBookingLabel: "Booking",
       midCtaGalleryLabel: "Gallery",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Frequently asked questions",
       faqs: [
         {
           question: "Is one day enough?",
-          answer: "It can work, but two days often feels richer.",
+          answer: "It can be, but enjoyment is often greater with two days.",
         },
         {
-          question: "How should I pace energy?",
-          answer: "Harder blocks in the morning, lighter afternoons.",
+          question: "How should I spread my energy?",
+          answer: "Heavier part in the morning, lighter afternoon.",
         },
         {
-          question: "Where to stay for multi-day trips?",
-          answer: "A nearby base saves driving and energy.",
+          question: "Where to stay for several days?",
+          answer:
+            "Nearby accommodation shortens drives and saves energy.",
         },
         {
-          question: "Is jacuzzi helpful after hiking?",
-          answer: "Many guests say yes—see the dedicated landing page.",
+          question: "Does a jacuzzi matter after walking?",
+          answer:
+            "For many guests it does—see the dedicated themed page.",
         },
       ],
-      relatedLandingsTitle: "Related booking pages",
+      relatedLandingsTitle: "Related pages for booking",
       relatedLandingsIntro:
-        "Choose accommodation that matches your Plitvice plans.",
+        "Choose accommodation that matches your plan around Plitvice.",
     },
     de: {
       eyebrow: "Reiseführer",
@@ -912,32 +948,35 @@ export const GUIDES_ENRICHED: Record<
           imageAlt: "Platzhalter Jacuzzi.",
         },
       ],
-      midCtaTitle: "Mehrere Nächte nahe Plitvice?",
+      midCtaTitle: "Planen Sie mehrere Nächte nahe Plitvice?",
       midCtaBody:
-        "Direktbuchung hilft bei Terminen und Preisen vor Hochsaison.",
-      midCtaBookingLabel: "Jetzt buchen",
+        "Direktbuchung hilft, Termine und Preise vor der Hochsaison abzustimmen.",
+      midCtaBookingLabel: "Buchung",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Häufig gestellte Fragen",
       faqs: [
         {
           question: "Reicht ein Tag?",
-          answer: "Möglich, aber zwei Tage wirken oft reicher.",
+          answer: "Es kann reichen, aber mit zwei Tagen genießt man oft mehr.",
         },
         {
-          question: "Energie einteilen?",
-          answer: "Vormittags intensiver, nachmittags leichter.",
+          question: "Wie Kraft einteilen?",
+          answer: "Anspruchsvoller am Vormittag, leichter am Nachmittag.",
         },
         {
-          question: "Unterkunft für mehrere Tage?",
-          answer: "Nahe gelegen spart Fahrzeit und Energie.",
+          question: "Wo für mehrere Tage übernachten?",
+          answer:
+            "Nahe gelegene Unterkunft verkürzt Fahrten und spart Energie.",
         },
         {
-          question: "Jacuzzi nach Wandern?",
-          answer: "Viele Gäste sagen ja—siehe Landingpage.",
+          question: "Ist Jacuzzi nach dem Wandern wichtig?",
+          answer:
+            "Für viele Gäste ja—siehe die Themenseite.",
         },
       ],
-      relatedLandingsTitle: "Verwandte Buchungsseiten",
-      relatedLandingsIntro: "Unterkunft passend zu Ihrem Plitvice-Plan wählen.",
+      relatedLandingsTitle: "Verwandte Seiten zur Buchung",
+      relatedLandingsIntro:
+        "Unterkunft wählen, die zu Ihrem Plan rund um Plitvice passt.",
     },
     it: {
       eyebrow: "Guida",
@@ -974,31 +1013,33 @@ export const GUIDES_ENRICHED: Record<
       ],
       midCtaTitle: "Pianificate più notti vicino a Plitvice?",
       midCtaBody:
-        "La prenotazione diretta aiuta su date e prezzi prima dell’alta stagione.",
-      midCtaBookingLabel: "Prenota",
+        "La prenotazione diretta aiuta ad allineare date e prezzi prima dell’alta stagione.",
+      midCtaBookingLabel: "Prenotazione",
       midCtaGalleryLabel: "Galleria",
       faqSectionTitle: "Domande frequenti",
       faqs: [
         {
           question: "Basta un giorno?",
-          answer: "Si può, ma due giorni spesso danno più soddisfazione.",
+          answer: "Può bastare, ma con due giorni si gode spesso di più.",
         },
         {
-          question: "Come gestire le energie?",
-          answer: "Mattina più impegnativa, pomeriggio più leggero.",
+          question: "Come distribuire le energie?",
+          answer: "Parte più intensa al mattino, pomeriggio più leggero.",
         },
         {
           question: "Dove dormire per più giorni?",
-          answer: "Una base vicina riduce spostamenti e fatica.",
+          answer:
+            "Un alloggio vicino accorcia i tragitti e fa risparmiare energia.",
         },
         {
-          question: "Jacuzzi dopo le camminate?",
-          answer: "Molti ospiti la apprezzano—vedi la landing dedicata.",
+          question: "La jacuzzi conta dopo le passeggiate?",
+          answer:
+            "Per molti ospiti sì—vedete la pagina tematica dedicata.",
         },
       ],
-      relatedLandingsTitle: "Pagine collegate per prenotare",
+      relatedLandingsTitle: "Pagine collegate per la prenotazione",
       relatedLandingsIntro:
-        "Scegliete l’alloggio in linea con il vostro piano su Plitvice.",
+        "Scegliete l’alloggio in linea con il vostro piano intorno a Plitvice.",
     },
   },
 };

@@ -109,314 +109,314 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
     en: {
       eyebrow: "Plitvice & Lika",
       heroImage: {
-        src: "/images/placeholders/01-plitvice-lakes.svg",
-        alt: "Stylized lakes and waterfalls illustration as a visual cue for Plitvice Lakes National Park (placeholder).",
+        src: "/images/seo/landing/plitvicka_jezera.png",
+        alt: "Illustrative lakes and waterfalls visual—a reminder of Plitvice Lakes National Park (placeholder).",
       },
       highlights: [
-        "A practical base for early starts and a calmer daily rhythm",
-        "Private jacuzzi after trails and sightseeing",
+        "Earlier park entry and more time to enjoy nature",
+        "Private jacuzzi after walks and a day in the park",
         "Direct booking with clear communication",
       ],
       sections: [
         {
-          heading: "Why staying in Lika works well with a Plitvice visit",
+          heading: "Why accommodation in Lika makes sense with a Plitvice visit",
           paragraphs: [
-            "A slightly quieter base helps you keep your own pace: morning park time, a relaxed afternoon, and peaceful evenings.",
-            "Villa Velebita focuses on nature, privacy, and simple logistics for couples, families, and small groups.",
+            "If you choose Villa Velebita as your base, it is easier to keep your own rhythm: lakes in the morning, a quiet afternoon, and calm evenings nearby.",
+            "Villa Velebita highlights nature, space for a family or small group, and simple ways to link activities throughout your stay.",
           ],
         },
         {
-          heading: "Balance active days with slow evenings",
+          heading: "Active days and relaxed evenings",
           paragraphs: [
-            "Plitvice is best enjoyed with enough breaks and flexible alternatives nearby.",
-            "A private jacuzzi and home-style comfort help you unwind after viewpoints and walking routes.",
+            "Plitvice Lakes are best with enough time for breaks and shorter alternatives in the area.",
+            "The jacuzzi and privacy of the house help you slow down after trails and viewpoints.",
           ],
         },
         {
           heading: "Families, couples, and small groups",
           paragraphs: [
-            "Plan one main outing in the morning and keep the afternoon lighter to avoid travel fatigue.",
-            "For larger groups, check the dedicated page for stays up to nine guests to match capacity and comfort.",
+            "You can keep the schedule flexible: one main outing in the morning, a lighter afternoon, without rushing parking or the drive back.",
+            "For larger groups, see the page for accommodation up to nine guests to match capacity and comfort.",
           ],
         },
       ],
-      activitiesSectionTitle: "Activities and nearby highlights",
+      activitiesSectionTitle: "Activities and attractions nearby",
       activities: [
         {
           title: "Plitvice Lakes National Park",
           description:
-            "The signature experience: boardwalk routes, lakes, and waterfalls—plan entry timing by season.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
-          imageAlt: "Placeholder lakes visual.",
+            "Walks along the lakes and wooden boardwalks through the national park.",
+          image: "/images/seo/landing/family_walking.jpg",
+          imageAlt: "Placeholder lakes and waterfalls visual.",
         },
         {
-          title: "Viewpoints and gentle walks in Lika",
+          title: "Viewpoints and walks in Lika",
           description:
-            "Shorter nature moments when you want a quieter day away from peak crowds.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder Lika hills illustration.",
+            "Shorter routes and quieter nature when you want fewer crowds.",
+          image: "/images/seo/landing/vidikovci.png",
+          imageAlt: "Placeholder Lika hillside landscape.",
         },
         {
-          title: "Half-day plans and local rhythm",
+          title: "Local half-day trips at an easy pace",
           description:
-            "Combine a lighter outing with food stops and downtime—great alongside a park day.",
-          image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Placeholder hiking trail illustration.",
+            "Half-day plans with food and rest—a good balance alongside the park.",
+          image: "/images/seo/landing/hrana.png",
+          imageAlt: "Placeholder walk in nature.",
         },
         {
-          title: "Evening reset at the house",
+          title: "Relaxation at the house",
           description:
-            "Terrace time, jacuzzi, and private space after an active day outdoors.",
-          image: "/images/placeholders/03-villa-outdoor.svg",
-          imageAlt: "Placeholder outdoor stay visual.",
+            "Terrace, jacuzzi, and private space after the active part of the day.",
+          image: "/images/seo/landing/odmor_u_kuci.png",
+          imageAlt: "Placeholder outdoor area of the stay.",
         },
       ],
-      midCtaTitle: "Ready to pick dates that fit your trip?",
+      midCtaTitle: "Want dates that work for your trip?",
       midCtaBody:
-        "Review availability and pricing, then book directly for faster details and no marketplace commission.",
-      midCtaPrimaryLabel: "Book now",
+        "Check availability and pricing, then book directly—quicker coordination and no platform commission.",
+      midCtaPrimaryLabel: "Booking",
       midCtaGalleryLabel: "Gallery",
       faqSectionTitle: "Frequently asked questions",
       faqs: [
         {
-          question: "How far is the national park?",
+          question: "How far is it to the park entrance?",
           answer:
-            "Distance depends on the entrance you use and the season. A Lika base typically means a short drive toward the Plitvice area—confirm the best route before arrival.",
+            "Distance depends on which entrance you use and the season; a base in Lika usually means a short drive to the Plitvice area—around 30 minutes by car. Confirm the best route and timing before you arrive.",
         },
         {
-          question: "Is the jacuzzi available year-round?",
+          question: "Is the jacuzzi available all year?",
           answer:
-            "The jacuzzi is an outdoor amenity; usability depends on weather and preference. Ask when you request dates.",
+            "The jacuzzi is on the house terrace and part of the stay experience; use depends on the weather and your preferences.",
         },
         {
           question: "Can I book directly?",
           answer:
-            "Yes—direct booking reduces intermediaries and makes arrival and payment details easier to align.",
+            "Yes—direct booking through the site means fewer intermediaries and simpler communication about arrival and payment.",
         },
         {
           question: "Who is this stay best for?",
           answer:
-            "Couples, families, and small groups who want calm, privacy, and practical day-trip logistics.",
+            "Couples, families, and small groups looking for calm, privacy, and practical logistics for day trips.",
         },
         {
-          question: "How should I plan a park day?",
+          question: "How should I plan a day in the park?",
           answer:
-            "Earlier starts and a simpler schedule usually feel better; pair the park with a relaxed evening at the villa.",
+            "An earlier start and a simple schedule usually feel better; combine Plitvice with a relaxed evening on the terrace.",
         },
       ],
       reservationIntro:
-        "Check pricing, availability, and location before booking so your travel plan stays straightforward.",
+        "Review pricing, availability, and location before booking so your trip plan stays simple and predictable.",
       guidesBlockTitle: "Guides for Plitvice and Lika",
       guidesBlockIntro:
-        "Short articles help you build an itinerary, choose activities, and get more value from your stay.",
+        "Short articles help you shape an itinerary, pick activities, and get more from a stay that matches your pace.",
     },
     de: {
       eyebrow: "Plitvice & Lika",
       heroImage: {
-        src: "/images/placeholders/01-plitvice-lakes.svg",
-        alt: "Stilisierte Seen und Wasserfälle als Platzhalter-Motiv für den Nationalpark Plitvicer Seen.",
+        src: "/images/seo/landing/plitvicka_jezera.png",
+        alt: "Illustratives Motiv von Seen und Wasserfällen—Erinnerung an den Nationalpark Plitvicer Seen (Platzhalter).",
       },
       highlights: [
-        "Gute Ausgangslage für frühe Starts und ruhigere Tagesabläufe",
-        "Privater Jacuzzi nach Wanderungen",
+        "Früherer Parkbesuch und mehr Zeit in der Natur",
+        "Privater Jacuzzi nach Spaziergängen und einem Tag im Park",
         "Direktbuchung mit klarer Kommunikation",
       ],
       sections: [
         {
-          heading: "Warum Lika als Basis zu Plitvice passt",
+          heading: "Warum Unterkunft in der Lika zu Plitvice passt",
           paragraphs: [
-            "Etwas ruhiger gelegene Unterkünfte helfen, ein eigenes Tempo zu halten: Vormittag im Park, entspannter Nachmittag, ruhiger Abend.",
-            "Villa Velebita legt Wert auf Natur, Privatsphäre und einfache Logistik für Paare, Familien und kleine Gruppen.",
+            "Wer Villa Velebita als Basis wählt, behält leichter das eigene Tempo: Seen am Morgen, ruhiger Nachmittag, stille Abende in der Umgebung.",
+            "Villa Velebita betont Natur, Platz für Familie oder kleine Gruppe und einfache Verknüpfung von Aktivitäten während des gesamten Aufenthalts.",
           ],
         },
         {
           heading: "Aktive Tage und entspannte Abende",
           paragraphs: [
-            "Plitvice wirkt am angenehmsten mit Pausen und flexiblen Alternativen in der Umgebung.",
-            "Jacuzzi und Hauskomfort unterstützen die Erholung nach Aussichtspunkten und Wanderwegen.",
+            "Die Plitvicer Seen erlebt man am besten mit genug Pausen und kurzen Alternativen in der Umgebung.",
+            "Jacuzzi und Privatsphäre des Hauses helfen, nach Wegen und Aussichtspunkten langsamer zu werden.",
           ],
         },
         {
-          heading: "Familien, Paare und Gruppen",
+          heading: "Familien, Paare und kleine Gruppen",
           paragraphs: [
-            "Ein Hauptprogramm vormittags und ein leichter Nachmittag reduzieren Stress.",
-            "Für größere Gruppen lohnt sich die Unterkunftsseite für bis zu neun Personen.",
+            "Der Tagesablauf bleibt flexibel: ein Hauptausflug am Morgen, leichter Nachmittag, ohne Stress mit Parken oder Rückfahrt.",
+            "Für größere Gruppen lohnt sich die Seite für Unterkunft bis neun Personen—Kapazität und Komfort abstimmen.",
           ],
         },
       ],
-      activitiesSectionTitle: "Aktivitäten und Highlights in der Nähe",
+      activitiesSectionTitle: "Aktivitäten und Sehenswürdigkeiten in der Nähe",
       activities: [
         {
           title: "Nationalpark Plitvicer Seen",
           description:
-            "Klassische Routen über Stege, Seen und Wasserfälle—Eintritt und Route saisonal planen.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
-          imageAlt: "Platzhalterbild Seen.",
+            "Spaziergänge entlang der Seen und Holzstege durch den Nationalpark.",
+          image: "/images/seo/landing/family_walking.jpg",
+          imageAlt: "Platzhalter Seen und Wasserfälle.",
         },
         {
-          title: "Aussichtspunkte und leichte Wanderungen",
+          title: "Aussichtspunkte und Wege in der Lika",
           description:
-            "Kürzere Naturmomente, wenn Sie einen ruhigeren Tag möchten.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Platzhalter Hügellandschaft.",
+            "Kürzere Routen und ruhigere Natur, wenn weniger Andrang gewünscht ist.",
+          image: "/images/seo/landing/vidikovci.png",
+          imageAlt: "Platzhalter Hügellandschaft der Lika.",
         },
         {
-          title: "Halbtagspläne und lokaler Rhythmus",
+          title: "Lokale Halbtagesausflüge im ruhigen Tempo",
           description:
-            "Kombinieren Sie leichtere Ausflüge mit Genusspausen—ideal neben einem Parktag.",
-          image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Platzhalter Wanderweg.",
+            "Halbtagespläne mit Essen und Pause—guter Ausgleich zum Parkbesuch.",
+          image: "/images/seo/landing/hrana.png",
+          imageAlt: "Platzhalter Spaziergang in der Natur.",
         },
         {
-          title: "Abends im Haus entspannen",
+          title: "Erholung am Haus",
           description:
-            "Terrasse, Jacuzzi und privater Raum nach einem aktiven Tag.",
-          image: "/images/placeholders/03-villa-outdoor.svg",
-          imageAlt: "Platzhalter Außenbereich.",
+            "Terrasse, Jacuzzi und privater Raum nach dem aktiven Teil des Tages.",
+          image: "/images/seo/landing/odmor_u_kuci.png",
+          imageAlt: "Platzhalter Außenbereich der Unterkunft.",
         },
       ],
-      midCtaTitle: "Möchten Sie passende Termine sichern?",
+      midCtaTitle: "Wünschen Sie Termine, die zu Ihrer Reise passen?",
       midCtaBody:
         "Verfügbarkeit und Preise prüfen, dann direkt buchen—schnellere Absprachen ohne Plattformprovision.",
-      midCtaPrimaryLabel: "Jetzt buchen",
+      midCtaPrimaryLabel: "Buchung",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "Häufige Fragen",
+      faqSectionTitle: "Häufig gestellte Fragen",
       faqs: [
         {
-          question: "Wie weit ist der Nationalpark?",
+          question: "Wie weit ist es zum Parkeingang?",
           answer:
-            "Das hängt vom Eingang und der Jahreszeit ab. Aus Lika ist die Anfahrt in die Plitvice-Region meist kurz—Route vor Anreise bestätigen.",
+            "Die Entfernung hängt vom gewählten Eingang und der Saison ab; eine Basis in der Lika bedeutet meist eine kurze Fahrt in die Plitvice-Region—etwa 30 Minuten mit dem Auto. Route und Zeit vor Anreise abstimmen.",
         },
         {
-          question: "Ist der Jacuzzi ganzjährig nutzbar?",
+          question: "Ist der Jacuzzi das ganze Jahr verfügbar?",
           answer:
-            "Der Jacuzzi ist outdoor; Nutzung hängt vom Wetter ab. Bei der Anfrage nach Terminen nachfragen.",
+            "Der Jacuzzi steht auf der Terrasse des Hauses und gehört zum Aufenthalt; die Nutzung hängt vom Wetter und Ihren Vorlieben ab.",
         },
         {
           question: "Kann ich direkt buchen?",
           answer:
-            "Ja—Direktbuchung reduziert Zwischeninstanzen und erleichtert Details zu Ankunft und Zahlung.",
+            "Ja—Direktbuchung über die Website bedeutet weniger Vermittler und einfachere Kommunikation zu Ankunft und Zahlung.",
         },
         {
-          question: "Für wen eignet sich der Aufenthalt?",
+          question: "Für wen eignet sich die Unterkunft am besten?",
           answer:
-            "Für Paare, Familien und kleine Gruppen, die Ruhe, Privatsphäre und praktische Tagesplanung schätzen.",
+            "Für Paare, Familien und kleine Gruppen, die Ruhe, Privatsphäre und praktische Logistik für Tagesausflüge suchen.",
         },
         {
-          question: "Wie plane ich einen Parktag?",
+          question: "Wie plane ich einen Tag im Park?",
           answer:
-            "Früher starten und das Programm schlank halten; den Abend ruhig in der Villa ausklingen lassen.",
+            "Früher Start und ein schlanker Plan wirken meist angenehmer; Plitvice mit einem ruhigen Abend auf der Terrasse kombinieren.",
         },
       ],
       reservationIntro:
-        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung klar bleibt.",
+        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung einfach und ohne Überraschungen bleibt.",
       guidesBlockTitle: "Reiseführer für Plitvice und Lika",
       guidesBlockIntro:
-        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert Ihres Aufenthalts.",
+        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert eines Aufenthalts im passenden Rhythmus.",
     },
     it: {
       eyebrow: "Plitvice e Lika",
       heroImage: {
-        src: "/images/placeholders/01-plitvice-lakes.svg",
-        alt: "Illustrazione stilizzata di laghi e cascate come promemoria visivo del parco (placeholder).",
+        src: "/images/seo/landing/plitvicka_jezera.png",
+        alt: "Illustrazione di laghi e cascate—promemoria del Parco nazionale dei Laghi di Plitvice (placeholder).",
       },
       highlights: [
-        "Base pratica per partenze mattutine e ritmi più tranquilli",
-        "Jacuzzi privata dopo escursioni",
+        "Arrivo anticipato al parco e più tempo per godersi la natura",
+        "Jacuzzi privata dopo passeggiate e una giornata nel parco",
         "Prenotazione diretta con comunicazione chiara",
       ],
       sections: [
         {
-          heading: "Perché la Lika funziona bene con Plitvice",
+          heading: "Perché un alloggio in Lika ha senso con Plitvice",
           paragraphs: [
-            "Una base leggermente defilata aiuta a tenere il proprio ritmo: mattina al parco, pomeriggio più soft, sera silenziosa.",
-            "Villa Velebita punta su natura, privacy e logistica semplice per coppie, famiglie e piccoli gruppi.",
+            "Se scegliete Villa Velebita come base, è più facile tenere il vostro ritmo: laghi al mattino, pomeriggio tranquillo, serate calme nei dintorni.",
+            "Villa Velebita mette in evidenza natura, spazio per famiglia o piccolo gruppo e un modo semplice di collegare le attività durante tutto il soggiorno.",
           ],
         },
         {
-          heading: "Giornate attive e serate lente",
+          heading: "Giornate attive e serate rilassate",
           paragraphs: [
-            "Plitvice si gusta meglio con pause e alternative flessibili nei dintorni.",
-            "Jacuzzi e comfort da casa aiutano a recuperare dopo sentieri e belvedere.",
+            "I Laghi di Plitvice si vivono meglio con pause sufficienti e alternative brevi nella zona.",
+            "La jacuzzi e la privacy della casa aiutano a rallentare dopo sentieri e belvedere.",
           ],
         },
         {
           heading: "Famiglie, coppie e piccoli gruppi",
           paragraphs: [
-            "Un’uscita principale al mattino e un pomeriggio più leggero riduce la fatica di viaggio.",
-            "Per gruppi più numerosi, consultate la pagina dedicata fino a nove ospiti.",
+            "Potete organizzare il programma in modo flessibile: un’escursione principale al mattino, pomeriggio più leggero, senza fretta per parcheggio o ritorno.",
+            "Per gruppi più numerosi, vedete la pagina per alloggio fino a nove ospiti per allineare capienza e comfort.",
           ],
         },
       ],
-      activitiesSectionTitle: "Attività e attrazioni vicine",
+      activitiesSectionTitle: "Attività e attrazioni nelle vicinanze",
       activities: [
         {
-          title: "Parco nazionale dei laghi di Plitvice",
+          title: "Parco nazionale dei Laghi di Plitvice",
           description:
-            "Percorsi sulle passerelle, laghi e cascate—pianificate ingressi e tempi in base alla stagione.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
-          imageAlt: "Placeholder laghi.",
+            "Passeggiate lungo i laghi e passerelle in legno nel parco nazionale.",
+          image: "/images/seo/landing/family_walking.jpg",
+          imageAlt: "Placeholder laghi e cascate.",
         },
         {
-          title: "Belvedere e passeggiate nella Lika",
+          title: "Belvedere e passeggiate in Lika",
           description:
-            "Momenti brevi nella natura quando volete un giorno più tranquillo.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder colline.",
+            "Percorsi più corti e natura più tranquilla quando volete meno folla.",
+          image: "/images/seo/landing/vidikovci.png",
+          imageAlt: "Placeholder paesaggio collinare della Lika.",
         },
         {
-          title: "Mezze giornate e ritmo locale",
+          title: "Escursioni locali a mezza giornata",
           description:
-            "Combinare uscite leggere con pause gastronomiche—ottimo accanto a una giornata in parco.",
-          image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Placeholder sentiero.",
+            "Programmi di mezza giornata con cibo e riposo—buon equilibrio accanto al parco.",
+          image: "/images/seo/landing/hrana.png",
+          imageAlt: "Placeholder passeggiata nella natura.",
         },
         {
-          title: "Relax serale in villa",
+          title: "Riposo presso la casa",
           description:
-            "Terrazza, jacuzzi e spazio privato dopo una giornata attiva.",
-          image: "/images/placeholders/03-villa-outdoor.svg",
-          imageAlt: "Placeholder esterno.",
+            "Terrazza, jacuzzi e spazio privato dopo la parte attiva della giornata.",
+          image: "/images/seo/landing/odmor_u_kuci.png",
+          imageAlt: "Placeholder area esterna dell’alloggio.",
         },
       ],
-      midCtaTitle: "Volete fissare le date giuste per il viaggio?",
+      midCtaTitle: "Volete date adatte al vostro viaggio?",
       midCtaBody:
-        "Controllate disponibilità e prezzi, poi prenotate direttamente per dettagli più rapidi e senza commissioni da piattaforma.",
-      midCtaPrimaryLabel: "Prenota",
+        "Controllate disponibilità e prezzi, poi prenotate direttamente—coordinamento più rapido e senza commissioni di piattaforma.",
+      midCtaPrimaryLabel: "Prenotazione",
       midCtaGalleryLabel: "Galleria",
       faqSectionTitle: "Domande frequenti",
       faqs: [
         {
-          question: "Quanto dista il parco?",
+          question: "Quanto dista l’ingresso al parco?",
           answer:
-            "Dipende dall’ingresso e dalla stagione. Dalla Lika di solito si raggiunge l’area di Plitvice con una guida breve—confermate il percorso prima dell’arrivo.",
+            "La distanza dipende dall’ingresso scelto e dalla stagione; una base in Lika di solito significa un breve tragitto verso Plitvice—circa 30 minuti in auto. Confermate percorso e orari prima dell’arrivo.",
         },
         {
           question: "La jacuzzi è disponibile tutto l’anno?",
           answer:
-            "È un servizio outdoor; l’uso dipende dal meteo. Chiedete in fase di richiesta date.",
+            "La jacuzzi si trova sulla terrazza della casa ed è parte dell’esperienza di soggiorno; l’uso dipende dal meteo e dalle vostre preferenze.",
         },
         {
           question: "Posso prenotare direttamente?",
           answer:
-            "Sì—la prenotazione diretta riduce intermediari e semplifica arrivo e pagamento.",
+            "Sì—la prenotazione diretta sul sito riduce intermediari e semplifica la comunicazione su arrivo e pagamento.",
         },
         {
-          question: "Per chi è più adatto?",
+          question: "Per chi è più adatto questo alloggio?",
           answer:
-            "Coppie, famiglie e piccoli gruppi che cercano calma, privacy e logistica pratica.",
+            "Coppie, famiglie e piccoli gruppi che cercano calma, privacy e logistica pratica per le gite giornaliere.",
         },
         {
-          question: "Come organizzare una giornata in parco?",
+          question: "Come pianificare una giornata nel parco?",
           answer:
-            "Partenza anticipata e programma snello di solito funzionano meglio; la sera, relax in villa.",
+            "Di solito funziona meglio una partenza anticipata e un programma semplice; unite Plitvice a una serata rilassata in terrazza.",
         },
       ],
       reservationIntro:
-        "Controllate prezzi, disponibilità e posizione prima di prenotare per un viaggio senza sorprese.",
+        "Controllate prezzi, disponibilità e posizione prima di prenotare per un piano di viaggio semplice e senza sorprese.",
       guidesBlockTitle: "Guide a Plitvice e alla Lika",
       guidesBlockIntro:
-        "Articoli brevi per itinerari, idee di attività e per sfruttare meglio il soggiorno.",
+        "Articoli brevi per costruire l’itinerario, scegliere attività e ottenere di più da un soggiorno al vostro ritmo.",
     },
   },
   "kuca-za-odmor-plitvice": {
@@ -526,306 +526,313 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
     en: {
       eyebrow: "Holiday house",
       heroImage: {
-        src: "/images/placeholders/03-villa-outdoor.svg",
+        src: "/images/seo/landing/jacuzzi.png",
         alt: "Illustration of a holiday house outdoor area (placeholder).",
       },
       highlights: [
-        "The whole house for your group—no sharing with other travelers",
-        "Space for shared meals and calm evenings after day trips",
-        "Direct booking with transparent stay terms",
+        "The whole property for your group—no sharing with other guests",
+        "Space to gather and calm evenings after day trips",
+        "Direct booking with clear stay terms",
       ],
       sections: [
         {
-          heading: "A holiday house as your Plitvice + Lika base",
+          heading: "A holiday house as your base for Plitvice and Lika",
           paragraphs: [
-            "Booking the entire home makes family rhythms easier: slower mornings, flexible departures, and a more “at home” feeling.",
-            "Lika offers quiet nights and short drives toward major nature highlights—ideal for multi-day stays.",
+            "When you book the entire house, it is easier to align family routines, coffee time, and trail departures without a “hotel” rhythm.",
+            "Lika offers quiet nights, starry evenings, and short drives to the main natural highlights—ideal for a multi-day stay.",
           ],
         },
         {
-          heading: "Families and friends traveling together",
+          heading: "Families and groups of friends",
           paragraphs: [
-            "Group travel needs room for luggage, downtime, and shared time without feeling crowded.",
-            "After an active day, a peaceful evening at the house closes the day nicely—especially if you also want jacuzzi-focused comfort on another landing page.",
+            "Traveling together needs enough room for luggage, children’s play, and adults relaxing.",
+            "After an active day, a calm evening at the house closes the day well—especially if you plan a barbecue, jacuzzi time, or a glass of wine on the terrace.",
           ],
         },
         {
-          heading: "Travel logistics",
+          heading: "Trip logistics",
           paragraphs: [
-            "Private stays simplify early arrivals, late departures, and clear communication with the host.",
-            "Pack layers and reliable walking shoes—mountain weather can shift the pace of outdoor plans.",
+            "Early arrival or late departure works more smoothly with private accommodation and flexible communication with the host.",
+            "Pack seasonal footwear, light layers, and a rain plan—weather around Plitvice can change the pace of the day.",
           ],
         },
       ],
-      activitiesSectionTitle: "Things to do during your stay",
+      activitiesSectionTitle: "What to do during your stay",
       activities: [
         {
           title: "Plitvice Lakes National Park",
           description:
-            "The headline reason to visit: waterfalls, lakes, and scenic boardwalks.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+            "The main reason for the trip: waterfalls, trails, and water colours through the seasons.",
+          image: "/images/seo/landing/plitvice.jpg",
           imageAlt: "Placeholder lakes.",
         },
         {
-          title: "Gentle walks and viewpoints nearby",
-          description:
-            "Lower-traffic nature moments when you want fresh air without a full-day push.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder hills.",
+          title: "Walks and viewpoints nearby",
+          description: "Gentle routes when you want fewer people and more fresh air.",
+          image: "/images/seo/landing/vidikovci.png",
+          imageAlt: "Placeholder Lika.",
         },
         {
-          title: "Slow time at the house",
+          title: "Family games and downtime at the house",
           description:
-            "Games, reading, or a simple barbecue night—a day without driving.",
-          image: "/images/placeholders/05-family-nature.svg",
-          imageAlt: "Placeholder family outdoors.",
+            "Board-game evening, barbecue, or a quiet book—a day without driving.",
+          image: "/images/seo/landing/hrana.png",
+          imageAlt: "Placeholder family in nature.",
         },
         {
           title: "A more active outing",
           description:
-            "A longer trail day or two highlights when your group has energy to spare.",
-          image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Placeholder trail.",
+            "A longer hike, zip line, or quad tour if you are up for it.",
+          image: "/images/seo/landing/zip-line.jpg",
+          imageAlt: "Placeholder hiking.",
         },
       ],
       midCtaTitle: "Need the whole house for your dates?",
       midCtaBody:
-        "Check capacity and pricing, send a booking request, and align arrival details directly—no marketplace fees.",
-      midCtaPrimaryLabel: "Book now",
+        "Check capacity and pricing, send a request for your dates, and arrange arrival details directly—no commission.",
+      midCtaPrimaryLabel: "Booking",
       midCtaGalleryLabel: "Gallery",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Frequently asked questions",
       faqs: [
         {
-          question: "Is the house fully private?",
+          question: "Is the house exclusively for us?",
           answer:
-            "The stay is designed as a private holiday house for one guest group at a time.",
+            "The stay is set up as a private holiday house for one guest group—no sharing with others.",
         },
         {
-          question: "Is it suitable for children?",
+          question: "Is this stay good for children?",
           answer:
-            "Families often value privacy and flexible pacing; bring sturdy shoes and layers for changing weather.",
+            "Families appreciate the privacy and flexible daily rhythm; bring walking shoes and layers for changing weather.",
         },
         {
           question: "How does direct booking work?",
           answer:
-            "You coordinate arrival, access, and payment details directly with the property.",
+            "Contact and terms go directly with the property, which simplifies arrival, keys, and payment.",
         },
         {
-          question: "What if we want a jacuzzi-focused stay?",
+          question: "Can we combine it with a jacuzzi focus?",
           answer:
-            "See the dedicated villa + jacuzzi landing page for that emphasis.",
+            "For more emphasis on wellness, see the villa with jacuzzi near Plitvice page.",
         },
         {
-          question: "How many days should we plan?",
+          question: "How many days is ideal?",
           answer:
-            "Two or three days is a common sweet spot for a calm rhythm plus park time and local exploring.",
+            "Two or three days are often optimal for a calm pace with the park and the surrounding area.",
         },
       ],
       reservationIntro:
-        "Check pricing, availability, and location before booking so your travel plan stays straightforward.",
+        "Review pricing, availability, and location before booking so your trip plan stays simple and predictable.",
       guidesBlockTitle: "Guides for Plitvice and Lika",
       guidesBlockIntro:
-        "Short articles help you build an itinerary, choose activities, and get more value from your stay.",
+        "Short articles help you shape an itinerary, pick activities, and get more from a stay that matches your pace.",
     },
     de: {
       eyebrow: "Ferienhaus",
       heroImage: {
-        src: "/images/placeholders/03-villa-outdoor.svg",
-        alt: "Illustration eines Ferienhaus-Außenbereichs (Platzhalter).",
+        src: "/images/seo/landing/jacuzzi.png",
+        alt: "Illustration des Außenbereichs eines Ferienhauses (Platzhalter).",
       },
       highlights: [
-        "Das gesamte Haus nur für Ihre Gruppe",
-        "Gemeinsame Abende nach Ausflügen",
-        "Direktbuchung mit transparenten Konditionen",
+        "Das gesamte Objekt nur für Ihre Gruppe—ohne andere Gäste",
+        "Raum für gemeinsame Zeit und ruhige Abende nach Ausflügen",
+        "Direktbuchung mit klaren Aufenthaltsbedingungen",
       ],
       sections: [
         {
           heading: "Ferienhaus als Basis für Plitvice und Lika",
           paragraphs: [
-            "Ein ganzes Haus erleichtert Familienalltag und flexiblere Tageszeiten.",
-            "Lika bietet ruhige Nächze und kurze Fahrten zu Naturhighlights—ideal für mehrtägige Aufenthalte.",
+            "Wer das ganze Haus bucht, kann Familienrhythmus, Kaffeepause und Abfahrt zu den Wegen leichter abstimmen—ohne „Hotel“-Tempo.",
+            "Die Lika bietet Ruhe, Sternenhimmel am Abend und kurze Fahrten zu den wichtigsten Naturattraktionen—ideal für mehrtägigen Urlaub.",
           ],
         },
         {
           heading: "Familien und Freundesgruppen",
           paragraphs: [
-            "Gruppen brauchen Platz für Gepäck, Pausen und gemeinsame Zeit.",
-            "Nach einem aktiven Tag wirkt ein ruhiger Abend im Haus wie ein natürlicher Abschluss.",
+            "Gemeinsame Reisen brauchen Platz für Gepäck, Spiel der Kinder und Erholung der Erwachsenen.",
+            "Nach einem aktiven Tag schließt ein ruhiger Abend am Haus den Tag gut ab—besonders mit Grill, Jacuzzi oder einem Glas Wein auf der Terrasse.",
           ],
         },
         {
-          heading: "Reiseorganisation",
+          heading: "Reiselogistik",
           paragraphs: [
-            "Privatunterkünfte vereinfachen Ankunft, Abreise und Absprachen.",
-            "Schichten und gutes Schuhwerk mitnehmen—Wetter und Wege können den Tagesrhythmus beeinflussen.",
+            "Frühe Ankunft oder späte Abreise funktionieren einfacher mit privater Unterkunft und flexibler Kommunikation mit dem Gastgeber.",
+            "Saisonales Schuhwerk, leichte Schichten und ein Regenplan mitnehmen—das Wetter um Plitvice kann das Tagestempo ändern.",
           ],
         },
       ],
-      activitiesSectionTitle: "Aktivitäten während des Aufenthalts",
+      activitiesSectionTitle: "Was man während des Aufenthalts unternehmen kann",
       activities: [
         {
           title: "Nationalpark Plitvicer Seen",
-          description: "Wasserfälle, Seen und klassische Stege.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+          description:
+            "Hauptgrund der Reise: Wasserfälle, Wege und Wasserfarben je nach Jahreszeit.",
+          image: "/images/seo/landing/plitvice.jpg",
           imageAlt: "Platzhalter Seen.",
         },
         {
-          title: "Leichte Wanderungen und Aussichtspunkte",
-          description: "Kürzere Naturmomente mit weniger Trubel.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Platzhalter Hügel.",
+          title: "Spaziergänge und Aussichtspunkte in der Nähe",
+          description:
+            "Sanfte Routen, wenn weniger Menschen und mehr frische Luft gewünscht sind.",
+          image: "/images/seo/landing/vidikovci.png",
+          imageAlt: "Platzhalter Lika.",
         },
         {
-          title: "Ruhetag im Haus",
+          title: "Familienspiele und Ruhe am Haus",
           description:
-            "Gesellschaftsspiele, Lesen oder ein einfacher Grillabend.",
-          image: "/images/placeholders/05-family-nature.svg",
-          imageAlt: "Platzhalter Familie.",
+            "Brettspielabend, Grill oder ein ruhiges Buch—ein Tag ohne Autofahrt.",
+          image: "/images/seo/landing/hrana.png",
+          imageAlt: "Platzhalter Familie in der Natur.",
         },
         {
           title: "Aktiverer Ausflug",
-          description: "Längere Wanderung oder zwei Highlights an einem Tag.",
-          image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Platzhalter Trail.",
+          description:
+            "Längere Wanderung, Zipline oder Quad-Tour, wenn Sie fit sind.",
+          image: "/images/seo/landing/zip-line.jpg",
+          imageAlt: "Platzhalter Wandern.",
         },
       ],
       midCtaTitle: "Brauchen Sie das ganze Haus für Ihre Termine?",
       midCtaBody:
-        "Kapazität und Preise prüfen, Anfrage senden und Details direkt abstimmen—ohne Plattformgebühren.",
-      midCtaPrimaryLabel: "Jetzt buchen",
+        "Kapazität und Preise prüfen, Anfrage für Ihre Daten senden und Ankunftsdetails direkt abstimmen—ohne Provision.",
+      midCtaPrimaryLabel: "Buchung",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Häufig gestellte Fragen",
       faqs: [
         {
-          question: "Ist das Haus vollständig privat?",
+          question: "Ist das Haus ausschließlich für uns?",
           answer:
-            "Konzipiert als Ferienhaus für eine Gastgruppe ohne Fremdgäste.",
+            "Die Unterkunft ist als privates Ferienhaus für eine Gastgruppe gedacht—ohne Mitbenutzung durch andere.",
         },
         {
-          question: "Ist es kinderfreundlich?",
+          question: "Ist die Unterkunft gut für Kinder?",
           answer:
-            "Familien profitieren von Privatsphäre und flexiblem Tagesrhythmus; gutes Schuhwerk mitnehmen.",
+            "Familien schätzen Privatsphäre und flexiblen Tagesrhythmus; Wanderschuhe und Schichten für wechselndes Wetter mitbringen.",
         },
         {
-          question: "Wie läuft Direktbuchung?",
+          question: "Wie funktioniert die Direktbuchung?",
           answer:
-            "Ankunft, Zugang und Zahlung werden direkt mit der Unterkunft abgestimmt.",
+            "Kontakt und Konditionen laufen direkt mit dem Objekt—einfacher bei Ankunft, Schlüsseln und Zahlung.",
         },
         {
-          question: "Jacuzzi-Fokus?",
-          answer: "Siehe die Landingpage Villa mit Jacuzzi nahe Plitvice.",
+          question: "Können wir den Jacuzzi-Schwerpunkt kombinieren?",
+          answer:
+            "Für mehr Wellness-Fokus siehe die Seite Villa mit Jacuzzi nahe Plitvice.",
         },
         {
-          question: "Wie viele Tage empfehlen sich?",
+          question: "Wie viele Tage sind ideal?",
           answer:
-            "Oft sind zwei bis drei Tage ein guter Rhythmus für Park und Umgebung.",
+            "Zwei oder drei Tage sind oft optimal für ruhiges Tempo mit Park und Umgebung.",
         },
       ],
       reservationIntro:
-        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung klar bleibt.",
+        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung einfach und ohne Überraschungen bleibt.",
       guidesBlockTitle: "Reiseführer für Plitvice und Lika",
       guidesBlockIntro:
-        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert Ihres Aufenthalts.",
+        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert eines Aufenthalts im passenden Rhythmus.",
     },
     it: {
       eyebrow: "Casa vacanze",
       heroImage: {
-        src: "/images/placeholders/03-villa-outdoor.svg",
-        alt: "Illustrazione spazio esterno casa vacanze (placeholder).",
+        src: "/images/seo/landing/jacuzzi.png",
+        alt: "Illustrazione dello spazio esterno di una casa vacanze (placeholder).",
       },
       highlights: [
-        "Intera casa per il vostro gruppo",
-        "Serate conviviali dopo le escursioni",
-        "Prenotazione diretta con condizioni chiare",
+        "Intera struttura solo per il vostro gruppo—senza altri ospiti",
+        "Spazio per stare insieme e serate tranquille dopo le escursioni",
+        "Prenotazione diretta con condizioni chiare di soggiorno",
       ],
       sections: [
         {
           heading: "Casa vacanze come base per Plitvice e Lika",
           paragraphs: [
-            "Avere l’intera struttura semplifica famiglie e gruppi: tempi più umani e maggiore privacy.",
-            "La Lika regala notti tranquille e spostamenti brevi verso i grandi luoghi naturali.",
+            "Prenotando l’intera casa è più facile coordinare le routine familiari, la pausa caffè e la partenza verso i sentieri senza ritmo da “hotel”.",
+            "La Lika offre quiete, cielo stellato la sera e brevi spostamenti verso le principali attrazioni naturali—ideale per un soggiorno di più giorni.",
           ],
         },
         {
           heading: "Famiglie e gruppi di amici",
           paragraphs: [
-            "Servono spazi per valigie, pause e convivenza senza sensazione di affollamento.",
-            "Dopo una giornata intensa, una sera calma in casa chiude bene la giornata.",
+            "Un viaggio in gruppo richiede spazio per bagagli, gioco dei bambini e relax degli adulti.",
+            "Dopo una giornata attiva, una serata calma in casa chiude bene la giornata—soprattutto con grigliata, jacuzzi o un bicchiere di vino in terrazza.",
           ],
         },
         {
-          heading: "Logistica di viaggio",
+          heading: "Logistica del viaggio",
           paragraphs: [
-            "Il soggiorno privato aiuta con arrivi, partenze e comunicazione diretta.",
-            "Portate strati e scarpe da trekking affidabili—il meteo montano cambia spesso i piani.",
+            "Arrivo anticipato o partenza tardiva funzionano meglio con alloggio privato e comunicazione flessibile con l’host.",
+            "Portate calzature stagionali, strati leggeri e un piano per la pioggia—il meteo intorno a Plitvice può cambiare il ritmo della giornata.",
           ],
         },
       ],
       activitiesSectionTitle: "Cosa fare durante il soggiorno",
       activities: [
         {
-          title: "Parco nazionale dei laghi di Plitvice",
-          description: "Cascate, laghi e passerelle iconiche.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+          title: "Parco nazionale dei Laghi di Plitvice",
+          description:
+            "Motivo principale del viaggio: cascate, sentieri e colori dell’acqua nelle diverse stagioni.",
+          image: "/images/seo/landing/plitvice.jpg",
           imageAlt: "Placeholder laghi.",
         },
         {
-          title: "Passeggiate facili e belvedere",
+          title: "Passeggiate e belvedere nelle vicinanze",
           description:
-            "Momento natura più leggero quando volete meno affluenza.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder colline.",
+            "Percorsi leggeri quando volete meno folla e più aria fresca.",
+          image: "/images/seo/landing/vidikovci.png",
+          imageAlt: "Placeholder Lika.",
         },
         {
-          title: "Giornata lenta in casa",
-          description: "Giochi, lettura o una semplice grigliata.",
-          image: "/images/placeholders/05-family-nature.svg",
-          imageAlt: "Placeholder famiglia.",
+          title: "Giochi in famiglia e relax in casa",
+          description:
+            "Serata con giochi da tavola, grigliata o un libro tranquillo—giornata senza auto.",
+          image: "/images/seo/landing/hrana.png",
+          imageAlt: "Placeholder famiglia nella natura.",
         },
         {
-          title: "Giornata più attiva",
-          description: "Sentiero lungo o due tappe se avete energia.",
-          image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Placeholder sentiero.",
+          title: "Escursione più attiva",
+          description:
+            "Escursione più lunga, zip line o tour in quad se siete in forma.",
+          image: "/images/seo/landing/zip-line.jpg",
+          imageAlt: "Placeholder escursione.",
         },
       ],
       midCtaTitle: "Vi serve l’intera casa per le vostre date?",
       midCtaBody:
-        "Controllate capienza e prezzi, inviate una richiesta e allineate i dettagli direttamente—senza commissioni da piattaforma.",
-      midCtaPrimaryLabel: "Prenota",
+        "Controllate capienza e prezzi, inviate una richiesta per le date e concordate i dettagli di arrivo direttamente—senza commissioni.",
+      midCtaPrimaryLabel: "Prenotazione",
       midCtaGalleryLabel: "Galleria",
-      faqSectionTitle: "FAQ",
+      faqSectionTitle: "Domande frequenti",
       faqs: [
         {
-          question: "La casa è interamente privata?",
-          answer: "Pensata come casa vacanze per un solo gruppo alla volta.",
+          question: "La casa è esclusivamente per noi?",
+          answer:
+            "L’alloggio è pensato come casa vacanze privata per un solo gruppo—senza condivisione con altri.",
         },
         {
           question: "È adatta ai bambini?",
           answer:
-            "Le famiglie apprezzano privacy e ritmo flessibile; portate scarpe robuste e strati.",
+            "Le famiglie apprezzano privacy e ritmo flessibile; portate scarpe da passeggio e strati per il meteo variabile.",
         },
         {
           question: "Come funziona la prenotazione diretta?",
           answer:
-            "Arrivo, accesso e pagamento si concordano direttamente con la struttura.",
+            "Contatto e condizioni vanno direttamente con la struttura—più semplice per arrivo, chiavi e pagamento.",
         },
         {
-          question: "E se vogliamo enfatizzare la jacuzzi?",
+          question: "Possiamo combinare il focus sulla jacuzzi?",
           answer:
-            "Vedete la landing dedicata villa con jacuzzi vicino a Plitvice.",
+            "Per più enfasi sul wellness, vedete la pagina villa con jacuzzi vicino a Plitvice.",
         },
         {
-          question: "Quanti giorni consigliate?",
+          question: "Quanti giorni sono ideali?",
           answer:
-            "Spesso due o tre giorni sono un buon equilibrio tra parco e dintorni.",
+            "Due o tre giorni sono spesso ottimali per un ritmo calmo con parco e dintorni.",
         },
       ],
       reservationIntro:
-        "Controllate prezzi, disponibilità e posizione prima di prenotare per un viaggio senza sorprese.",
+        "Controllate prezzi, disponibilità e posizione prima di prenotare per un piano di viaggio semplice e senza sorprese.",
       guidesBlockTitle: "Guide a Plitvice e alla Lika",
       guidesBlockIntro:
-        "Articoli brevi per itinerari, idee di attività e per sfruttare meglio il soggiorno.",
+        "Articoli brevi per costruire l’itinerario, scegliere attività e ottenere di più da un soggiorno al vostro ritmo.",
     },
   },
   "villa-jacuzzi-plitvice": {
@@ -936,308 +943,314 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
     en: {
       eyebrow: "Jacuzzi & calm",
       heroImage: {
-        src: "/images/placeholders/04-jacuzzi-relax.svg",
-        alt: "Illustration of jacuzzi relaxation (placeholder).",
+        src: "/images/seo/landing/odmor_u_kuci.png",
+        alt: "Illustration of relaxing in the jacuzzi (placeholder).",
       },
       highlights: [
-        "Private outdoor jacuzzi for guests",
-        "Perfect after waterfalls, trails, and full-day exploring",
-        "Lika quiet + practical proximity to Plitvice",
+        "Private outdoor jacuzzi for guests of the stay",
+        "Ideal after walks, waterfalls, and full-day trips",
+        "Lika combined with proximity to Plitvice",
       ],
       sections: [
         {
-          heading: "Why a jacuzzi matters after a park day",
+          heading: "Why a jacuzzi makes a difference after the park",
           paragraphs: [
-            "Plitvice days involve walking, stairs, and constant discovery—your body welcomes warmth and slow evenings.",
-            "A private jacuzzi adds a simple “wellness moment” without leaving your stay.",
+            "Plitvice Lakes leave their mark through movement, steps, and constant discovery—evenings call for warmth and calm.",
+            "A private jacuzzi as part of the stay feels like a small wellness pause without heading to a spa centre.",
           ],
         },
         {
-          heading: "Romantic stays and family rituals",
+          heading: "Romantic breaks and family rituals",
           paragraphs: [
-            "Couples often make it an evening ritual after dinner; families enjoy a lighthearted wind-down under the stars.",
-            "Lika nights tend to be quieter than city breaks, which amplifies the relaxation effect.",
+            "For couples it becomes an evening ritual after dinner; for families a place for laughter and easy conversation under the stars.",
+            "Lika offers a quiet night backdrop—without city noise—which deepens the sense of rest.",
           ],
         },
         {
           heading: "Seasonal rhythm and realistic expectations",
           paragraphs: [
-            "Outdoor jacuzzi use depends on weather and personal preference—ask when you book.",
-            "You should still plan solid shoes, layers, and enough time for the national park itself.",
+            "Outdoor jacuzzi use depends on weather and personal preference—always ask when you book.",
+            "Even with the jacuzzi, plan good footwear, light jackets, and enough time for the park.",
           ],
         },
       ],
-      activitiesSectionTitle: "Activities that pair well with jacuzzi evenings",
+      activitiesSectionTitle: "Activities that pair well with the jacuzzi",
       activities: [
         {
           title: "Plitvice Lakes National Park",
           description:
-            "The active part of the day: waterfalls, routes, and peaceful pauses by the water.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+            "The active part of the day: waterfalls, trails, photos, and calm pauses by the water.",
+          image: "/images/seo/landing/panoramski_vlak.jpg",
           imageAlt: "Placeholder lakes.",
         },
         {
-          title: "Gentle Lika walks",
+          title: "Gentle walks and Lika air",
           description:
-            "Keep daytime intensity moderate so the evening soak feels even better.",
-          image: "/images/placeholders/02-lika-hills.svg",
+            "Lower intensity so you can enjoy a warm soak in the evening.",
+          image: "/images/seo/landing/voznja_brodom_na_plitvicama.jpg",
           imageAlt: "Placeholder hills.",
         },
         {
-          title: "Slow evening at the villa",
+          title: "Wellness evening at the house",
           description:
-            "Tea, light dinner, jacuzzi—an easy “spa night” without a schedule.",
-          image: "/images/placeholders/04-jacuzzi-relax.svg",
+            "Light dinner, tea, and jacuzzi—a simple “spa” day without a timetable.",
+          image: "/images/seo/landing/odmor_u_kuci.png",
           imageAlt: "Placeholder jacuzzi.",
         },
         {
-          title: "Family balance",
+          title: "Family downtime",
           description:
-            "Kids get fresh air outdoors; adults get recovery time— a common guest preference.",
-          image: "/images/placeholders/05-family-nature.svg",
+            "Children in fresh air, adults unwinding—the balance many guests want.",
+          image: "/images/seo/landing/family_farm_2.jpg",
           imageAlt: "Placeholder family.",
         },
       ],
-      midCtaTitle: "Want jacuzzi time built into your trip?",
+      midCtaTitle: "Want the jacuzzi built into your stay dates?",
       midCtaBody:
-        "Check availability, browse the gallery, and book directly so jacuzzi evenings fit the rest of your itinerary.",
+        "Check availability, browse the gallery, and book directly to align the jacuzzi with the rest of your trip.",
       midCtaPrimaryLabel: "Check dates",
       midCtaGalleryLabel: "Gallery",
-      faqSectionTitle: "Jacuzzi FAQ",
+      faqSectionTitle: "Frequently asked questions about the jacuzzi",
       faqs: [
         {
-          question: "Is the jacuzzi private?",
+          question: "Is the jacuzzi truly private?",
           answer:
-            "It is intended for guests of the property, not shared with the public or other rentals.",
+            "It is for guests of the stay only—not shared with the public or other rentals.",
         },
         {
-          question: "Indoor or outdoor?",
+          question: "Is it indoor or outdoor?",
           answer:
-            "This experience centers on an outdoor jacuzzi; confirm details in your booking request.",
+            "An outdoor jacuzzi is part of the stay experience; confirm details when you inquire.",
         },
         {
-          question: "What about rain or changing weather?",
+          question: "Can we use it after rain?",
           answer:
-            "Use depends on safety and conditions—your host can advise for your dates.",
+            "Use depends on safety and weather; the host will give practical guidance for your dates.",
         },
         {
-          question: "Is jacuzzi the main reason guests choose this villa?",
+          question: "Is the jacuzzi enough reason to choose this villa?",
           answer:
-            "Many guests combine it with Plitvice proximity and full-property privacy.",
+            "Many guests pair it with Plitvice proximity and privacy of the whole property—a strong double motive.",
         },
         {
-          question: "How should I schedule my day?",
+          question: "How should we structure the day?",
           answer:
-            "Morning park or hike, afternoon rest, evening jacuzzi is a simple sustainable rhythm.",
+            "Morning park or walk, afternoon rest, evening jacuzzi—a simple, sustainable rhythm.",
         },
       ],
       reservationIntro:
-        "Check pricing, availability, and location before booking so your travel plan stays straightforward.",
+        "Review pricing, availability, and location before booking so your trip plan stays simple and predictable.",
       guidesBlockTitle: "Guides for Plitvice and Lika",
       guidesBlockIntro:
-        "Short articles help you build an itinerary, choose activities, and get more value from your stay.",
+        "Short articles help you shape an itinerary, pick activities, and get more from a stay that matches your pace.",
     },
     de: {
       eyebrow: "Jacuzzi & Ruhe",
       heroImage: {
-        src: "/images/placeholders/04-jacuzzi-relax.svg",
-        alt: "Illustration Jacuzzi-Entspannung (Platzhalter).",
+        src: "/images/seo/landing/odmor_u_kuci.png",
+        alt: "Illustration der Entspannung im Jacuzzi (Platzhalter).",
       },
       highlights: [
-        "Privater Outdoor-Jacuzzi",
-        "Ideal nach Wasserfällen, Stegen und Tagesausflügen",
-        "Ruhige Lika-Nähe zu Plitvice",
+        "Privater Outdoor-Jacuzzi für Gäste der Unterkunft",
+        "Ideal nach Spaziergängen, Wasserfällen und Ganztagesausflügen",
+        "Lika kombiniert mit Nähe zu Plitvice",
       ],
       sections: [
         {
-          heading: "Warum Jacuzzi nach dem Parktag hilft",
+          heading: "Warum der Jacuzzi nach dem Park den Unterschied macht",
           paragraphs: [
-            "Plitvice bedeutet viel Gehen und Entdecken—abends tun Wärme und langsames Tempo gut.",
-            "Ein privater Jacuzzi ergänzt den Aufenthalt ohne externes Spa.",
+            "Die Plitvicer Seen fordern Bewegung, Stufen und ständiges Entdecken—abends verlangt der Körper Wärme und Ruhe.",
+            "Ein privater Jacuzzi im Aufenthalt wirkt wie eine kleine Wellness-Pause ohne Besuch im Spa-Zentrum.",
           ],
         },
         {
-          heading: "Paare und Familien",
+          heading: "Romantischer Urlaub und Familienrituale",
           paragraphs: [
-            "Paare nutzen ihn gern als Abendritual, Familien als entspannten Ausklang.",
-            "Die nächtliche Ruhe in Lika verstärkt das Erholungsgefühl.",
+            "Paare machen daraus ein Abendritual nach dem Essen; Familien finden Platz für Lachen und leichte Gespräche unter den Sternen.",
+            "Die Lika bietet eine ruhige nächtliche Kulisse—ohne Stadtlärm—was das Erholungsgefühl verstärkt.",
           ],
         },
         {
-          heading: "Saison und Erwartungen",
+          heading: "Saisonaler Rhythmus und realistische Erwartungen",
           paragraphs: [
-            "Outdoor-Nutzung hängt vom Wetter ab—bei Buchung nachfragen.",
-            "Trotzdem gutes Schuhwerk und Zeit für den Nationalpark einplanen.",
+            "Die Nutzung des Outdoor-Jacuzzis hängt vom Wetter und persönlichen Vorlieben ab—bei der Buchung nachfragen.",
+            "Trotzdem gutes Schuhwerk, leichte Jacken und Reservezeit für den Park einplanen.",
           ],
         },
       ],
-      activitiesSectionTitle: "Aktivitäten, die zu Jacuzzi-Abenden passen",
+      activitiesSectionTitle: "Aktivitäten, die gut zum Jacuzzi passen",
       activities: [
         {
           title: "Nationalpark Plitvicer Seen",
-          description: "Aktiver Tag: Wasserfälle, Routen, Pausen am Wasser.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+          description:
+            "Aktiver Tagesanteil: Wasserfälle, Wege, Fotos und ruhige Pausen am Wasser.",
+          image: "/images/seo/landing/panoramski_vlak.jpg",
           imageAlt: "Platzhalter Seen.",
         },
         {
-          title: "Leichte Wanderungen",
+          title: "Leichte Wege und Lika-Luft",
           description:
-            "Moderate Tagesintensität macht den Abend im Jacuzzi angenehmer.",
-          image: "/images/placeholders/02-lika-hills.svg",
+            "Geringere Intensität, damit der warme Abend im Jacuzzi noch besser wirkt.",
+          image: "/images/seo/landing/voznja_brodom_na_plitvicama.jpg",
           imageAlt: "Platzhalter Hügel.",
         },
         {
-          title: "Ruhiger Abend in der Villa",
+          title: "Wellness-Abend am Haus",
           description:
-            "Tee, leichtes Abendessen, Jacuzzi—einfacher Wellness-Abend.",
-          image: "/images/placeholders/04-jacuzzi-relax.svg",
+            "Leichtes Abendessen, Tee und Jacuzzi—ein einfacher „Spa“-Tag ohne Zeitplan.",
+          image: "/images/seo/landing/odmor_u_kuci.png",
           imageAlt: "Platzhalter Jacuzzi.",
         },
         {
-          title: "Familienbalance",
+          title: "Familienurlaub",
           description:
-            "Frische Luft tagsüber, Erholung abends—häufiges Gästemotiv.",
-          image: "/images/placeholders/05-family-nature.svg",
+            "Kinder an frischer Luft, Erwachsene beim Entspannen—Balance, die viele Gäste suchen.",
+          image: "/images/seo/landing/family_farm_2.jpg",
           imageAlt: "Platzhalter Familie.",
         },
       ],
-      midCtaTitle: "Jacuzzi fest in die Reise einplanen?",
+      midCtaTitle: "Jacuzzi-Erlebnis in Ihre Aufenthaltstermine einbauen?",
       midCtaBody:
-        "Verfügbarkeit prüfen, Galerie ansehen und direkt buchen—damit Abende im Jacuzzi zum Restplan passen.",
+        "Verfügbarkeit prüfen, Galerie ansehen und direkt buchen—Jacuzzi mit dem Rest der Reise abstimmen.",
       midCtaPrimaryLabel: "Termine prüfen",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "Jacuzzi FAQ",
+      faqSectionTitle: "Häufige Fragen zum Jacuzzi",
       faqs: [
         {
-          question: "Ist der Jacuzzi privat?",
-          answer: "Für Gäste der Unterkunft gedacht, nicht öffentlich geteilt.",
-        },
-        {
-          question: "Drinnen oder draußen?",
-          answer: "Fokus auf outdoor—Details bei der Anfrage klären.",
-        },
-        {
-          question: "Bei Regen?",
+          question: "Ist der Jacuzzi wirklich privat?",
           answer:
-            "Nutzung abhängig von Sicherheit und Bedingungen—Host berät für Ihre Termine.",
+            "Er ist nur für Gäste der Unterkunft—nicht mit Öffentlichkeit oder anderen Mietobjekten geteilt.",
         },
         {
-          question: "Hauptgrund zur Buchung?",
+          question: "Innen oder außen?",
           answer:
-            "Oft Kombination aus Jacuzzi, Nähe zu Plitvice und Privatsphäre.",
+            "Outdoor-Jacuzzi als Teil des Aufenthalts—Details bei der Anfrage klären.",
         },
         {
-          question: "Tagesrhythmus?",
+          question: "Nutzung nach Regen?",
           answer:
-            "Vormittag Park, Nachmittag Pause, Abend Jacuzzi—einfach und nachhaltig.",
+            "Abhängig von Sicherheit und Wetter; der Gastgeber gibt praktische Hinweise für Ihre Termine.",
+        },
+        {
+          question: "Reicht der Jacuzzi als Hauptgrund für diese Villa?",
+          answer:
+            "Viele Gäste kombinieren ihn mit Plitvice-Nähe und Privatsphäre des ganzen Objekts—starker Doppelgrund.",
+        },
+        {
+          question: "Wie den Tag strukturieren?",
+          answer:
+            "Vormittag Park oder Spaziergang, Nachmittag Ruhe, Abend Jacuzzi—einfacher, tragbarer Rhythmus.",
         },
       ],
       reservationIntro:
-        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung klar bleibt.",
+        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung einfach und ohne Überraschungen bleibt.",
       guidesBlockTitle: "Reiseführer für Plitvice und Lika",
       guidesBlockIntro:
-        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert Ihres Aufenthalts.",
+        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert eines Aufenthalts im passenden Rhythmus.",
     },
     it: {
       eyebrow: "Jacuzzi e calma",
       heroImage: {
-        src: "/images/placeholders/04-jacuzzi-relax.svg",
-        alt: "Illustrazione relax in jacuzzi (placeholder).",
+        src: "/images/seo/landing/odmor_u_kuci.png",
+        alt: "Illustrazione del relax in jacuzzi (placeholder).",
       },
       highlights: [
-        "Jacuzzi esterna privata per gli ospiti",
-        "Perfetta dopo cascate, sentieri e giornate piene",
-        "Lika tranquilla con buona vicinanza a Plitvice",
+        "Jacuzzi esterna privata per gli ospiti dell’alloggio",
+        "Ideale dopo passeggiate, cascate e gite di tutta la giornata",
+        "Lika combinata con vicinanza a Plitvice",
       ],
       sections: [
         {
-          heading: "Perché la jacuzzi conta dopo il parco",
+          heading: "Perché la jacuzzi fa la differenza dopo il parco",
           paragraphs: [
-            "A Plitvice si cammina molto: la sera servono calore e lentezza.",
-            "La jacuzzi privata aggiunge un momento wellness senza uscire dalla struttura.",
+            "I Laghi di Plitvice lasciano il segno con movimento, scale e scoperte continue—la sera il corpo chiede calore e calma.",
+            "Una jacuzzi privata nel soggiorno è come una piccola pausa wellness senza andare in un centro spa.",
           ],
         },
         {
-          heading: "Coppie e famiglie",
+          heading: "Vacanza romantica e rituali in famiglia",
           paragraphs: [
-            "Rituale serale per coppie; per famiglie un modo leggero per chiudere la giornata.",
-            "Le notti in Lika sono spesso più silenziose e amplificano il relax.",
+            "Per le coppie diventa un rituale serale dopo cena; per le famiglie un momento di risate e conversazione sotto le stelle.",
+            "La Lika offre una cornice notturna silenziosa—senza rumore di città—che intensifica la sensazione di riposo.",
           ],
         },
         {
-          heading: "Stagionalità e aspettative",
+          heading: "Ritmo stagionale e aspettative realistiche",
           paragraphs: [
-            "Uso outdoor dipende dal meteo—chiedete in prenotazione.",
-            "Comunque pianificate scarpe solide, strati e tempo per il parco.",
+            "L’uso della jacuzzi esterna dipende dal meteo e dalle preferenze personali—chiedete sempre in prenotazione.",
+            "Anche con la jacuzzi, pianificate buone scarpe, giacche leggere e tempo sufficiente per il parco.",
           ],
         },
       ],
-      activitiesSectionTitle: "Attività che si abbinano alla jacuzzi la sera",
+      activitiesSectionTitle: "Attività che si abbinano bene alla jacuzzi",
       activities: [
         {
-          title: "Parco nazionale dei laghi di Plitvice",
-          description: "Parte attiva: cascate, percorsi, pause acqua.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+          title: "Parco nazionale dei Laghi di Plitvice",
+          description:
+            "Parte attiva della giornata: cascate, sentieri, foto e pause tranquille vicino all’acqua.",
+          image: "/images/seo/landing/panoramski_vlak.jpg",
           imageAlt: "Placeholder laghi.",
         },
         {
-          title: "Passeggiate leggere",
+          title: "Passeggiate leggere e aria della Lika",
           description:
-            "Tenere il giorno moderato rende la sera in jacuzzi ancora più piacevole.",
-          image: "/images/placeholders/02-lika-hills.svg",
+            "Intensità più bassa per godersi meglio un bagno caldo la sera.",
+          image: "/images/seo/landing/voznja_brodom_na_plitvicama.jpg",
           imageAlt: "Placeholder colline.",
         },
         {
-          title: "Sera lenta in villa",
-          description: "Tè, cena leggera, jacuzzi—serata spa semplice.",
-          image: "/images/placeholders/04-jacuzzi-relax.svg",
+          title: "Serata wellness in casa",
+          description:
+            "Cena leggera, tè e jacuzzi—giornata “spa” semplice senza orari rigidi.",
+          image: "/images/seo/landing/odmor_u_kuci.png",
           imageAlt: "Placeholder jacuzzi.",
         },
         {
-          title: "Equilibrio in famiglia",
-          description: "Aria aperta per i bambini, recupero per gli adulti.",
-          image: "/images/placeholders/05-family-nature.svg",
+          title: "Relax in famiglia",
+          description:
+            "Bambini all’aria aperta, adulti che si riposano—equilibrio che molti ospiti cercano.",
+          image: "/images/seo/landing/family_farm_2.jpg",
           imageAlt: "Placeholder famiglia.",
         },
       ],
-      midCtaTitle: "Volete la jacuzzi dentro al viaggio?",
+      midCtaTitle: "Volete la jacuzzi nelle date del soggiorno?",
       midCtaBody:
-        "Controllate disponibilità, guardate la galleria e prenotate direttamente per allineare le serate in jacuzzi al resto.",
-      midCtaPrimaryLabel: "Verifica disponibilità",
+        "Controllate disponibilità, guardate la galleria e prenotate direttamente per allineare la jacuzzi al resto del viaggio.",
+      midCtaPrimaryLabel: "Verifica date",
       midCtaGalleryLabel: "Galleria",
-      faqSectionTitle: "FAQ jacuzzi",
+      faqSectionTitle: "Domande frequenti sulla jacuzzi",
       faqs: [
         {
-          question: "La jacuzzi è privata?",
+          question: "La jacuzzi è davvero privata?",
           answer:
-            "È pensata per gli ospiti della struttura, non condivisa con il pubblico.",
+            "È riservata agli ospiti del soggiorno—non condivisa con il pubblico o altri affitti.",
         },
         {
-          question: "Interna o esterna?",
+          question: "È interna o esterna?",
           answer:
-            "Focus su soluzione outdoor—dettagli da confermare in richiesta.",
+            "Jacuzzi esterna come parte dell’esperienza—confermate i dettagli nella richiesta.",
         },
         {
-          question: "E se piove?",
+          question: "Si può usare dopo la pioggia?",
           answer:
-            "Dipende da sicurezza e condizioni; l’host può consigliare per le vostre date.",
+            "L’uso dipende da sicurezza e meteo; l’host darà indicazioni pratiche per le vostre date.",
         },
         {
-          question: "È il motivo principale della scelta?",
+          question: "Basta la jacuzzi per scegliere questa villa?",
           answer:
-            "Spesso si combina con vicinanza a Plitvice e privacy dell’intera casa.",
+            "Molti ospiti la abbinano a vicinanza di Plitvice e privacy dell’intera struttura—doppio motivo forte.",
         },
         {
-          question: "Come impostare la giornata?",
+          question: "Come organizzare la giornata?",
           answer:
-            "Mattina parco, pomeriggio pausa, sera jacuzzi—ritmo sostenibile.",
+            "Mattina parco o passeggiata, pomeriggio riposo, sera jacuzzi—ritmo semplice e sostenibile.",
         },
       ],
       reservationIntro:
-        "Controllate prezzi, disponibilità e posizione prima di prenotare per un viaggio senza sorprese.",
+        "Controllate prezzi, disponibilità e posizione prima di prenotare per un piano di viaggio semplice e senza sorprese.",
       guidesBlockTitle: "Guide a Plitvice e alla Lika",
       guidesBlockIntro:
-        "Articoli brevi per itinerari, idee di attività e per sfruttare meglio il soggiorno.",
+        "Articoli brevi per costruire l’itinerario, scegliere attività e ottenere di più da un soggiorno al vostro ritmo.",
     },
   },
   "smjestaj-za-9-osoba-plitvice": {
@@ -1315,7 +1328,7 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
         {
           question: "Je li smještaj prikladan za devet odraslih?",
           answer:
-            "Stranica je usmjerena na grupe do devet osoba; točan raspored soba i kreveta potvrdite upitom.",
+            "Villa Velebita je prikladna za grupe do devet osoba; točan raspored soba i kreveta potvrdite upitom.",
         },
         {
           question: "Kako podijeliti troškove?",
@@ -1345,304 +1358,315 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
         "Kratki članci pomažu složiti itinerar, odabrati aktivnosti i bolje iskoristiti boravak uz smještaj koji odgovara vašem ritmu.",
     },
     en: {
-      eyebrow: "Groups up to 9",
+      eyebrow: "Group up to 9",
       heroImage: {
-        src: "/images/placeholders/05-family-nature.svg",
-        alt: "Illustration of friends and family outdoors (placeholder).",
+        src: "/images/seo/landing/odmor_u_kuci.png",
+        alt: "Illustration of family and friends in nature (placeholder).",
       },
       highlights: [
-        "Designed for larger families and friend groups",
-        "Space for shared meals and itinerary planning",
-        "Practical Plitvice proximity for day-trip logistics",
+        "Stay for larger families and groups of friends",
+        "Space for shared meals and planning activities together",
+        "Close to Plitvice for simpler day-trip logistics",
       ],
       sections: [
         {
-          heading: "Nine travelers means logistics is half the experience",
+          heading: "When nine people travel, logistics is half the experience",
           paragraphs: [
-            "Group trips need clear roles: driving shifts, meal planning, and park departure times.",
-            "A private house base reduces friction and gives you one place to regroup every evening.",
+            "A group holiday needs clear roles: who drives, who cooks, when you leave for Plitvice Lakes National Park.",
+            "A private house as the hub reduces friction around the schedule and gives one place to meet up in the evening.",
           ],
         },
         {
-          heading: "Budget and dates",
+          heading: "How to plan budget and dates",
           paragraphs: [
-            "Split costs early and agree on minimum nights so expectations stay fair.",
-            "Booking ahead helps align calendars and avoids last-minute stress.",
+            "Split costs upfront and agree on a minimum number of nights so it feels fair for everyone.",
+            "Booking early helps align dates and avoids last-minute rush.",
           ],
         },
         {
-          heading: "Activities that work for bigger groups",
+          heading: "Activities that work for larger groups",
           paragraphs: [
-            "Plitvice can be visited together or in smaller sub-groups depending on pace.",
-            "Add at least one slow day without driving—groups usually appreciate it.",
+            "Plitvice can be visited in smaller sub-groups or together, depending on pace.",
+            "Include at least one “slow day” without driving—the group will thank you.",
           ],
         },
       ],
-      activitiesSectionTitle: "Group-friendly planning ideas",
+      activitiesSectionTitle: "Ideas for a group schedule",
       activities: [
         {
           title: "Plitvice Lakes National Park",
           description:
-            "Align entry timing, breaks, and a meeting point after walking routes.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+            "Agree on entry, breaks, and where to meet after the walk.",
+          image: "/images/seo/landing/plitvicka_jezera.png",
           imageAlt: "Placeholder lakes.",
         },
         {
-          title: "A lighter Lika outing",
-          description:
-            "A shorter trip when part of the group wants an easier day.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder hills.",
+          title: "Day trip in Lika",
+          description: "A shorter outing when part of the group wants a calmer pace.",
+          image: "/images/seo/landing/bariceve_spilje.jpg",
+          imageAlt: "Placeholder Lika.",
         },
         {
-          title: "Dinner and hangout at the house",
-          description: "Often the best “team bonding” moment of the holiday.",
-          image: "/images/placeholders/03-villa-outdoor.svg",
+          title: "Dinner and time together at the stay",
+          description:
+            "A shared dinner is often the best “team building” on holiday.",
+          image: "/images/seo/landing/hrana.png",
           imageAlt: "Placeholder house.",
         },
         {
-          title: "Optional active hike",
-          description: "For members who want more movement on one day.",
-          image: "/images/placeholders/06-trail-hiking.svg",
+          title: "Active walk for those who want more",
+          description:
+            "One more intense option for anyone who wants extra movement.",
+          image: "/images/seo/landing/zipp_line_iznad _sume.jpg",
           imageAlt: "Placeholder trail.",
         },
       ],
       midCtaTitle: "Need accommodation for nine people?",
       midCtaBody:
-        "Send your dates, review pricing, and align bedroom needs with the group—direct and transparent.",
-      midCtaPrimaryLabel: "Send request",
+        "Send an inquiry with your dates, check pricing, and align room capacity with the group—direct and transparent.",
+      midCtaPrimaryLabel: "Send inquiry",
       midCtaGalleryLabel: "Gallery",
-      faqSectionTitle: "Group FAQ",
+      faqSectionTitle: "FAQ for groups",
       faqs: [
         {
-          question: "Is this suitable for nine adults?",
+          question: "Is the stay suitable for nine adults?",
           answer:
-            "This landing targets groups up to nine; confirm bed layout with your request.",
+            "Villa Velebita suits groups up to nine; confirm the room and bed layout in your inquiry.",
         },
         {
-          question: "How should we split costs?",
+          question: "How do we split costs?",
           answer:
-            "Agree per person or per family unit before the trip to avoid misunderstandings.",
+            "Agree a fixed amount per person or per family unit before the trip to avoid misunderstandings.",
         },
         {
-          question: "Can kids and adults share the space?",
+          question: "Can children and adults stay together?",
           answer:
-            "Yes—just confirm rooming early so kids have a calm sleep setup.",
+            "Yes, but check the room layout in advance so children have a quiet corner to sleep.",
         },
         {
           question: "How do we plan Plitvice as a group?",
           answer:
-            "Set meeting times, break points, and a fallback plan if someone needs to stop early.",
+            "Agree meeting times, break points, and a backup if someone gets tired earlier.",
         },
         {
-          question: "Is jacuzzi part of the experience?",
+          question: "Is the jacuzzi part of the experience?",
           answer:
-            "For a jacuzzi-first story, see the dedicated villa + jacuzzi landing page.",
+            "For more focus on the jacuzzi, see the villa with jacuzzi near Plitvice page.",
         },
       ],
       reservationIntro:
-        "Check pricing, availability, and location before booking so your travel plan stays straightforward.",
+        "Review pricing, availability, and location before booking so your trip plan stays simple and predictable.",
       guidesBlockTitle: "Guides for Plitvice and Lika",
       guidesBlockIntro:
-        "Short articles help you build an itinerary, choose activities, and get more value from your stay.",
+        "Short articles help you shape an itinerary, pick activities, and get more from a stay that matches your pace.",
     },
     de: {
-      eyebrow: "Gruppen bis 9",
+      eyebrow: "Gruppe bis 9 Personen",
       heroImage: {
-        src: "/images/placeholders/05-family-nature.svg",
-        alt: "Illustration Freunde und Familie in der Natur (Platzhalter).",
+        src: "/images/seo/landing/odmor_u_kuci.png",
+        alt: "Illustration von Familie und Freunden in der Natur (Platzhalter).",
       },
       highlights: [
-        "Für größere Familien und Freundesgruppen",
-        "Platz für gemeinsame Mahlzeiten und Planung",
-        "Praktische Nähe zu Plitvice für Tageslogistik",
+        "Unterkunft für größere Familien und Freundesgruppen",
+        "Platz für gemeinsame Mahlzeiten und Abstimmung der Aktivitäten",
+        "Nähe zu Plitvice für einfachere Tageslogistik",
       ],
       sections: [
         {
-          heading: "Neun Personen: Logistik zählt",
+          heading: "Bei neun Reisenden ist Logistik die halbe Erfahrung",
           paragraphs: [
-            "Klare Rollen helfen: Fahrwechsel, Essensplan, Parkzeit.",
-            "Ein privates Haus reduziert Reibung und schafft einen Abend-Treffpunkt.",
+            "Gemeinsamer Urlaub braucht klare Rollen: wer fährt, wer kocht, wann Abfahrt zum Nationalpark Plitvicer Seen.",
+            "Ein privates Haus als Zentrum reduziert Streit um den Plan und bietet einen Ort für das Gruppentreffen am Abend.",
           ],
         },
         {
-          heading: "Budget und Termine",
+          heading: "Budget und Termine planen",
           paragraphs: [
-            "Kosten früh aufteilen und Mindestnächte abstimmen.",
-            "Früh buchen vermeidet Stress mit Kalendern.",
+            "Kosten vorab aufteilen und Mindestanzahl der Nächte festlegen, damit es für alle fair bleibt.",
+            "Frühe Buchung hilft bei Datumsabstimmung und vermeidet Last-Minute-Stress.",
           ],
         },
         {
-          heading: "Aktivitäten für Gruppen",
+          heading: "Aktivitäten, die für größere Gruppen funktionieren",
           paragraphs: [
-            "Plitvice gemeinsam oder in Teilgruppen je nach Tempo.",
-            "Mindestens einen ruhigen Tag ohne Fahren einplanen.",
+            "Plitvice lässt sich in kleineren Untergruppen oder gemeinsam besuchen—je nach Tempo.",
+            "Mindestens einen „langsamen Tag“ ohne Fahren einplanen—die Gruppe wird es danken.",
           ],
         },
       ],
-      activitiesSectionTitle: "Gruppentaugliche Ideen",
+      activitiesSectionTitle: "Ideen für den Gruppenplan",
       activities: [
         {
           title: "Nationalpark Plitvicer Seen",
           description:
-            "Eintritt, Pausen und Treffpunkt nach der Route abstimmen.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+            "Eintritt, Pausen und Treffpunkt nach der Wanderung abstimmen.",
+          image: "/images/seo/landing/plitvicka_jezera.png",
           imageAlt: "Platzhalter Seen.",
         },
         {
-          title: "Leichter Lika-Ausflug",
+          title: "Ausflug in der Lika",
           description:
-            "Kürzer, wenn ein Teil der Gruppe entspannter bleiben will.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Platzhalter Hügel.",
+            "Kürzerer Ausflug, wenn ein Teil der Gruppe ein ruhigeres Tempo möchte.",
+          image: "/images/seo/landing/bariceve_spilje.jpg",
+          imageAlt: "Platzhalter Lika.",
         },
         {
-          title: "Abendessen im Haus",
-          description: "Oft der beste Team-Moment des Urlaubs.",
-          image: "/images/placeholders/03-villa-outdoor.svg",
+          title: "Abendessen und Zeit an der Unterkunft",
+          description:
+            "Gemeinsames Abendessen ist oft das beste „Team Building“ im Urlaub.",
+          image: "/images/seo/landing/hrana.png",
           imageAlt: "Platzhalter Haus.",
         },
         {
-          title: "Optional aktive Wanderung",
-          description: "Für alle, die mehr Bewegung möchten.",
-          image: "/images/placeholders/06-trail-hiking.svg",
-          imageAlt: "Platzhalter Trail.",
+          title: "Aktiver Spaziergang für die Motivierten",
+          description:
+            "Eine intensivere Option für alle, die mehr Bewegung wollen.",
+          image: "/images/seo/landing/zipp_line_iznad _sume.jpg",
+          imageAlt: "Platzhalter Weg.",
         },
       ],
-      midCtaTitle: "Unterkunft für neun Personen gesucht?",
+      midCtaTitle: "Brauchen Sie Unterkunft für neun Personen?",
       midCtaBody:
-        "Termine senden, Preise prüfen und Zimmerbedarf abstimmen—direkt und transparent.",
+        "Anfrage mit Daten senden, Preise prüfen und Zimmerkapazität mit der Gruppe abstimmen—direkt und transparent.",
       midCtaPrimaryLabel: "Anfrage senden",
       midCtaGalleryLabel: "Galerie",
-      faqSectionTitle: "Gruppen FAQ",
+      faqSectionTitle: "FAQ für Gruppen",
       faqs: [
         {
-          question: "Geeignet für neun Erwachsene?",
+          question: "Ist die Unterkunft für neun Erwachsene geeignet?",
           answer:
-            "Zielgruppe bis neun Personen; Bettensplit per Anfrage klären.",
+            "Villa Velebita eignet sich für Gruppen bis neun Personen; genaue Zimmer- und Bettenaufteilung per Anfrage bestätigen.",
         },
         {
-          question: "Kosten aufteilen?",
-          answer: "Pro Person oder Haushalt vorab vereinbaren.",
+          question: "Wie teilen wir die Kosten?",
+          answer:
+            "Festen Betrag pro Person oder Haushalt vor der Reise vereinbaren, um Missverständnisse zu vermeiden.",
         },
         {
-          question: "Kinder und Erwachsene?",
-          answer: "Ja—Schlafplatzplanung früh klären.",
+          question: "Können Kinder und Erwachsene zusammen?",
+          answer:
+            "Ja—Raumaufteilung vorab prüfen, damit Kinder eine ruhige Ecke zum Schlafen haben.",
         },
         {
-          question: "Plitvice als Gruppe?",
-          answer: "Treffzeiten, Pausen, Ausstiegsszenario festlegen.",
+          question: "Wie Plitvice als Gruppe planen?",
+          answer:
+            "Treffzeiten, Pausenpunkte und Alternative, falls jemand früher müde wird, abstimmen.",
         },
         {
-          question: "Jacuzzi-Fokus?",
-          answer: "Siehe Landingpage Villa mit Jacuzzi nahe Plitvice.",
+          question: "Ist der Jacuzzi Teil des Erlebnisses?",
+          answer:
+            "Für mehr Jacuzzi-Fokus siehe die Themenseite Villa mit Jacuzzi nahe Plitvice.",
         },
       ],
       reservationIntro:
-        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung klar bleibt.",
+        "Preise, Verfügbarkeit und Lage vor der Buchung prüfen, damit die Reiseplanung einfach und ohne Überraschungen bleibt.",
       guidesBlockTitle: "Reiseführer für Plitvice und Lika",
       guidesBlockIntro:
-        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert Ihres Aufenthalts.",
+        "Kurze Artikel helfen beim Itinerar, bei Aktivitäten und beim Mehrwert eines Aufenthalts im passenden Rhythmus.",
     },
     it: {
-      eyebrow: "Gruppi fino a 9",
+      eyebrow: "Gruppo fino a 9 persone",
       heroImage: {
-        src: "/images/placeholders/05-family-nature.svg",
-        alt: "Illustrazione gruppo in natura (placeholder).",
+        src: "/images/seo/landing/odmor_u_kuci.png",
+        alt: "Illustrazione di famiglia e amici nella natura (placeholder).",
       },
       highlights: [
-        "Per famiglie numerose e gruppi di amici",
-        "Spazio per cene insieme e pianificazione",
-        "Vicinanza pratica a Plitvice per le giornate",
+        "Alloggio per famiglie numerose e gruppi di amici",
+        "Spazio per pasti insieme e pianificare le attività",
+        "Vicinanza a Plitvice per una logistica giornaliera più semplice",
       ],
       sections: [
         {
-          heading: "In nove, la logistica è metà del viaggio",
+          heading: "Con nove persone in viaggio, la logistica è metà dell’esperienza",
           paragraphs: [
-            "Servono ruoli chiari: chi guida, i pasti, l’orario di partenza per il parco.",
-            "Una base privata riduce attriti e offre un punto di ritrovo serale.",
+            "Una vacanza di gruppo richiede ruoli chiari: chi guida, chi cucina, quando partire per il Parco nazionale dei Laghi di Plitvice.",
+            "Una casa privata come hub riduce attriti sul programma e offre un punto di ritrovo la sera.",
           ],
         },
         {
-          heading: "Budget e date",
+          heading: "Come pianificare budget e date",
           paragraphs: [
-            "Dividete i costi in anticipo e concordate le notti minime.",
-            "Prenotare prima aiuta ad allineare i calendari.",
+            "Dividete i costi in anticipo e concordate il numero minimo di notti così resta equo per tutti.",
+            "Prenotare in anticipo aiuta ad allineare le date ed evita la corsa dell’ultimo minuto.",
           ],
         },
         {
-          heading: "Attività adatte ai gruppi",
+          heading: "Attività che funzionano per gruppi numerosi",
           paragraphs: [
-            "Plitvice insieme o in sottogruppi secondo il ritmo.",
-            "Inserite almeno un giorno lento senza auto.",
+            "Plitvice si può visitare in sottogruppi o insieme, a seconda del ritmo.",
+            "Inserite almeno una “giornata lenta” senza auto—il gruppo vi ringrazierà.",
           ],
         },
       ],
-      activitiesSectionTitle: "Idee per gruppi",
+      activitiesSectionTitle: "Idee per il programma di gruppo",
       activities: [
         {
-          title: "Parco nazionale dei laghi di Plitvice",
+          title: "Parco nazionale dei Laghi di Plitvice",
           description:
-            "Allineate ingressi, pause e punto di incontro dopo i percorsi.",
-          image: "/images/placeholders/01-plitvice-lakes.svg",
+            "Concordate ingresso, pause e punto di ritrovo dopo la passeggiata.",
+          image: "/images/seo/landing/plitvicka_jezera.png",
           imageAlt: "Placeholder laghi.",
         },
         {
-          title: "Escursione leggera in Lika",
+          title: "Gita in Lika",
           description:
-            "Più corta se parte del gruppo preferisce un giorno soft.",
-          image: "/images/placeholders/02-lika-hills.svg",
-          imageAlt: "Placeholder colline.",
+            "Escursione più breve quando parte del gruppo preferisce un ritmo più calmo.",
+          image: "/images/seo/landing/bariceve_spilje.jpg",
+          imageAlt: "Placeholder Lika.",
         },
         {
-          title: "Cena conviviale in casa",
-          description: "Spesso il miglior momento di gruppo.",
-          image: "/images/placeholders/03-villa-outdoor.svg",
+          title: "Cena e tempo insieme nell’alloggio",
+          description:
+            "La cena insieme è spesso il miglior “team building” in vacanza.",
+          image: "/images/seo/landing/hrana.png",
           imageAlt: "Placeholder casa.",
         },
         {
-          title: "Escursione attiva opzionale",
-          description: "Per chi vuole più movimento.",
-          image: "/images/placeholders/06-trail-hiking.svg",
+          title: "Passeggiata attiva per chi vuole di più",
+          description:
+            "Un’opzione più intensa per chi desidera più movimento.",
+          image: "/images/seo/landing/zipp_line_iznad _sume.jpg",
           imageAlt: "Placeholder sentiero.",
         },
       ],
-      midCtaTitle: "Vi serve un alloggio per nove persone?",
+      midCtaTitle: "Vi serve alloggio per nove persone?",
       midCtaBody:
-        "Inviate le date, controllate i prezzi e allineate le camere alle esigenze del gruppo—diretto e trasparente.",
+        "Inviate una richiesta con le date, controllate i prezzi e allineate la capienza delle camere al gruppo—diretto e trasparente.",
       midCtaPrimaryLabel: "Invia richiesta",
       midCtaGalleryLabel: "Galleria",
-      faqSectionTitle: "FAQ gruppi",
+      faqSectionTitle: "FAQ per gruppi",
       faqs: [
         {
-          question: "Adatto a nove adulti?",
+          question: "L’alloggio è adatto a nove adulti?",
           answer:
-            "Pagina pensata fino a nove ospiti; confermate la disposizione letti in richiesta.",
+            "Villa Velebita è adatta a gruppi fino a nove persone; confermate disposizione di camere e letti nella richiesta.",
         },
         {
           question: "Come dividere i costi?",
-          answer: "Accordatevi per persona o nucleo prima del viaggio.",
-        },
-        {
-          question: "Bambini e adulti insieme?",
-          answer: "Sì—pianificate presto le camere per il riposo dei bambini.",
-        },
-        {
-          question: "Plitvice in gruppo?",
           answer:
-            "Orari di ritrovo, pause e piano B se qualcuno si ferma prima.",
+            "Concordate un importo fisso a persona o per nucleo familiare prima del viaggio per evitare incomprensioni.",
         },
         {
-          question: "Jacuzzi?",
+          question: "Bambini e adulti possono stare insieme?",
           answer:
-            "Vedete la landing dedicata villa con jacuzzi vicino a Plitvice.",
+            "Sì—verificate in anticipo la disposizione degli spazi così i bambini hanno un angolo tranquillo per dormire.",
+        },
+        {
+          question: "Come pianificare Plitvice in gruppo?",
+          answer:
+            "Concordate orari di ritrovo, punti pausa e un’alternativa se qualcuno si stanca prima.",
+        },
+        {
+          question: "La jacuzzi fa parte dell’esperienza?",
+          answer:
+            "Per più focus sulla jacuzzi, vedete la pagina tematica villa con jacuzzi vicino a Plitvice.",
         },
       ],
       reservationIntro:
-        "Controllate prezzi, disponibilità e posizione prima di prenotare per un viaggio senza sorprese.",
+        "Controllate prezzi, disponibilità e posizione prima di prenotare per un piano di viaggio semplice e senza sorprese.",
       guidesBlockTitle: "Guide a Plitvice e alla Lika",
       guidesBlockIntro:
-        "Articoli brevi per itinerari, idee di attività e per sfruttare meglio il soggiorno.",
+        "Articoli brevi per costruire l’itinerario, scegliere attività e ottenere di più da un soggiorno al vostro ritmo.",
     },
   },
 };

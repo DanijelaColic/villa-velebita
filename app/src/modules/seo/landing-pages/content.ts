@@ -26,31 +26,31 @@ const LANDING_PAGE_CONTENT: Record<LandingPageKey, Record<AppLocale, LandingPage
     en: {
       seoTitle: 'Accommodation Near Plitvice Lakes | Villa Velebita',
       metaDescription:
-        'Looking for accommodation near Plitvice Lakes? Villa Velebita offers privacy, jacuzzi comfort, and a peaceful Lika location for direct bookings.',
-      h1: 'Accommodation Near Plitvice Lakes for a Relaxing Nature Stay',
+        'Looking for accommodation near Plitvice Lakes? Villa Velebita in Lika offers privacy, a private jacuzzi, calm surroundings, and a strong base for an active yet relaxed stay.',
+      h1: 'Accommodation near Plitvice Lakes for a calm nature getaway',
       intro:
-        'Villa Velebita is designed for guests who want quick access to Plitvice while staying in a calm and private part of Lika.',
+        'Villa Velebita is a base for guests who want nature, privacy, and quick access to Plitvice. It sits in a quiet part of Lika—ideal for couples, families, and small groups.',
       ctaLabel: 'Check availability',
       breadcrumbLabel: 'Accommodation near Plitvice Lakes',
     },
     de: {
       seoTitle: 'Unterkunft nahe Plitvicer Seen | Villa Velebita',
       metaDescription:
-        'Unterkunft nahe den Plitvicer Seen mit direkter Buchung. Villa Velebita bietet Ruhe, Privatsphäre, Jacuzzi und eine starke Lage in Lika.',
-      h1: 'Unterkunft nahe den Plitvicer Seen fur erholsame Naturtage',
+        'Unterkunft nahe den Plitvicer Seen gesucht? Villa Velebita in Lika bietet Privatsphäre, privaten Jacuzzi, Ruhe und eine ideale Basis für aktive und entspannte Tage.',
+      h1: 'Unterkunft nahe den Plitvicer Seen für erholsame Tage in der Natur',
       intro:
-        'Villa Velebita ist ideal fur Gaste, die Natur, Komfort und eine ruhige Lage nahe den Plitvicer Seen suchen.',
-      ctaLabel: 'Verfugbarkeit prufen',
+        'Villa Velebita ist die Basis für Gäste, die Natur, Privatsphäre und schnellen Zugang zu Plitvice wünschen. In einem ruhigen Teil der Lika—ideal für Paare, Familien und kleine Gruppen.',
+      ctaLabel: 'Verfügbarkeit prüfen',
       breadcrumbLabel: 'Unterkunft nahe Plitvicer Seen',
     },
     it: {
       seoTitle: 'Alloggio vicino ai Laghi di Plitvice | Villa Velebita',
       metaDescription:
-        'Cerchi un alloggio vicino ai Laghi di Plitvice? Villa Velebita offre privacy, jacuzzi e prenotazione diretta in una posizione tranquilla in Lika.',
-      h1: 'Alloggio vicino ai Laghi di Plitvice per un soggiorno nella natura',
+        'Cerchi un alloggio vicino ai Laghi di Plitvice? Villa Velebita in Lika offre privacy, jacuzzi privata, tranquillità e una base ideale per un soggiorno attivo e rilassato.',
+      h1: 'Alloggio vicino ai Laghi di Plitvice per una vacanza tranquilla nella natura',
       intro:
-        'Villa Velebita e una base ideale per chi vuole visitare Plitvice e allo stesso tempo rilassarsi in un ambiente tranquillo.',
-      ctaLabel: 'Controlla disponibilita',
+        'Villa Velebita è la base per chi cerca natura, privacy e accesso rapido a Plitvice. Si trova in una zona tranquilla della Lika—ideale per coppie, famiglie e piccoli gruppi.',
+      ctaLabel: 'Controlla disponibilità',
       breadcrumbLabel: 'Alloggio vicino ai Laghi di Plitvice',
     },
   },
@@ -68,30 +68,30 @@ const LANDING_PAGE_CONTENT: Record<LandingPageKey, Record<AppLocale, LandingPage
     en: {
       seoTitle: 'Holiday House Near Plitvice | Villa Velebita',
       metaDescription:
-        'Villa Velebita is a holiday house near Plitvice, ideal for families and groups seeking comfort, privacy, and direct booking.',
-      h1: 'Holiday House Near Plitvice for Families and Groups',
+        'Villa Velebita is a holiday house near Plitvice, ideal for families and groups who want privacy, nature, and direct booking.',
+      h1: 'Holiday house near Plitvice for families and groups',
       intro:
-        'This house near Plitvice combines practical location, private space, and full-stay comfort for multi-day travel plans.',
+        'If you are looking for a holiday house close to Plitvice Lakes, this location combines comfort, space, and practical access to Lika’s natural highlights.',
       ctaLabel: 'Book directly',
       breadcrumbLabel: 'Holiday house near Plitvice',
     },
     de: {
       seoTitle: 'Ferienhaus nahe Plitvice | Villa Velebita',
       metaDescription:
-        'Ferienhaus nahe Plitvice fur Familien und Gruppen. Villa Velebita bietet Komfort, Privatsphäre und direkte Buchung ohne Vermittler.',
-      h1: 'Ferienhaus nahe Plitvice fur Familien und Gruppen',
+        'Villa Velebita ist ein Ferienhaus nahe Plitvice—ideal für Familien und Gruppen mit Privatsphäre, Natur und Direktbuchung.',
+      h1: 'Ferienhaus nahe Plitvice für Familien und Gruppen',
       intro:
-        'Diese Unterkunft verbindet naturnahe Lage, ausreichend Platz und Direktbuchung fur einen stressfreien Aufenthalt.',
+        'Wer ein Ferienhaus in der Nähe der Plitvicer Seen sucht, findet hier Komfort, Platz und praktischen Zugang zu den Naturhighlights der Lika.',
       ctaLabel: 'Direkt buchen',
       breadcrumbLabel: 'Ferienhaus nahe Plitvice',
     },
     it: {
       seoTitle: 'Casa vacanze vicino a Plitvice | Villa Velebita',
       metaDescription:
-        'Casa vacanze vicino a Plitvice ideale per famiglie e gruppi. Villa Velebita offre comfort, privacy e prenotazione diretta.',
+        'Villa Velebita è una casa vacanze vicino a Plitvice, ideale per famiglie e gruppi che cercano privacy, natura e prenotazione diretta.',
       h1: 'Casa vacanze vicino a Plitvice per famiglie e gruppi',
       intro:
-        'Una soluzione completa per chi cerca natura, comodita e una posizione pratica per visitare i Laghi di Plitvice.',
+        'Se cercate una casa vacanze vicino ai Laghi di Plitvice, questa location unisce comfort, spazio e accesso pratico alle attrazioni naturali della Lika.',
       ctaLabel: 'Prenota direttamente',
       breadcrumbLabel: 'Casa vacanze vicino a Plitvice',
     },
@@ -110,31 +110,31 @@ const LANDING_PAGE_CONTENT: Record<LandingPageKey, Record<AppLocale, LandingPage
     en: {
       seoTitle: 'Villa With Jacuzzi Near Plitvice | Villa Velebita',
       metaDescription:
-        'Stay in a villa with jacuzzi near Plitvice Lakes. Villa Velebita combines privacy, comfort, and direct booking for nature-focused trips.',
-      h1: 'Villa With Jacuzzi Near Plitvice for Full Relaxation',
+        'Enjoy a stay in a villa with jacuzzi near Plitvice. Villa Velebita blends nature, privacy, and relaxation with direct booking.',
+      h1: 'Villa with jacuzzi near Plitvice for a full reset',
       intro:
-        'This stay pairs active days in nature with private evening relaxation in a peaceful Lika setting.',
+        'After an active day in nature, a private jacuzzi and a calm atmosphere deliver the kind of rest guests look for most.',
       ctaLabel: 'Check dates',
       breadcrumbLabel: 'Villa with jacuzzi near Plitvice',
     },
     de: {
       seoTitle: 'Villa mit Jacuzzi nahe Plitvice | Villa Velebita',
       metaDescription:
-        'Villa mit Jacuzzi nahe Plitvice fur einen entspannten Natururlaub. Direkte Buchung, Privatsphäre und komfortable Ausstattung.',
-      h1: 'Villa mit Jacuzzi nahe Plitvice fur erholsamen Urlaub',
+        'Urlaub in einer Villa mit Jacuzzi nahe Plitvice. Villa Velebita verbindet Natur, Privatsphäre und Entspannung mit Direktbuchung.',
+      h1: 'Villa mit Jacuzzi nahe Plitvice für vollständige Erholung',
       intro:
-        'Die Kombination aus Naturerlebnis und privater Erholung macht diese Unterkunft besonders attraktiv fur Direktbucher.',
-      ctaLabel: 'Termine prufen',
+        'Nach einem aktiven Tag in der Natur liefern privater Jacuzzi und ruhige Atmosphäre genau die Erholung, die Gäste am meisten suchen.',
+      ctaLabel: 'Termine prüfen',
       breadcrumbLabel: 'Villa mit Jacuzzi nahe Plitvice',
     },
     it: {
       seoTitle: 'Villa con jacuzzi vicino a Plitvice | Villa Velebita',
       metaDescription:
-        'Soggiorna in una villa con jacuzzi vicino a Plitvice. Villa Velebita offre privacy, natura e prenotazione diretta senza intermediari.',
-      h1: 'Villa con jacuzzi vicino a Plitvice per un relax completo',
+        'Soggiornate in una villa con jacuzzi vicino a Plitvice. Villa Velebita unisce natura, privacy e relax con prenotazione diretta.',
+      h1: 'Villa con jacuzzi vicino a Plitvice per un vero reset',
       intro:
-        'Una proposta ideale per unire giornate attive nella natura e momenti di puro relax in un ambiente riservato.',
-      ctaLabel: 'Verifica disponibilita',
+        'Dopo una giornata attiva nella natura, la jacuzzi privata e l’atmosfera tranquilla offrono proprio il riposo che gli ospiti cercano di più.',
+      ctaLabel: 'Verifica date',
       breadcrumbLabel: 'Villa con jacuzzi vicino a Plitvice',
     },
   },
@@ -152,30 +152,30 @@ const LANDING_PAGE_CONTENT: Record<LandingPageKey, Record<AppLocale, LandingPage
     en: {
       seoTitle: 'Accommodation for 9 People Near Plitvice | Villa Velebita',
       metaDescription:
-        'Need accommodation for 9 people near Plitvice? Villa Velebita is a practical choice for larger families and groups with direct booking.',
-      h1: 'Accommodation for 9 People Near Plitvice',
+        'Looking for accommodation for 9 near Plitvice? Villa Velebita suits families and groups who want comfort and direct booking.',
+      h1: 'Accommodation for 9 people near Plitvice',
       intro:
-        'For larger groups, comfort and logistics matter most. This property supports multi-person stays with direct booking and flexible planning.',
-      ctaLabel: 'Send request and book',
+        'For a larger family or group of friends, enough space, clear terms, and a location that simplifies the trip plan matter most.',
+      ctaLabel: 'Send inquiry and book',
       breadcrumbLabel: 'Accommodation for 9 people near Plitvice',
     },
     de: {
-      seoTitle: 'Unterkunft fur 9 Personen nahe Plitvice | Villa Velebita',
+      seoTitle: 'Unterkunft für 9 Personen nahe Plitvice | Villa Velebita',
       metaDescription:
-        'Unterkunft fur 9 Personen nahe Plitvice. Ideal fur Familien und Gruppen mit klaren Konditionen und direkter Buchung.',
-      h1: 'Unterkunft fur 9 Personen nahe Plitvice',
+        'Unterkunft für 9 Personen nahe Plitvice gesucht? Villa Velebita eignet sich für Familien und Gruppen mit Komfort und Direktbuchung.',
+      h1: 'Unterkunft für 9 Personen nahe Plitvice',
       intro:
-        'Fur Gruppenreisen sind ausreichend Platz, gute Lage und transparente Buchung entscheidend. Genau darauf ist diese Unterkunft ausgerichtet.',
+        'Für eine größere Familie oder Freundesgruppe zählen genug Platz, klare Konditionen und eine Lage, die die Reiseplanung vereinfacht.',
       ctaLabel: 'Anfrage senden und buchen',
-      breadcrumbLabel: 'Unterkunft fur 9 Personen nahe Plitvice',
+      breadcrumbLabel: 'Unterkunft für 9 Personen nahe Plitvice',
     },
     it: {
       seoTitle: 'Alloggio per 9 persone vicino a Plitvice | Villa Velebita',
       metaDescription:
-        'Alloggio per 9 persone vicino a Plitvice, ideale per gruppi e famiglie con prenotazione diretta e organizzazione semplice.',
+        'Cercate alloggio per 9 persone vicino a Plitvice? Villa Velebita è adatta a famiglie e gruppi con comfort e prenotazione diretta.',
       h1: 'Alloggio per 9 persone vicino a Plitvice',
       intro:
-        'Per i gruppi numerosi servono spazio, comodita e logistica efficiente. Questa soluzione risponde a queste esigenze.',
+        'Per una famiglia numerosa o un gruppo di amici contano spazio sufficiente, condizioni chiare e una posizione che semplifichi il piano di viaggio.',
       ctaLabel: 'Invia richiesta e prenota',
       breadcrumbLabel: 'Alloggio per 9 persone vicino a Plitvice',
     },
