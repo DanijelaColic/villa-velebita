@@ -21,7 +21,9 @@ export type GuideArticle = {
 export type GuideListItem = Pick<
   GuideArticle,
   'slug' | 'title' | 'description' | 'publishedAt' | 'readingTime'
->;
+> & {
+  coverImage: GuideCoverImage;
+};
 
 export type GuideCoverImage = {
   src: string;

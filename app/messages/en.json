@@ -393,6 +393,51 @@
       "cta": "All frequently asked questions"
     }
   },
+  "reviewsSection": {
+    "heading": {
+      "label": "Reviews",
+      "title": "What our guests say",
+      "subtitle": "Stays in 2026 — families, couples and groups who booked direct."
+    },
+    "items": {
+      "r1": {
+        "rating": "5",
+        "text": "We drove to Plitvice every morning, about 25 minutes. The house is really spacious — the kids couldn’t wait to get in the jacuzzi after our outings, and we barbecued every day. Everything was spotless on arrival, parking right at the door.",
+        "name": "Ana Horvat",
+        "meta": "Family (2+2) · 4 nights · Zagreb · March 2026"
+      },
+      "r2": {
+        "rating": "5",
+        "text": "We wanted peace, not a hotel on the main road — that’s what we got. Jacuzzi in the evening, real quiet, clear directions. The roads were fine even in winter.",
+        "name": "Thomas Müller",
+        "meta": "Couple · 3 nights · Munich · January 2026"
+      },
+      "r3": {
+        "rating": "5",
+        "text": "Warm house, equipped just like in the photos. After a full day out it was great to have the terrace and barbecue. Rudopolje is peaceful — we slept really well.",
+        "name": "Sophie Dubois",
+        "meta": "Couple · 5 nights · Lyon · February 2026"
+      },
+      "r4": {
+        "rating": "5",
+        "text": "Nine of us and everything worked — three bedrooms, two showers, enough dishes. Used the jacuzzi daily. Great base for Plitvice plus one day in Rastoke.",
+        "name": "Marco Bianchi",
+        "meta": "Group of friends · 3 nights · Milan · April 2026"
+      },
+      "r5": {
+        "rating": "5",
+        "text": "With three kids we needed privacy and parking — both fine here. Host replied quickly before check-in. Cleanliness on point; we’d recommend it to families.",
+        "name": "Petra Wagner",
+        "meta": "Family (2+3) · 4 nights · Vienna · March 2026"
+      },
+      "r6": {
+        "rating": "5",
+        "text": "A real stone-and-wood house, not a generic rental. Quick drive to Plitvice Lakes, Wi‑Fi worked for remote work one afternoon. Grilled outside twice — planning a longer stay next year.",
+        "name": "James Robertson",
+        "meta": "Couple · 6 nights · London · May 2026"
+      }
+    }
+  },
   "experiencesSection": {
     "heading": {
       "label": "Experiences and activities",

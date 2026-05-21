@@ -50,6 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       publishedTime: guide.publishedAt,
       modifiedTime: guide.updatedAt ?? guide.publishedAt,
       authors: ['Villa Velebita'],
+      images: [{ url: guide.coverImage.src, alt: guide.coverImage.alt }],
     },
   };
 }

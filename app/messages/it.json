@@ -393,6 +393,51 @@
       "cta": "Tutte le domande frequenti"
     }
   },
+  "reviewsSection": {
+    "heading": {
+      "label": "Recensioni",
+      "title": "Cosa dicono i nostri ospiti",
+      "subtitle": "Soggiorni nel 2026 — famiglie, coppie e gruppi con prenotazione diretta."
+    },
+    "items": {
+      "r1": {
+        "rating": "5",
+        "text": "Ogni mattina andavamo a Plitvice, circa 25 minuti. Casa davvero spaziosa — i bambini non vedevano l’ora di entrare in jacuzzi dopo le gite, noi facevamo barbecue ogni giorno. Tutto pulito all’arrivo, parcheggio davanti.",
+        "name": "Ana Horvat",
+        "meta": "Famiglia (2+2) · 4 notti · Zagabria · marzo 2026"
+      },
+      "r2": {
+        "rating": "5",
+        "text": "Volevamo tranquillità, non un hotel sulla strada — qui sì. Jacuzzi la sera, silenzio, indicazioni chiare. Le strade vanno bene anche in inverno.",
+        "name": "Thomas Müller",
+        "meta": "Coppia · 3 notti · Monaco · gennaio 2026"
+      },
+      "r3": {
+        "rating": "5",
+        "text": "Casa calda, attrezzata come in foto. Dopo una giornata intera fuori terrazza e barbecue sono un plus. Rudopolje è tranquillo — dormito benissimo.",
+        "name": "Sophie Dubois",
+        "meta": "Coppia · 5 notti · Lione · febbraio 2026"
+      },
+      "r4": {
+        "rating": "5",
+        "text": "In nove, tutto ok — tre camere, due bagni, stoviglie sufficienti. Jacuzzi ogni giorno. Ottima base per Plitvice e un giorno a Rastoke.",
+        "name": "Marco Bianchi",
+        "meta": "Gruppo di amici · 3 notti · Milano · aprile 2026"
+      },
+      "r5": {
+        "rating": "5",
+        "text": "Con tre bambini servivano privacy e parcheggio — entrambi a posto. Risposte rapide prima del check-in. Pulizia ottima, consigliato alle famiglie.",
+        "name": "Petra Wagner",
+        "meta": "Famiglia (2+3) · 4 notti · Vienna · marzo 2026"
+      },
+      "r6": {
+        "rating": "5",
+        "text": "Vera casa in pietra e legno, non un affitto generico. Breve tragitto ai Laghi di Plitvice, Wi‑Fi utile un pomeriggio anche per lavoro. Barbecue fuori due volte — il prossimo anno restiamo di più.",
+        "name": "James Robertson",
+        "meta": "Coppia · 6 notti · Londra · maggio 2026"
+      }
+    }
+  },
   "experiencesSection": {
     "heading": {
       "label": "Esperienze e attività",

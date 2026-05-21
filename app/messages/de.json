@@ -393,6 +393,51 @@
       "cta": "Alle häufigen Fragen"
     }
   },
+  "reviewsSection": {
+    "heading": {
+      "label": "Bewertungen",
+      "title": "Das sagen unsere Gäste",
+      "subtitle": "Aufenthalte in 2026 — Familien, Paare und Gruppen mit Direktbuchung."
+    },
+    "items": {
+      "r1": {
+        "rating": "5",
+        "text": "Wir sind jeden Morgen nach Plitvice gefahren, etwa 25 Minuten. Das Haus ist wirklich großzügig — die Kinder konnten nach den Ausflügen kaum erwarten, in den Whirlpool zu gehen, wir haben jeden Tag gegrillt. Bei Ankunft alles sauber, Parkplatz vor der Tür.",
+        "name": "Ana Horvat",
+        "meta": "Familie (2+2) · 4 Nächte · Zagreb · März 2026"
+      },
+      "r2": {
+        "rating": "5",
+        "text": "Wir wollten Ruhe, kein Hotel an der Straße — genau das. Whirlpool abends, Stille, klare Anfahrt. Die Straßen sind selbst im Winter in Ordnung.",
+        "name": "Thomas Müller",
+        "meta": "Paar · 3 Nächte · München · Januar 2026"
+      },
+      "r3": {
+        "rating": "5",
+        "text": "Warmes Haus, Ausstattung wie auf den Fotos. Nach einem ganzen Tag unterwegs sind Terrasse und Grill ideal. Rudopolje ist ruhig — wir haben super geschlafen.",
+        "name": "Sophie Dubois",
+        "meta": "Paar · 5 Nächte · Lyon · Februar 2026"
+      },
+      "r4": {
+        "rating": "5",
+        "text": "Zu neunt, alles hat funktioniert — drei Schlafzimmer, zwei Duschen, genug Geschirr. Whirlpool täglich genutzt. Tolle Basis für Plitvice und einen Tag Rastoke.",
+        "name": "Marco Bianchi",
+        "meta": "Freundesgruppe · 3 Nächte · Mailand · April 2026"
+      },
+      "r5": {
+        "rating": "5",
+        "text": "Mit drei Kindern waren Privatsphäre und Parkplatz wichtig — beides passte. Gastgeber hat vor Anreise schnell geantwortet. Sauberkeit top, für Familien empfehlenswert.",
+        "name": "Petra Wagner",
+        "meta": "Familie (2+3) · 4 Nächte · Wien · März 2026"
+      },
+      "r6": {
+        "rating": "5",
+        "text": "Echtes Stein- und Holzhaus, keine Standard-Ferienwohnung. Kurze Fahrt zu den Plitvicer Seen, WLAN an einem Nachmittag auch fürs Arbeiten. Zweimal draußen gegrillt — nächstes Jahr planen wir länger.",
+        "name": "James Robertson",
+        "meta": "Paar · 6 Nächte · London · Mai 2026"
+      }
+    }
+  },
   "experiencesSection": {
     "heading": {
       "label": "Erlebnisse und Aktivitäten",

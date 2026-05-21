@@ -411,6 +411,51 @@
       "cta": "Sva česta pitanja"
     }
   },
+  "reviewsSection": {
+    "heading": {
+      "label": "Recenzije",
+      "title": "Iskustva naših gostiju",
+      "subtitle": "Boravci iz 2026. — obitelji, parovi i grupe koji su rezervirali direktno."
+    },
+    "items": {
+      "r1": {
+        "rating": "5",
+        "text": "Do Plitvica smo vozili svako jutro, oko 25 minuta. Kuća je stvarno prostrana — djeca nisu mogla dočekati da se kupaju u jacuzzi nakon izleta, mi smo pripremali roštilj svaki dan. Sve je bilo čisto pri dolasku, parking ispred vrata.",
+        "name": "Ana Horvat",
+        "meta": "Obitelj (2+2) · 4 noći · Zagreb · ožujak 2026."
+      },
+      "r2": {
+        "rating": "5",
+        "text": "Tražili smo mir, ne hotel uz cestu — ovdje smo to dobili. Jacuzzi navečer, tišina, a upute za dolazak jasne. Ceste su dobre čak i u zimu.",
+        "name": "Thomas Müller",
+        "meta": "Par · 3 noći · München · siječanj 2026."
+      },
+      "r3": {
+        "rating": "5",
+        "text": "Kuća je topla i opremljena kao na slikama. Nakon cjelodnevnog obilaska fino je imati terasu i roštilj. Rudopolje je mirno, spavalo se odlično.",
+        "name": "Sophie Dubois",
+        "meta": "Par · 5 noći · Lyon · veljača 2026."
+      },
+      "r4": {
+        "rating": "5",
+        "text": "Bilo nas devet, sve je funkcioniralo — tri sobe, dva tuša, dovoljno posuđa. Jacuzzi smo koristili svaki dan. Odlična baza za Plitvice i jedan dan Rastoke.",
+        "name": "Marco Bianchi",
+        "meta": "Grupa prijatelja · 3 noći · Milano · travanj 2026."
+      },
+      "r5": {
+        "rating": "5",
+        "text": "S troje djece nam je bilo bitno imati privatnost i parking — tu je sve štimalo. Domaćin je odgovorio brzo na poruke prije dolaska. Čistoća na razini, preporučujemo obiteljima.",
+        "name": "Petra Wagner",
+        "meta": "Obitelj (2+3) · 4 noći · Wien · ožujak 2026."
+      },
+      "r6": {
+        "rating": "5",
+        "text": "Prava kameno drvena kuća, ne generičan apartman. Do Plitvičkih jezera brza vožnja, Wi‑Fi nam je jedno poslijepodne koristio i za posao. Dva puta smo pekli vani — planiramo duži boravak iduće godine.",
+        "name": "James Robertson",
+        "meta": "Par · 6 noći · London · svibanj 2026."
+      }
+    }
+  },
   "experiencesSection": {
     "heading": {
       "label": "Doživljaji i aktivnosti",

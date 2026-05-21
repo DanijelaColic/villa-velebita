@@ -8,6 +8,7 @@ import {
   LocationTeaser,
   FAQTeaser,
 } from '@/components/sections/LandingTeasers';
+import { ReviewsSection } from '@/components/sections/ReviewsSection';
 import { Booking } from '@/components/sections/Booking';
 import { Contact } from '@/components/sections/Contact';
 
@@ -22,6 +23,7 @@ export default function HomePage() {
         <AmenitiesTeaser />
         <LocationTeaser />
         <FAQTeaser />
+        <ReviewsSection />
         <Booking />
         <Contact />
       </main>

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
+import { AppImage } from '@/components/ui/AppImage';
 import { Link } from '@/i18n/navigation';
 import { getBreadcrumbStructuredData } from '@/i18n/metadata';
 import { getGuides } from '@/modules/seo/guides/get-guides';
@@ -62,21 +63,33 @@ export default async function VodicPage() {
             {guides.map((guide) => (
               <article
                 key={guide.slug}
-                className="rounded-card border border-stone-pale bg-white p-5 shadow-card"
+                className="overflow-hidden rounded-card border border-stone-pale bg-white shadow-card"
               >
-                <h2 className="font-display text-xl text-oak mb-2">{guide.title}</h2>
-                <p className="text-sm text-stone mb-3">{guide.description}</p>
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs text-stone">
-                    {guide.publishedAt} · {guide.readingTime}
-                  </p>
-                  <Link
-                    href={`/vodic/${guide.slug}`}
-                    className="text-sm font-semibold text-terracotta hover:text-terracotta-dark transition-colors"
-                  >
-                    {hubUi.readGuide}
-                  </Link>
-                </div>
+                <Link href={`/vodic/${guide.slug}`} className="group block">
+                  <div className="relative aspect-[21/9] w-full bg-stone-pale">
+                    <AppImage
+                      src={guide.coverImage.src}
+                      alt={guide.coverImage.alt}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      sizes="(max-width: 768px) 100vw, 896px"
+                    />
+                  </div>
+                  <div className="p-5">
+                    <h2 className="font-display text-xl text-oak mb-2 group-hover:text-terracotta transition-colors">
+                      {guide.title}
+                    </h2>
+                    <p className="text-sm text-stone mb-3 line-clamp-2">{guide.description}</p>
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-xs text-stone">
+                        {guide.publishedAt} · {guide.readingTime}
+                      </p>
+                      <span className="text-sm font-semibold text-terracotta group-hover:text-terracotta-dark transition-colors">
+                        {hubUi.readGuide}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
               </article>
             ))}
           </div>
