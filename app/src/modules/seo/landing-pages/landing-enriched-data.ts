@@ -602,17 +602,17 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
         {
           question: "Is this stay good for children?",
           answer:
-            "Families appreciate the privacy and flexible daily rhythm; bring walking shoes and layers for changing weather.",
+            "Yes—families especially value the calm, privacy, and flexibility during the day, especially after visiting Plitvice Lakes. Comfortable walking shoes help children, and layered clothing is recommended because weather in nature can change quickly.",
         },
         {
           question: "How does direct booking work?",
           answer:
-            "Contact and terms go directly with the property, which simplifies arrival, keys, and payment.",
+            "Direct booking makes it easier to coordinate dates, arrival, and payment with the host, without extra intermediaries. It also helps you align arrival time, key handover, and any special requests related to the stay.",
         },
         {
-          question: "Can we combine it with a jacuzzi focus?",
+          question: "Is use of the jacuzzi included in the stay price?",
           answer:
-            "For more emphasis on wellness, see the villa with jacuzzi near Plitvice page.",
+            "Yes—after a day spent in nature, many guests choose accommodation with a jacuzzi for extra relaxation and a quieter evening. For a more wellness-focused stay, see our villa with jacuzzi near Plitvice Lakes.",
         },
         {
           question: "How many days is ideal?",
@@ -706,17 +706,17 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
         {
           question: "Ist die Unterkunft gut für Kinder?",
           answer:
-            "Familien schätzen Privatsphäre und flexiblen Tagesrhythmus; Wanderschuhe und Schichten für wechselndes Wetter mitbringen.",
+            "Ja—Familien schätzen vor allem Ruhe, Privatsphäre und Flexibilität im Tagesablauf, besonders nach einem Besuch der Plitvicer Seen. Bequeme Schuhe helfen Kindern beim Gehen, und Kleidung in Schichten ist wegen des wechselhaften Wetters in der Natur empfehlenswert.",
         },
         {
           question: "Wie funktioniert die Direktbuchung?",
           answer:
-            "Kontakt und Konditionen laufen direkt mit dem Objekt—einfacher bei Ankunft, Schlüsseln und Zahlung.",
+            "Die Direktbuchung erleichtert die Abstimmung mit dem Gastgeber zu Termin, Anreise und Zahlung, ohne zusätzliche Vermittler. So lassen sich Ankunftszeit, Schlüsselübergabe und besondere Wünsche rund um den Aufenthalt einfacher koordinieren.",
         },
         {
-          question: "Können wir den Jacuzzi-Schwerpunkt kombinieren?",
+          question: "Ist die Nutzung des Jacuzzis im Aufenthaltspreis enthalten?",
           answer:
-            "Für mehr Wellness-Fokus siehe die Seite Villa mit Jacuzzi nahe Plitvice.",
+            "Ja—nach einem Tag in der Natur wählen viele Gäste eine Unterkunft mit Jacuzzi für zusätzliche Entspannung und einen ruhigeren Abend. Für mehr Wellness-Fokus sehen Sie sich auch unsere Villa mit Jacuzzi nahe den Plitvicer Seen an.",
         },
         {
           question: "Wie viele Tage sind ideal?",
@@ -810,17 +810,17 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
         {
           question: "È adatta ai bambini?",
           answer:
-            "Le famiglie apprezzano privacy e ritmo flessibile; portate scarpe da passeggio e strati per il meteo variabile.",
+            "Sì—le famiglie apprezzano soprattutto calma, privacy e flessibilità durante la giornata, soprattutto dopo la visita ai Laghi di Plitvice. Per i bambini sono utili scarpe comode da passeggio, e si consigliano capi a strati per i frequenti cambi di meteo nella natura.",
         },
         {
           question: "Come funziona la prenotazione diretta?",
           answer:
-            "Contatto e condizioni vanno direttamente con la struttura—più semplice per arrivo, chiavi e pagamento.",
+            "La prenotazione diretta rende più semplice accordarsi con l’host su date, arrivo e pagamento, senza intermediari aggiuntivi. Così è più facile coordinare orario di arrivo, consegna delle chiavi ed eventuali richieste speciali relative al soggiorno.",
         },
         {
-          question: "Possiamo combinare il focus sulla jacuzzi?",
+          question: "L’uso della jacuzzi è incluso nel prezzo del soggiorno?",
           answer:
-            "Per più enfasi sul wellness, vedete la pagina villa con jacuzzi vicino a Plitvice.",
+            "Sì—dopo una giornata trascorsa nella natura, molti ospiti scelgono un alloggio con jacuzzi per un relax extra e una serata più tranquilla. Per un’esperienza più orientata al wellness, guardate anche la nostra villa con jacuzzi vicino ai Laghi di Plitvice.",
         },
         {
           question: "Quanti giorni sono ideali?",
@@ -1028,9 +1028,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "Use depends on safety and weather; the host will give practical guidance for your dates.",
         },
         {
-          question: "Is the jacuzzi enough reason to choose this villa?",
+          question: "Why do guests choose a house with a jacuzzi?",
           answer:
-            "Many guests pair it with Plitvice proximity and privacy of the whole property—a strong double motive.",
+            "Many guests choose this house precisely because of the combination of a private jacuzzi, peace, and proximity to Plitvice Lakes. After a day spent in nature, relaxing in warm water adds extra value and a real sense of complete rest to the stay.",
         },
         {
           question: "How should we structure the day?",
@@ -1132,9 +1132,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "Abhängig von Sicherheit und Wetter; der Gastgeber gibt praktische Hinweise für Ihre Termine.",
         },
         {
-          question: "Reicht der Jacuzzi als Hauptgrund für diese Villa?",
+          question: "Warum wählen Gäste ein Haus mit Jacuzzi?",
           answer:
-            "Viele Gäste kombinieren ihn mit Plitvice-Nähe und Privatsphäre des ganzen Objekts—starker Doppelgrund.",
+            "Viele Gäste wählen dieses Haus genau wegen der Kombination aus privatem Jacuzzi, Ruhe und Nähe zu den Plitvicer Seen. Nach einem Tag in der Natur bringt das Entspannen im warmen Wasser zusätzlichen Wert und ein echtes Gefühl vollständiger Erholung.",
         },
         {
           question: "Wie den Tag strukturieren?",
@@ -1236,9 +1236,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "L’uso dipende da sicurezza e meteo; l’host darà indicazioni pratiche per le vostre date.",
         },
         {
-          question: "Basta la jacuzzi per scegliere questa villa?",
+          question: "Perché gli ospiti scelgono una casa con jacuzzi?",
           answer:
-            "Molti ospiti la abbinano a vicinanza di Plitvice e privacy dell’intera struttura—doppio motivo forte.",
+            "Molti ospiti scelgono questa casa proprio per la combinazione di jacuzzi privata, tranquillità e vicinanza ai Laghi di Plitvice. Dopo una giornata trascorsa nella natura, rilassarsi nell’acqua calda aggiunge valore al soggiorno e una vera sensazione di riposo completo.",
         },
         {
           question: "Come organizzare la giornata?",
@@ -1449,9 +1449,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "Agree meeting times, break points, and a backup if someone gets tired earlier.",
         },
         {
-          question: "Is the jacuzzi part of the experience?",
+          question: "Is the jacuzzi included in the stay price?",
           answer:
-            "For more focus on the jacuzzi, see the villa with jacuzzi near Plitvice page.",
+            "The jacuzzi is a private part of the stay experience and is available to guests throughout the holiday. Many guests choose it as the perfect way to unwind after time in nature and visits to Plitvice Lakes. For more details, see the villa with jacuzzi near Plitvice page.",
         },
       ],
       reservationIntro:
@@ -1553,9 +1553,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "Treffzeiten, Pausenpunkte und Alternative, falls jemand früher müde wird, abstimmen.",
         },
         {
-          question: "Ist der Jacuzzi Teil des Erlebnisses?",
+          question: "Ist der Jacuzzi im Aufenthaltspreis enthalten?",
           answer:
-            "Für mehr Jacuzzi-Fokus siehe die Themenseite Villa mit Jacuzzi nahe Plitvice.",
+            "Der Jacuzzi ist ein privater Teil des Aufenthaltserlebnisses und steht den Gästen während des gesamten Urlaubs zur Verfügung. Viele wählen ihn als perfekte Möglichkeit zur Entspannung nach einem Tag in der Natur und dem Besuch der Plitvicer Seen. Weitere Informationen finden Sie auf der Seite zur Villa mit Jacuzzi nahe Plitvice.",
         },
       ],
       reservationIntro:
@@ -1657,9 +1657,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "Concordate orari di ritrovo, punti pausa e un’alternativa se qualcuno si stanca prima.",
         },
         {
-          question: "La jacuzzi fa parte dell’esperienza?",
+          question: "La jacuzzi è inclusa nel prezzo del soggiorno?",
           answer:
-            "Per più focus sulla jacuzzi, vedete la pagina tematica villa con jacuzzi vicino a Plitvice.",
+            "La jacuzzi è una parte privata dell’esperienza di soggiorno ed è disponibile per gli ospiti durante tutta la vacanza. Molti la scelgono come modo perfetto per rilassarsi dopo una giornata nella natura e una visita ai Laghi di Plitvice. Per maggiori informazioni, consultate anche la pagina della villa con jacuzzi vicino a Plitvice.",
         },
       ],
       reservationIntro:

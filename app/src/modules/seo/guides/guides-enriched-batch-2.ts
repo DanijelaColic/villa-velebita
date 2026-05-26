@@ -407,7 +407,7 @@ export const NEW_GUIDES_ENRICHED_BATCH_2: Record<
         {
           question: 'When should I book accommodation?',
           answer:
-            'As early as possible for summer weekends and holidays.',
+            'As early as possible for summer weekends and holidays—availability fills up quickly.',
         },
         {
           question: 'What if I arrive Friday evening only?',
@@ -477,7 +477,7 @@ export const NEW_GUIDES_ENRICHED_BATCH_2: Record<
         {
           question: 'Wann Unterkunft buchen?',
           answer:
-            'So früh wie möglich für Sommerwochenenden und Feiertage.',
+            'So früh wie möglich für Sommerwochenenden und Feiertage—die Verfügbarkeit ist schnell ausgebucht.',
         },
         {
           question: 'Ankunft erst Freitagabend?',
@@ -547,7 +547,7 @@ export const NEW_GUIDES_ENRICHED_BATCH_2: Record<
         {
           question: 'Quando prenotare l’alloggio?',
           answer:
-            'Il prima possibile per weekend estivi e festivi.',
+            'Il prima possibile per weekend estivi e festivi—la disponibilità si esaurisce rapidamente.',
         },
         {
           question: 'Arrivo solo venerdì sera?',
