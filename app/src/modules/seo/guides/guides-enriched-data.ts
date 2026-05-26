@@ -1,11 +1,18 @@
 import type { AppLocale } from "@/i18n/routing";
 import type { GuideEnrichedFields } from "./guide-types";
+import {
+  NEW_GUIDES_ENRICHED_BATCH_2,
+  type NewGuideContentSlugBatch2,
+} from "./guides-enriched-batch-2";
+import { NEW_GUIDES_ENRICHED, type NewGuideContentSlug } from "./guides-enriched-new";
 
 type GuideContentSlug =
   | "sto-posjetiti-blizu-plitvickih-jezera"
   | "najbolje-aktivnosti-u-lici"
   | "obiteljski-odmor-blizu-plitvica"
-  | "koliko-dana-treba-za-plitvice";
+  | "koliko-dana-treba-za-plitvice"
+  | NewGuideContentSlug
+  | NewGuideContentSlugBatch2;
 
 export const GUIDES_ENRICHED: Record<
   GuideContentSlug,
@@ -1042,4 +1049,6 @@ export const GUIDES_ENRICHED: Record<
         "Scegliete l’alloggio in linea con il vostro piano intorno a Plitvice.",
     },
   },
+  ...NEW_GUIDES_ENRICHED,
+  ...NEW_GUIDES_ENRICHED_BATCH_2,
 };

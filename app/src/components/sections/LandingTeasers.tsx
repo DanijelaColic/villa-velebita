@@ -1,11 +1,14 @@
 import { AppImage as Image } from '@/components/ui/AppImage';
 import Link from 'next/link';
-import { getTranslations } from 'next-intl/server';
+import { Link as LocaleLink } from '@/i18n/navigation';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { MapPin, Navigation, Mountain, Waves, Wifi } from 'lucide-react';
 import { getGalleryItems, getPublicMediaUrl } from '@/lib/gallery';
+import { getValidLocale } from '@/i18n/messages';
+import { getSeoNavLinks } from '@/modules/seo/seo-nav-links';
 
 /** Početna: uži izrez galerije + jedinstveni uvod (puna galerija na /galerija). */
 export async function GalleryTeaser() {
@@ -75,6 +78,45 @@ export async function AboutTeaser() {
             <Link href="/galerija">{t('cta.secondary')}</Link>
           </Button>
         </div>
+      </div>
+    </SectionWrapper>
+  );
+}
+
+/** Početna: vodič + SEO landing stranice (unutarnji linkovi za crawl i planiranje puta). */
+export async function SeoDiscoverTeaser() {
+  const locale = getValidLocale(await getLocale());
+  const t = await getTranslations('landingTeasers.seoDiscover');
+  const links = getSeoNavLinks(locale);
+
+  return (
+    <SectionWrapper id="planiranje-puta" bg="cream-dark">
+      <SectionHeading
+        label={t('heading.label')}
+        title={t('heading.title')}
+        subtitle={t('heading.subtitle')}
+      />
+      <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        {links.map((link) => (
+          <li key={link.href}>
+            <LocaleLink
+              href={link.href}
+              className="group flex h-full flex-col rounded-card border border-stone-pale bg-white p-5 shadow-card transition-colors hover:border-terracotta/40"
+            >
+              <span className="font-display text-lg font-semibold text-oak group-hover:text-terracotta transition-colors leading-snug">
+                {link.label}
+              </span>
+              <span className="mt-2 text-sm font-semibold text-terracotta group-hover:text-terracotta-dark transition-colors">
+                {t('readMore')}
+              </span>
+            </LocaleLink>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-8 text-center">
+        <Button asChild>
+          <LocaleLink href="/booking">{t('cta')}</LocaleLink>
+        </Button>
       </div>
     </SectionWrapper>
   );

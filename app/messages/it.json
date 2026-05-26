@@ -117,7 +117,9 @@
       "accommodation": "Alloggio",
       "gallery": "Galleria",
       "amenities": "Servizi",
+      "location": "Posizione",
       "pricing": "Prezzi",
+      "faq": "FAQ",
       "booking": "Prenotazione",
       "contact": "Contatto"
     },
@@ -278,6 +280,8 @@
     "builtByPrefix": "Sito realizzato da",
     "builtBySuffix": ".",
     "whatsappLabel": "WhatsApp",
+    "seoNavTitle": "Pianifica il viaggio",
+    "seoNavigationAriaLabel": "Guida e alloggi vicino a Plitvice",
     "links": {
       "accommodation": "Alloggio",
       "gallery": "Galleria",
@@ -339,6 +343,15 @@
         "primary": "Scopri di più sull'alloggio",
         "secondary": "Galleria"
       }
+    },
+    "seoDiscover": {
+      "heading": {
+        "label": "Plitvice e Lika",
+        "title": "Pianificare il soggiorno e l’alloggio",
+        "subtitle": "Guide pratiche e pagine per prenotare direttamente vicino al parco."
+      },
+      "readMore": "Leggi di più",
+      "cta": "Verifica disponibilità"
     },
     "location": {
       "heading": {

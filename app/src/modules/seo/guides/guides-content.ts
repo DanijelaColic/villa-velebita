@@ -1,4 +1,6 @@
 import type { GuideArticle } from './guide-types';
+import { NEW_GUIDES_BATCH_2 } from './guides-content-batch-2';
+import { NEW_GUIDES } from './guides-content-new';
 
 export const GUIDE_HUB_BY_LOCALE = {
   hr: {
@@ -27,9 +29,9 @@ export const GUIDES: GuideArticle[] = [
   {
     slug: 'sto-posjetiti-blizu-plitvickih-jezera',
     locale: 'hr',
-    title: 'Sto posjetiti blizu Plitvickih jezera',
+    title: 'Sto posjetiti blizu Plitvičkih jezera',
     description:
-      'Praktican vodic kroz najzanimljivije lokacije i izlete u okolici Plitvica, uz savjete za planiranje boravka u Lici.',
+      'Praktican vodič kroz najzanimljivije lokacije i izlete u okolici Plitvica, uz savjete za planiranje boravka u Lici.',
     publishedAt: '2026-05-08',
     updatedAt: '2026-05-08',
     readingTime: '7 min',
@@ -44,24 +46,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Najljepse lokacije u okolici Plitvica',
+        heading: 'Najljepše lokacije u okolici Plitvica',
         paragraphs: [
-          'Plitvicka jezera su glavni razlog dolaska, ali okolica nudi vise od samog nacionalnog parka. U blizini mozes kombinirati kratke setnje, vidikovce i lokalna mjesta koja cuvaju mir i autenticnost Like.',
-          'Ako zelis opusten raspored, najbolje je planirati jednu glavnu aktivnost ujutro i jednu kracu popodne. Tako izbjegavas umor i ostavljas dovoljno vremena za odmor.',
+          'Plitvička jezera su glavni razlog dolaska, ali okolica nudi više od samog nacionalnog parka. U blizini možeš kombinirati kratke šetnje, vidikovce i lokalna mjesta koja čuvaju mir i autentičnost Like.',
+          'Ako želis opušten raspored, najbolje je planirati jednu glavnu aktivnost ujutro i jednu kraću popodne. Tako izbjegavaš umor i ostavljaš dovoljno vremena za odmor.',
         ],
       },
       {
         heading: 'Ideje za poludnevne i cjelodnevne izlete',
         paragraphs: [
-          'Za poludnevni izlet odaberi jednu rutu kroz prirodu i ubaci pauzu za lokalnu gastronomiju. Za cjelodnevni izlet kombiniraj NP Plitvicka jezera s jos jednom lokacijom u Lici.',
-          'Obiteljima i manjim grupama najvise odgovara fleksibilan plan koji se prilagodava vremenu i tempu putovanja.',
+          'Za poludnevni izlet odaberi jednu rutu kroz prirodu i ubaci pauzu za lokalnu gastronomiju. Za cjelodnevni izlet kombiniraj NP Plitvička jezera s jos jednom lokacijom u Lici.',
+          'Obiteljima i manjim grupama najviše odgovara fleksibilan plan koji se prilagođava vremenu i tempu putovanja.',
         ],
       },
       {
         heading: 'Kako isplanirati boravak bez stresa',
         paragraphs: [
-          'Najvece guzve su kasnije prijepodne, pa je raniji polazak velika prednost. Smjestaj na dobroj lokaciji stedi vrijeme i olaksava svakodnevnu logistiku.',
-          'Ako trazis smjestaj blizu Plitvica, pogledaj i cijene unaprijed kako bi lakse odabrala termin koji ti odgovara.',
+          'Najveće guzve su kasnije prijepodne, pa je raniji polazak velika prednost. Smještaj na dobroj lokaciji štedi vrijeme i olakšava svakodnevnu logistiku.',
+          'Ako tražis smjestaj blizu Plitvica, pogledaj i cijene unaprijed kako bi lakše odabrala termin koji ti odgovara.',
         ],
       },
     ],
@@ -71,7 +73,7 @@ export const GUIDES: GuideArticle[] = [
     locale: 'hr',
     title: 'Najbolje aktivnosti u Lici',
     description:
-      'Ideje za aktivan i opusten odmor u Lici, od prirode i izleta do jednostavnog planiranja boravka blizu Plitvica.',
+      'Ideje za aktivan i opušten odmor u Lici, od prirode i izleta do jednostavnog planiranja boravka blizu Plitvica.',
     publishedAt: '2026-05-09',
     updatedAt: '2026-05-09',
     readingTime: '8 min',
@@ -87,24 +89,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Aktivnosti u prirodi i adrenalinski dozivljaji',
+        heading: 'Aktivnosti u prirodi i adrenalinski doživljaji',
         paragraphs: [
-          'Lika nudi odlican balans izmedu aktivnog dana i mirnog vecernjeg odmora. Tijekom boravka mozes kombinirati setnje, vidikovce i lokalne outdoor aktivnosti.',
-          'Ako planiras vise dana, isplati se rasporediti aktivnosti prema intenzitetu kako bi svaki dan imao jasnu temu i dovoljno vremena za oporavak.',
+          'Lika nudi odličan balans izmedu aktivnog dana i mirnog večernjeg odmora. Tijekom boravka možeš kombinirati šetnje, vidikovce i lokalne outdoor aktivnosti.',
+          'Ako planiraš više dana, isplati se rasporediti aktivnosti prema intenzitetu kako bi svaki dan imao jasnu temu i dovoljno vremena za oporavak.',
         ],
       },
       {
-        heading: 'Kako sloziti plan za parove, obitelji i grupe',
+        heading: 'Kako složiti plan za parove, obitelji i grupe',
         paragraphs: [
-          'Parovima odgovaraju opusteniji itinerari s vise spontanosti, dok obiteljima i grupama vise odgovara unaprijed dogovoren raspored.',
-          'Kod grupnog putovanja vazno je uskladiti tempo i odabrati smjestaj koji olaksava logistiku za sve sudionike.',
+          'Parovima odgovaraju opušteniji raspored s više spontanosti, dok obiteljima i grupama više odgovara unaprijed dogovoren raspored.',
+          'Kod grupnog putovanja važno je uskladiti tempo i odabrati smještaj koji olakšava logistiku za sve sudionike.',
         ],
       },
       {
-        heading: 'Prakticni savjeti za bolji raspored dana',
+        heading: 'Praktični savjeti za bolji raspored dana',
         paragraphs: [
-          'Kreni ranije na najpopularnije lokacije i ostavi popodne za manje opterecene aktivnosti. Tako izbjegavas guzve i zadrzavas energiju.',
-          'Ako trazis bazu iz koje je lako organizirati aktivnosti, provjeri smjestaj i rezervaciju unaprijed.',
+          'Kreni ranije na najpopularnije lokacije i ostavi popodne za manje zahtijevne aktivnosti. Tako izbjegavaš gužve i zadržavaš energiju.',
+          'Ako tražiš bazu iz koje je lako organizirati aktivnosti, provjeri smještaj i rezervaciju unaprijed.',
         ],
       },
     ],
@@ -114,7 +116,7 @@ export const GUIDES: GuideArticle[] = [
     locale: 'hr',
     title: 'Obiteljski odmor blizu Plitvica',
     description:
-      'Kako organizirati obiteljski odmor blizu Plitvica: smjestaj, dnevni ritam, aktivnosti za djecu i prakticni savjeti za bezbrizan boravak.',
+      'Kako organizirati obiteljski odmor blizu Plitvica: smještaj, dnevni ritam, aktivnosti za djecu i praktični savjeti za bezbrižan boravak.',
     publishedAt: '2026-05-10',
     updatedAt: '2026-05-10',
     readingTime: '7 min',
@@ -130,24 +132,24 @@ export const GUIDES: GuideArticle[] = [
     ],
     sections: [
       {
-        heading: 'Sto je najvaznije kod obiteljskog smjestaja',
+        heading: 'Što je najvažnije kod obiteljskog smještaja',
         paragraphs: [
-          'Obiteljima su prioritet sigurnost, dovoljno prostora i jasna organizacija dana. Smjestaj koji nudi privatnost i funkcionalnost olaksava cijeli boravak.',
-          'Kod planiranja je korisno odmah provjeriti cjenik i dostupnost termina kako bi se putovanje uskladilo sa skolskim i poslovnim obvezama.',
+          'Obiteljima su prioritet sigurnost, dovoljno prostora i jasna organizacija dana. Smještaj koji nudi privatnost i funkcionalnost olaksava cijeli boravak.',
+          'Kod planiranja je korisno odmah provjeriti cjenik i dostupnost termina kako bi se putovanje uskladilo sa školskim i poslovnim obvezama.',
         ],
       },
       {
-        heading: 'Aktivnosti prilagodene djeci i roditeljima',
+        heading: 'Aktivnosti prilagođene djeci i roditeljima',
         paragraphs: [
-          'Najbolji raspored je kombinirati krace aktivnosti u prirodi s dovoljno pauza za odmor. Tako su i djeca i odrasli zadovoljniji tijekom dana.',
-          'U okolici Plitvica lako je sloziti jednostavne izlete bez dugih voznji, sto je posebno vazno za obitelji s manjom djecom.',
+          'Najbolji raspored je kombinirati kraće aktivnosti u prirodi s dovoljno pauza za odmor. Tako su i djeca i odrasli zadovoljniji tijekom dana.',
+          'U okolici Plitvica lako je sloziti jednostavne izlete bez dugih vožnji, sto je posebno važno za obitelji s manjom djecom.',
         ],
       },
       {
         heading: 'Kako smanjiti stres kod planiranja putovanja',
         paragraphs: [
-          'Raspodijeli aktivnosti po danima, planiraj fleksibilno i ostavi vrijeme za odmor. Preopterećen raspored najcesci je razlog umora na obiteljskim putovanjima.',
-          'Direktna rezervacija i jasna komunikacija oko detalja smjestaja dodatno pojednostavljuju organizaciju.',
+          'Raspodijeli aktivnosti po danima, planiraj fleksibilno i ostavi vrijeme za odmor. Preopterećen raspored najčesći je razlog umora na obiteljskim putovanjima.',
+          'Direktna rezervacija i jasna komunikacija oko detalja smještaja dodatno pojednostavljuju organizaciju.',
         ],
       },
     ],
@@ -157,13 +159,13 @@ export const GUIDES: GuideArticle[] = [
     locale: 'hr',
     title: 'Koliko dana treba za Plitvice',
     description:
-      'Praktican vodic za planiranje boravka na Plitvicama: 1, 2 ili 3 dana, kako sloziti raspored i gdje odsjesti za bolju logistiku.',
+      'Praktičan vodič za planiranje boravka na Plitvicama: 1, 2 ili 3 dana, kako složiti raspored i gdje odsjesti za bolju logistiku.',
     publishedAt: '2026-05-11',
     updatedAt: '2026-05-11',
     readingTime: '6 min',
     keywords: [
       'koliko dana treba za plitvice',
-      'plitvice itinerar',
+      'plan posjeta plitvicama',
       'smjestaj blizu plitvica vise dana',
     ],
     relatedLandingPages: [
@@ -175,22 +177,22 @@ export const GUIDES: GuideArticle[] = [
       {
         heading: '1 dan, 2 dana ili 3 dana na Plitvicama',
         paragraphs: [
-          'Ako imas samo jedan dan, fokusiraj se na jednu glavnu rutu i izbjegni pretrpavanje rasporeda. Za dublji dozivljaj prirode preporucuju se najmanje dva dana.',
-          'Tri dana daju dovoljno prostora za NP Plitvicka jezera i dodatne aktivnosti u Lici bez zurbe.',
+          'Ako imaš samo jedan dan, fokusiraj se na jednu glavnu rutu i izbjegni pretrpavanje rasporeda. Za dublji doživljaj prirode preporučuju se najmanje dva dana.',
+          'Tri dana daju dovoljno prostora za NP Plitvička jezera i dodatne aktivnosti u Lici bez žurbe.',
         ],
       },
       {
-        heading: 'Primjer itinerara po duljini boravka',
+        heading: 'Primjer rasporeda po duljini boravka',
         paragraphs: [
           'Za vikend boravak dobro funkcionira model: prvi dan lagani dolazak i odmor, drugi dan glavni izlet, treci dan kraci obilazak i povratak.',
-          'Za dulji boravak ukljuci i lokalne izlete kako bi putovanje imalo vecu raznolikost i bolju vrijednost.',
+          'Za dulji boravak uključi i lokalne izlete kako bi putovanje imalo veću raznolikost i bolju vrijednost.',
         ],
       },
       {
         heading: 'Gdje odsjesti za najbolju logistiku',
         paragraphs: [
-          'Smjestaj blizu Plitvica skracuje vrijeme voznje i pojednostavljuje svaki dan putovanja. To je posebno korisno kod obitelji i vecih grupa.',
-          'Ako planiras vise dana, rezerviraj termin unaprijed i uskladi ga s raspolozivim cijenama i kapacitetom.',
+          'Smještaj blizu Plitvica skraćuje vrijeme vožnje i pojednostavljuje svaki dan putovanja. To je posebno korisno kod obitelji i većih grupa.',
+          'Ako planiras više dana, rezerviraj termin unaprijed i uskladi ga s raspoloživim cijenama i kapacitetom.',
         ],
       },
     ],
@@ -708,4 +710,6 @@ export const GUIDES: GuideArticle[] = [
       },
     ],
   },
+  ...NEW_GUIDES,
+  ...NEW_GUIDES_BATCH_2,
 ];

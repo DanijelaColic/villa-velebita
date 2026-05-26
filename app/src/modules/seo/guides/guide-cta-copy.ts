@@ -30,6 +30,25 @@ export const GUIDE_SECONDARY_CTA: Record<
   },
 };
 
+export const GUIDE_RELATED_UI: Record<AppLocale, { title: string; intro: string }> = {
+  hr: {
+    title: 'Povezani vodiči',
+    intro: 'Nastavite planiranje puta uz ostale članke o Plitvicama i Lici.',
+  },
+  en: {
+    title: 'Related guides',
+    intro: 'Continue planning with more articles about Plitvice and Lika.',
+  },
+  de: {
+    title: 'Weitere Artikel',
+    intro: 'Planung fortsetzen mit weiteren Beiträgen zu Plitvice und Lika.',
+  },
+  it: {
+    title: 'Guide correlate',
+    intro: 'Continuate a pianificare con altri articoli su Plitvice e Lika.',
+  },
+};
+
 export const GUIDE_HUB_UI: Record<
   AppLocale,
   { eyebrow: string; readGuide: string }

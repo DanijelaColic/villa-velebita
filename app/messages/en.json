@@ -117,7 +117,9 @@
       "accommodation": "Accommodation",
       "gallery": "Gallery",
       "amenities": "Amenities",
+      "location": "Location",
       "pricing": "Pricing",
+      "faq": "FAQ",
       "booking": "Booking",
       "contact": "Contact"
     },
@@ -278,6 +280,8 @@
     "builtByPrefix": "Website by",
     "builtBySuffix": ".",
     "whatsappLabel": "WhatsApp",
+    "seoNavTitle": "Trip planning",
+    "seoNavigationAriaLabel": "Guide and stays near Plitvice",
     "links": {
       "accommodation": "Accommodation",
       "gallery": "Gallery",
@@ -339,6 +343,15 @@
         "primary": "Learn more about the house",
         "secondary": "Gallery"
       }
+    },
+    "seoDiscover": {
+      "heading": {
+        "label": "Plitvice and Lika",
+        "title": "Planning your stay and accommodation",
+        "subtitle": "Practical guides and pages to book a stay near the national park."
+      },
+      "readMore": "Read more",
+      "cta": "Check availability"
     },
     "location": {
       "heading": {

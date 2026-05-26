@@ -7,7 +7,9 @@ import { AppImage } from '@/components/ui/AppImage';
 import { Link } from '@/i18n/navigation';
 import { getBreadcrumbStructuredData } from '@/i18n/metadata';
 import { getGuideBySlug } from '@/modules/seo/guides/get-guide-by-slug';
-import { GUIDE_SECONDARY_CTA } from '@/modules/seo/guides/guide-cta-copy';
+import { getGuides } from '@/modules/seo/guides/get-guides';
+import { InternalLinks } from '@/components/seo/InternalLinks';
+import { GUIDE_RELATED_UI, GUIDE_SECONDARY_CTA } from '@/modules/seo/guides/guide-cta-copy';
 import { getValidLocale } from '@/i18n/messages';
 import { getLandingPageContent } from '@/modules/seo/landing-pages/content';
 import { parseLandingPageKeyFromPath } from '@/modules/seo/landing-pages/landing-enriched-types';
@@ -66,6 +68,10 @@ export default async function VodicArticlePage({ params }: Props) {
 
   const tFooter = await getTranslations('footer');
   const secondaryCta = GUIDE_SECONDARY_CTA[locale];
+  const relatedGuidesUi = GUIDE_RELATED_UI[locale];
+  const relatedGuides = getGuides(locale)
+    .filter((item) => item.slug !== guide.slug)
+    .slice(0, 4);
 
   const breadcrumbJsonLd = getBreadcrumbStructuredData(locale, [
     { name: 'Villa Velebita', pathname: '/' },
@@ -91,6 +97,7 @@ export default async function VodicArticlePage({ params }: Props) {
       name: 'Villa Velebita',
     },
     mainEntityOfPage: `https://villavelebita.hr${basePath}/vodic/${guide.slug}`,
+    image: `https://villavelebita.hr${guide.coverImage.src}`,
   };
 
   const faqJsonLd = {
@@ -228,6 +235,25 @@ export default async function VodicArticlePage({ params }: Props) {
             </div>
           </section>
 
+          {relatedGuides.length > 0 ? (
+            <div className="mt-10 rounded-card border border-stone-pale bg-white p-5 shadow-card">
+              <h2 className="font-display text-xl text-oak mb-2">{relatedGuidesUi.title}</h2>
+              <p className="text-stone text-sm leading-relaxed mb-4">{relatedGuidesUi.intro}</p>
+              <ul className="flex flex-wrap gap-2.5">
+                {relatedGuides.map((item) => (
+                  <li key={item.slug}>
+                    <Link
+                      href={`/vodic/${item.slug}`}
+                      className="inline-flex rounded-full border border-stone-pale px-3 py-1.5 text-sm text-oak transition-colors hover:border-terracotta hover:text-terracotta"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <div className="mt-10 rounded-card border border-stone-pale bg-white p-5 shadow-card">
             <h2 className="font-display text-xl text-oak mb-2">{guide.relatedLandingsTitle}</h2>
             <p className="text-stone text-sm leading-relaxed mb-4">{guide.relatedLandingsIntro}</p>
@@ -250,6 +276,8 @@ export default async function VodicArticlePage({ params }: Props) {
               })}
             </ul>
           </div>
+
+          <InternalLinks currentPath={`/vodic/${guide.slug}`} />
 
           {/* Secondary commercial CTAs: pricing + location alongside booking (conversion path from guides). */}
           <div className="mt-6 rounded-card border border-stone-pale bg-white p-5 shadow-card">

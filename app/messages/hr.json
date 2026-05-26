@@ -117,7 +117,9 @@
       "accommodation": "O smještaju",
       "gallery": "Galerija",
       "amenities": "Sadržaji",
+      "location": "Lokacija",
       "pricing": "Cijene",
+      "faq": "FAQ",
       "booking": "Rezervacije",
       "contact": "Kontakt"
     },
@@ -278,6 +280,8 @@
     "builtByPrefix": "Stranicu izradio",
     "builtBySuffix": ".",
     "whatsappLabel": "WhatsApp",
+    "seoNavTitle": "Planiranje puta",
+    "seoNavigationAriaLabel": "Vodič i smještaj blizu Plitvica",
     "links": {
       "accommodation": "O smještaju",
       "gallery": "Galerija",
@@ -357,6 +361,15 @@
         "primary": "Saznajte više o smještaju",
         "secondary": "Galerija"
       }
+    },
+    "seoDiscover": {
+      "heading": {
+        "label": "Plitvice i Lika",
+        "title": "Planiranje boravka i smještaj",
+        "subtitle": "Praktični vodiči i stranice za rezervaciju smještaja blizu nacionalnog parka."
+      },
+      "readMore": "Pročitaj više",
+      "cta": "Provjeri dostupnost"
     },
     "location": {
       "heading": {

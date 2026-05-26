@@ -8,6 +8,7 @@ import { getBreadcrumbStructuredData } from '@/i18n/metadata';
 import { getGuides } from '@/modules/seo/guides/get-guides';
 import { GUIDE_HUB_BY_LOCALE } from '@/modules/seo/guides/guides-content';
 import { getValidLocale } from '@/i18n/messages';
+import { InternalLinks } from '@/components/seo/InternalLinks';
 import { GUIDE_HUB_UI, GUIDE_SECONDARY_CTA } from '@/modules/seo/guides/guide-cta-copy';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -93,6 +94,8 @@ export default async function VodicPage() {
               </article>
             ))}
           </div>
+
+          <InternalLinks currentPath="/vodic" />
 
           {/* Same commercial path as guide articles: booking + pricing + location. */}
           <div className="mt-10 rounded-card border border-stone-pale bg-white p-5 shadow-card">

@@ -3,6 +3,7 @@ import { getLocale, getTranslations } from 'next-intl/server';
 import { Link } from '@/i18n/navigation';
 import { localizePath } from '@/i18n/pathnames';
 import { getValidLocale } from '@/i18n/messages';
+import { getSeoNavLinks } from '@/modules/seo/seo-nav-links';
 
 const NAV_LINKS = [
   { href: '/smjestaj', labelKey: 'accommodation' },
@@ -18,13 +19,14 @@ const NAV_LINKS = [
 export async function Footer() {
   const locale = getValidLocale(await getLocale());
   const t = await getTranslations('footer');
+  const seoLinks = getSeoNavLinks(locale);
   const year = new Date().getFullYear();
   const contactHref = `${localizePath('/', locale)}#kontakt`;
 
   return (
     <footer className="bg-oak text-cream" aria-label={t('ariaLabel')}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand column */}
           <div className="lg:col-span-1">
             <p className="font-display text-2xl font-semibold text-cream mb-2">
@@ -62,6 +64,27 @@ export async function Footer() {
                         {t(`links.${link.labelKey}`)}
                       </Link>
                     )}
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
+
+          {/* SEO: vodič + landing stranice */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-widest text-cream/50 mb-4">
+              {t('seoNavTitle')}
+            </p>
+            <nav aria-label={t('seoNavigationAriaLabel')}>
+              <ul className="space-y-2">
+                {seoLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-stone-light hover:text-cream transition-colors duration-150 leading-snug"
+                    >
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>

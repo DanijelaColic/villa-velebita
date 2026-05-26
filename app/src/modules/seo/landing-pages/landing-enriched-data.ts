@@ -499,17 +499,17 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
         {
           question: "Je li ovaj smještaj dobar za djecu?",
           answer:
-            "Obiteljima odgovara privatnost i mogućnost prilagodbe ritma dana; pripremite obuću za šetnje i slojeve za promjenu vremena.",
+            "Da — obiteljima najviše odgovaraju mir, privatnost i fleksibilnost tijekom dana, posebno nakon obilaska Plitvičkih jezera. Djeci će koristiti udobna obuća za šetnje, a preporučuju se i slojevita odjeća zbog čestih promjena vremena u prirodi.",
         },
         {
           question: "Kako funkcionira direktna rezervacija?",
           answer:
-            "Kontakt i uvjeti idu izravno s objektom, što olakšava dogovor oko dolaska, ključeva i plaćanja.",
+            "Direktna rezervacija omogućuje jednostavniji dogovor s domaćinom oko termina, dolaska i plaćanja, bez dodatnih posrednika. Tako lakše možete uskladiti vrijeme dolaska, preuzimanje ključeva i posebne želje vezane uz boravak.",
         },
         {
-          question: "Mogu li kombinirati s jacuzzijem?",
+          question: "Je li korištenje jacuzzija uključeno u cijenu boravka?",
           answer:
-            "Za naglasak na wellness iskustvu pogledajte i stranicu vile s jacuzzijem blizu Plitvica.",
+            "Da — nakon dana provedenog u prirodi mnogi gosti biraju smještaj s jacuzzijem za dodatno opuštanje i mirniji večernji odmor. Za wellness iskustvo pogledajte i našu vilu s jacuzzijem u blizini Plitvičkih jezera.",
         },
         {
           question: "Koliko dana je idealno?",
@@ -924,9 +924,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "Korištenje ovisi o sigurnosti i vremenu; domaćin će dati praktične smjernice za vaš termin.",
         },
         {
-          question: "Je li jacuzzi dovoljan razlog da odaberem ovu vilu?",
+          question: "Zašto gosti biraju kuću s jacuzzijem?",
           answer:
-            "Mnogi gosti ga kombiniraju s blizinom Plitvica i privatnošću cijelog objekta — dobar “dupli” motiv.",
+            "Mnogi gosti biraju ovu kuću upravo zbog spoja privatnog jacuzzija, mira i blizine Plitvičkih jezera. Nakon dana provedenog u prirodi, opuštanje u toploj vodi daje boravku dodatnu vrijednost i osjećaj potpunog odmora.",
         },
         {
           question: "Kako organizirati dan?",
@@ -1311,7 +1311,7 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
           imageAlt: "Placeholder kuće.",
         },
         {
-          title: "Aktivna šetnja za željne",
+          title: "Aktivna šetnja ili zipline",
           description:
             "Jedna intenzivnija opcija za one koji žele više kretanja.",
           image: "/images/seo/landing/zipp_line_iznad _sume.jpg",
@@ -1346,9 +1346,9 @@ export const LANDING_ENRICHED: LandingEnrichedMap = {
             "Dogovorite vrijeme okupljanja, točke pauze i alternativu ako se netko umori ranije.",
         },
         {
-          question: "Je li jacuzzi uključen u iskustvo?",
+          question: "Je li jacuzzi uključen u cijenu boravka?",
           answer:
-            "Za naglasak na jacuzziju pogledajte tematsku stranicu vile s jacuzzijem blizu Plitvica.",
+            "Jacuzzi je privatni dio iskustva boravka i dostupan je gostima tijekom cijelog odmora. Mnogi ga biraju kao savršen način opuštanja nakon dana provedenog u prirodi i obilaska Plitvičkih jezera. Za više informacija pogledajte i stranicu vile s jacuzzijem blizu Plitvica.",
         },
       ],
       reservationIntro:

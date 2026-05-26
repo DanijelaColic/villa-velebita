@@ -117,7 +117,9 @@
       "accommodation": "Unterkunft",
       "gallery": "Galerie",
       "amenities": "Ausstattung",
+      "location": "Lage",
       "pricing": "Preise",
+      "faq": "FAQ",
       "booking": "Buchung",
       "contact": "Kontakt"
     },
@@ -278,6 +280,8 @@
     "builtByPrefix": "Website von",
     "builtBySuffix": ".",
     "whatsappLabel": "WhatsApp",
+    "seoNavTitle": "Reiseplanung",
+    "seoNavigationAriaLabel": "Reiseführer und Unterkunft nahe Plitvice",
     "links": {
       "accommodation": "Unterkunft",
       "gallery": "Galerie",
@@ -339,6 +343,15 @@
         "primary": "Mehr über die Unterkunft",
         "secondary": "Galerie"
       }
+    },
+    "seoDiscover": {
+      "heading": {
+        "label": "Plitvice und Lika",
+        "title": "Aufenthalt planen und Unterkunft",
+        "subtitle": "Praktische Guides und Seiten zur Direktbuchung nahe dem Nationalpark."
+      },
+      "readMore": "Mehr lesen",
+      "cta": "Verfügbarkeit prüfen"
     },
     "location": {
       "heading": {

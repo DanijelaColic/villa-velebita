@@ -5,6 +5,7 @@ import { Footer } from '@/components/Footer';
 import { Amenities } from '@/components/sections/Amenities';
 import { Experiences } from '@/components/sections/Experiences';
 import { CaffeBarPlitvice } from '@/components/sections/CaffeBarPlitvice';
+import { InternalLinks } from '@/components/seo/InternalLinks';
 import { getPageMetadata } from '@/i18n/metadata';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -25,6 +26,9 @@ export default function SadrzajiPage() {
         <Amenities />
         <Experiences />
         <CaffeBarPlitvice />
+        <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8 pb-12">
+          <InternalLinks currentPath="/sadrzaji" />
+        </div>
       </main>
       <Footer />
     </>

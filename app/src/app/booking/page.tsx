@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
+import { InternalLinks } from '@/components/seo/InternalLinks';
 import BookingWidget from '@/modules/booking-admin/components/BookingWidget';
 import { getPageMetadata } from '@/i18n/metadata';
 
@@ -37,8 +39,10 @@ export default async function BookingPage({ searchParams }: Props) {
             <p className="text-stone">{t('description')}</p>
           </div>
           <BookingWidget initialSlug={apartment ?? 'villa-velebita'} />
+          <InternalLinks currentPath="/booking" />
         </div>
       </main>
+      <Footer />
     </>
   );
 }

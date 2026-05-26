@@ -6,6 +6,7 @@ import {
   GalleryTeaser,
   AmenitiesTeaser,
   LocationTeaser,
+  SeoDiscoverTeaser,
   FAQTeaser,
 } from '@/components/sections/LandingTeasers';
 import { ReviewsSection } from '@/components/sections/ReviewsSection';
@@ -22,6 +23,7 @@ export default function HomePage() {
         <GalleryTeaser />
         <AmenitiesTeaser />
         <LocationTeaser />
+        <SeoDiscoverTeaser />
         <FAQTeaser />
         <ReviewsSection />
         <Booking />
