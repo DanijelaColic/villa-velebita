@@ -280,6 +280,11 @@
     "builtByPrefix": "Sito realizzato da",
     "builtBySuffix": ".",
     "whatsappLabel": "WhatsApp",
+    "socialTitle": "Social media",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram"
+    },
     "seoNavTitle": "Pianifica il viaggio",
     "seoNavigationAriaLabel": "Guida e alloggi vicino a Plitvice",
     "links": {

@@ -280,6 +280,11 @@
     "builtByPrefix": "Stranicu izradio",
     "builtBySuffix": ".",
     "whatsappLabel": "WhatsApp",
+    "socialTitle": "Društvene mreže",
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram"
+    },
     "seoNavTitle": "Planiranje puta",
     "seoNavigationAriaLabel": "Vodič i smještaj blizu Plitvica",
     "links": {

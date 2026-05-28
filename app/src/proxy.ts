@@ -7,6 +7,18 @@ const handleI18nRouting = createMiddleware(routing);
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+  const isMetadataRoute =
+    pathname === '/icon' ||
+    pathname.startsWith('/icon/') ||
+    pathname === '/apple-icon' ||
+    pathname.startsWith('/apple-icon/') ||
+    pathname === '/manifest.webmanifest' ||
+    pathname === '/manifest';
+
+  // Skip locale middleware for Next.js metadata routes without file extensions.
+  if (isMetadataRoute) {
+    return NextResponse.next();
+  }
 
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
     const cookie = request.cookies.get(ADMIN_COOKIE_NAME);

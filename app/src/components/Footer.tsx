@@ -22,6 +22,16 @@ export async function Footer() {
   const seoLinks = getSeoNavLinks(locale);
   const year = new Date().getFullYear();
   const contactHref = `${localizePath('/', locale)}#kontakt`;
+  const socialLinks = [
+    {
+      href: 'https://www.facebook.com/profile.php?id=61589074076852',
+      label: t('social.facebook'),
+    },
+    {
+      href: 'https://www.instagram.com/villa__velebita/',
+      label: t('social.instagram'),
+    },
+  ];
 
   return (
     <footer className="bg-oak text-cream" aria-label={t('ariaLabel')}>
@@ -124,6 +134,27 @@ export async function Footer() {
                 >
                   Ivica.cacic485@gmail.com
                 </a>
+              </div>
+
+              {/* Social links are grouped with contact details so users can find them on every page. */}
+              <div className="pt-2 border-t border-cream/10">
+                <p className="text-xs font-semibold uppercase tracking-widest text-cream/50 mb-2">
+                  {t('socialTitle')}
+                </p>
+                <ul className="space-y-1.5">
+                  {socialLinks.map(link => (
+                    <li key={link.href}>
+                      <a
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm text-stone-light hover:text-cream transition-colors duration-150"
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </address>
           </div>
