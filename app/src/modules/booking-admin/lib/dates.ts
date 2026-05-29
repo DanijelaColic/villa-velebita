@@ -8,6 +8,7 @@ import {
   LONG_STAY_DISCOUNT_NIGHTS,
   LONG_STAY_DISCOUNT_RATE,
   CLEANING_FEE,
+  SPECIAL_PRICE_PERIODS,
 } from '../booking.config';
 import type { PriceBreakdown } from '../types';
 
@@ -126,46 +127,60 @@ export function getMonthGrid(year: number, month: number): (Date | null)[] {
 }
 
 // ── Cijena ───────────────────────────────────────────────────────
-// Visoka sezona je definirana u booking.config.ts (HIGH_SEASON_MONTHS)
+// Posebni periodi (blagdani, Nova godina…) imaju prednost pred
+// sezonskim cijenama. Oba `from` i `to` su inkluzivni datumi.
+
+function parseYMD(s: string): Date {
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+
+export function getPriceForDate(apartment: Apartment, date: Date): { price: number; label: string } {
+  for (const period of SPECIAL_PRICE_PERIODS) {
+    const from = parseYMD(period.from);
+    const to = parseYMD(period.to);
+    if (date >= from && date <= to) {
+      return { price: period.pricePerNight, label: period.label };
+    }
+  }
+  const month = date.getMonth() + 1;
+  const isHigh = HIGH_SEASON_MONTHS.includes(month);
+  return {
+    price: isHigh ? apartment.priceHighSeason : apartment.priceOffSeason,
+    label: isHigh ? HIGH_SEASON_LABEL : OFF_SEASON_LABEL,
+  };
+}
 
 export function calculatePrice(
   checkIn: Date,
   checkOut: Date,
   apartment: Apartment,
 ): PriceBreakdown {
-  let lowNights = 0;
-  let highNights = 0;
+  // Akumuliraj noći po (label + pricePerNight) paru
+  const nightMap = new Map<string, { label: string; pricePerNight: number; nights: number }>();
 
   let d = new Date(checkIn);
   while (d < checkOut) {
-    const month = d.getMonth() + 1;
-    if (HIGH_SEASON_MONTHS.includes(month)) highNights++;
-    else lowNights++;
+    const { price, label } = getPriceForDate(apartment, d);
+    const key = `${label}|${price}`;
+    const existing = nightMap.get(key);
+    if (existing) {
+      existing.nights++;
+    } else {
+      nightMap.set(key, { label, pricePerNight: price, nights: 1 });
+    }
     d = addDays(d, 1);
   }
 
-  const lines: PriceBreakdown['lines'] = [];
+  const lines: PriceBreakdown['lines'] = Array.from(nightMap.values()).map((entry) => ({
+    label: entry.label,
+    nights: entry.nights,
+    pricePerNight: entry.pricePerNight,
+    subtotal: entry.nights * entry.pricePerNight,
+  }));
 
-  if (lowNights > 0) {
-    lines.push({
-      label: OFF_SEASON_LABEL,
-      nights: lowNights,
-      pricePerNight: apartment.priceOffSeason,
-      subtotal: lowNights * apartment.priceOffSeason,
-    });
-  }
-
-  if (highNights > 0) {
-    lines.push({
-      label: HIGH_SEASON_LABEL,
-      nights: highNights,
-      pricePerNight: apartment.priceHighSeason,
-      subtotal: highNights * apartment.priceHighSeason,
-    });
-  }
-
-  const nights = lowNights + highNights;
-  const rawTotalPrice = lines.reduce((sum, l) => sum + l.subtotal, 0);
+  const nights = lines.reduce((s, l) => s + l.nights, 0);
+  const rawTotalPrice = lines.reduce((s, l) => s + l.subtotal, 0);
   const discountAmount =
     nights >= LONG_STAY_DISCOUNT_NIGHTS
       ? Math.round(rawTotalPrice * LONG_STAY_DISCOUNT_RATE)

@@ -49,6 +49,7 @@ export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {
                 <span className="text-xl text-stone mb-2">€ / noć</span>
               </div>
               <p className="text-stone text-sm mt-1">{t('priceCard.note')}</p>
+              <p className="text-stone/70 text-xs mt-2 italic">{t('priceCard.variablePriceNote')}</p>
             </div>
             <div className="bg-terracotta/10 border border-terracotta/20 rounded-card px-5 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-terracotta mb-1">

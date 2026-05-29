@@ -723,7 +723,8 @@
     },
     "priceCard": {
       "eyebrow": "Tariffa",
-      "note": "Intera casa · fino a 9 ospiti · 30 € a persona (270/9)"
+      "note": "Intera casa · fino a 9 ospiti · 30 € a persona (270/9)",
+      "variablePriceNote": "* Il prezzo per festività, weekend e periodi speciali può variare. L'importo esatto è visibile nella selezione delle date al momento della prenotazione."
     },
     "discountBadge": {
       "title": "Prenota 7+ notti",

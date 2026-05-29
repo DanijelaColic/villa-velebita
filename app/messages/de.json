@@ -723,7 +723,8 @@
     },
     "priceCard": {
       "eyebrow": "Mietpreis",
-      "note": "Ganzes Haus · bis zu 9 Gäste · 30 € pro Person (270/9)"
+      "note": "Ganzes Haus · bis zu 9 Gäste · 30 € pro Person (270/9)",
+      "variablePriceNote": "* Für Feiertage, Wochenenden und besondere Zeiträume kann der Preis abweichen. Den genauen Betrag sehen Sie bei der Datumsauswahl in der Buchung."
     },
     "discountBadge": {
       "title": "7+ Nächte buchen",

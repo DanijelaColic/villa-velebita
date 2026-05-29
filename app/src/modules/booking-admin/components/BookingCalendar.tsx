@@ -13,7 +13,9 @@ import {
   isDateBooked,
   getFirstBlockedAfter,
   getMonthGrid,
+  getPriceForDate,
 } from '../lib/dates';
+import { apartments } from '../booking.config';
 import type { BookedRange } from '../types';
 
 type DayState =
@@ -139,6 +141,19 @@ export default function BookingCalendar({
   const firstBlocked = checkIn && !checkOut
     ? getFirstBlockedAfter(checkIn, bookedRanges)
     : null;
+
+  const apartment = useMemo(
+    () => apartments.find((a) => a.slug === apartmentSlug),
+    [apartmentSlug],
+  );
+
+  const getDayPrice = useCallback(
+    (day: Date): number => {
+      if (!apartment) return 0;
+      return getPriceForDate(apartment, day).price;
+    },
+    [apartment],
+  );
 
   const getDayState = useCallback(
     (day: Date): DayState => {
@@ -291,6 +306,7 @@ export default function BookingCalendar({
             weekdays={weekdays}
             t={t}
             getDayState={getDayState}
+            getDayPrice={getDayPrice}
             onDayClick={handleDayClick}
             onDayHover={handleDayHover}
           />
@@ -321,6 +337,7 @@ type MonthGridProps = {
   weekdays: string[];
   t: ReturnType<typeof useTranslations<'bookingWidget.calendar'>>;
   getDayState: (day: Date) => DayState;
+  getDayPrice: (day: Date) => number;
   onDayClick: (day: Date) => void;
   onDayHover: (day: Date) => void;
 };
@@ -333,6 +350,7 @@ function MonthGrid({
   weekdays,
   t,
   getDayState,
+  getDayPrice,
   onDayClick,
   onDayHover,
 }: MonthGridProps) {
@@ -363,6 +381,8 @@ function MonthGrid({
             state === 'hover-range' ||
             state === 'check-in' ||
             state === 'check-out';
+          const showPrice = state !== 'past' && state !== 'booked';
+          const dayPrice = showPrice ? getDayPrice(day) : 0;
 
           return (
             <div
@@ -370,7 +390,7 @@ function MonthGrid({
               onClick={() => onDayClick(day)}
               onMouseEnter={() => onDayHover(day)}
               className={clsx(
-                'relative h-9 flex items-center justify-center text-sm select-none transition-colors',
+                'relative h-14 flex flex-col items-center justify-center text-sm select-none transition-colors',
                 {
                   'text-gray-300 cursor-not-allowed':
                     state === 'past' || state === 'blocked-for-checkout',
@@ -394,7 +414,12 @@ function MonthGrid({
                     : undefined
               }
             >
-              {day.getDate()}
+              <span className="leading-none">{day.getDate()}</span>
+              {showPrice && dayPrice > 0 && (
+                <span className="text-[9px] leading-none mt-0.5 opacity-60">
+                  {dayPrice}€
+                </span>
+              )}
             </div>
           );
         })}

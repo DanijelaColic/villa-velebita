@@ -741,7 +741,8 @@
     },
     "priceCard": {
       "eyebrow": "Cijena najma",
-      "note": "Cijela kuća · do 9 osoba · 30 € po osobi (270/9)"
+      "note": "Cijela kuća · do 9 osoba · 30 € po osobi (270/9)",
+      "variablePriceNote": "* Za Blagdane, vikende i posebne termine cijena može varirati. Točan iznos vidite pri odabiru datuma u rezervaciji."
     },
     "discountBadge": {
       "title": "Rezerviraj 7+ noći",

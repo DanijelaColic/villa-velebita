@@ -69,6 +69,27 @@ export const LONG_STAY_DISCOUNT_RATE = 0.1;
  */
 export const HIGH_SEASON_MONTHS: number[] = [];
 
+// ── Posebni cjenovni periodi (blagdani, vikendi, posebni termini) ──
+// `from` i `to` su inkluzivni (YYYY-MM-DD) — zadnja noć je uključena.
+
+export type SpecialPricePeriod = {
+  from: string;
+  to: string;
+  pricePerNight: number;
+  label: string;
+};
+
+export const SPECIAL_PRICE_PERIODS: SpecialPricePeriod[] = [
+  // 2025/2026
+  { from: '2025-12-23', to: '2025-12-29', pricePerNight: 360, label: 'Blagdani' },
+  { from: '2025-12-30', to: '2026-01-07', pricePerNight: 450, label: 'Nova godina' },
+  { from: '2026-03-26', to: '2026-03-28', pricePerNight: 360, label: 'Uskrsni vikend' },
+  // 2026/2027
+  { from: '2026-12-23', to: '2026-12-29', pricePerNight: 360, label: 'Blagdani' },
+  { from: '2026-12-30', to: '2027-01-07', pricePerNight: 450, label: 'Nova godina' },
+  { from: '2027-03-26', to: '2027-03-29', pricePerNight: 360, label: 'Uskrsni vikend' },
+];
+
 export const HIGH_SEASON_LABEL = 'Visoka sezona';
 export const OFF_SEASON_LABEL = 'Van sezone';
 

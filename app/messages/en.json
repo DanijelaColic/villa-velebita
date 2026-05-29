@@ -723,7 +723,8 @@
     },
     "priceCard": {
       "eyebrow": "Rental rate",
-      "note": "Entire house · up to 9 guests · 30 € per guest (270/9)"
+      "note": "Entire house · up to 9 guests · 30 € per guest (270/9)",
+      "variablePriceNote": "* Prices for holidays, weekends and special periods may vary. The exact rate is shown when you select dates during booking."
     },
     "discountBadge": {
       "title": "Book 7+ nights",
