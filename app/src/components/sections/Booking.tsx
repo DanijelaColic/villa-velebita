@@ -1,18 +1,36 @@
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import BookingWidget from '@/modules/booking-admin/components/BookingWidget';
 import { MIN_NIGHTS } from '@/modules/booking-admin/booking.config';
+import { getValidLocale } from '@/i18n/messages';
+import {
+  getSiteTextOverrides,
+  resolveSiteText,
+} from '@/modules/cms/lib/get-site-texts';
 
 export async function Booking() {
+  const locale = getValidLocale(await getLocale());
   const t = await getTranslations('bookingSection');
+  const overrides = await getSiteTextOverrides(locale);
+
+  const title = resolveSiteText(
+    overrides,
+    'bookingSection.heading.title',
+    t('heading.title'),
+  );
+  const subtitle = resolveSiteText(
+    overrides,
+    'bookingSection.heading.subtitle',
+    t('heading.subtitle'),
+  );
 
   return (
     <SectionWrapper id="rezervacije" bg="cream">
       <SectionHeading
         label={t('heading.label')}
-        title={t('heading.title')}
-        subtitle={t('heading.subtitle')}
+        title={title}
+        subtitle={subtitle}
       />
 
       {/* Inline rules text prilagođen za Villa Velebita */}

@@ -23,6 +23,7 @@ const navEntries: NavEntry[] = [
   { kind: 'route', href: '/galerija', labelKey: 'gallery' },
   { kind: 'route', href: '/sadrzaji', labelKey: 'amenities' },
   { kind: 'route', href: '/cjenik', labelKey: 'pricing' },
+  { kind: 'route', href: '/novosti', labelKey: 'news' },
   { kind: 'route', href: '/booking', labelKey: 'booking' },
   { kind: 'hash', id: 'kontakt', labelKey: 'contact' },
 ];

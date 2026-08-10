@@ -1,20 +1,18 @@
 'use client';
 
 import { useState, useEffect, useCallback, useMemo } from 'react';
-import { useRouter } from 'next/navigation';
 import {
-  LogOut, Plus, Check, X, Banknote, Trash2, Pencil,
+  Plus, Check, X, Banknote, Trash2, Pencil,
   ChevronDown, ChevronUp, Filter, RefreshCw, Loader2,
   Download, CalendarDays, TableProperties, GanttChartSquare,
   Search, BarChart2, Mail, ChevronRight, AlertTriangle,
 } from 'lucide-react';
 import clsx from 'clsx';
-import { apartments, SITE_NAME, ADMIN_COOKIE_NAME, CSV_EXPORT_PREFIX, DEPOSIT_PERCENT } from '../../booking.config';
+import { apartments, CSV_EXPORT_PREFIX, DEPOSIT_PERCENT } from '../../booking.config';
 import { formatDisplayDate, parseLocalDate, calculatePrice } from '../../lib/dates';
 import type { Booking } from '../../types';
 import BookingTimeline from './BookingTimeline';
 import { ToastContainer, type ToastItem } from './Toast';
-import AdminGalleryManager from './AdminGalleryManager';
 
 const MONTHS_HR_SHORT = [
   'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
@@ -44,7 +42,6 @@ function SortIcon({ k, sortKey, sortAsc }: { k: SortKey; sortKey: SortKey; sortA
 }
 
 export default function AdminDashboard() {
-  const router = useRouter();
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterApt, setFilterApt] = useState('');
@@ -53,7 +50,7 @@ export default function AdminDashboard() {
   const [filterDateTo, setFilterDateTo] = useState('');
   const [sortKey, setSortKey] = useState<SortKey>('check_in');
   const [sortAsc, setSortAsc] = useState(false);
-  const [view, setView] = useState<'table' | 'timeline' | 'gallery'>('table');
+  const [view, setView] = useState<'table' | 'timeline'>('table');
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingBooking, setEditingBooking] = useState<Booking | null>(null);
   const [expandedId, setExpandedId] = useState<string | null>(null);
@@ -95,13 +92,6 @@ export default function AdminDashboard() {
       isCancelled = true;
     };
   }, []);
-
-  const handleLogout = async () => {
-    await fetch('/api/admin/login', { method: 'DELETE' });
-    document.cookie = `${ADMIN_COOKIE_NAME}=; Max-Age=0; path=/`;
-    router.push('/admin/login');
-    router.refresh();
-  };
 
   const updateBooking = async (id: string, updates: Partial<Booking>) => {
     setActionLoading(id);
@@ -273,224 +263,198 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Top bar */}
-      <header className="bg-primary text-white px-4 sm:px-6 py-4 flex items-center justify-between sticky top-0 z-40 shadow-sm">
-        <div className="flex items-center gap-3">
-          <h1 className="font-serif text-lg font-semibold">{SITE_NAME}</h1>
-          <span className="text-white/50 text-sm hidden sm:inline">Admin</span>
-        </div>
-        <div className="flex items-center gap-3">
-          {/* Tab switcher */}
-          <div className="flex items-center bg-white/10 rounded-full p-0.5">
-            <button
-              onClick={() => setView('table')}
-              title="Table"
-              className={clsx(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
-                view === 'table' ? 'bg-white text-primary' : 'text-white/70 hover:text-white',
-              )}
-            >
-              <TableProperties size={14} />
-              <span className="hidden sm:inline">Table</span>
-            </button>
-            <button
-              onClick={() => setView('timeline')}
-              title="Timeline"
-              className={clsx(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
-                view === 'timeline' ? 'bg-white text-primary' : 'text-white/70 hover:text-white',
-              )}
-            >
-              <GanttChartSquare size={14} />
-              <span className="hidden sm:inline">Timeline</span>
-            </button>
-            <button
-              onClick={() => setView('gallery')}
-              title="Gallery"
-              className={clsx(
-                'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
-                view === 'gallery' ? 'bg-white text-primary' : 'text-white/70 hover:text-white',
-              )}
-            >
-              <span className="hidden sm:inline">Gallery</span>
-            </button>
-          </div>
-
+    <>
+      {/* Toolbar: tablica / timeline + akcije */}
+      <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
+        <div className="flex items-center bg-white border border-gray-200 rounded-full p-0.5 shadow-sm">
           <button
+            type="button"
+            onClick={() => setView('table')}
+            title="Tablica"
+            className={clsx(
+              'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
+              view === 'table' ? 'bg-primary text-white' : 'text-gray-600 hover:text-gray-900',
+            )}
+          >
+            <TableProperties size={14} />
+            <span className="hidden sm:inline">Tablica</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setView('timeline')}
+            title="Timeline"
+            className={clsx(
+              'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
+              view === 'timeline' ? 'bg-primary text-white' : 'text-gray-600 hover:text-gray-900',
+            )}
+          >
+            <GanttChartSquare size={14} />
+            <span className="hidden sm:inline">Timeline</span>
+          </button>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
             onClick={fetchBookings}
-            className="text-white/70 hover:text-white p-1.5 rounded-full transition-colors"
-            title="Refresh"
+            className="text-gray-500 hover:text-gray-800 p-1.5 rounded-full transition-colors"
+            title="Osvježi"
           >
             <RefreshCw size={16} />
           </button>
-          {view !== 'gallery' && (
-            <button
-              onClick={() => setShowAddForm(true)}
-              className="flex items-center gap-1.5 bg-secondary hover:bg-secondary-light text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
-            >
-              <Plus size={15} />
-              <span className="hidden sm:inline">New booking</span>
-            </button>
-          )}
           <button
-            onClick={handleLogout}
-            className="text-white/70 hover:text-white flex items-center gap-1.5 text-sm transition-colors"
+            type="button"
+            onClick={() => setShowAddForm(true)}
+            className="flex items-center gap-1.5 bg-secondary hover:bg-secondary-light text-white text-sm font-medium px-4 py-2 rounded-full transition-colors"
           >
-            <LogOut size={16} />
-            <span className="hidden sm:inline">Logout</span>
+            <Plus size={15} />
+            <span className="hidden sm:inline">Nova rezervacija</span>
           </button>
         </div>
-      </header>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        {view !== 'gallery' && (
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-            {[
-              { label: 'Total bookings', value: stats.total, color: 'text-primary' },
-              { label: 'Pending', value: stats.pending, color: 'text-yellow-600' },
-              { label: 'Confirmed', value: stats.confirmed, color: 'text-green-600' },
-              { label: 'Revenue', value: `${stats.revenue}€`, color: 'text-secondary' },
-            ].map(({ label, value, color }) => (
-              <div key={label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
-                <p className="text-xs text-gray-500 mb-1">{label}</p>
-                <p className={clsx('text-2xl font-bold', color)}>{value}</p>
-              </div>
-            ))}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+        {[
+          { label: 'Total bookings', value: stats.total, color: 'text-primary' },
+          { label: 'Pending', value: stats.pending, color: 'text-yellow-600' },
+          { label: 'Confirmed', value: stats.confirmed, color: 'text-green-600' },
+          { label: 'Revenue', value: `${stats.revenue}€`, color: 'text-secondary' },
+        ].map(({ label, value, color }) => (
+          <div key={label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+            <p className="text-xs text-gray-500 mb-1">{label}</p>
+            <p className={clsx('text-2xl font-bold', color)}>{value}</p>
           </div>
-        )}
+        ))}
+      </div>
 
-        {/* Overlap warning */}
-        {view !== 'gallery' && overlaps.length > 0 && (
-          <div className="mb-6 bg-red-50 border border-red-200 rounded-xl px-5 py-4">
-            <div className="flex items-start gap-3">
-              <AlertTriangle size={18} className="text-red-500 shrink-0 mt-0.5" />
-              <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-red-700 mb-1">
-                  {overlaps.length === 1
-                    ? '1 overlapping booking found!'
-                    : `${overlaps.length} overlapping bookings found!`}
-                </p>
-                <ul className="space-y-1">
-                  {overlaps.map(({ a, b }, i) => (
-                    <li key={i} className="text-xs text-red-600">
-                      <span className="font-semibold">{APT_NAMES[a.apartment_slug]}</span>
-                      {' — '}
-                      {a.guest_name} ({a.check_in} → {a.check_out})
-                      {' ⟺ '}
-                      {b.guest_name} ({b.check_in} → {b.check_out})
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Godišnje statistike — collapsible */}
-        {view !== 'gallery' && (
-          <div className="mb-6 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-          <button
-            onClick={() => setShowMonthlyStats((v) => !v)}
-            className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors"
-          >
-            <span className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-              <BarChart2 size={16} className="text-secondary" />
-              Statistics {currentYear}
-            </span>
-            <ChevronRight
-              size={16}
-              className={clsx('text-gray-400 transition-transform', showMonthlyStats && 'rotate-90')}
-            />
-          </button>
-
-          {showMonthlyStats && (
-            <div className="border-t border-gray-100 px-5 py-4">
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
-                Occupancy (nights / {daysInYear})
+      {/* Overlap warning */}
+      {overlaps.length > 0 && (
+        <div className="mb-6 bg-red-50 border border-red-200 rounded-xl px-5 py-4">
+          <div className="flex items-start gap-3">
+            <AlertTriangle size={18} className="text-red-500 shrink-0 mt-0.5" />
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-semibold text-red-700 mb-1">
+                {overlaps.length === 1
+                  ? '1 overlapping booking found!'
+                  : `${overlaps.length} overlapping bookings found!`}
               </p>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-                {occupancy.map((o) => (
-                  <div key={o.name} className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex justify-between items-center mb-1.5">
-                      <span className="text-xs font-semibold text-gray-700">{o.name}</span>
-                      <span className="text-xs font-bold text-primary">{o.pct}%</span>
-                    </div>
-                    <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-primary rounded-full transition-all"
-                        style={{ width: `${o.pct}%` }}
-                      />
-                    </div>
-                    <p className="text-[10px] text-gray-400 mt-1">{o.bookedNights} nights</p>
-                  </div>
+              <ul className="space-y-1">
+                {overlaps.map(({ a, b }, i) => (
+                  <li key={i} className="text-xs text-red-600">
+                    <span className="font-semibold">{APT_NAMES[a.apartment_slug]}</span>
+                    {' — '}
+                    {a.guest_name} ({a.check_in} → {a.check_out})
+                    {' ⟺ '}
+                    {b.guest_name} ({b.check_in} → {b.check_out})
+                  </li>
                 ))}
-              </div>
-
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
-                Revenue by month
-              </p>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="text-xs text-gray-400 uppercase">
-                      <th className="text-left pb-2 font-medium">Month</th>
-                      <th className="text-center pb-2 font-medium">Bookings</th>
-                      <th className="text-center pb-2 font-medium">Nights</th>
-                      <th className="text-right pb-2 font-medium">Revenue</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-50">
-                    {monthlyStats.filter((m) => m.revenue > 0).map((m) => (
-                      <tr key={m.month} className="hover:bg-gray-50">
-                        <td className="py-1.5 font-medium text-gray-700">
-                          {MONTHS_HR_SHORT[m.month]}
-                        </td>
-                        <td className="py-1.5 text-center text-gray-500">{m.bookings}</td>
-                        <td className="py-1.5 text-center text-gray-500">{m.nights}</td>
-                        <td className="py-1.5 text-right font-semibold text-gray-900">
-                          {m.revenue.toLocaleString()}€
-                        </td>
-                      </tr>
-                    ))}
-                    {monthlyStats.every((m) => m.revenue === 0) && (
-                      <tr>
-                        <td colSpan={4} className="py-3 text-center text-gray-400 text-xs">
-                          No confirmed bookings for {currentYear}.
-                        </td>
-                      </tr>
-                    )}
-                    {monthlyStats.some((m) => m.revenue > 0) && (
-                      <tr className="border-t border-gray-200 font-semibold">
-                        <td className="pt-2 text-gray-700">Total</td>
-                        <td className="pt-2 text-center text-gray-700">
-                          {monthlyStats.reduce((s, m) => s + m.bookings, 0)}
-                        </td>
-                        <td className="pt-2 text-center text-gray-700">
-                          {monthlyStats.reduce((s, m) => s + m.nights, 0)}
-                        </td>
-                        <td className="pt-2 text-right text-primary">
-                          {monthlyStats.reduce((s, m) => s + m.revenue, 0).toLocaleString()}€
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-              </div>
+              </ul>
             </div>
-          )}
+          </div>
+        </div>
+      )}
+
+      {/* Godišnje statistike — collapsible */}
+      <div className="mb-6 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+        <button
+          type="button"
+          onClick={() => setShowMonthlyStats((v) => !v)}
+          className="w-full flex items-center justify-between px-5 py-3.5 hover:bg-gray-50 transition-colors"
+        >
+          <span className="flex items-center gap-2 text-sm font-semibold text-gray-700">
+            <BarChart2 size={16} className="text-secondary" />
+            Statistics {currentYear}
+          </span>
+          <ChevronRight
+            size={16}
+            className={clsx('text-gray-400 transition-transform', showMonthlyStats && 'rotate-90')}
+          />
+        </button>
+
+        {showMonthlyStats && (
+          <div className="border-t border-gray-100 px-5 py-4">
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+              Occupancy (nights / {daysInYear})
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
+              {occupancy.map((o) => (
+                <div key={o.name} className="bg-gray-50 rounded-lg p-3">
+                  <div className="flex justify-between items-center mb-1.5">
+                    <span className="text-xs font-semibold text-gray-700">{o.name}</span>
+                    <span className="text-xs font-bold text-primary">{o.pct}%</span>
+                  </div>
+                  <div className="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-primary rounded-full transition-all"
+                      style={{ width: `${o.pct}%` }}
+                    />
+                  </div>
+                  <p className="text-[10px] text-gray-400 mt-1">{o.bookedNights} nights</p>
+                </div>
+              ))}
+            </div>
+
+            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
+              Revenue by month
+            </p>
+            <div className="overflow-x-auto">
+              <table className="w-full text-sm">
+                <thead>
+                  <tr className="text-xs text-gray-400 uppercase">
+                    <th className="text-left pb-2 font-medium">Month</th>
+                    <th className="text-center pb-2 font-medium">Bookings</th>
+                    <th className="text-center pb-2 font-medium">Nights</th>
+                    <th className="text-right pb-2 font-medium">Revenue</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-50">
+                  {monthlyStats.filter((m) => m.revenue > 0).map((m) => (
+                    <tr key={m.month} className="hover:bg-gray-50">
+                      <td className="py-1.5 font-medium text-gray-700">
+                        {MONTHS_HR_SHORT[m.month]}
+                      </td>
+                      <td className="py-1.5 text-center text-gray-500">{m.bookings}</td>
+                      <td className="py-1.5 text-center text-gray-500">{m.nights}</td>
+                      <td className="py-1.5 text-right font-semibold text-gray-900">
+                        {m.revenue.toLocaleString()}€
+                      </td>
+                    </tr>
+                  ))}
+                  {monthlyStats.every((m) => m.revenue === 0) && (
+                    <tr>
+                      <td colSpan={4} className="py-3 text-center text-gray-400 text-xs">
+                        No confirmed bookings for {currentYear}.
+                      </td>
+                    </tr>
+                  )}
+                  {monthlyStats.some((m) => m.revenue > 0) && (
+                    <tr className="border-t border-gray-200 font-semibold">
+                      <td className="pt-2 text-gray-700">Total</td>
+                      <td className="pt-2 text-center text-gray-700">
+                        {monthlyStats.reduce((s, m) => s + m.bookings, 0)}
+                      </td>
+                      <td className="pt-2 text-center text-gray-700">
+                        {monthlyStats.reduce((s, m) => s + m.nights, 0)}
+                      </td>
+                      <td className="pt-2 text-right text-primary">
+                        {monthlyStats.reduce((s, m) => s + m.revenue, 0).toLocaleString()}€
+                      </td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
+      </div>
 
-        {view === 'gallery' && <AdminGalleryManager showToast={showToast} />}
+      {/* Timeline view */}
+      {view === 'timeline' && (
+        <BookingTimeline bookings={bookings} onEditBooking={(b) => setEditingBooking(b)} />
+      )}
 
-        {/* Timeline view */}
-        {view === 'timeline' && (
-          <BookingTimeline bookings={bookings} onEditBooking={(b) => setEditingBooking(b)} />
-        )}
-
-        {/* Table view */}
-        {view === 'table' && (
+      {/* Table view */}
+      {view === 'table' && (
           <>
             {/* Predstojeći boravci */}
             {upcoming.length > 0 && (
@@ -914,7 +878,6 @@ export default function AdminDashboard() {
             </div>
           </>
         )}
-      </div>
 
       {/* Modali */}
       {showAddForm && (
@@ -941,7 +904,7 @@ export default function AdminDashboard() {
       )}
 
       <ToastContainer toasts={toasts} onDismiss={dismissToast} />
-    </div>
+    </>
   );
 }
 

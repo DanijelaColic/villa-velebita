@@ -1,14 +1,28 @@
 import { AppImage as Image } from '@/components/ui/AppImage';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import { ChevronDown, MapPin, Star, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { getValidLocale } from '@/i18n/messages';
+import {
+  getSiteTextOverrides,
+  resolveSiteText,
+} from '@/modules/cms/lib/get-site-texts';
 
 type HeroProps = {
   promoText?: string;
 };
 
 export async function Hero({ promoText }: HeroProps = {}) {
+  const locale = getValidLocale(await getLocale());
   const t = await getTranslations('hero');
+  const overrides = await getSiteTextOverrides(locale);
+
+  const location = resolveSiteText(overrides, 'hero.location', t('location'));
+  const titlePrefix = resolveSiteText(overrides, 'hero.titlePrefix', t('titlePrefix'));
+  const titleAccent = resolveSiteText(overrides, 'hero.titleAccent', t('titleAccent'));
+  const subtitle = resolveSiteText(overrides, 'hero.subtitle', t('subtitle'));
+  const ctaBooking = resolveSiteText(overrides, 'hero.cta.booking', t('cta.booking'));
+  const ctaExplore = resolveSiteText(overrides, 'hero.cta.explore', t('cta.explore'));
 
   return (
     <section className="relative min-h-screen flex flex-col" aria-label={t('ariaLabel')}>
@@ -33,7 +47,7 @@ export async function Hero({ promoText }: HeroProps = {}) {
         {/* Location badge */}
         <div className="flex items-center gap-1.5 text-cream/80 text-sm font-medium mb-6 tracking-wide">
           <MapPin className="size-4 text-terracotta-light" />
-          <span>{t('location')}</span>
+          <span>{location}</span>
         </div>
 
         {promoText ? (
@@ -45,25 +59,25 @@ export async function Hero({ promoText }: HeroProps = {}) {
         {/* H1 – inline dark backdrop samo iza teksta */}
         <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.3] max-w-4xl">
           <span className="bg-black/55 backdrop-blur-[2px] text-cream px-3 py-1 rounded-lg box-decoration-clone leading-[1.4]">
-            {t('titlePrefix')}{' '}
+            {titlePrefix}{' '}
           </span>
           <span className="bg-black/55 backdrop-blur-[2px] text-terracotta-light italic px-3 py-1 rounded-lg box-decoration-clone leading-[1.4]">
-            {t('titleAccent')}
+            {titleAccent}
           </span>
         </h1>
 
         {/* Subtitle */}
         <p className="mt-6 text-lg md:text-xl text-cream max-w-2xl leading-relaxed [text-shadow:0_2px_8px_rgba(0,0,0,0.8)]">
-          {t('subtitle')}
+          {subtitle}
         </p>
 
         {/* CTAs */}
         <div className="mt-10 flex flex-col sm:flex-row items-center gap-4">
           <Button size="lg" asChild>
-            <a href="#rezervacije">{t('cta.booking')}</a>
+            <a href="#rezervacije">{ctaBooking}</a>
           </Button>
           <Button size="lg" variant="outline" asChild className="border-cream text-cream hover:bg-cream hover:text-oak">
-            <a href="#o-smjestaju">{t('cta.explore')}</a>
+            <a href="#o-smjestaju">{ctaExplore}</a>
           </Button>
         </div>
 

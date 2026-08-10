@@ -4,6 +4,10 @@ import { Link } from '@/i18n/navigation';
 import { localizePath } from '@/i18n/pathnames';
 import { getValidLocale } from '@/i18n/messages';
 import { getSeoNavLinks } from '@/modules/seo/seo-nav-links';
+import {
+  getSiteTextOverrides,
+  resolveSiteText,
+} from '@/modules/cms/lib/get-site-texts';
 
 const NAV_LINKS = [
   { href: '/smjestaj', labelKey: 'accommodation' },
@@ -19,6 +23,12 @@ const NAV_LINKS = [
 export async function Footer() {
   const locale = getValidLocale(await getLocale());
   const t = await getTranslations('footer');
+  const overrides = await getSiteTextOverrides(locale);
+  const description = resolveSiteText(
+    overrides,
+    'footer.description',
+    t('description'),
+  );
   const seoLinks = getSeoNavLinks(locale);
   const year = new Date().getFullYear();
   const contactHref = `${localizePath('/', locale)}#kontakt`;
@@ -46,7 +56,7 @@ export async function Footer() {
               {t('location')}
             </p>
             <p className="text-stone-light text-sm leading-relaxed max-w-xs">
-              {t('description')}
+              {description}
             </p>
           </div>
 

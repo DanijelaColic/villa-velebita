@@ -99,3 +99,8 @@ create policy "Service role can write gallery media"
   for all
   using (bucket_id = 'gallery-media')
   with check (bucket_id = 'gallery-media');
+
+-- ------------------------------------------------------------
+-- CMS (članci, uredivi tekstovi, SEO)
+-- Puna shema: src/modules/cms/schema.sql
+-- ------------------------------------------------------------

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
 import { getGalleryItems, getPublicMediaUrl } from '@/lib/gallery';
+import { getPublishedArticleSlugs } from '@/modules/cms/lib/get-articles';
 import { GUIDES } from '@/modules/seo/guides/guides-content';
 
 const BASE_URL = 'https://villavelebita.hr';
@@ -22,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { pathname: '/villa-jacuzzi-plitvice', changeFrequency: 'weekly', priority: 0.88 },
     { pathname: '/smjestaj-za-9-osoba-plitvice', changeFrequency: 'weekly', priority: 0.86 },
     { pathname: '/vodic', changeFrequency: 'weekly', priority: 0.8 },
+    { pathname: '/novosti', changeFrequency: 'weekly', priority: 0.8 },
   ] as const;
   const guideRoutes = Array.from(new Set(GUIDES.map((guide) => `/vodic/${guide.slug}`))).map(
     (pathname) => ({
@@ -30,7 +32,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.75,
     }),
   );
-  const allRoutes = [...staticRoutes, ...guideRoutes];
+  const articleSlugs = await getPublishedArticleSlugs();
+  const newsRoutes = articleSlugs.map((slug) => ({
+    pathname: `/novosti/${slug}`,
+    changeFrequency: 'weekly' as const,
+    priority: 0.7,
+  }));
+  const allRoutes = [...staticRoutes, ...guideRoutes, ...newsRoutes];
 
   const toLocalizedPath = (locale: string, pathname: string) => {
     const normalizedPath = pathname === '/' ? '' : pathname;

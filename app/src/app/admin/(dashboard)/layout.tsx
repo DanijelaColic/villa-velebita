@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { isAdminAuthenticated } from '@/modules/booking-admin/lib/admin-auth';
-import AdminDashboard from '@/modules/booking-admin/components/admin/AdminDashboard';
+import AdminShell from '@/modules/booking-admin/components/admin/AdminShell';
 import { SITE_NAME } from '@/modules/booking-admin/booking.config';
 
 export const metadata = {
@@ -11,9 +11,13 @@ export const metadata = {
   },
 };
 
-export default async function AdminPage() {
+export default async function AdminDashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const authenticated = await isAdminAuthenticated();
   if (!authenticated) redirect('/admin/login');
 
-  return <AdminDashboard />;
+  return <AdminShell>{children}</AdminShell>;
 }

@@ -2,6 +2,11 @@ import type {Metadata} from 'next';
 import type {Locale} from 'next-intl';
 import {getTranslations} from 'next-intl/server';
 import {routing} from './routing';
+import {
+  getPageSeoOverride,
+  mergePageSeo,
+  pageKeyFromNamespace,
+} from '@/modules/cms/lib/get-page-seo';
 
 const SITE_URL = 'https://villavelebita.hr';
 const SITE_NAME = 'Villa Velebita';
@@ -100,14 +105,25 @@ function getSharedImageMetadata(locale: Locale, alt: string) {
 
 export async function getRootMetadata(locale: Locale): Promise<Metadata> {
   const t = await getTranslations({locale, namespace: 'metadata.layout'});
+  const override = await getPageSeoOverride(locale, 'home');
+  const seo = mergePageSeo(
+    {
+      title: t('title.default'),
+      description: t('description'),
+      ogTitle: t('openGraph.title'),
+      ogDescription: t('openGraph.description'),
+      ogImageAlt: t('openGraph.imageAlt'),
+    },
+    override,
+  );
 
   return {
     metadataBase: new URL(SITE_URL),
     title: {
-      default: t('title.default'),
+      default: seo.title,
       template: t('title.template'),
     },
-    description: t('description'),
+    description: seo.description,
     keywords: getKeywords(locale),
     authors: [{name: SITE_NAME}],
     creator: SITE_NAME,
@@ -122,14 +138,14 @@ export async function getRootMetadata(locale: Locale): Promise<Metadata> {
       type: 'website',
       url: getLocalizedPath(locale, '/'),
       siteName: SITE_NAME,
-      title: t('openGraph.title'),
-      description: t('openGraph.description'),
-      ...getSharedImageMetadata(locale, t('openGraph.imageAlt')),
+      title: seo.ogTitle,
+      description: seo.ogDescription,
+      ...getSharedImageMetadata(locale, seo.ogImageAlt),
     },
     twitter: {
       card: 'summary_large_image',
-      title: t('twitter.title'),
-      description: t('twitter.description'),
+      title: override?.title?.trim() || t('twitter.title'),
+      description: override?.description?.trim() || t('twitter.description'),
       images: [HERO_OG_IMAGE_PATH],
     },
     robots: {
@@ -166,19 +182,31 @@ export async function getPageMetadata({
 }: PageMetadataOptions): Promise<Metadata> {
   const t = await getTranslations({locale, namespace});
   const localizedPath = getLocalizedPath(locale, pathname);
+  const pageKey = pageKeyFromNamespace(namespace);
+  const override = pageKey ? await getPageSeoOverride(locale, pageKey) : null;
+  const seo = mergePageSeo(
+    {
+      title: t('title'),
+      description: t('description'),
+      ogTitle: t('openGraph.title'),
+      ogDescription: t('openGraph.description'),
+      ogImageAlt: t('openGraph.imageAlt'),
+    },
+    override,
+  );
 
   return {
-    title: t('title'),
-    description: t('description'),
+    title: seo.title,
+    description: seo.description,
     alternates: {
       canonical: localizedPath,
       languages: getLanguageAlternates(pathname),
     },
     openGraph: {
       url: localizedPath,
-      title: t('openGraph.title'),
-      description: t('openGraph.description'),
-      ...getSharedImageMetadata(locale, t('openGraph.imageAlt')),
+      title: seo.ogTitle,
+      description: seo.ogDescription,
+      ...getSharedImageMetadata(locale, seo.ogImageAlt),
     },
     ...(robots ? {robots} : {}),
   };
