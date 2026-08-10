@@ -2,18 +2,24 @@ import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { getLocale, getTranslations } from 'next-intl/server';
 import BookingWidget from '@/modules/booking-admin/components/BookingWidget';
-import { MIN_NIGHTS } from '@/modules/booking-admin/booking.config';
 import { getValidLocale } from '@/i18n/messages';
 import {
   getSiteTextOverrides,
   resolveSiteText,
 } from '@/modules/cms/lib/get-site-texts';
+import { getBookingSettings, getSpecialPricePeriods, priceFeesFromSettings } from '@/modules/cms/lib/get-booking-settings';
+import { getPaymentSettings } from '@/modules/cms/lib/get-payment-settings';
 
 export async function Booking() {
   const locale = getValidLocale(await getLocale());
   const t = await getTranslations('bookingSection');
-  const overrides = await getSiteTextOverrides(locale);
-
+  const [overrides, bookingSettings, specialPricePeriods, payment] = await Promise.all([
+    getSiteTextOverrides(locale),
+    getBookingSettings(),
+    getSpecialPricePeriods(),
+    getPaymentSettings(),
+  ]);
+  const priceFees = priceFeesFromSettings(bookingSettings);
   const title = resolveSiteText(
     overrides,
     'bookingSection.heading.title',
@@ -37,6 +43,11 @@ export async function Booking() {
       <div className="max-w-2xl mx-auto">
         <BookingWidget
           initialSlug="villa-velebita"
+          minNights={bookingSettings.minNights}
+          basePricePerNight={bookingSettings.basePricePerNight}
+          specialPricePeriods={specialPricePeriods}
+          priceFees={priceFees}
+          payment={payment}
           rulesText={
             <div className="bg-cream-dark rounded-xl p-4 text-xs text-stone space-y-1">
               <p>
@@ -46,7 +57,7 @@ export async function Booking() {
               </p>
               <p>
                 <strong className="text-oak">{t('rules.minStayLabel')}</strong>{' '}
-                {t('rules.minStayValue', { count: MIN_NIGHTS })}
+                {t('rules.minStayValue', { count: bookingSettings.minNights })}
               </p>
               <p>
                 <strong className="text-oak">{t('rules.discountLabel')}</strong>{' '}

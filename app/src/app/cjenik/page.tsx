@@ -9,11 +9,9 @@ import {
   getPageMetadata,
 } from '@/i18n/metadata';
 import {
-  LONG_STAY_DISCOUNT_NIGHTS,
-  LONG_STAY_DISCOUNT_RATE,
-  MIN_NIGHTS,
   apartments,
 } from '@/modules/booking-admin/booking.config';
+import { getBookingSettings } from '@/modules/cms/lib/get-booking-settings';
 
 const BASE_URL = 'https://villavelebita.hr';
 const DEFAULT_LOCALE = 'hr';
@@ -31,6 +29,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function CjenikPage() {
   const locale = await getLocale();
   const villa = apartments[0];
+  const settings = await getBookingSettings();
   const localizedPath = locale === DEFAULT_LOCALE ? '/cjenik' : `/${locale}/cjenik`;
   const breadcrumbJsonLd = getBreadcrumbStructuredData(locale, [
     { name: 'Villa Velebita', pathname: '/' },
@@ -52,11 +51,11 @@ export default async function CjenikPage() {
       },
     },
     priceCurrency: 'EUR',
-    price: villa.priceOffSeason.toString(),
+    price: settings.basePricePerNight.toString(),
     category: 'https://schema.org/Accommodation',
     eligibleDuration: {
       '@type': 'QuantitativeValue',
-      value: MIN_NIGHTS,
+      value: settings.minNights,
       unitText: 'NIGHT',
     },
     eligibleQuantity: {
@@ -65,9 +64,9 @@ export default async function CjenikPage() {
     },
     eligibleCustomerType: 'https://schema.org/BusinessAudience',
     validFrom: new Date().toISOString(),
-    description: `Flat rate ${villa.priceOffSeason} EUR per night with ${
-      LONG_STAY_DISCOUNT_RATE * 100
-    }% discount for stays of ${LONG_STAY_DISCOUNT_NIGHTS}+ nights.`,
+    description: `Flat rate ${settings.basePricePerNight} EUR per night with ${
+      settings.longStayDiscountPercent
+    }% discount for stays of ${settings.longStayDiscountNights}+ nights.`,
   };
 
   return (

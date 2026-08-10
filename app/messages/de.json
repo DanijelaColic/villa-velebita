@@ -91,6 +91,15 @@
           "imageAlt": "Villa Velebita - Buchung"
         }
       },
+      "villaPlitvice": {
+        "title": "Villa nahe den Plitvicer Seen",
+        "description": "Ferienhaus 20 Minuten von Plitvice — Jacuzzi, Grill, bis 9 Gäste. Direkt beim Eigentümer buchen.",
+        "openGraph": {
+          "title": "Villa Velebita nahe Plitvice",
+          "description": "Direktbuchung für ein Ferienhaus in Rudopolje, 20 Min. von den Plitvicer Seen.",
+          "imageAlt": "Villa Velebita – Unterkunft bei Plitvice"
+        }
+      },
       "bookingReview": {
         "title": "Buchungsübersicht",
         "description": "Prüfen Sie Ihre Buchungsdetails und Zahlungsanweisungen für Villa Velebita.",
@@ -237,11 +246,11 @@
       },
       "included": {
         "question": "Was ist im Mietpreis enthalten?",
-        "answer": "Im Preis enthalten sind Bettwäsche und Handtücher, grundlegende Pflegeprodukte, kostenloses WLAN, privates Parken, die Nutzung des Außenjacuzzis, Grill und Außenküche. Der Reinigungsservice wird zusätzlich mit 100 EUR pro Buchung berechnet."
+        "answer": "Im Preis enthalten sind Bettwäsche und Handtücher, grundlegende Pflegeprodukte, kostenloses WLAN, privates Parken, die Nutzung des Außenjacuzzis, Grill und Außenküche. Der Reinigungsservice wird zusätzlich mit {cleaningFee} EUR pro Buchung berechnet."
       },
       "minStay": {
         "question": "Wie lange ist der Mindestaufenthalt?",
-        "answer": "Der Mindestaufenthalt beträgt 2 Nächte. Für längere Reservierungen gelten bessere Konditionen, und ab 7 Nächten gibt es einen zusätzlichen Rabatt."
+        "answer": "Der Mindestaufenthalt beträgt {minNights} Nächte. Für längere Reservierungen gelten bessere Konditionen, und ab {discountNights} Nächten gibt es einen zusätzlichen Rabatt von {discountPercent} %."
       },
       "pets": {
         "question": "Sind Haustiere erlaubt?",
@@ -671,7 +680,7 @@
           "pets": "Haustiere erlaubt (kleine Rassen)",
           "smoking": "Rauchen im Erdgeschoss/Pavillon",
           "checkin": "Check-in 14:00 / Check-out 11:00",
-          "cleaning": "Reinigungsservice: 100 EUR"
+          "cleaning": "Reinigungsservice: {cleaningFee} EUR"
         }
       }
     },
@@ -711,11 +720,11 @@
       },
       "minStay": {
         "label": "Mindestaufenthalt",
-        "value": "2 Nächte"
+        "value": "{count} Nächte"
       },
       "pricePerNight": {
         "label": "Preis/Nacht",
-        "value": "270 € (ganzes Haus)"
+        "value": "{price} € (ganzes Haus)"
       },
       "discount": {
         "label": "Ab 7 Nächten",
@@ -724,17 +733,17 @@
     },
     "priceCard": {
       "eyebrow": "Mietpreis",
-      "note": "Ganzes Haus · bis zu 9 Gäste · 30 € pro Person (270/9)",
+      "note": "Ganzes Haus · bis zu 9 Gäste · {perPerson} € pro Person ({price}/9)",
       "variablePriceNote": "* Für Feiertage, Wochenenden und besondere Zeiträume kann der Preis abweichen. Den genauen Betrag sehen Sie bei der Datumsauswahl in der Buchung."
     },
     "discountBadge": {
       "title": "7+ Nächte buchen",
-      "note": "= 243 € / Nacht"
+      "note": "= {discounted} € / Nacht"
     },
     "includedTitle": "Inklusive und Zusatzleistungen",
     "included": {
       "linen": "Bettwäsche und Handtücher",
-      "cleaning": "Reinigungsservice (+100 EUR)",
+      "cleaning": "Reinigungsservice (+{cleaningFee} EUR)",
       "toiletries": "Shampoo, Seife, Toilettenpapier",
       "wifi": "Kostenloses WLAN",
       "parking": "Kostenlose Parkplätze",
@@ -754,7 +763,7 @@
       "checkAvailability": "Verfügbarkeit prüfen",
       "whatsapp": "Per WhatsApp schreiben"
     },
-    "disclaimer": "Alle Preise sind in Euro angegeben. Der Grundpreis beträgt 270 € pro Nacht für das gesamte Haus, der Mindestaufenthalt beträgt 2 Nächte und der Reinigungsservice kostet 100 EUR pro Buchung. Ab 7 Nächten gilt ein Rabatt von 10 %."
+    "disclaimer": "Alle Preise sind in Euro angegeben. Der Grundpreis beträgt {price} € pro Nacht für das gesamte Haus, der Mindestaufenthalt beträgt {minNights} Nächte und der Reinigungsservice kostet {cleaningFee} EUR pro Buchung. Ab {discountNights} Nächten gilt ein Rabatt von {discountPercent} %."
   },
   "villaPlitviceLanding": {
     "heroPromo": "Sparen Sie bis zu 15% bei Direktbuchung",

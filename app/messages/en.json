@@ -91,6 +91,15 @@
           "imageAlt": "Villa Velebita - booking"
         }
       },
+      "villaPlitvice": {
+        "title": "Villa near Plitvice Lakes",
+        "description": "Holiday house 20 minutes from Plitvice — jacuzzi, barbecue, up to 9 guests. Book direct with the owners.",
+        "openGraph": {
+          "title": "Villa Velebita near Plitvice",
+          "description": "Direct booking for a holiday house in Rudopolje, 20 min from Plitvice Lakes.",
+          "imageAlt": "Villa Velebita – stay near Plitvice"
+        }
+      },
       "bookingReview": {
         "title": "Booking Overview",
         "description": "Review your booking details and payment instructions for Villa Velebita.",
@@ -237,11 +246,11 @@
       },
       "included": {
         "question": "What is included in the rental price?",
-        "answer": "The price includes bed linen and towels, basic toiletries, free WiFi, private parking, use of the outdoor jacuzzi, barbecue and outdoor cooking area. Cleaning service is charged separately at 100 EUR per booking."
+        "answer": "The price includes bed linen and towels, basic toiletries, free WiFi, private parking, use of the outdoor jacuzzi, barbecue and outdoor cooking area. Cleaning service is charged separately at {cleaningFee} EUR per booking."
       },
       "minStay": {
         "question": "What is the minimum stay?",
-        "answer": "The minimum stay is 2 nights. Better conditions are available for longer reservations, and stays of 7 nights or more receive an additional discount."
+        "answer": "The minimum stay is {minNights} nights. Better conditions are available for longer reservations, and stays of {discountNights} nights or more receive an additional {discountPercent}% discount."
       },
       "pets": {
         "question": "Are pets allowed?",
@@ -671,7 +680,7 @@
           "pets": "Pets allowed (small breeds)",
           "smoking": "Smoking on ground floor/gazebo",
           "checkin": "Check-in 14:00 / Check-out 11:00",
-          "cleaning": "Cleaning service: 100 EUR"
+          "cleaning": "Cleaning service: {cleaningFee} EUR"
         }
       }
     },
@@ -711,11 +720,11 @@
       },
       "minStay": {
         "label": "Min stay",
-        "value": "2 nights"
+        "value": "{count} nights"
       },
       "pricePerNight": {
         "label": "Price/night",
-        "value": "270 € (entire house)"
+        "value": "{price} € (entire house)"
       },
       "discount": {
         "label": "7+ night stay",
@@ -724,17 +733,17 @@
     },
     "priceCard": {
       "eyebrow": "Rental rate",
-      "note": "Entire house · up to 9 guests · 30 € per guest (270/9)",
+      "note": "Entire house · up to 9 guests · {perPerson} € per guest ({price}/9)",
       "variablePriceNote": "* Prices for holidays, weekends and special periods may vary. The exact rate is shown when you select dates during booking."
     },
     "discountBadge": {
       "title": "Book 7+ nights",
-      "note": "= 243 € / night"
+      "note": "= {discounted} € / night"
     },
     "includedTitle": "Included and additional services",
     "included": {
       "linen": "Bed linen and towels",
-      "cleaning": "Cleaning service (+100 EUR)",
+      "cleaning": "Cleaning service (+{cleaningFee} EUR)",
       "toiletries": "Shampoo, soap, toilet paper",
       "wifi": "Free WiFi",
       "parking": "Free parking",
@@ -754,7 +763,7 @@
       "checkAvailability": "Check availability",
       "whatsapp": "Write on WhatsApp"
     },
-    "disclaimer": "Prices are listed in euros. The base rate is 270 € per night for the entire house, minimum stay is 2 nights, and cleaning service is 100 EUR per booking. A 10% discount applies for stays of 7 nights or more."
+    "disclaimer": "Prices are listed in euros. The base rate is {price} € per night for the entire house, minimum stay is {minNights} nights, and cleaning service is {cleaningFee} EUR per booking. A {discountPercent}% discount applies for stays of {discountNights} nights or more."
   },
   "villaPlitviceLanding": {
     "heroPromo": "Save up to 15% by booking direct",

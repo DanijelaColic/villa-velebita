@@ -1,15 +1,10 @@
 import { createServerSupabaseClient } from './supabase';
 import { verifyBookingViewToken } from './booking-view-token';
 import { getMessagesForLocale, getValidLocale } from '@/i18n/messages';
-import {
-  getApartment,
-  RECIPIENT_IBAN,
-  RECIPIENT_NAME,
-  RECIPIENT_BIC,
-  RECIPIENT_BANK_NAME,
-} from '../booking.config';
+import { getApartment } from '../booking.config';
 import { formatDisplayDate, parseLocalDate } from './dates';
 import { generateHUB3Barcode, generateEPCQR } from './barcode';
+import { getPaymentSettings } from '@/modules/cms/lib/get-payment-settings';
 
 export type BookingPublicViewData = {
   guestName: string;
@@ -59,12 +54,18 @@ export async function loadBookingPublicView(
         ? reviewMessages.status.cancelled
         : reviewMessages.status.pending;
 
+  const payment = await getPaymentSettings();
+  const barcodeRecipient = {
+    name: payment.recipientName,
+    iban: payment.iban,
+  };
+
   let hub3: string | null = null;
   let epc: string | null = null;
-  if (RECIPIENT_IBAN && row.status !== 'cancelled') {
+  if (payment.iban && row.status !== 'cancelled') {
     const [h, e] = await Promise.allSettled([
-      generateHUB3Barcode(row.deposit, row.guest_name, reference),
-      generateEPCQR(row.deposit, row.guest_name, reference),
+      generateHUB3Barcode(row.deposit, row.guest_name, reference, barcodeRecipient),
+      generateEPCQR(row.deposit, row.guest_name, reference, barcodeRecipient),
     ]);
     if (h.status === 'fulfilled') hub3 = h.value;
     if (e.status === 'fulfilled') epc = e.value;
@@ -84,9 +85,9 @@ export async function loadBookingPublicView(
     statusLabel,
     hub3,
     epc,
-    recipientName: RECIPIENT_NAME,
-    recipientIban: RECIPIENT_IBAN,
-    recipientBank: RECIPIENT_BANK_NAME,
-    recipientBic: RECIPIENT_BIC,
+    recipientName: payment.recipientName,
+    recipientIban: payment.iban,
+    recipientBank: payment.bankName,
+    recipientBic: payment.bic,
   };
 }

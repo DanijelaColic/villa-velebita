@@ -9,6 +9,7 @@ import {
   Newspaper,
   Type,
   Search,
+  Banknote,
 } from 'lucide-react';
 import clsx from 'clsx';
 import { SITE_NAME } from '@/modules/booking-admin/booking.config';
@@ -17,6 +18,7 @@ const NAV_ITEMS = [
   { href: '/admin', label: 'Rezervacije', icon: CalendarDays, exact: true },
   { href: '/admin/gallery', label: 'Galerija', icon: Images },
   { href: '/admin/articles', label: 'Novosti', icon: Newspaper },
+  { href: '/admin/pricing', label: 'Cijene', icon: Banknote },
   { href: '/admin/content', label: 'Tekstovi', icon: Type },
   { href: '/admin/seo', label: 'SEO', icon: Search },
 ] as const;

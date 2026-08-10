@@ -72,6 +72,17 @@ export function resolveSiteText(
   return fallback;
 }
 
+/** Jednostavna zamjena {placeholder} — za FAQ odgovore s cijenama iz postavki. */
+export function fillSiteTextTemplate(
+  template: string,
+  vars: Record<string, string | number>,
+): string {
+  return Object.entries(vars).reduce(
+    (result, [key, value]) => result.replaceAll(`{${key}}`, String(value)),
+    template,
+  );
+}
+
 export type SiteTextAdminRow = {
   key: EditableSiteTextKey;
   locale: AppLocale;

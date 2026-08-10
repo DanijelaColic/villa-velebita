@@ -11,15 +11,21 @@ import {
   SITE_LOCATION,
   OWNER_EMAIL,
   OWNER_PHONE,
-  RECIPIENT_IBAN,
-  RECIPIENT_NAME,
-  RECIPIENT_BIC,
-  RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
   BALANCE_DAYS_BEFORE_CHECK_IN,
   apartments,
 } from '../booking.config';
 import type { BookingEmailData } from '../types';
+import { getBookingSettings } from '@/modules/cms/lib/get-booking-settings';
+import {
+  getPaymentSettings,
+  type PaymentSettings,
+} from '@/modules/cms/lib/get-payment-settings';
+import {
+  getSiteTextOverrides,
+  resolveSiteText,
+} from '@/modules/cms/lib/get-site-texts';
+import type { EditableSiteTextKey } from '@/modules/cms/constants';
 
 export type { BookingEmailData };
 
@@ -43,7 +49,7 @@ function resolveRecipient(actualTo: string): string {
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
 const BALANCE_PCT_DISPLAY = 100 - DEPOSIT_PCT_DISPLAY;
 const HAS_BALANCE_PAYMENT = BALANCE_PCT_DISPLAY > 0;
-const BASE_PRICE_PER_NIGHT = apartments[0]?.priceOffSeason ?? 270;
+const FALLBACK_BASE_PRICE = apartments[0]?.priceOffSeason ?? 270;
 
 /** Osnovna zaštita od HTML u korisničkim poljima u predlošcima. */
 function esc(s: string): string {
@@ -144,6 +150,10 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
       '[email] BOOKING_VIEW_SECRET nije postavljen — u mailu gosta nema poveznice na /rezervacija/pregled.',
     );
   }
+  const [settings, payment] = await Promise.all([
+    getBookingSettings(),
+    getPaymentSettings(),
+  ]);
   const fullData: FullData = {
     ...data,
     locale,
@@ -151,13 +161,16 @@ export async function sendNewBookingEmails(data: BookingEmailData) {
     checkOutStr,
     reference,
     publicViewUrl,
+    basePricePerNight: settings.basePricePerNight || FALLBACK_BASE_PRICE,
+    payment,
   };
 
   const attachments: { filename: string; content: string }[] = [];
-  if (reference && RECIPIENT_IBAN) {
+  if (reference && payment.iban) {
+    const barcodeRecipient = { name: payment.recipientName, iban: payment.iban };
     const [hub3, epc] = await Promise.allSettled([
-      generateHUB3Buffer(data.deposit, data.guestName, reference),
-      generateEPCBuffer(data.deposit, data.guestName, reference),
+      generateHUB3Buffer(data.deposit, data.guestName, reference, barcodeRecipient),
+      generateEPCBuffer(data.deposit, data.guestName, reference, barcodeRecipient),
     ]);
     if (hub3.status === 'fulfilled') {
       attachments.push({ filename: 'qr-placanje-hr.png', content: hub3.value.toString('base64') });
@@ -224,6 +237,10 @@ export async function sendConfirmationEmail(data: BookingEmailData) {
       '[email] BOOKING_VIEW_SECRET nije postavljen — u mailu potvrde nema poveznice na /rezervacija/pregled.',
     );
   }
+  const [settings, payment] = await Promise.all([
+    getBookingSettings(),
+    getPaymentSettings(),
+  ]);
   const fullData: FullData = {
     ...data,
     locale,
@@ -231,13 +248,16 @@ export async function sendConfirmationEmail(data: BookingEmailData) {
     checkOutStr,
     reference,
     publicViewUrl,
+    basePricePerNight: settings.basePricePerNight || FALLBACK_BASE_PRICE,
+    payment,
   };
 
   const attachments: { filename: string; content: string }[] = [];
-  if (reference && RECIPIENT_IBAN) {
+  if (reference && payment.iban) {
+    const barcodeRecipient = { name: payment.recipientName, iban: payment.iban };
     const [hub3, epc] = await Promise.allSettled([
-      generateHUB3Buffer(data.deposit, data.guestName, reference),
-      generateEPCBuffer(data.deposit, data.guestName, reference),
+      generateHUB3Buffer(data.deposit, data.guestName, reference, barcodeRecipient),
+      generateEPCBuffer(data.deposit, data.guestName, reference, barcodeRecipient),
     ]);
     if (hub3.status === 'fulfilled') {
       attachments.push({ filename: 'qr-placanje-hr.png', content: hub3.value.toString('base64') });
@@ -285,6 +305,8 @@ type FullData = BookingEmailData & {
   checkOutStr: string;
   reference: string | null;
   publicViewUrl: string | null;
+  basePricePerNight: number;
+  payment: PaymentSettings;
 };
 
 function guestReceivedHtml(d: FullData, messages: Awaited<ReturnType<typeof getBookingEmailMessages>>) {
@@ -308,11 +330,11 @@ function guestReceivedHtml(d: FullData, messages: Awaited<ReturnType<typeof getB
         <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.nightsLabel)}</strong> ${d.nights}</p>
         <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;line-height:1.4;color:#1e4a5f;font-weight:700;">${esc(messages.shared.totalLabel)}: ${d.totalPrice} €</p>
         <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">${esc(
-          fill(messages.shared.basePrice, { price: BASE_PRICE_PER_NIGHT }),
+          fill(messages.shared.basePrice, { price: d.basePricePerNight }),
         )}</p>
       </div>
 
-      ${RECIPIENT_IBAN ? `
+      ${d.payment.iban ? `
       <div style="background:#fffbeb;border-radius:10px;padding:18px 16px;margin:18px 0;">
         <h3 style="margin:0 0 12px;font-size:16px;color:#1c2b35;line-height:1.3;">${esc(messages.shared.paymentTitle)}</h3>
         <p style="margin:0;font-size:16px;line-height:1.6;color:#475569;">
@@ -331,11 +353,11 @@ function guestReceivedHtml(d: FullData, messages: Awaited<ReturnType<typeof getB
           )}
         </p>` : ''}
         <div style="margin:14px 0 0;padding:12px 14px;background:#ffffff;border:1px solid #fde68a;border-radius:8px;font-size:15px;line-height:1.55;word-break:break-word;">
-          ${RECIPIENT_NAME ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(RECIPIENT_NAME)}</span>` : ''}
-          <span style="font-family:ui-monospace,monospace;">IBAN: ${esc(RECIPIENT_IBAN)}</span>
+          ${d.payment.recipientName ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(d.payment.recipientName)}</span>` : ''}
+          <span style="font-family:ui-monospace,monospace;">IBAN: ${esc(d.payment.iban)}</span>
         </div>
         <p style="margin:10px 0 0;font-size:14px;line-height:1.5;color:#64748b;">
-          ${esc(RECIPIENT_BANK_NAME)} · BIC/SWIFT: <strong style="font-family:ui-monospace,monospace;color:#334155;">${esc(RECIPIENT_BIC)}</strong>
+          ${esc(d.payment.bankName)} · BIC/SWIFT: <strong style="font-family:ui-monospace,monospace;color:#334155;">${esc(d.payment.bic)}</strong>
         </p>
         <p style="margin:8px 0 0;font-size:14px;color:#64748b;">${esc(messages.shared.referenceLabel)}: <strong style="color:#1c2b35;">${esc(d.reference ?? `${d.guestName} — ${d.apartmentName}`)}</strong></p>
         ${d.reference ? `
@@ -388,11 +410,11 @@ function guestConfirmedHtml(d: FullData, messages: Awaited<ReturnType<typeof get
         <p style="margin:10px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#1c2b35;display:inline-block;min-width:108px;">${esc(messages.shared.nightsLabel)}</strong> ${d.nights}</p>
         <p style="margin:14px 0 0;padding-top:12px;border-top:1px solid #f0e6d3;font-size:18px;color:#1e4a5f;font-weight:700;">${esc(messages.shared.totalLabel)}: ${d.totalPrice} €</p>
         <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">${esc(
-          fill(messages.shared.basePrice, { price: BASE_PRICE_PER_NIGHT }),
+          fill(messages.shared.basePrice, { price: d.basePricePerNight }),
         )}</p>
       </div>
 
-      ${RECIPIENT_IBAN ? `
+      ${d.payment.iban ? `
       <div style="background:#fffbeb;border-radius:10px;padding:18px 16px;margin:18px 0;">
         <h3 style="margin:0 0 10px;font-size:16px;color:#1c2b35;">${esc(messages.shared.paymentTitle)}</h3>
         <p style="margin:0;font-size:16px;line-height:1.6;color:#475569;">
@@ -411,8 +433,8 @@ function guestConfirmedHtml(d: FullData, messages: Awaited<ReturnType<typeof get
           )}
         </p>` : ''}
         <div style="margin:14px 0 0;padding:12px 14px;background:#ffffff;border:1px solid #fde68a;border-radius:8px;font-size:15px;word-break:break-word;line-height:1.55;">
-          ${RECIPIENT_NAME ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(RECIPIENT_NAME)}</span>` : ''}
-          <span style="font-family:ui-monospace,monospace;">IBAN: ${esc(RECIPIENT_IBAN)}</span>
+          ${d.payment.recipientName ? `<span style="display:block;font-weight:600;color:#1c2b35;margin-bottom:6px;">${esc(d.payment.recipientName)}</span>` : ''}
+          <span style="font-family:ui-monospace,monospace;">IBAN: ${esc(d.payment.iban)}</span>
         </div>
         <p style="margin:8px 0 0;font-size:14px;color:#64748b;">${esc(messages.shared.referenceShort)}: <strong style="color:#1c2b35;">${esc(d.reference ?? `${d.guestName} — ${d.apartmentName}`)}</strong></p>
         ${d.reference ? `
@@ -448,7 +470,7 @@ function ownerNewBookingHtml(d: FullData, messages: Awaited<ReturnType<typeof ge
       <p style="margin:12px 0;font-size:16px;line-height:1.55;color:#334155;"><strong style="color:#64748b;display:inline-block;min-width:100px;">${esc(messages.owner.nights)}</strong> ${d.nights}</p>
       <p style="margin:16px 0 0;padding-top:14px;border-top:1px solid #e2e8f0;font-size:18px;font-weight:700;color:#1e4a5f;">${esc(messages.shared.totalLabel)}: ${d.totalPrice} €</p>
       <p style="margin:8px 0 0;font-size:14px;line-height:1.5;color:#64748b;">${esc(
-        fill(messages.shared.basePrice, { price: BASE_PRICE_PER_NIGHT }),
+        fill(messages.shared.basePrice, { price: d.basePricePerNight }),
       )}</p>
       <p style="margin:10px 0;font-size:15px;color:#475569;">${esc(
         fill(messages.shared.depositLabel, { percent: DEPOSIT_PCT_DISPLAY }),
@@ -458,8 +480,8 @@ function ownerNewBookingHtml(d: FullData, messages: Awaited<ReturnType<typeof ge
       )}: ${d.totalPrice - d.deposit} € · ${esc(
         fill(messages.owner.balanceDeadline, { days: BALANCE_DAYS_BEFORE_CHECK_IN }),
       )}</p>` : ''}
-      ${RECIPIENT_IBAN ? `<p style="margin:10px 0;font-size:14px;font-family:ui-monospace,monospace;word-break:break-all;color:#334155;">IBAN: ${esc(RECIPIENT_IBAN)}</p>` : ''}
-      ${RECIPIENT_BIC ? `<p style="margin:10px 0;font-size:14px;color:#475569;">BIC: ${esc(RECIPIENT_BIC)} (${esc(RECIPIENT_BANK_NAME)})</p>` : ''}
+      ${d.payment.iban ? `<p style="margin:10px 0;font-size:14px;font-family:ui-monospace,monospace;word-break:break-all;color:#334155;">IBAN: ${esc(d.payment.iban)}</p>` : ''}
+      ${d.payment.bic ? `<p style="margin:10px 0;font-size:14px;color:#475569;">BIC: ${esc(d.payment.bic)} (${esc(d.payment.bankName)})</p>` : ''}
     </div>`;
   return emailShell(inner, d.locale);
 }
@@ -468,8 +490,150 @@ async function getContactEmailMessages(locale: AppLocale) {
   return getMessagesForLocale(locale).contact.email;
 }
 
+function pickEmailText(
+  overrides: Record<string, string>,
+  key: EditableSiteTextKey,
+  fallback: string,
+): string {
+  return resolveSiteText(overrides, key, fallback);
+}
+
+/** Messages za booking email + CMS overridei iz /admin/content (grupa Email). */
 async function getBookingEmailMessages(locale: AppLocale) {
-  return getMessagesForLocale(locale).bookingEmail;
+  const base = getMessagesForLocale(locale).bookingEmail;
+  const overrides = await getSiteTextOverrides(locale);
+
+  const line0 = pickEmailText(
+    overrides,
+    'bookingEmail.terms.cancellationLines.0',
+    base.terms.cancellationLines[0] ?? '',
+  );
+  const line1 = pickEmailText(
+    overrides,
+    'bookingEmail.terms.cancellationLines.1',
+    base.terms.cancellationLines[1] ?? '',
+  );
+  const cancellationLines = [line0, line1].filter((line) => line.trim() !== '');
+
+  return {
+    ...base,
+    terms: {
+      ...base.terms,
+      cancellationTitle: pickEmailText(
+        overrides,
+        'bookingEmail.terms.cancellationTitle',
+        base.terms.cancellationTitle,
+      ),
+      cancellationLines:
+        cancellationLines.length > 0
+          ? cancellationLines
+          : base.terms.cancellationLines,
+      invoiceLabel: pickEmailText(
+        overrides,
+        'bookingEmail.terms.invoiceLabel',
+        base.terms.invoiceLabel,
+      ),
+      invoiceText: pickEmailText(
+        overrides,
+        'bookingEmail.terms.invoiceText',
+        base.terms.invoiceText,
+      ),
+    },
+    shared: {
+      ...base.shared,
+      paymentTitle: pickEmailText(
+        overrides,
+        'bookingEmail.shared.paymentTitle',
+        base.shared.paymentTitle,
+      ),
+      questions: pickEmailText(
+        overrides,
+        'bookingEmail.shared.questions',
+        base.shared.questions,
+      ),
+      attachmentsBody: pickEmailText(
+        overrides,
+        'bookingEmail.shared.attachmentsBody',
+        base.shared.attachmentsBody,
+      ),
+      publicView: {
+        button: pickEmailText(
+          overrides,
+          'bookingEmail.shared.publicView.button',
+          base.shared.publicView.button,
+        ),
+        hint: pickEmailText(
+          overrides,
+          'bookingEmail.shared.publicView.hint',
+          base.shared.publicView.hint,
+        ),
+      },
+    },
+    received: {
+      ...base.received,
+      subject: pickEmailText(
+        overrides,
+        'bookingEmail.received.subject',
+        base.received.subject,
+      ),
+      greeting: pickEmailText(
+        overrides,
+        'bookingEmail.received.greeting',
+        base.received.greeting,
+      ),
+      intro: pickEmailText(
+        overrides,
+        'bookingEmail.received.intro',
+        base.received.intro,
+      ),
+      depositNote: pickEmailText(
+        overrides,
+        'bookingEmail.received.depositNote',
+        base.received.depositNote,
+      ),
+    },
+    confirmed: {
+      ...base.confirmed,
+      subject: pickEmailText(
+        overrides,
+        'bookingEmail.confirmed.subject',
+        base.confirmed.subject,
+      ),
+      badge: pickEmailText(
+        overrides,
+        'bookingEmail.confirmed.badge',
+        base.confirmed.badge,
+      ),
+      greeting: pickEmailText(
+        overrides,
+        'bookingEmail.confirmed.greeting',
+        base.confirmed.greeting,
+      ),
+      intro: pickEmailText(
+        overrides,
+        'bookingEmail.confirmed.intro',
+        base.confirmed.intro,
+      ),
+      depositNote: pickEmailText(
+        overrides,
+        'bookingEmail.confirmed.depositNote',
+        base.confirmed.depositNote,
+      ),
+    },
+    owner: {
+      ...base.owner,
+      subject: pickEmailText(
+        overrides,
+        'bookingEmail.owner.subject',
+        base.owner.subject,
+      ),
+      title: pickEmailText(
+        overrides,
+        'bookingEmail.owner.title',
+        base.owner.title,
+      ),
+    },
+  };
 }
 
 function contactEmailHtml(

@@ -45,9 +45,19 @@ const initialFormState: ContactFormState = {
   message: '',
 };
 
-export function Contact() {
+type ContactProps = {
+  /** CMS overridei (server → client) */
+  cmsTitle?: string;
+  cmsSubtitle?: string;
+  cmsIntro?: string;
+};
+
+export function Contact({ cmsTitle, cmsSubtitle, cmsIntro }: ContactProps = {}) {
   const t = useTranslations('contact');
   const locale = useLocale();
+  const title = cmsTitle?.trim() || t('heading.title');
+  const subtitle = cmsSubtitle?.trim() || t('heading.subtitle');
+  const intro = cmsIntro?.trim() || t('intro');
   const [form, setForm] = useState<ContactFormState>(initialFormState);
   const [isSending, setIsSending] = useState(false);
   const [ownerPhotoVisible, setOwnerPhotoVisible] = useState(true);
@@ -98,8 +108,8 @@ export function Contact() {
     <SectionWrapper id="kontakt" bg="cream-dark">
       <SectionHeading
         label={t('heading.label')}
-        title={t('heading.title')}
-        subtitle={t('heading.subtitle')}
+        title={title}
+        subtitle={subtitle}
         className="mb-8 md:mb-10"
       />
 
@@ -121,7 +131,7 @@ export function Contact() {
           )}
 
           <p className="text-stone text-sm md:text-base leading-relaxed">
-            {t('intro')}
+            {intro}
           </p>
 
           <div className="space-y-3">

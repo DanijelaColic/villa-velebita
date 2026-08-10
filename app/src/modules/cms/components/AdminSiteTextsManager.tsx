@@ -132,6 +132,18 @@ export default function AdminSiteTextsManager({ showToast }: Props) {
           <p className="text-sm text-gray-500">
             Prazno polje = zadani tekst iz prijevoda. Spremi samo promijenjena polja.
           </p>
+          {groupFilter === 'faq' && (
+            <p className="mt-1 text-xs text-amber-700/90">
+              U FAQ odgovorima možeš ostaviti npr. {'{cleaningFee}'} ili {'{minNights}'} —
+              brojke se automatski uzimaju iz Cijena.
+            </p>
+          )}
+          {groupFilter === 'email' && (
+            <p className="mt-1 text-xs text-amber-700/90">
+              U pozdravu ostavi {'{name}'} — zamijenit će se imenom gosta. IBAN dolazi iz
+              Cijena → Podaci za uplatu.
+            </p>
+          )}
         </div>
         <div className="flex items-center gap-2">
           <button

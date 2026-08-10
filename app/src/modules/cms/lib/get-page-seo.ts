@@ -8,6 +8,7 @@ import {
   type EditablePageSeoKey,
 } from '../constants';
 import { NEWS_HUB_BY_LOCALE } from '../news-copy';
+import { GUIDE_HUB_BY_LOCALE } from '@/modules/seo/guides/guides-content';
 import { getMessagePathValue } from './get-site-texts';
 import type { PageSeoFields } from '../types';
 
@@ -42,7 +43,17 @@ export function getDefaultPageSeo(
   const meta = EDITABLE_PAGE_SEO_KEYS.find((item) => item.pageKey === pageKey);
   if (!meta) return emptyFields();
 
-  if (pageKey === 'news' || !meta.messagePath) {
+  if (pageKey === 'news' || pageKey === 'guides' || !meta.messagePath) {
+    if (pageKey === 'guides') {
+      const hub = GUIDE_HUB_BY_LOCALE[locale];
+      return {
+        title: `${hub.title} | Villa Velebita`,
+        description: hub.description,
+        og_title: `${hub.title} | Villa Velebita`,
+        og_description: hub.description,
+        og_image_alt: hub.title,
+      };
+    }
     const hub = NEWS_HUB_BY_LOCALE[locale];
     return {
       title: `${hub.title} | Villa Velebita`,

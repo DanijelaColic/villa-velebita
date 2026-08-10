@@ -5,6 +5,8 @@ import { Footer } from '@/components/Footer';
 import { InternalLinks } from '@/components/seo/InternalLinks';
 import BookingWidget from '@/modules/booking-admin/components/BookingWidget';
 import { getPageMetadata } from '@/i18n/metadata';
+import { getBookingSettings, getSpecialPricePeriods, priceFeesFromSettings } from '@/modules/cms/lib/get-booking-settings';
+import { getPaymentSettings } from '@/modules/cms/lib/get-payment-settings';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -23,6 +25,12 @@ type Props = {
 export default async function BookingPage({ searchParams }: Props) {
   const t = await getTranslations('bookingPage');
   const { apartment } = await searchParams;
+  const [bookingSettings, specialPricePeriods, payment] = await Promise.all([
+    getBookingSettings(),
+    getSpecialPricePeriods(),
+    getPaymentSettings(),
+  ]);
+  const priceFees = priceFeesFromSettings(bookingSettings);
 
   return (
     <>
@@ -38,7 +46,14 @@ export default async function BookingPage({ searchParams }: Props) {
             </h1>
             <p className="text-stone">{t('description')}</p>
           </div>
-          <BookingWidget initialSlug={apartment ?? 'villa-velebita'} />
+          <BookingWidget
+            initialSlug={apartment ?? 'villa-velebita'}
+            minNights={bookingSettings.minNights}
+            basePricePerNight={bookingSettings.basePricePerNight}
+            specialPricePeriods={specialPricePeriods}
+            priceFees={priceFees}
+            payment={payment}
+          />
           <InternalLinks currentPath="/booking" />
         </div>
       </main>

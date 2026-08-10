@@ -91,6 +91,15 @@
           "imageAlt": "Villa Velebita - prenotazione"
         }
       },
+      "villaPlitvice": {
+        "title": "Villa vicino ai Laghi di Plitvice",
+        "description": "Casa vacanze a 20 minuti da Plitvice — jacuzzi, barbecue, fino a 9 ospiti. Prenota direttamente dai proprietari.",
+        "openGraph": {
+          "title": "Villa Velebita vicino a Plitvice",
+          "description": "Prenotazione diretta di una casa vacanze a Rudopolje, 20 min dai Laghi di Plitvice.",
+          "imageAlt": "Villa Velebita – soggiorno vicino a Plitvice"
+        }
+      },
       "bookingReview": {
         "title": "Riepilogo Prenotazione",
         "description": "Controlla i dettagli della prenotazione e le istruzioni di pagamento per Villa Velebita.",
@@ -237,11 +246,11 @@
       },
       "included": {
         "question": "Cosa è incluso nel prezzo?",
-        "answer": "Il prezzo include biancheria da letto e asciugamani, prodotti base da bagno, WiFi gratuito, parcheggio privato, uso della jacuzzi esterna, barbecue e area cucina esterna. Il servizio di pulizia viene addebitato separatamente a 100 EUR per prenotazione."
+        "answer": "Il prezzo include biancheria da letto e asciugamani, prodotti base da bagno, WiFi gratuito, parcheggio privato, uso della jacuzzi esterna, barbecue e area cucina esterna. Il servizio di pulizia viene addebitato separatamente a {cleaningFee} EUR per prenotazione."
       },
       "minStay": {
         "question": "Qual è il soggiorno minimo?",
-        "answer": "Il soggiorno minimo è di 2 notti. Per prenotazioni più lunghe sono disponibili condizioni più vantaggiose e per 7 o più notti offriamo uno sconto aggiuntivo."
+        "answer": "Il soggiorno minimo è di {minNights} notti. Per prenotazioni più lunghe sono disponibili condizioni più vantaggiose e per {discountNights} o più notti offriamo uno sconto aggiuntivo del {discountPercent}%."
       },
       "pets": {
         "question": "Accettate animali domestici?",
@@ -671,7 +680,7 @@
           "pets": "Animali ammessi (piccole taglie)",
           "smoking": "Fumo consentito al piano terra/gazebo",
           "checkin": "Check-in 14:00 / Check-out 11:00",
-          "cleaning": "Servizio di pulizia: 100 EUR"
+          "cleaning": "Servizio di pulizia: {cleaningFee} EUR"
         }
       }
     },
@@ -711,11 +720,11 @@
       },
       "minStay": {
         "label": "Soggiorno min.",
-        "value": "2 notti"
+        "value": "{count} notti"
       },
       "pricePerNight": {
         "label": "Prezzo/notte",
-        "value": "270 € (intera casa)"
+        "value": "{price} € (intera casa)"
       },
       "discount": {
         "label": "Sconto 7+ notti",
@@ -724,17 +733,17 @@
     },
     "priceCard": {
       "eyebrow": "Tariffa",
-      "note": "Intera casa · fino a 9 ospiti · 30 € a persona (270/9)",
+      "note": "Intera casa · fino a 9 ospiti · {perPerson} € a persona ({price}/9)",
       "variablePriceNote": "* Il prezzo per festività, weekend e periodi speciali può variare. L'importo esatto è visibile nella selezione delle date al momento della prenotazione."
     },
     "discountBadge": {
       "title": "Prenota 7+ notti",
-      "note": "= 243 € / notte"
+      "note": "= {discounted} € / notte"
     },
     "includedTitle": "Incluso e servizi aggiuntivi",
     "included": {
       "linen": "Biancheria da letto e asciugamani",
-      "cleaning": "Servizio di pulizia (+100 EUR)",
+      "cleaning": "Servizio di pulizia (+{cleaningFee} EUR)",
       "toiletries": "Shampoo, sapone, carta igienica",
       "wifi": "WiFi gratuito",
       "parking": "Parcheggio gratuito",
@@ -754,7 +763,7 @@
       "checkAvailability": "Controlla disponibilità",
       "whatsapp": "Scrivi su WhatsApp"
     },
-    "disclaimer": "I prezzi sono espressi in euro. La tariffa base è 270 € a notte per l'intera casa, il soggiorno minimo è di 2 notti e il servizio di pulizia è 100 EUR per prenotazione. Per soggiorni di 7 o più notti applichiamo uno sconto del 10%."
+    "disclaimer": "I prezzi sono espressi in euro. La tariffa base è {price} € a notte per l'intera casa, il soggiorno minimo è di {minNights} notti e il servizio di pulizia è {cleaningFee} EUR per prenotazione. Per soggiorni di {discountNights} o più notti applichiamo uno sconto del {discountPercent}%."
   },
   "villaPlitviceLanding": {
     "heroPromo": "Risparmia fino al 15% con prenotazione diretta",

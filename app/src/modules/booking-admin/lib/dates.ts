@@ -9,6 +9,7 @@ import {
   LONG_STAY_DISCOUNT_RATE,
   CLEANING_FEE,
   SPECIAL_PRICE_PERIODS,
+  type SpecialPricePeriod,
 } from '../booking.config';
 import type { PriceBreakdown } from '../types';
 
@@ -135,8 +136,12 @@ function parseYMD(s: string): Date {
   return new Date(y, m - 1, d);
 }
 
-export function getPriceForDate(apartment: Apartment, date: Date): { price: number; label: string } {
-  for (const period of SPECIAL_PRICE_PERIODS) {
+export function getPriceForDate(
+  apartment: Apartment,
+  date: Date,
+  specialPeriods: SpecialPricePeriod[] = SPECIAL_PRICE_PERIODS,
+): { price: number; label: string } {
+  for (const period of specialPeriods) {
     const from = parseYMD(period.from);
     const to = parseYMD(period.to);
     if (date >= from && date <= to) {
@@ -155,13 +160,23 @@ export function calculatePrice(
   checkIn: Date,
   checkOut: Date,
   apartment: Apartment,
+  specialPeriods: SpecialPricePeriod[] = SPECIAL_PRICE_PERIODS,
+  fees?: {
+    cleaningFee?: number;
+    longStayDiscountNights?: number;
+    longStayDiscountRate?: number;
+  },
 ): PriceBreakdown {
+  const cleaningFee = fees?.cleaningFee ?? CLEANING_FEE;
+  const discountNights = fees?.longStayDiscountNights ?? LONG_STAY_DISCOUNT_NIGHTS;
+  const discountRate = fees?.longStayDiscountRate ?? LONG_STAY_DISCOUNT_RATE;
+
   // Akumuliraj noći po (label + pricePerNight) paru
   const nightMap = new Map<string, { label: string; pricePerNight: number; nights: number }>();
 
   let d = new Date(checkIn);
   while (d < checkOut) {
-    const { price, label } = getPriceForDate(apartment, d);
+    const { price, label } = getPriceForDate(apartment, d, specialPeriods);
     const key = `${label}|${price}`;
     const existing = nightMap.get(key);
     if (existing) {
@@ -182,10 +197,10 @@ export function calculatePrice(
   const nights = lines.reduce((s, l) => s + l.nights, 0);
   const rawTotalPrice = lines.reduce((s, l) => s + l.subtotal, 0);
   const discountAmount =
-    nights >= LONG_STAY_DISCOUNT_NIGHTS
-      ? Math.round(rawTotalPrice * LONG_STAY_DISCOUNT_RATE)
+    nights >= discountNights
+      ? Math.round(rawTotalPrice * discountRate)
       : 0;
-  const totalPrice = rawTotalPrice - discountAmount + CLEANING_FEE;
+  const totalPrice = rawTotalPrice - discountAmount + cleaningFee;
   const deposit = Math.round(totalPrice * DEPOSIT_PERCENT);
 
   return {
@@ -194,6 +209,6 @@ export function calculatePrice(
     deposit,
     lines,
     discountAmount,
-    cleaningFee: CLEANING_FEE,
+    cleaningFee,
   };
 }

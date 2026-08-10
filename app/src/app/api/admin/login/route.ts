@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
   const { password } = await request.json();
 
   if (!verifyPassword(password)) {
-    return NextResponse.json({ error: 'Incorrect password' }, { status: 401 });
+    return NextResponse.json({ error: 'Netočna lozinka' }, { status: 401 });
   }
 
   const response = NextResponse.json({ success: true });

@@ -61,6 +61,248 @@ export const EDITABLE_SITE_TEXT_KEYS = [
     group: 'footer',
     multiline: true,
   },
+  {
+    key: 'faq.heading.title',
+    labelHr: 'FAQ – naslov',
+    group: 'faq',
+  },
+  {
+    key: 'faq.heading.subtitle',
+    labelHr: 'FAQ – podnaslov',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.distance.question',
+    labelHr: 'FAQ – udaljenost (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.distance.answer',
+    labelHr: 'FAQ – udaljenost (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.capacity.question',
+    labelHr: 'FAQ – kapacitet (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.capacity.answer',
+    labelHr: 'FAQ – kapacitet (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.included.question',
+    labelHr: 'FAQ – uključeno (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.included.answer',
+    labelHr: 'FAQ – uključeno (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.minStay.question',
+    labelHr: 'FAQ – min. boravak (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.minStay.answer',
+    labelHr: 'FAQ – min. boravak (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.pets.question',
+    labelHr: 'FAQ – ljubimci (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.pets.answer',
+    labelHr: 'FAQ – ljubimci (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.checkInOut.question',
+    labelHr: 'FAQ – check-in/out (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.checkInOut.answer',
+    labelHr: 'FAQ – check-in/out (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.jacuzzi.question',
+    labelHr: 'FAQ – jacuzzi (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.jacuzzi.answer',
+    labelHr: 'FAQ – jacuzzi (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.payment.question',
+    labelHr: 'FAQ – plaćanje (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.payment.answer',
+    labelHr: 'FAQ – plaćanje (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'faq.items.cancellation.question',
+    labelHr: 'FAQ – otkazivanje (pitanje)',
+    group: 'faq',
+  },
+  {
+    key: 'faq.items.cancellation.answer',
+    labelHr: 'FAQ – otkazivanje (odgovor)',
+    group: 'faq',
+    multiline: true,
+  },
+  {
+    key: 'contact.heading.title',
+    labelHr: 'Kontakt – naslov',
+    group: 'contact',
+  },
+  {
+    key: 'contact.heading.subtitle',
+    labelHr: 'Kontakt – podnaslov',
+    group: 'contact',
+    multiline: true,
+  },
+  {
+    key: 'contact.intro',
+    labelHr: 'Kontakt – uvodni tekst',
+    group: 'contact',
+    multiline: true,
+  },
+  // ── Email predlošci (bookingEmail.*) ────────────────────────────
+  {
+    key: 'bookingEmail.received.subject',
+    labelHr: 'Email (upit) – naslov (subject)',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.received.greeting',
+    labelHr: 'Email (upit) – pozdrav ({name})',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.received.intro',
+    labelHr: 'Email (upit) – uvodni tekst',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.received.depositNote',
+    labelHr: 'Email (upit) – napomena uz uplatu',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.confirmed.subject',
+    labelHr: 'Email (potvrda) – naslov (subject)',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.confirmed.badge',
+    labelHr: 'Email (potvrda) – badge / istaknuto',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.confirmed.greeting',
+    labelHr: 'Email (potvrda) – pozdrav ({name})',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.confirmed.intro',
+    labelHr: 'Email (potvrda) – uvodni tekst',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.confirmed.depositNote',
+    labelHr: 'Email (potvrda) – napomena uz uplatu',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.shared.paymentTitle',
+    labelHr: 'Email – naslov bloka plaćanja',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.shared.questions',
+    labelHr: 'Email – tekst „Za pitanja”',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.shared.attachmentsBody',
+    labelHr: 'Email – opis QR privitaka',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.shared.publicView.button',
+    labelHr: 'Email – gumb javnog pregleda',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.shared.publicView.hint',
+    labelHr: 'Email – hint ispod gumba pregleda',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.terms.cancellationTitle',
+    labelHr: 'Email – naslov otkazivanja',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.terms.cancellationLines.0',
+    labelHr: 'Email – otkazivanje (1. red)',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.terms.cancellationLines.1',
+    labelHr: 'Email – otkazivanje (2. red)',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.terms.invoiceLabel',
+    labelHr: 'Email – oznaka „Računi”',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.terms.invoiceText',
+    labelHr: 'Email – tekst o računima',
+    group: 'email',
+    multiline: true,
+  },
+  {
+    key: 'bookingEmail.owner.subject',
+    labelHr: 'Email (vlasnik) – naslov (subject)',
+    group: 'email',
+  },
+  {
+    key: 'bookingEmail.owner.title',
+    labelHr: 'Email (vlasnik) – naslov u tijelu',
+    group: 'email',
+  },
 ] as const;
 
 export type EditableSiteTextKey =
@@ -120,6 +362,16 @@ export const EDITABLE_PAGE_SEO_KEYS = [
     labelHr: 'Novosti (lista)',
     messagePath: null,
   },
+  {
+    pageKey: 'villaPlitvice',
+    labelHr: 'Villa Plitvice (landing)',
+    messagePath: 'metadata.pages.villaPlitvice',
+  },
+  {
+    pageKey: 'guides',
+    labelHr: 'Vodiči (/vodic)',
+    messagePath: null,
+  },
 ] as const;
 
 export type EditablePageSeoKey =
@@ -133,4 +385,7 @@ export const SITE_TEXT_GROUPS: Record<string, string> = {
   hero: 'Hero (početna)',
   booking: 'Sekcija rezervacije',
   footer: 'Podnožje',
+  faq: 'FAQ',
+  contact: 'Kontakt',
+  email: 'Email predlošci',
 };

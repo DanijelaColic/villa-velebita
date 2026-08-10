@@ -10,23 +10,44 @@ import { GUIDE_HUB_BY_LOCALE } from '@/modules/seo/guides/guides-content';
 import { getValidLocale } from '@/i18n/messages';
 import { InternalLinks } from '@/components/seo/InternalLinks';
 import { GUIDE_HUB_UI, GUIDE_SECONDARY_CTA } from '@/modules/seo/guides/guide-cta-copy';
+import {
+  getDefaultPageSeo,
+  getPageSeoOverride,
+  mergePageSeo,
+} from '@/modules/cms/lib/get-page-seo';
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = getValidLocale(await getLocale());
-  const content = GUIDE_HUB_BY_LOCALE[locale];
   const localizedPath = locale === 'hr' ? '/vodic' : `/${locale}/vodic`;
+  const defaults = getDefaultPageSeo(locale, 'guides');
+  const override = await getPageSeoOverride(locale, 'guides');
+  const seo = mergePageSeo(
+    {
+      title: defaults.title ?? '',
+      description: defaults.description ?? '',
+      ogTitle: defaults.og_title ?? '',
+      ogDescription: defaults.og_description ?? '',
+      ogImageAlt: defaults.og_image_alt ?? '',
+    },
+    override,
+  );
 
   return {
-    title: `${content.title} | Villa Velebita`,
-    description: content.description,
+    title: seo.title,
+    description: seo.description,
     alternates: {
       canonical: localizedPath,
     },
     openGraph: {
-      title: `${content.title} | Villa Velebita`,
-      description: content.description,
+      title: seo.ogTitle,
+      description: seo.ogDescription,
       url: localizedPath,
-      images: ['/images/hero/exterior-08.jpg'],
+      images: [
+        {
+          url: '/images/hero/exterior-08.jpg',
+          alt: seo.ogImageAlt,
+        },
+      ],
     },
   };
 }

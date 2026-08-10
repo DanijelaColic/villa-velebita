@@ -31,7 +31,7 @@ export default function AdminLoginPage() {
       router.refresh();
     } else {
       const data = await res.json();
-      setError(data.error ?? 'Incorrect password');
+      setError(data.error ?? 'Netočna lozinka');
       setShakeKey((k) => k + 1);
       setPassword('');
     }

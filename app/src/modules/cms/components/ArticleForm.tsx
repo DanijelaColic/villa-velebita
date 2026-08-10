@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { ImagePlus, Loader2, Trash2, X } from 'lucide-react';
+import { ImagePlus, Languages, Loader2, Trash2, X } from 'lucide-react';
 import clsx from 'clsx';
 import { AppImage } from '@/components/ui/AppImage';
 import type { AppLocale } from '@/i18n/routing';
@@ -23,6 +23,8 @@ const LOCALE_LABELS: Record<AppLocale, string> = {
   de: 'DE',
   it: 'IT',
 };
+
+const TRANSLATE_TARGETS = ['en', 'de', 'it'] as const;
 
 type TranslationForm = {
   locale: AppLocale;
@@ -90,12 +92,19 @@ export default function ArticleForm({
     article ? fromArticle(article) : emptyTranslations(),
   );
   const [saving, setSaving] = useState(false);
+  const [translating, setTranslating] = useState(false);
+  const [editorEpoch, setEditorEpoch] = useState(0);
   const [uploadingCover, setUploadingCover] = useState(false);
   const [error, setError] = useState('');
 
   const active = useMemo(
     () => translations.find((t) => t.locale === localeTab) ?? translations[0],
     [translations, localeTab],
+  );
+
+  const hrSource = useMemo(
+    () => translations.find((t) => t.locale === 'hr') ?? translations[0],
+    [translations],
   );
 
   const coverPreview =
@@ -176,6 +185,90 @@ export default function ArticleForm({
       });
     }
     setCoverPath(null);
+  };
+
+  const handleAiTranslate = async () => {
+    if (!hrSource.title.trim()) {
+      showToast('Najprije upiši hrvatski naslov.', 'error');
+      setLocaleTab('hr');
+      return;
+    }
+
+    const filledTargets = TRANSLATE_TARGETS.filter((locale) => {
+      const t = translations.find((item) => item.locale === locale);
+      return t ? isLocaleFilled(t) : false;
+    });
+
+    if (filledTargets.length > 0) {
+      const labels = filledTargets.map((l) => LOCALE_LABELS[l]).join(', ');
+      const ok = window.confirm(
+        `Već postoji prijevod za: ${labels}.\n\nŽeliš li prepisati AI prijevodom?`,
+      );
+      if (!ok) return;
+    }
+
+    setTranslating(true);
+    setError('');
+
+    const res = await fetch('/api/admin/articles/translate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: hrSource.title,
+        excerpt: hrSource.excerpt,
+        content: hrSource.content,
+        seo_title: hrSource.seo_title,
+        seo_description: hrSource.seo_description,
+        targets: [...TRANSLATE_TARGETS],
+      }),
+    });
+
+    const data = await res.json().catch(() => ({}));
+    setTranslating(false);
+
+    if (!res.ok) {
+      const message =
+        (data as { error?: string }).error ?? 'AI prijevod nije uspio.';
+      setError(message);
+      showToast(message, 'error');
+      return;
+    }
+
+    const translated = (
+      data as {
+        translations: Record<
+          'en' | 'de' | 'it',
+          {
+            title: string;
+            excerpt: string;
+            content: TipTapDoc | null;
+            seo_title: string;
+            seo_description: string;
+          }
+        >;
+      }
+    ).translations;
+
+    setTranslations((prev) =>
+      prev.map((t) => {
+        if (t.locale === 'hr') return t;
+        const next = translated[t.locale as 'en' | 'de' | 'it'];
+        if (!next) return t;
+        return {
+          ...t,
+          title: next.title,
+          excerpt: next.excerpt,
+          content: next.content,
+          seo_title: next.seo_title,
+          seo_description: next.seo_description,
+        };
+      }),
+    );
+    setEditorEpoch((n) => n + 1);
+
+    showToast('Prijevod EN/DE/IT je spreman — pregledaj pa Spremi.');
+    const firstEmpty = TRANSLATE_TARGETS.find((locale) => !filledByLocale[locale]);
+    setLocaleTab(firstEmpty ?? 'en');
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -363,6 +456,20 @@ export default function ArticleForm({
                 );
               })}
             </div>
+            <button
+              type="button"
+              onClick={() => void handleAiTranslate()}
+              disabled={translating || saving || !hrSource.title.trim()}
+              className="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/10 disabled:opacity-50"
+              title="Prevedi hrvatski sadržaj na EN, DE i IT (OpenAI)"
+            >
+              {translating ? (
+                <Loader2 size={14} className="animate-spin" />
+              ) : (
+                <Languages size={14} />
+              )}
+              {translating ? 'Prevodim…' : 'AI prijevod HR → EN/DE/IT'}
+            </button>
             <p className="text-[11px] text-gray-400">
               ● zeleno = prevedeno · ● narančasto = nije prevedeno (na webu se koristi HR)
             </p>
@@ -419,7 +526,7 @@ export default function ArticleForm({
                 ) : null}
               </label>
               <ArticleRichEditor
-                key={localeTab}
+                key={`${localeTab}-${editorEpoch}`}
                 locale={localeTab}
                 content={active.content}
                 onChange={(locale, doc) => updateLocale(locale, { content: doc })}
@@ -477,7 +584,7 @@ export default function ArticleForm({
             </button>
             <button
               type="submit"
-              disabled={saving || uploadingCover}
+              disabled={saving || uploadingCover || translating}
               className="flex flex-1 items-center justify-center gap-2 rounded-full bg-primary py-2.5 text-sm font-medium text-white hover:bg-primary-light disabled:opacity-60"
             >
               {saving && <Loader2 size={14} className="animate-spin" />}

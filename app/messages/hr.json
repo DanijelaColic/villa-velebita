@@ -91,6 +91,15 @@
           "imageAlt": "Villa Velebita – rezervacija"
         }
       },
+      "villaPlitvice": {
+        "title": "Villa blizu Plitvičkih jezera",
+        "description": "Kuća za odmor 20 minuta od Plitvica — jacuzzi, roštilj, do 9 gostiju. Rezervirajte direktno kod vlasnika.",
+        "openGraph": {
+          "title": "Villa Velebita blizu Plitvica",
+          "description": "Direktna rezervacija kuće za odmor u Rudopolju, 20 min od Plitvičkih jezera.",
+          "imageAlt": "Villa Velebita – smještaj uz Plitvice"
+        }
+      },
       "bookingReview": {
         "title": "Pregled rezervacije",
         "description": "Podaci o rezervaciji i upute za uplatu punog iznosa za Villa Velebita.",
@@ -237,11 +246,11 @@
       },
       "included": {
         "question": "Što je uključeno u cijenu najma?",
-        "answer": "U cijenu su uključeni posteljina i ručnici, osnovni toaletni pribor, besplatni WiFi, privatno parkiranje, korištenje vanjskog jacuzzija, roštilj i pečenjara. Usluga čišćenja obračunava se dodatno 100 EUR po rezervaciji."
+        "answer": "U cijenu su uključeni posteljina i ručnici, osnovni toaletni pribor, besplatni WiFi, privatno parkiranje, korištenje vanjskog jacuzzija, roštilj i pečenjara. Usluga čišćenja obračunava se dodatno {cleaningFee} EUR po rezervaciji."
       },
       "minStay": {
         "question": "Kakav je minimalni boravak?",
-        "answer": "Minimalni boravak je 2 noći. Za duže rezervacije dostupni su povoljniji uvjeti, a za 7 ili više noći odobravamo i dodatni popust."
+        "answer": "Minimalni boravak je {minNights} noći. Za duže rezervacije dostupni su povoljniji uvjeti, a za {discountNights} ili više noći odobravamo i dodatni popust od {discountPercent}%."
       },
       "pets": {
         "question": "Prihvaćate li kućne ljubimce?",
@@ -689,7 +698,7 @@
           "pets": "Kućni ljubimci (male pasmine)",
           "smoking": "Pušenje u prizemlju/sjenici",
           "checkin": "Check-in 14:00 / Check-out 11:00",
-          "cleaning": "Usluga čišćenja: 100 EUR"
+          "cleaning": "Usluga čišćenja: {cleaningFee} EUR"
         }
       }
     },
@@ -729,11 +738,11 @@
       },
       "minStay": {
         "label": "Min. boravak",
-        "value": "2 noći"
+        "value": "{count} noći"
       },
       "pricePerNight": {
         "label": "Cijena/noć",
-        "value": "270 € (cijela kuća)"
+        "value": "{price} € (cijela kuća)"
       },
       "discount": {
         "label": "Popust 7+ noći",
@@ -742,17 +751,17 @@
     },
     "priceCard": {
       "eyebrow": "Cijena najma",
-      "note": "Cijela kuća · do 9 osoba · 30 € po osobi (270/9)",
+      "note": "Cijela kuća · do 9 osoba · {perPerson} € po osobi ({price}/9)",
       "variablePriceNote": "* Za Blagdane, vikende i posebne termine cijena može varirati. Točan iznos vidite pri odabiru datuma u rezervaciji."
     },
     "discountBadge": {
       "title": "Rezerviraj 7+ noći",
-      "note": "= 243 € / noć"
+      "note": "= {discounted} € / noć"
     },
     "includedTitle": "Uključeno i dodatne usluge",
     "included": {
       "linen": "Posteljina i ručnici",
-      "cleaning": "Usluga čišćenja (+100 EUR)",
+      "cleaning": "Usluga čišćenja (+{cleaningFee} EUR)",
       "toiletries": "Šamponi, sapun, WC papir",
       "wifi": "Besplatni WiFi",
       "parking": "Besplatno parkiranje",
@@ -772,7 +781,7 @@
       "checkAvailability": "Provjerite dostupnost",
       "whatsapp": "Pišite na WhatsApp"
     },
-    "disclaimer": "Cijene su iskazane u eurima. Osnovna cijena je 270 € po noći za cijelu kuću, minimalni boravak je 2 noći, a usluga čišćenja iznosi 100 EUR po rezervaciji. Za 7 i više noći odobravamo 10% popusta."
+    "disclaimer": "Cijene su iskazane u eurima. Osnovna cijena je {price} € po noći za cijelu kuću, minimalni boravak je {minNights} noći, a usluga čišćenja iznosi {cleaningFee} EUR po rezervaciji. Za {discountNights} i više noći odobravamo {discountPercent}% popusta."
   },
   "villaPlitviceLanding": {
     "heroPromo": "Uštedite do 15% rezervacijom direktno",

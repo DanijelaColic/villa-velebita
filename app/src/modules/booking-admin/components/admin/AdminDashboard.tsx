@@ -9,20 +9,21 @@ import {
 } from 'lucide-react';
 import clsx from 'clsx';
 import { apartments, CSV_EXPORT_PREFIX, DEPOSIT_PERCENT } from '../../booking.config';
+import type { SpecialPricePeriod } from '../../booking.config';
 import { formatDisplayDate, parseLocalDate, calculatePrice } from '../../lib/dates';
 import type { Booking } from '../../types';
 import BookingTimeline from './BookingTimeline';
 import { ToastContainer, type ToastItem } from './Toast';
 
 const MONTHS_HR_SHORT = [
-  'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-  'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+  'Sij', 'Velj', 'Ožu', 'Tra', 'Svi', 'Lip',
+  'Srp', 'Kol', 'Ruj', 'Lis', 'Stu', 'Pro',
 ];
 
 const STATUS_LABELS: Record<string, string> = {
-  pending: 'Pending',
-  confirmed: 'Confirmed',
-  cancelled: 'Cancelled',
+  pending: 'Na čekanju',
+  confirmed: 'Potvrđeno',
+  cancelled: 'Otkazano',
 };
 
 const STATUS_COLORS: Record<string, string> = {
@@ -101,23 +102,23 @@ export default function AdminDashboard() {
       body: JSON.stringify(updates),
     });
     if (res.ok) {
-      if (updates.status === 'confirmed') showToast('Booking confirmed — email sent to guest');
-      else if (updates.status === 'cancelled') showToast('Booking cancelled');
+      if (updates.status === 'confirmed') showToast('Rezervacija potvrđena — email poslan gostu');
+      else if (updates.status === 'cancelled') showToast('Rezervacija otkazana');
       else if ('deposit_paid' in updates)
-        showToast(updates.deposit_paid ? 'Deposit marked as paid' : 'Deposit marked as unpaid');
+        showToast(updates.deposit_paid ? 'Uplata označena kao plaćena' : 'Uplata označena kao neplaćena');
     } else {
-      showToast('Error updating booking', 'error');
+      showToast('Greška pri ažuriranju rezervacije', 'error');
     }
     await fetchBookings();
     setActionLoading(null);
   };
 
   const deleteBooking = async (id: string, name: string) => {
-    if (!confirm(`Delete booking for ${name}?`)) return;
+    if (!confirm(`Obrisati rezervaciju za ${name}?`)) return;
     setActionLoading(id);
     const res = await fetch(`/api/admin/bookings/${id}`, { method: 'DELETE' });
-    if (res.ok) showToast(`Booking for ${name} deleted`);
-    else showToast('Error deleting booking', 'error');
+    if (res.ok) showToast(`Rezervacija za ${name} obrisana`);
+    else showToast('Greška pri brisanju rezervacije', 'error');
     await fetchBookings();
     setActionLoading(null);
   };
@@ -129,8 +130,8 @@ export default function AdminDashboard() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ _resend_email: true }),
     });
-    if (res.ok) showToast(`Email sent to ${booking.guest_email}`);
-    else showToast('Error sending email', 'error');
+    if (res.ok) showToast(`Email poslan na ${booking.guest_email}`);
+    else showToast('Greška pri slanju emaila', 'error');
     setActionLoading(null);
   };
 
@@ -238,15 +239,15 @@ export default function AdminDashboard() {
 
   const exportCSV = () => {
     const headers = [
-      'Apartment', 'Guest', 'Email', 'Phone', 'Check-in', 'Check-out',
-      'Nights', 'Adults', 'Children', 'Total (€)', 'Deposit (€)', 'Deposit paid',
-      'Status', 'Notes', 'Created',
+      'Apartman', 'Gost', 'Email', 'Telefon', 'Prijava', 'Odjava',
+      'Noćenja', 'Odrasli', 'Djeca', 'Ukupno (€)', 'Uplata (€)', 'Uplata plaćena',
+      'Status', 'Napomene', 'Kreirano',
     ];
     const rows = filtered.map((b) => [
       APT_NAMES[b.apartment_slug] ?? b.apartment_slug,
       b.guest_name, b.guest_email, b.guest_phone ?? '',
       b.check_in, b.check_out, b.nights, b.adults, b.children,
-      b.total_price, b.deposit, b.deposit_paid ? 'Yes' : 'No',
+      b.total_price, b.deposit, b.deposit_paid ? 'Da' : 'Ne',
       STATUS_LABELS[b.status] ?? b.status, b.notes ?? '',
       new Date(b.created_at).toLocaleDateString(),
     ]);
@@ -282,14 +283,14 @@ export default function AdminDashboard() {
           <button
             type="button"
             onClick={() => setView('timeline')}
-            title="Timeline"
+            title="Vremenska crta"
             className={clsx(
               'flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors',
               view === 'timeline' ? 'bg-primary text-white' : 'text-gray-600 hover:text-gray-900',
             )}
           >
             <GanttChartSquare size={14} />
-            <span className="hidden sm:inline">Timeline</span>
+            <span className="hidden sm:inline">Vremenska crta</span>
           </button>
         </div>
 
@@ -315,10 +316,10 @@ export default function AdminDashboard() {
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
         {[
-          { label: 'Total bookings', value: stats.total, color: 'text-primary' },
-          { label: 'Pending', value: stats.pending, color: 'text-yellow-600' },
-          { label: 'Confirmed', value: stats.confirmed, color: 'text-green-600' },
-          { label: 'Revenue', value: `${stats.revenue}€`, color: 'text-secondary' },
+          { label: 'Ukupno rezervacija', value: stats.total, color: 'text-primary' },
+          { label: 'Na čekanju', value: stats.pending, color: 'text-yellow-600' },
+          { label: 'Potvrđeno', value: stats.confirmed, color: 'text-green-600' },
+          { label: 'Prihod', value: `${stats.revenue}€`, color: 'text-secondary' },
         ].map(({ label, value, color }) => (
           <div key={label} className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
             <p className="text-xs text-gray-500 mb-1">{label}</p>
@@ -335,8 +336,8 @@ export default function AdminDashboard() {
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-red-700 mb-1">
                 {overlaps.length === 1
-                  ? '1 overlapping booking found!'
-                  : `${overlaps.length} overlapping bookings found!`}
+                  ? 'Pronađeno 1 preklapanje rezervacija!'
+                  : `Pronađeno ${overlaps.length} preklapanja rezervacija!`}
               </p>
               <ul className="space-y-1">
                 {overlaps.map(({ a, b }, i) => (
@@ -363,7 +364,7 @@ export default function AdminDashboard() {
         >
           <span className="flex items-center gap-2 text-sm font-semibold text-gray-700">
             <BarChart2 size={16} className="text-secondary" />
-            Statistics {currentYear}
+            Statistika {currentYear}
           </span>
           <ChevronRight
             size={16}
@@ -374,7 +375,7 @@ export default function AdminDashboard() {
         {showMonthlyStats && (
           <div className="border-t border-gray-100 px-5 py-4">
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
-              Occupancy (nights / {daysInYear})
+              Popunjenost (noćenja / {daysInYear})
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
               {occupancy.map((o) => (
@@ -389,22 +390,22 @@ export default function AdminDashboard() {
                       style={{ width: `${o.pct}%` }}
                     />
                   </div>
-                  <p className="text-[10px] text-gray-400 mt-1">{o.bookedNights} nights</p>
+                  <p className="text-[10px] text-gray-400 mt-1">{o.bookedNights} noćenja</p>
                 </div>
               ))}
             </div>
 
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-3">
-              Revenue by month
+              Prihod po mjesecu
             </p>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="text-xs text-gray-400 uppercase">
-                    <th className="text-left pb-2 font-medium">Month</th>
-                    <th className="text-center pb-2 font-medium">Bookings</th>
-                    <th className="text-center pb-2 font-medium">Nights</th>
-                    <th className="text-right pb-2 font-medium">Revenue</th>
+                    <th className="text-left pb-2 font-medium">Mjesec</th>
+                    <th className="text-center pb-2 font-medium">Rezervacije</th>
+                    <th className="text-center pb-2 font-medium">Noćenja</th>
+                    <th className="text-right pb-2 font-medium">Prihod</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-50">
@@ -423,13 +424,13 @@ export default function AdminDashboard() {
                   {monthlyStats.every((m) => m.revenue === 0) && (
                     <tr>
                       <td colSpan={4} className="py-3 text-center text-gray-400 text-xs">
-                        No confirmed bookings for {currentYear}.
+                        Nema potvrđenih rezervacija za {currentYear}.
                       </td>
                     </tr>
                   )}
                   {monthlyStats.some((m) => m.revenue > 0) && (
                     <tr className="border-t border-gray-200 font-semibold">
-                      <td className="pt-2 text-gray-700">Total</td>
+                      <td className="pt-2 text-gray-700">Ukupno</td>
                       <td className="pt-2 text-center text-gray-700">
                         {monthlyStats.reduce((s, m) => s + m.bookings, 0)}
                       </td>
@@ -462,7 +463,7 @@ export default function AdminDashboard() {
                 <div className="flex items-center gap-2 mb-3">
                   <CalendarDays size={16} className="text-secondary" />
                   <h2 className="text-sm font-semibold text-gray-700 uppercase tracking-wide">
-                    Upcoming stays — next 14 days
+                    Predstojeći boravci — sljedećih 14 dana
                   </h2>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -482,10 +483,10 @@ export default function AdminDashboard() {
                             {APT_NAMES[b.apartment_slug] ?? b.apartment_slug}
                           </p>
                           <p className="text-xs text-gray-500 mt-0.5">
-                            {formatDisplayDate(parseLocalDate(b.check_in))} · {b.nights} nights
-                            {daysUntil === 0 && <span className="ml-1.5 text-orange-600 font-semibold">today!</span>}
-                            {daysUntil === 1 && <span className="ml-1.5 text-yellow-600 font-semibold">tomorrow</span>}
-                            {daysUntil > 1 && <span className="ml-1.5 text-gray-400">in {daysUntil} days</span>}
+                            {formatDisplayDate(parseLocalDate(b.check_in))} · {b.nights} noćenja
+                            {daysUntil === 0 && <span className="ml-1.5 text-orange-600 font-semibold">danas!</span>}
+                            {daysUntil === 1 && <span className="ml-1.5 text-yellow-600 font-semibold">sutra</span>}
+                            {daysUntil > 1 && <span className="ml-1.5 text-gray-400">za {daysUntil} dana</span>}
                           </p>
                         </div>
                         <span className={clsx(
@@ -512,7 +513,7 @@ export default function AdminDashboard() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search by name, email or phone..."
+                  placeholder="Pretraži po imenu, emailu ili telefonu..."
                   className="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-lg focus:outline-none focus:border-primary"
                 />
                 {searchQuery && (
@@ -532,7 +533,7 @@ export default function AdminDashboard() {
                   onChange={(e) => setFilterApt(e.target.value)}
                   className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-primary bg-white"
                 >
-                  <option value="">All apartments</option>
+                  <option value="">Svi apartmani</option>
                   {apartments.map((a) => (
                     <option key={a.slug} value={a.slug}>{a.name}</option>
                   ))}
@@ -542,22 +543,22 @@ export default function AdminDashboard() {
                   onChange={(e) => setFilterStatus(e.target.value)}
                   className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 focus:outline-none focus:border-primary bg-white"
                 >
-                  <option value="">All statuses</option>
-                  <option value="pending">Pending</option>
-                  <option value="confirmed">Confirmed</option>
-                  <option value="cancelled">Cancelled</option>
+                  <option value="">Svi statusi</option>
+                  <option value="pending">Na čekanju</option>
+                  <option value="confirmed">Potvrđeno</option>
+                  <option value="cancelled">Otkazano</option>
                 </select>
 
                 <span className="hidden sm:block text-gray-200 text-lg">|</span>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-gray-400 shrink-0">Period:</span>
+                  <span className="text-xs text-gray-400 shrink-0">Razdoblje:</span>
                   <input
                     type="date"
                     value={filterDateFrom}
                     onChange={(e) => setFilterDateFrom(e.target.value)}
                     className="text-sm border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:border-primary"
-                    title="From"
+                    title="Od"
                   />
                   <span className="text-gray-300 text-xs">—</span>
                   <input
@@ -565,7 +566,7 @@ export default function AdminDashboard() {
                     value={filterDateTo}
                     onChange={(e) => setFilterDateTo(e.target.value)}
                     className="text-sm border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:border-primary"
-                    title="To"
+                    title="Do"
                   />
                   {(filterDateFrom || filterDateTo) && (
                     <button
@@ -621,7 +622,7 @@ export default function AdminDashboard() {
                         <span>{booking.check_in}</span>
                         <span className="mx-1 text-gray-300">→</span>
                         <span>{booking.check_out}</span>
-                        <span className="ml-1.5 text-gray-400">· {booking.nights} nights</span>
+                        <span className="ml-1.5 text-gray-400">· {booking.nights} noćenja</span>
                       </div>
                       <span className="font-bold text-gray-900 text-sm">{booking.total_price}€</span>
                     </div>
@@ -634,7 +635,7 @@ export default function AdminDashboard() {
                       )}
                     >
                       <Banknote size={12} />
-                      {booking.deposit_paid ? 'Deposit paid' : 'Deposit unpaid'}
+                      {booking.deposit_paid ? 'Plaćeno' : 'Nije plaćeno'}
                     </button>
                     <div className="flex items-center gap-2 flex-wrap border-t border-gray-50 pt-3">
                       {booking.status === 'pending' && (
@@ -643,7 +644,7 @@ export default function AdminDashboard() {
                           disabled={actionLoading === booking.id}
                           className="flex items-center gap-1 text-xs bg-green-50 text-green-700 border border-green-200 px-3 py-1.5 rounded-lg"
                         >
-                          <Check size={13} /> Confirm
+                          <Check size={13} /> Potvrdi
                         </button>
                       )}
                       {booking.status !== 'cancelled' && (
@@ -652,21 +653,21 @@ export default function AdminDashboard() {
                           disabled={actionLoading === booking.id}
                           className="flex items-center gap-1 text-xs bg-orange-50 text-orange-600 border border-orange-200 px-3 py-1.5 rounded-lg"
                         >
-                          <X size={13} /> Cancel
+                          <X size={13} /> Otkaži
                         </button>
                       )}
                       <button
                         onClick={() => setEditingBooking(booking)}
                         className="flex items-center gap-1 text-xs bg-blue-50 text-blue-600 border border-blue-200 px-3 py-1.5 rounded-lg"
                       >
-                        <Pencil size={13} /> Edit
+                        <Pencil size={13} /> Uredi
                       </button>
                       <button
                         onClick={() => deleteBooking(booking.id, booking.guest_name)}
                         disabled={actionLoading === booking.id}
                         className="flex items-center gap-1 text-xs bg-red-50 text-red-500 border border-red-200 px-3 py-1.5 rounded-lg ml-auto"
                       >
-                        <Trash2 size={13} /> Delete
+                        <Trash2 size={13} /> Obriši
                       </button>
                     </div>
                   </div>
@@ -679,39 +680,39 @@ export default function AdminDashboard() {
               {loading ? (
                 <div className="flex items-center justify-center py-20 text-gray-400">
                   <Loader2 size={24} className="animate-spin mr-2" />
-                  Loading...
+                  Učitavanje...
                 </div>
               ) : filtered.length === 0 ? (
                 <div className="text-center py-16 text-gray-400">
-                  <p className="text-lg mb-1">No bookings</p>
-                  <p className="text-sm">Add the first booking by clicking &quot;New booking&quot;</p>
+                  <p className="text-lg mb-1">Nema rezervacija</p>
+                  <p className="text-sm">Dodajte prvu rezervaciju klikom na &quot;Nova rezervacija&quot;</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto sm:block hidden">
                   <table className="w-full text-sm">
                     <thead className="bg-gray-50 border-b border-gray-100">
                       <tr>
-                        <th className="text-left px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Apartment</th>
-                        <th className="text-left px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Guest</th>
+                        <th className="text-left px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Apartman</th>
+                        <th className="text-left px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Gost</th>
                         <th
                           className="text-left px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide cursor-pointer hover:text-primary select-none"
                           onClick={() => toggleSort('check_in')}
                         >
                           <span className="flex items-center gap-1">
-                            Check-in <SortIcon k="check_in" sortKey={sortKey} sortAsc={sortAsc} />
+                            Prijava <SortIcon k="check_in" sortKey={sortKey} sortAsc={sortAsc} />
                           </span>
                         </th>
-                        <th className="text-left px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Check-out</th>
-                        <th className="text-center px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Nights</th>
+                        <th className="text-left px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Odjava</th>
+                        <th className="text-center px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Noćenja</th>
                         <th
                           className="text-right px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide cursor-pointer hover:text-primary select-none"
                           onClick={() => toggleSort('total_price')}
                         >
                           <span className="flex items-center justify-end gap-1">
-                            Total <SortIcon k="total_price" sortKey={sortKey} sortAsc={sortAsc} />
+                            Ukupno <SortIcon k="total_price" sortKey={sortKey} sortAsc={sortAsc} />
                           </span>
                         </th>
-                        <th className="text-center px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Deposit</th>
+                        <th className="text-center px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Uplata</th>
                         <th className="text-center px-4 py-3 text-xs text-gray-500 font-medium uppercase tracking-wide">Status</th>
                         <th className="px-4 py-3" />
                       </tr>
@@ -755,7 +756,7 @@ export default function AdminDashboard() {
                                 )}
                               >
                                 <Banknote size={12} />
-                                {booking.deposit_paid ? 'Paid' : 'Unpaid'}
+                                {booking.deposit_paid ? 'Plaćeno' : 'Nije plaćeno'}
                               </button>
                             </td>
                             <td className="px-4 py-3 text-center">
@@ -769,7 +770,7 @@ export default function AdminDashboard() {
                                   <button
                                     onClick={() => updateBooking(booking.id, { status: 'confirmed' })}
                                     disabled={actionLoading === booking.id}
-                                    title="Confirm booking (sends email to guest)"
+                                    title="Potvrdi rezervaciju (šalje email gostu)"
                                     className="p-1.5 rounded-lg text-green-600 hover:bg-green-50 transition-colors"
                                   >
                                     <Check size={15} />
@@ -779,7 +780,7 @@ export default function AdminDashboard() {
                                   <button
                                     onClick={() => updateBooking(booking.id, { status: 'cancelled' })}
                                     disabled={actionLoading === booking.id}
-                                    title="Cancel booking"
+                                    title="Otkaži rezervaciju"
                                     className="p-1.5 rounded-lg text-orange-500 hover:bg-orange-50 transition-colors"
                                   >
                                     <X size={15} />
@@ -787,14 +788,14 @@ export default function AdminDashboard() {
                                 )}
                                 <button
                                   onClick={() => setEditingBooking(booking)}
-                                  title="Edit booking"
+                                  title="Uredi rezervaciju"
                                   className="p-1.5 rounded-lg text-blue-500 hover:bg-blue-50 transition-colors"
                                 >
                                   <Pencil size={15} />
                                 </button>
                                 <button
                                   onClick={() => setExpandedId(expandedId === booking.id ? null : booking.id)}
-                                  title="Details"
+                                  title="Detalji"
                                   className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 transition-colors"
                                 >
                                   <ChevronDown
@@ -805,7 +806,7 @@ export default function AdminDashboard() {
                                 <button
                                   onClick={() => deleteBooking(booking.id, booking.guest_name)}
                                   disabled={actionLoading === booking.id}
-                                  title="Delete"
+                                  title="Obriši"
                                   className="p-1.5 rounded-lg text-red-400 hover:bg-red-50 transition-colors"
                                 >
                                   <Trash2 size={15} />
@@ -820,30 +821,30 @@ export default function AdminDashboard() {
                               <td colSpan={9} className="px-4 py-3">
                                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">
                                   <div>
-                                    <p className="text-xs text-gray-400 mb-0.5">Phone</p>
+                                    <p className="text-xs text-gray-400 mb-0.5">Telefon</p>
                                     <p className="text-gray-700">{booking.guest_phone ?? '—'}</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-400 mb-0.5">Guests</p>
+                                    <p className="text-xs text-gray-400 mb-0.5">Gosti</p>
                                     <p className="text-gray-700">
-                                      {booking.adults} adults, {booking.children} children
+                                      {booking.adults} odraslih, {booking.children} djece
                                     </p>
                                   </div>
                                   <div>
                                     <p className="text-xs text-gray-400 mb-0.5">
-                                      Deposit amount ({DEPOSIT_PCT}%)
+                                      Iznos uplate ({DEPOSIT_PCT}%)
                                     </p>
                                     <p className="text-gray-700">{booking.deposit}€</p>
                                   </div>
                                   <div>
-                                    <p className="text-xs text-gray-400 mb-0.5">Created</p>
+                                    <p className="text-xs text-gray-400 mb-0.5">Kreirano</p>
                                     <p className="text-gray-700">
                                       {new Date(booking.created_at).toLocaleDateString()}
                                     </p>
                                   </div>
                                   {booking.notes && (
                                     <div className="col-span-2 sm:col-span-4">
-                                      <p className="text-xs text-gray-400 mb-0.5">Notes</p>
+                                      <p className="text-xs text-gray-400 mb-0.5">Napomene</p>
                                       <p className="text-gray-700">{booking.notes}</p>
                                     </div>
                                   )}
@@ -855,7 +856,7 @@ export default function AdminDashboard() {
                                         className="flex items-center gap-1.5 text-xs text-blue-600 hover:text-blue-800 border border-blue-200 hover:border-blue-400 rounded-lg px-3 py-1.5 transition-colors disabled:opacity-50"
                                       >
                                         <Mail size={13} />
-                                        Resend confirmation email
+                                        Ponovno pošalji potvrdu emailom
                                       </button>
                                     </div>
                                   )}
@@ -871,8 +872,8 @@ export default function AdminDashboard() {
               )}
               {!loading && filtered.length === 0 && (
                 <div className="hidden sm:block text-center py-16 text-gray-400">
-                  <p className="text-lg mb-1">No bookings</p>
-                  <p className="text-sm">Add the first booking by clicking &quot;New booking&quot;</p>
+                  <p className="text-lg mb-1">Nema rezervacija</p>
+                  <p className="text-sm">Dodajte prvu rezervaciju klikom na &quot;Nova rezervacija&quot;</p>
                 </div>
               )}
             </div>
@@ -886,7 +887,7 @@ export default function AdminDashboard() {
           onSuccess={() => {
             setShowAddForm(false);
             fetchBookings();
-            showToast('Booking added');
+            showToast('Rezervacija dodana');
           }}
         />
       )}
@@ -898,7 +899,7 @@ export default function AdminDashboard() {
           onSuccess={() => {
             setEditingBooking(null);
             fetchBookings();
-            showToast('Booking updated');
+            showToast('Rezervacija ažurirana');
           }}
         />
       )}
@@ -919,38 +920,103 @@ function PricePreview({
   checkIn: string;
   checkOut: string;
 }) {
+  const [basePricePerNight, setBasePricePerNight] = useState<number | null>(null);
+  const [priceFees, setPriceFees] = useState<{
+    cleaningFee?: number;
+    longStayDiscountNights?: number;
+    longStayDiscountRate?: number;
+  } | null>(null);
+  const [specialPeriods, setSpecialPeriods] = useState<SpecialPricePeriod[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const [settingsRes, periodsRes] = await Promise.all([
+          fetch('/api/admin/booking-settings'),
+          fetch('/api/admin/special-price-periods'),
+        ]);
+        if (cancelled) return;
+        if (settingsRes.ok) {
+          const data = (await settingsRes.json()) as {
+            basePricePerNight?: number;
+            cleaningFee?: number;
+            longStayDiscountNights?: number;
+            longStayDiscountPercent?: number;
+          };
+          if (typeof data.basePricePerNight === 'number') {
+            setBasePricePerNight(data.basePricePerNight);
+          }
+          setPriceFees({
+            cleaningFee: data.cleaningFee,
+            longStayDiscountNights: data.longStayDiscountNights,
+            longStayDiscountRate:
+              typeof data.longStayDiscountPercent === 'number'
+                ? data.longStayDiscountPercent / 100
+                : undefined,
+          });
+        }
+        if (periodsRes.ok) {
+          const data = (await periodsRes.json()) as { periods?: SpecialPricePeriod[] };
+          if (Array.isArray(data.periods)) {
+            setSpecialPeriods(data.periods);
+          }
+        }
+      } catch {
+        /* fallback na booking.config cijene */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const priceData = useMemo(() => {
     if (!checkIn || !checkOut) return null;
-    const apt = apartments.find((a) => a.slug === apartmentSlug);
-    if (!apt) return null;
+    const aptBase = apartments.find((a) => a.slug === apartmentSlug);
+    if (!aptBase) return null;
+    const apt =
+      basePricePerNight != null
+        ? {
+            ...aptBase,
+            priceOffSeason: basePricePerNight,
+            priceHighSeason: basePricePerNight,
+          }
+        : aptBase;
     const ci = parseLocalDate(checkIn);
     const co = parseLocalDate(checkOut);
     if (co <= ci) return null;
-    return calculatePrice(ci, co, apt);
-  }, [apartmentSlug, checkIn, checkOut]);
+    return calculatePrice(
+      ci,
+      co,
+      apt,
+      specialPeriods ?? undefined,
+      priceFees ?? undefined,
+    );
+  }, [apartmentSlug, checkIn, checkOut, basePricePerNight, specialPeriods, priceFees]);
 
   if (!priceData) return null;
 
   return (
     <div className="col-span-2 bg-blue-50 border border-blue-100 rounded-lg px-4 py-3 text-sm">
       <div className="flex justify-between items-center mb-1">
-        <span className="text-gray-500">{priceData.nights} nights</span>
+        <span className="text-gray-500">{priceData.nights} noćenja</span>
         <span className="font-bold text-primary text-base">{priceData.totalPrice}€</span>
       </div>
       {priceData.lines.map((l) => (
         <div key={l.label} className="flex justify-between text-xs text-gray-500">
-          <span>{l.nights}× {l.label} · {l.pricePerNight}€/night</span>
+          <span>{l.nights}× {l.label} · {l.pricePerNight}€/noć</span>
           <span>{l.subtotal}€</span>
         </div>
       ))}
       {priceData.discountAmount ? (
         <div className="flex justify-between text-xs text-green-700">
-          <span>Long-stay discount</span>
+          <span>Popust za duži boravak</span>
           <span>-{priceData.discountAmount}€</span>
         </div>
       ) : null}
       <div className="flex justify-between text-xs text-gray-500 mt-1 pt-1 border-t border-blue-100">
-        <span>Deposit ({Math.round(DEPOSIT_PERCENT * 100)}%)</span>
+        <span>Uplata ({Math.round(DEPOSIT_PERCENT * 100)}%)</span>
         <span className="font-medium">{priceData.deposit}€</span>
       </div>
     </div>
@@ -1006,7 +1072,7 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
       onSuccess();
     } else {
       const d = await res.json();
-      setError(d.error ?? 'Error');
+      setError(d.error ?? 'Greška');
     }
     setLoading(false);
   };
@@ -1021,7 +1087,7 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
-          <h2 className="font-serif text-lg font-semibold text-gray-900">New booking</h2>
+          <h2 className="font-serif text-lg font-semibold text-gray-900">Nova rezervacija</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
             <X size={20} />
           </button>
@@ -1030,7 +1096,7 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
-              <label className="block text-xs font-medium text-gray-600 mb-1">Apartment</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Apartman</label>
               <select
                 name="apartment_slug"
                 value={form.apartment_slug}
@@ -1043,7 +1109,7 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Check-in *</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Prijava *</label>
               <input
                 type="date" name="check_in" value={form.check_in}
                 onChange={handleChange} required
@@ -1051,7 +1117,7 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Check-out *</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Odjava *</label>
               <input
                 type="date" name="check_out" value={form.check_out}
                 onChange={handleChange} required
@@ -1066,10 +1132,10 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
             />
 
             <div className="col-span-2">
-              <label className="block text-xs font-medium text-gray-600 mb-1">Full name *</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Ime i prezime *</label>
               <input
                 type="text" name="guest_name" value={form.guest_name}
-                onChange={handleChange} required placeholder="Jane Smith"
+                onChange={handleChange} required placeholder="Ana Anić"
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
               />
             </div>
@@ -1077,20 +1143,20 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
               <label className="block text-xs font-medium text-gray-600 mb-1">Email</label>
               <input
                 type="email" name="guest_email" value={form.guest_email}
-                onChange={handleChange} placeholder="jane@email.com"
+                onChange={handleChange} placeholder="ana@email.com"
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Phone</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Telefon</label>
               <input
                 type="tel" name="guest_phone" value={form.guest_phone}
-                onChange={handleChange} placeholder="+1..."
+                onChange={handleChange} placeholder="+385..."
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Adults</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Odrasli</label>
               <input
                 type="number" name="adults" value={form.adults}
                 onChange={handleChange} min="1" max="10"
@@ -1098,7 +1164,7 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Children</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Djeca</label>
               <input
                 type="number" name="children" value={form.children}
                 onChange={handleChange} min="0" max="10"
@@ -1111,8 +1177,8 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
                 name="status" value={form.status} onChange={handleChange}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary bg-white"
               >
-                <option value="confirmed">Confirmed</option>
-                <option value="pending">Pending</option>
+                <option value="confirmed">Potvrđeno</option>
+                <option value="pending">Na čekanju</option>
               </select>
             </div>
             <div className="flex items-center gap-2 pt-5">
@@ -1122,11 +1188,11 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
                 className="accent-primary"
               />
               <label htmlFor="add_deposit_paid" className="text-sm text-gray-700 cursor-pointer">
-                Deposit paid
+                Plaćeno
               </label>
             </div>
             <div className="col-span-2">
-              <label className="block text-xs font-medium text-gray-600 mb-1">Notes</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Napomene</label>
               <textarea
                 name="notes" value={form.notes} onChange={handleChange} rows={2}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary resize-none"
@@ -1141,14 +1207,14 @@ function AddBookingModal({ onClose, onSuccess }: ModalProps) {
               type="button" onClick={onClose}
               className="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-full text-sm hover:bg-gray-50 transition-colors"
             >
-              Cancel
+              Odustani
             </button>
             <button
               type="submit" disabled={loading}
               className="flex-1 bg-primary hover:bg-primary-light text-white py-2.5 rounded-full text-sm font-medium transition-colors flex items-center justify-center gap-2"
             >
               {loading && <Loader2 size={14} className="animate-spin" />}
-              Save booking
+              Spremi rezervaciju
             </button>
           </div>
         </form>
@@ -1213,7 +1279,7 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
       onSuccess();
     } else {
       const d = await res.json();
-      setError(d.error ?? 'Error saving');
+      setError(d.error ?? 'Greška pri spremanju');
     }
     setLoading(false);
   };
@@ -1229,7 +1295,7 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
       >
         <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
           <div>
-            <h2 className="font-serif text-lg font-semibold text-gray-900">Edit booking</h2>
+            <h2 className="font-serif text-lg font-semibold text-gray-900">Uredi rezervaciju</h2>
             <p className="text-xs text-gray-400 mt-0.5">{booking.guest_name}</p>
           </div>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
@@ -1240,7 +1306,7 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
-              <label className="block text-xs font-medium text-gray-600 mb-1">Apartment</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Apartman</label>
               <select
                 name="apartment_slug" value={form.apartment_slug} onChange={handleChange}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary bg-white"
@@ -1251,7 +1317,7 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Check-in *</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Prijava *</label>
               <input
                 type="date" name="check_in" value={form.check_in}
                 onChange={handleChange} required
@@ -1259,7 +1325,7 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Check-out *</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Odjava *</label>
               <input
                 type="date" name="check_out" value={form.check_out}
                 onChange={handleChange} required
@@ -1274,7 +1340,7 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
             />
 
             <div className="col-span-2">
-              <label className="block text-xs font-medium text-gray-600 mb-1">Full name *</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Ime i prezime *</label>
               <input
                 type="text" name="guest_name" value={form.guest_name}
                 onChange={handleChange} required
@@ -1290,15 +1356,15 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Phone</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Telefon</label>
               <input
                 type="tel" name="guest_phone" value={form.guest_phone}
-                onChange={handleChange} placeholder="+1..."
+                onChange={handleChange} placeholder="+385..."
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary"
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Adults</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Odrasli</label>
               <input
                 type="number" name="adults" value={form.adults}
                 onChange={handleChange} min="1" max="10"
@@ -1306,7 +1372,7 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
               />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Children</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Djeca</label>
               <input
                 type="number" name="children" value={form.children}
                 onChange={handleChange} min="0" max="10"
@@ -1319,9 +1385,9 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
                 name="status" value={form.status} onChange={handleChange}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary bg-white"
               >
-                <option value="pending">Pending</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="cancelled">Cancelled</option>
+                <option value="pending">Na čekanju</option>
+                <option value="confirmed">Potvrđeno</option>
+                <option value="cancelled">Otkazano</option>
               </select>
             </div>
             <div className="flex items-center gap-2 pt-5">
@@ -1331,11 +1397,11 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
                 className="accent-primary"
               />
               <label htmlFor="edit_deposit_paid" className="text-sm text-gray-700 cursor-pointer">
-                Deposit paid
+                Plaćeno
               </label>
             </div>
             <div className="col-span-2">
-              <label className="block text-xs font-medium text-gray-600 mb-1">Notes</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Napomene</label>
               <textarea
                 name="notes" value={form.notes} onChange={handleChange} rows={2}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-primary resize-none"
@@ -1350,14 +1416,14 @@ function EditBookingModal({ booking, onClose, onSuccess }: EditModalProps) {
               type="button" onClick={onClose}
               className="flex-1 border border-gray-200 text-gray-600 py-2.5 rounded-full text-sm hover:bg-gray-50 transition-colors"
             >
-              Cancel
+              Odustani
             </button>
             <button
               type="submit" disabled={loading}
               className="flex-1 bg-primary hover:bg-primary-light text-white py-2.5 rounded-full text-sm font-medium transition-colors flex items-center justify-center gap-2"
             >
               {loading && <Loader2 size={14} className="animate-spin" />}
-              Save changes
+              Spremi promjene
             </button>
           </div>
         </form>

@@ -8,6 +8,12 @@ import {
 import { parseLocalDate, diffDays, calculatePrice } from '@/modules/booking-admin/lib/dates';
 import { sendConfirmationEmail } from '@/modules/booking-admin/lib/email';
 import type { Booking } from '@/modules/booking-admin/types';
+import {
+  applyBasePriceToApartment,
+  getBookingSettings,
+  getSpecialPricePeriods,
+  priceFeesFromSettings,
+} from '@/modules/cms/lib/get-booking-settings';
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -61,11 +67,20 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     const checkOut = parseLocalDate(
       (updates.check_out as string | undefined) ?? existing.check_out,
     );
-    const apt = getApartment(slug);
+    const aptBase = getApartment(slug);
 
-    if (apt && checkOut > checkIn) {
+    if (aptBase && checkOut > checkIn) {
+      const settings = await getBookingSettings();
+      const apt = applyBasePriceToApartment(aptBase, settings.basePricePerNight);
+      const specialPeriods = await getSpecialPricePeriods();
       const nights = diffDays(checkOut, checkIn);
-      const priceData = calculatePrice(checkIn, checkOut, apt);
+      const priceData = calculatePrice(
+        checkIn,
+        checkOut,
+        apt,
+        specialPeriods,
+        priceFeesFromSettings(settings),
+      );
       const totalPrice = priceData.totalPrice;
       const deposit = priceData.deposit;
       updates.nights = nights;

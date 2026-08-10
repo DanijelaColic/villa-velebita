@@ -6,9 +6,12 @@ import {
   Baby, Tv, Utensils, ShowerHead, TreePine, Thermometer,
   Cigarette, PawPrint, Clock, CheckCircle2,
 } from 'lucide-react';
+import { getBookingSettings } from '@/modules/cms/lib/get-booking-settings';
 
 export async function Amenities() {
   const t = await getTranslations('amenitiesSection');
+  const settings = await getBookingSettings();
+  const cleaningFee = settings.cleaningFee;
   const amenityGroups = [
     {
       title: t('groups.kitchen.title'),
@@ -53,7 +56,7 @@ export async function Amenities() {
         { icon: <PawPrint className="size-5" />, label: t('groups.rules.items.pets') },
         { icon: <Cigarette className="size-5" />, label: t('groups.rules.items.smoking') },
         { icon: <Clock className="size-5" />, label: t('groups.rules.items.checkin') },
-        { icon: <CheckCircle2 className="size-5" />, label: t('groups.rules.items.cleaning') },
+        { icon: <CheckCircle2 className="size-5" />, label: t('groups.rules.items.cleaning', { cleaningFee }) },
       ],
     },
   ];

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { Hero } from '@/components/sections/Hero';
@@ -6,7 +7,7 @@ import { Booking } from '@/components/sections/Booking';
 import { AppImage as Image } from '@/components/ui/AppImage';
 import { Button } from '@/components/ui/Button';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
-import { getTranslations } from 'next-intl/server';
+import { getLocale, getTranslations } from 'next-intl/server';
 import {
   CheckCircle2,
   Clock3,
@@ -16,6 +17,17 @@ import {
   Waves,
   Wifi,
 } from 'lucide-react';
+import { getBookingSettings } from '@/modules/cms/lib/get-booking-settings';
+import { getPageMetadata } from '@/i18n/metadata';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return getPageMetadata({
+    locale,
+    pathname: '/villa-plitvice',
+    namespace: 'metadata.pages.villaPlitvice',
+  });
+}
 
 const benefits = [
   {
@@ -78,6 +90,8 @@ const shortGallery = [
 
 export default async function VillaPlitvicePage() {
   const t = await getTranslations();
+  const settings = await getBookingSettings();
+  const price = settings.basePricePerNight;
 
   return (
     <>
@@ -115,7 +129,7 @@ export default async function VillaPlitvicePage() {
                 {t('villaPlitviceLanding.pricing.label')}
               </p>
               <h2 className="font-display text-4xl sm:text-5xl text-oak leading-tight">
-                270€{' '}
+                {price}€{' '}
                 <span className="text-stone text-2xl sm:text-3xl">
                   {t('villaPlitviceLanding.pricing.perNight')}
                 </span>

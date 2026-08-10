@@ -9,7 +9,12 @@ import {
   calculatePrice,
 } from '@/modules/booking-admin/lib/dates';
 import { sendNewBookingEmails } from '@/modules/booking-admin/lib/email';
-import { MIN_NIGHTS } from '@/modules/booking-admin/booking.config';
+import {
+  applyBasePriceToApartment,
+  getBookingSettings,
+  getSpecialPricePeriods,
+  priceFeesFromSettings,
+} from '@/modules/cms/lib/get-booking-settings';
 
 // GET /api/bookings?apartment=slug
 // Vraća zauzete datume za odabrani apartman (koristi BookingCalendar)
@@ -74,25 +79,34 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: bookingMessages.missingFields }, { status: 400 });
     }
 
-    const apt = getApartment(apartment_slug);
-    if (!apt) {
+    const aptBase = getApartment(apartment_slug);
+    if (!aptBase) {
       return NextResponse.json({ error: bookingMessages.apartmentNotFound }, { status: 404 });
     }
 
-    if (apt.fullyBooked) {
+    if (aptBase.fullyBooked) {
       return NextResponse.json(
         { error: bookingMessages.unavailable },
         { status: 400 },
       );
     }
 
+    const settings = await getBookingSettings();
+    const apt = applyBasePriceToApartment(aptBase, settings.basePricePerNight);
+    const specialPeriods = await getSpecialPricePeriods();
+
     const checkInDate = parseLocalDate(check_in);
     const checkOutDate = parseLocalDate(check_out);
     const nights = diffDays(checkOutDate, checkInDate);
 
-    if (nights < MIN_NIGHTS) {
+    if (nights < settings.minNights) {
       return NextResponse.json(
-        { error: bookingMessages.minStay.replace('{count}', String(MIN_NIGHTS)) },
+        {
+          error: bookingMessages.minStay.replace(
+            '{count}',
+            String(settings.minNights),
+          ),
+        },
         { status: 400 },
       );
     }
@@ -124,7 +138,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const priceData = calculatePrice(checkInDate, checkOutDate, apt);
+    const priceData = calculatePrice(
+      checkInDate,
+      checkOutDate,
+      apt,
+      specialPeriods,
+      priceFeesFromSettings(settings),
+    );
     const totalPrice = priceData.totalPrice;
     const deposit = priceData.deposit;
     const avgPricePerNight = Math.round(totalPrice / nights);

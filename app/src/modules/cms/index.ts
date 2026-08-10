@@ -50,6 +50,7 @@ export { NEWS_HUB_BY_LOCALE, NEWS_FALLBACK_COVER } from './news-copy';
 export {
   getSiteTextOverrides,
   resolveSiteText,
+  fillSiteTextTemplate,
   getDefaultSiteText,
   getSiteTextsForAdmin,
 } from './lib/get-site-texts';
@@ -62,3 +63,23 @@ export {
   pageKeyFromNamespace,
 } from './lib/get-page-seo';
 export type { PageSeoAdminRow, PageSeoOverride } from './lib/get-page-seo';
+export {
+  getBookingSettings,
+  getDefaultBookingSettings,
+  getSpecialPricePeriods,
+  getDefaultSpecialPricePeriods,
+  applyBasePriceToApartment,
+  getApartmentWithSettings,
+  priceFeesFromSettings,
+  longStayRateFromSettings,
+  saveBookingSettings,
+  saveSpecialPricePeriods,
+  validateBookingSettingsInput,
+  validateSpecialPricePeriodsInput,
+  BOOKING_SETTING_KEYS,
+} from './lib/get-booking-settings';
+export type {
+  BookingSettings,
+  BookingSettingsInput,
+  SpecialPricePeriod,
+} from './lib/get-booking-settings';

@@ -16,6 +16,7 @@ import {
   getPriceForDate,
 } from '../lib/dates';
 import { apartments } from '../booking.config';
+import type { SpecialPricePeriod } from '../booking.config';
 import type { BookedRange } from '../types';
 
 type DayState =
@@ -40,6 +41,10 @@ type Props = {
   bookingsApiPath?: string;
   /** Minimalni broj noći — uzima se iz MIN_NIGHTS config, ali može se override-ati */
   minNights?: number;
+  /** CMS override — osnovna cijena €/noć */
+  basePricePerNight?: number;
+  /** CMS override — posebni periodi (blagdani…) */
+  specialPricePeriods?: SpecialPricePeriod[];
 };
 
 export default function BookingCalendar({
@@ -51,6 +56,8 @@ export default function BookingCalendar({
   onReset,
   bookingsApiPath = '/api/bookings',
   minNights = 2,
+  basePricePerNight,
+  specialPricePeriods,
 }: Props) {
   const locale = useLocale();
   const t = useTranslations('bookingWidget.calendar');
@@ -142,17 +149,23 @@ export default function BookingCalendar({
     ? getFirstBlockedAfter(checkIn, bookedRanges)
     : null;
 
-  const apartment = useMemo(
-    () => apartments.find((a) => a.slug === apartmentSlug),
-    [apartmentSlug],
-  );
+  const apartment = useMemo(() => {
+    const base = apartments.find((a) => a.slug === apartmentSlug);
+    if (!base) return undefined;
+    if (basePricePerNight == null) return base;
+    return {
+      ...base,
+      priceOffSeason: basePricePerNight,
+      priceHighSeason: basePricePerNight,
+    };
+  }, [apartmentSlug, basePricePerNight]);
 
   const getDayPrice = useCallback(
     (day: Date): number => {
       if (!apartment) return 0;
-      return getPriceForDate(apartment, day).price;
+      return getPriceForDate(apartment, day, specialPricePeriods).price;
     },
-    [apartment],
+    [apartment, specialPricePeriods],
   );
 
   const getDayState = useCallback(

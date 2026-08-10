@@ -11,7 +11,7 @@ import {
 } from '@/components/sections/LandingTeasers';
 import { ReviewsSection } from '@/components/sections/ReviewsSection';
 import { Booking } from '@/components/sections/Booking';
-import { Contact } from '@/components/sections/Contact';
+import { ContactSection } from '@/components/sections/ContactSection';
 
 export default function HomePage() {
   return (
@@ -27,7 +27,7 @@ export default function HomePage() {
         <FAQTeaser />
         <ReviewsSection />
         <Booking />
-        <Contact />
+        <ContactSection />
       </main>
       <Footer />
     </>

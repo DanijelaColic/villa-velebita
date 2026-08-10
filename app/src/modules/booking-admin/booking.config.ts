@@ -71,6 +71,8 @@ export const HIGH_SEASON_MONTHS: number[] = [];
 
 // ── Posebni cjenovni periodi (blagdani, vikendi, posebni termini) ──
 // `from` i `to` su inkluzivni (YYYY-MM-DD) — zadnja noć je uključena.
+// FALLBACK: ako u adminu (/admin/pricing) nije spremljen DB override,
+// koristi se ova lista. Nakon prvog "Spremi periode" vrijedi DB.
 
 export type SpecialPricePeriod = {
   from: string;
@@ -109,9 +111,9 @@ export const apartments: Apartment[] = [
     name: 'Villa Velebita',
     tagline: 'Cijela villa za vas — privatnost, priroda, komfor.',
     description:
-      'Cijela villa na tri etaže (155 m²), tri spavaće sobe, dvije kupaonice, potpuno opremljena kuhinja, dnevni boravak, vanjski jacuzzi, roštilj i pečenjara. Idealno za obitelji i grupe do 13 osoba.',
-    capacity: 13,
-    capacityNote: 'do 13 osoba',
+      'Cijela villa na tri etaže (155 m²), tri spavaće sobe, dvije kupaonice, potpuno opremljena kuhinja, dnevni boravak, vanjski jacuzzi, roštilj i pečenjara. Idealno za obitelji i grupe do 9 osoba.',
+    capacity: 9,
+    capacityNote: 'do 9 osoba',
     size: 155,
     beds: '3 spavaće sobe, razvlačna garnitura, dodatni ležajevi',
     view: false,

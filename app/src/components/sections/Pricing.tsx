@@ -3,6 +3,7 @@ import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { getTranslations } from 'next-intl/server';
 import { CheckCircle2, Tag, Users, CalendarDays, Sparkles } from 'lucide-react';
+import { getBookingSettings, longStayRateFromSettings } from '@/modules/cms/lib/get-booking-settings';
 
 type PricingProps = {
   bookingHref?: string;
@@ -10,9 +11,19 @@ type PricingProps = {
 
 export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {}) {
   const t = await getTranslations('pricingSection');
+  const settings = await getBookingSettings();
+  const price = settings.basePricePerNight;
+  const minNights = settings.minNights;
+  const cleaningFee = settings.cleaningFee;
+  const discountNights = settings.longStayDiscountNights;
+  const discountPercent = settings.longStayDiscountPercent;
+  const discountRate = longStayRateFromSettings(settings);
+  const perPerson = Math.round(price / 9);
+  const discounted = Math.round(price * (1 - discountRate));
+
   const included = [
     t('included.linen'),
-    t('included.cleaning'),
+    t('included.cleaning', { cleaningFee }),
     t('included.toiletries'),
     t('included.wifi'),
     t('included.parking'),
@@ -21,10 +32,26 @@ export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {
     t('included.crib'),
   ];
   const rules = [
-    { icon: <Users className="size-4" />, label: t('stats.capacity.label'), value: t('stats.capacity.value') },
-    { icon: <CalendarDays className="size-4" />, label: t('stats.minStay.label'), value: t('stats.minStay.value') },
-    { icon: <Tag className="size-4" />, label: t('stats.pricePerNight.label'), value: t('stats.pricePerNight.value') },
-    { icon: <Sparkles className="size-4" />, label: t('stats.discount.label'), value: t('stats.discount.value') },
+    {
+      icon: <Users className="size-4" />,
+      label: t('stats.capacity.label'),
+      value: t('stats.capacity.value'),
+    },
+    {
+      icon: <CalendarDays className="size-4" />,
+      label: t('stats.minStay.label'),
+      value: t('stats.minStay.value', { count: minNights }),
+    },
+    {
+      icon: <Tag className="size-4" />,
+      label: t('stats.pricePerNight.label'),
+      value: t('stats.pricePerNight.value', { price }),
+    },
+    {
+      icon: <Sparkles className="size-4" />,
+      label: t('stats.discount.label'),
+      value: t('stats.discount.value'),
+    },
   ];
 
   return (
@@ -45,24 +72,34 @@ export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {
                 {t('priceCard.eyebrow')}
               </p>
               <div className="flex items-end gap-2">
-                <span className="font-display text-6xl font-semibold text-oak">270</span>
+                <span className="font-display text-6xl font-semibold text-oak">
+                  {price}
+                </span>
                 <span className="text-xl text-stone mb-2">€ / noć</span>
               </div>
-              <p className="text-stone text-sm mt-1">{t('priceCard.note')}</p>
-              <p className="text-stone/70 text-xs mt-2 italic">{t('priceCard.variablePriceNote')}</p>
+              <p className="text-stone text-sm mt-1">
+                {t('priceCard.note', { price, perPerson })}
+              </p>
+              <p className="text-stone/70 text-xs mt-2 italic">
+                {t('priceCard.variablePriceNote')}
+              </p>
             </div>
             <div className="bg-terracotta/10 border border-terracotta/20 rounded-card px-5 py-4 text-center">
               <p className="text-xs font-semibold uppercase tracking-wide text-terracotta mb-1">
                 {t('discountBadge.title')}
               </p>
-              <p className="font-display text-3xl font-semibold text-terracotta">−10%</p>
-              <p className="text-xs text-stone mt-1">{t('discountBadge.note')}</p>
+              <p className="font-display text-3xl font-semibold text-terracotta">
+                −{discountPercent}%
+              </p>
+              <p className="text-xs text-stone mt-1">
+                {t('discountBadge.note', { discounted })}
+              </p>
             </div>
           </div>
 
           {/* Quick stats */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8 pb-8 border-b border-stone-pale">
-            {rules.map(r => (
+            {rules.map((r) => (
               <div key={r.label} className="flex flex-col gap-1">
                 <div className="flex items-center gap-1.5 text-stone text-xs">
                   <span className="text-terracotta">{r.icon}</span>
@@ -79,7 +116,7 @@ export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {
               {t('includedTitle')}
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-              {included.map(item => (
+              {included.map((item) => (
                 <li key={item} className="flex items-center gap-2.5 text-sm text-oak">
                   <CheckCircle2 className="size-4 text-forest shrink-0" />
                   {item}
@@ -99,7 +136,12 @@ export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {
               {t('cta.description')}
             </p>
             <ul className="space-y-2 mb-8">
-              {[t('cta.benefits.noFees'), t('cta.benefits.directContact'), t('cta.benefits.flexibility'), t('cta.benefits.localTips')].map(item => (
+              {[
+                t('cta.benefits.noFees'),
+                t('cta.benefits.directContact'),
+                t('cta.benefits.flexibility'),
+                t('cta.benefits.localTips'),
+              ].map((item) => (
                 <li key={item} className="flex items-center gap-2 text-sm text-cream/90">
                   <CheckCircle2 className="size-4 shrink-0 text-cream" />
                   {item}
@@ -127,9 +169,15 @@ export async function Pricing({ bookingHref = '#rezervacije' }: PricingProps = {
         </div>
       </div>
 
-      {/* Disclaimer */}
+      {/* Disclaimer — sink s admin cijenama / booking.config */}
       <p className="mt-6 text-center text-xs text-stone-light">
-        {t('disclaimer')}
+        {t('disclaimer', {
+          price,
+          minNights,
+          cleaningFee,
+          discountNights,
+          discountPercent,
+        })}
       </p>
     </SectionWrapper>
   );

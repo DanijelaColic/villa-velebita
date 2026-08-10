@@ -112,7 +112,7 @@ export default function BookingTimeline({ bookings, onEditBooking }: Props) {
         <button
           onClick={() => setOffset((o) => o - 1)}
           className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors"
-          title="Previous month"
+          title="Prethodni mjesec"
         >
           <ChevronLeft size={18} />
         </button>
@@ -124,7 +124,7 @@ export default function BookingTimeline({ bookings, onEditBooking }: Props) {
         <button
           onClick={() => setOffset((o) => o + 1)}
           className="p-1.5 rounded-lg border border-gray-200 hover:bg-gray-50 text-gray-600 transition-colors"
-          title="Next month"
+          title="Sljedeći mjesec"
         >
           <ChevronRight size={18} />
         </button>
@@ -133,7 +133,7 @@ export default function BookingTimeline({ bookings, onEditBooking }: Props) {
             onClick={() => setOffset(0)}
             className="ml-1 text-xs text-primary border border-primary/30 hover:bg-primary/5 px-3 py-1.5 rounded-full transition-colors"
           >
-            Today
+            Danas
           </button>
         )}
 
@@ -141,7 +141,7 @@ export default function BookingTimeline({ bookings, onEditBooking }: Props) {
           {(['confirmed', 'pending', 'cancelled'] as const).map((s) => (
             <span key={s} className="flex items-center gap-1.5">
               <span className={clsx('w-2.5 h-2.5 rounded-sm', DOT_COLORS[s])} />
-              {s === 'confirmed' ? 'Confirmed' : s === 'pending' ? 'Pending' : 'Cancelled'}
+              {s === 'confirmed' ? 'Potvrđeno' : s === 'pending' ? 'Na čekanju' : 'Otkazano'}
             </span>
           ))}
         </div>
@@ -172,7 +172,7 @@ export default function BookingTimeline({ bookings, onEditBooking }: Props) {
               style={{ width: LABEL_W }}
               className="shrink-0 px-3 py-2 text-xs text-gray-400 font-medium border-r border-gray-100"
             >
-              Apartment
+              Apartman
             </div>
             {allDays.map((day, idx) => {
               const isToday = day.getTime() === today.getTime();
@@ -295,7 +295,7 @@ export default function BookingTimeline({ bookings, onEditBooking }: Props) {
       </div>
 
       <p className="text-xs text-gray-400 mt-3 text-center">
-        Click on a booking to edit · yellow = pending · blue = confirmed
+        Kliknite na rezervaciju za uređivanje · žuto = na čekanju · plavo = potvrđeno
       </p>
     </div>
   );

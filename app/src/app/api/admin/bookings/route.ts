@@ -5,6 +5,12 @@ import {
   getApartment,
 } from '@/modules/booking-admin/booking.config';
 import { parseLocalDate, diffDays, calculatePrice } from '@/modules/booking-admin/lib/dates';
+import {
+  applyBasePriceToApartment,
+  getBookingSettings,
+  getSpecialPricePeriods,
+  priceFeesFromSettings,
+} from '@/modules/cms/lib/get-booking-settings';
 
 // GET /api/admin/bookings — sve rezervacije
 export async function GET(request: NextRequest) {
@@ -43,8 +49,12 @@ export async function POST(request: NextRequest) {
     deposit_paid,
   } = body;
 
-  const apt = getApartment(apartment_slug);
-  if (!apt) return NextResponse.json({ error: 'Apartment not found' }, { status: 404 });
+  const aptBase = getApartment(apartment_slug);
+  if (!aptBase) return NextResponse.json({ error: 'Apartment not found' }, { status: 404 });
+
+  const settings = await getBookingSettings();
+  const apt = applyBasePriceToApartment(aptBase, settings.basePricePerNight);
+  const specialPeriods = await getSpecialPricePeriods();
 
   const checkInDate = parseLocalDate(check_in);
   const checkOutDate = parseLocalDate(check_out);
@@ -54,7 +64,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Check-out must be after check-in' }, { status: 400 });
   }
 
-  const priceData = calculatePrice(checkInDate, checkOutDate, apt);
+  const priceData = calculatePrice(
+    checkInDate,
+    checkOutDate,
+    apt,
+    specialPeriods,
+    priceFeesFromSettings(settings),
+  );
   const totalPrice = priceData.totalPrice;
   const deposit = priceData.deposit;
 

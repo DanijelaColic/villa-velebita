@@ -1,8 +1,23 @@
 import bwipjs from 'bwip-js/node';
 import QRCode from 'qrcode';
-import { RECIPIENT_NAME, RECIPIENT_IBAN } from '../booking.config';
+import {
+  RECIPIENT_NAME as DEFAULT_NAME,
+  RECIPIENT_IBAN as DEFAULT_IBAN,
+} from '../booking.config';
 
 const CURRENCY = 'EUR';
+
+export type BarcodeRecipient = {
+  name: string;
+  iban: string;
+};
+
+function resolveRecipient(recipient?: BarcodeRecipient): BarcodeRecipient {
+  return {
+    name: recipient?.name?.trim() || DEFAULT_NAME,
+    iban: recipient?.iban?.trim() || DEFAULT_IBAN,
+  };
+}
 
 function normalizeCroatian(str: string): string {
   const map: Record<string, string> = {
@@ -13,18 +28,24 @@ function normalizeCroatian(str: string): string {
 }
 
 /** HUB3 PDF417 2D barcode za hrvatske banke (m-zaba, m-keks, Erste, OTP...) */
-export function formatHUB3String(amount: number, guestName: string, reference: string): string {
+export function formatHUB3String(
+  amount: number,
+  guestName: string,
+  reference: string,
+  recipient?: BarcodeRecipient,
+): string {
   const amountCents = Math.round(amount * 100).toString();
   const normalizedPayer = normalizeCroatian(guestName);
+  const payee = resolveRecipient(recipient);
 
   return [
     'HRVHUB30',
     CURRENCY,
     amountCents,
     '', '', '',
-    RECIPIENT_NAME,
+    payee.name,
     '', '',
-    RECIPIENT_IBAN,
+    payee.iban,
     'HR00',
     reference,
     '',
@@ -34,15 +55,21 @@ export function formatHUB3String(amount: number, guestName: string, reference: s
 }
 
 /** EPC/SEPA QR za EU banke (Revolut, N26, Wise, SEPA banke) */
-export function formatEPCString(amount: number, guestName: string, reference: string): string {
+export function formatEPCString(
+  amount: number,
+  guestName: string,
+  reference: string,
+  recipient?: BarcodeRecipient,
+): string {
   const amountFormatted = `EUR${amount.toFixed(2)}`;
   const remittance = `${normalizeCroatian(guestName)} - ${reference}`.substring(0, 140);
+  const payee = resolveRecipient(recipient);
 
   return [
     'BCD', '002', '1', 'SCT',
     '',
-    RECIPIENT_NAME,
-    RECIPIENT_IBAN,
+    payee.name,
+    payee.iban,
     amountFormatted,
     '', '',
     remittance, '',
@@ -58,17 +85,25 @@ export async function generateHUB3Buffer(
   amount: number,
   guestName: string,
   reference: string,
+  recipient?: BarcodeRecipient,
 ): Promise<Buffer> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return (bwipjs as any).toBuffer({ ...PDF417_OPTS, text: formatHUB3String(amount, guestName, reference) });
+  return (bwipjs as any).toBuffer({
+    ...PDF417_OPTS,
+    text: formatHUB3String(amount, guestName, reference, recipient),
+  });
 }
 
 export async function generateEPCBuffer(
   amount: number,
   guestName: string,
   reference: string,
+  recipient?: BarcodeRecipient,
 ): Promise<Buffer> {
-  return QRCode.toBuffer(formatEPCString(amount, guestName, reference), QR_OPTS);
+  return QRCode.toBuffer(
+    formatEPCString(amount, guestName, reference, recipient),
+    QR_OPTS,
+  );
 }
 
 // ── Data URL verzije — za frontend prikaz ────────────────────────
@@ -77,8 +112,9 @@ export async function generateHUB3Barcode(
   amount: number,
   guestName: string,
   reference: string,
+  recipient?: BarcodeRecipient,
 ): Promise<string> {
-  const png = await generateHUB3Buffer(amount, guestName, reference);
+  const png = await generateHUB3Buffer(amount, guestName, reference, recipient);
   return `data:image/png;base64,${png.toString('base64')}`;
 }
 
@@ -86,6 +122,10 @@ export async function generateEPCQR(
   amount: number,
   guestName: string,
   reference: string,
+  recipient?: BarcodeRecipient,
 ): Promise<string> {
-  return QRCode.toDataURL(formatEPCString(amount, guestName, reference), QR_OPTS);
+  return QRCode.toDataURL(
+    formatEPCString(amount, guestName, reference, recipient),
+    QR_OPTS,
+  );
 }

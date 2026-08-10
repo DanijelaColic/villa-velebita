@@ -1,3 +1,4 @@
-import Page from '../../villa-plitvice/page';
+import Page, { generateMetadata } from '../../villa-plitvice/page';
 
+export { generateMetadata };
 export default Page;

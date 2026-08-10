@@ -7,15 +7,16 @@ import BookingCalendar from './BookingCalendar';
 import { formatDisplayDate, formatShortDate, formatDate, calculatePrice } from '../lib/dates';
 import {
   apartments,
-  RECIPIENT_IBAN,
-  RECIPIENT_NAME,
-  RECIPIENT_BIC,
-  RECIPIENT_BANK_NAME,
   DEPOSIT_PERCENT,
   BALANCE_DAYS_BEFORE_CHECK_IN,
   MIN_NIGHTS,
   LONG_STAY_DISCOUNT_NIGHTS,
   LONG_STAY_DISCOUNT_RATE,
+  RECIPIENT_IBAN,
+  RECIPIENT_NAME,
+  RECIPIENT_BIC,
+  RECIPIENT_BANK_NAME,
+  type SpecialPricePeriod,
 } from '../booking.config';
 
 const DEPOSIT_PCT_DISPLAY = Math.round(DEPOSIT_PERCENT * 100);
@@ -32,6 +33,13 @@ type FormData = {
   agreeRules: boolean;
 };
 
+export type PaymentDisplay = {
+  iban: string;
+  recipientName: string;
+  bic: string;
+  bankName: string;
+};
+
 type Props = {
   initialSlug?: string;
   /** API path — default '/api/bookings' */
@@ -40,6 +48,20 @@ type Props = {
   barcodeApiPath?: string;
   /** Custom rules text shown below the form */
   rulesText?: React.ReactNode;
+  /** CMS override — minimalni broj noći */
+  minNights?: number;
+  /** CMS override — osnovna cijena €/noć (oba sezona) */
+  basePricePerNight?: number;
+  /** CMS override — posebni periodi (blagdani…) */
+  specialPricePeriods?: SpecialPricePeriod[];
+  /** CMS override — čišćenje + dug boravak popust */
+  priceFees?: {
+    cleaningFee?: number;
+    longStayDiscountNights?: number;
+    longStayDiscountRate?: number;
+  };
+  /** CMS override — IBAN / primatelj (fallback na booking.config) */
+  payment?: PaymentDisplay;
 };
 
 export default function BookingWidget({
@@ -47,7 +69,29 @@ export default function BookingWidget({
   bookingsApiPath = '/api/bookings',
   barcodeApiPath = '/api/generate-barcode',
   rulesText,
+  minNights: minNightsProp,
+  basePricePerNight,
+  specialPricePeriods,
+  priceFees,
+  payment,
 }: Props) {
+  const payIban = payment?.iban ?? RECIPIENT_IBAN;
+  const payName = payment?.recipientName ?? RECIPIENT_NAME;
+  const payBic = payment?.bic ?? RECIPIENT_BIC;
+  const payBank = payment?.bankName ?? RECIPIENT_BANK_NAME;
+  const effectiveMinNights = minNightsProp ?? MIN_NIGHTS;
+  const discountNights = priceFees?.longStayDiscountNights ?? LONG_STAY_DISCOUNT_NIGHTS;
+  const discountRate = priceFees?.longStayDiscountRate ?? LONG_STAY_DISCOUNT_RATE;
+  const discountPercent = Math.round(discountRate * 100);
+
+  const pricedApartments = useMemo(() => {
+    if (basePricePerNight == null) return apartments;
+    return apartments.map((a) => ({
+      ...a,
+      priceOffSeason: basePricePerNight,
+      priceHighSeason: basePricePerNight,
+    }));
+  }, [basePricePerNight]);
   const locale = useLocale();
   const t = useTranslations('bookingWidget');
   const getNightsLabel = useCallback(
@@ -62,13 +106,13 @@ export default function BookingWidget({
     [t],
   );
   const selectedSlug = useMemo(() => {
-    const available = apartments.filter((a) => !a.fullyBooked);
+    const available = pricedApartments.filter((a) => !a.fullyBooked);
     const fromParam =
-      initialSlug && !apartments.find((a) => a.slug === initialSlug)?.fullyBooked
+      initialSlug && !pricedApartments.find((a) => a.slug === initialSlug)?.fullyBooked
         ? initialSlug
         : null;
     return fromParam ?? available[0]?.slug ?? '';
-  }, [initialSlug]);
+  }, [initialSlug, pricedApartments]);
 
   const successRef = useRef<HTMLDivElement>(null);
   const [checkIn, setCheckIn] = useState<Date | null>(null);
@@ -89,10 +133,16 @@ export default function BookingWidget({
     }
   }, [success]);
 
-  const selectedApartment = apartments.find((a) => a.slug === selectedSlug);
+  const selectedApartment = pricedApartments.find((a) => a.slug === selectedSlug);
   const priceData =
     checkIn && checkOut && selectedApartment
-      ? calculatePrice(checkIn, checkOut, selectedApartment)
+      ? calculatePrice(
+          checkIn,
+          checkOut,
+          selectedApartment,
+          specialPricePeriods,
+          priceFees,
+        )
       : null;
 
   const fetchBarcodes = useCallback(
@@ -271,17 +321,17 @@ export default function BookingWidget({
               </ul>
             </div>
 
-            {RECIPIENT_IBAN && (
+            {payIban && (
               <div className="text-xs bg-white border border-sand px-3 py-3 rounded-lg space-y-1.5 text-left text-muted leading-relaxed">
-                {RECIPIENT_NAME && (
-                  <p className="font-sans text-text font-medium text-sm">{RECIPIENT_NAME}</p>
+                {payName && (
+                  <p className="font-sans text-text font-medium text-sm">{payName}</p>
                 )}
-                <p className="font-mono">IBAN: {RECIPIENT_IBAN}</p>
+                <p className="font-mono">IBAN: {payIban}</p>
                 <p className="font-sans">
-                  {t('success.summary.bankLabel')}: {RECIPIENT_BANK_NAME}
+                  {t('success.summary.bankLabel')}: {payBank}
                 </p>
                 <p className="font-sans">
-                  BIC/SWIFT {RECIPIENT_BIC} ({t('success.summary.internationalPayments')})
+                  BIC/SWIFT {payBic} ({t('success.summary.internationalPayments')})
                 </p>
               </div>
             )}
@@ -389,7 +439,9 @@ export default function BookingWidget({
             onCheckOutSelect={setCheckOut}
             onReset={handleReset}
             bookingsApiPath={bookingsApiPath}
-            minNights={MIN_NIGHTS}
+            minNights={effectiveMinNights}
+            basePricePerNight={basePricePerNight}
+            specialPricePeriods={specialPricePeriods}
           />
         </div>
 
@@ -466,8 +518,8 @@ export default function BookingWidget({
               <div className="flex justify-between text-sm mb-1 gap-2">
                 <span className="text-muted">
                   {t('summary.discount', {
-                    nights: LONG_STAY_DISCOUNT_NIGHTS,
-                    percent: Math.round(LONG_STAY_DISCOUNT_RATE * 100),
+                    nights: discountNights,
+                    percent: discountPercent,
                   })}
                 </span>
                 <span className="text-forest font-medium shrink-0">- {priceData.discountAmount} €</span>

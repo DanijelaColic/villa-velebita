@@ -3,6 +3,7 @@ import {
   generateHUB3Barcode,
   generateEPCQR,
 } from '@/modules/booking-admin/lib/barcode';
+import { getPaymentSettings } from '@/modules/cms/lib/get-payment-settings';
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,9 +21,22 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Invalid amount' }, { status: 400 });
     }
 
+    const payment = await getPaymentSettings();
+    const recipient = { name: payment.recipientName, iban: payment.iban };
+
     const [hub3Result, epcResult] = await Promise.allSettled([
-      generateHUB3Barcode(parsedAmount, String(guestName), String(reference)),
-      generateEPCQR(parsedAmount, String(guestName), String(reference)),
+      generateHUB3Barcode(
+        parsedAmount,
+        String(guestName),
+        String(reference),
+        recipient,
+      ),
+      generateEPCQR(
+        parsedAmount,
+        String(guestName),
+        String(reference),
+        recipient,
+      ),
     ]);
 
     return NextResponse.json({
