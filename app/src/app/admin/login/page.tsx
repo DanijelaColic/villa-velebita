@@ -6,6 +6,9 @@ import { AppImage as Image } from '@/components/ui/AppImage';
 import { Loader2, Lock, Eye, EyeOff, AlertCircle } from 'lucide-react';
 import clsx from 'clsx';
 import { SITE_NAME, LOGO_PATH } from '@/modules/booking-admin/booking.config';
+import TurnstileWidget from '@/modules/booking-admin/components/admin/TurnstileWidget';
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? '';
 
 export default function AdminLoginPage() {
   const router = useRouter();
@@ -14,16 +17,29 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [shakeKey, setShakeKey] = useState(0);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+
+  const captchaEnabled = Boolean(TURNSTILE_SITE_KEY);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError('');
 
+    if (captchaEnabled && !turnstileToken) {
+      setError('Potvrdite CAPTCHA provjeru.');
+      setShakeKey((k) => k + 1);
+      setLoading(false);
+      return;
+    }
+
     const res = await fetch('/api/admin/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password }),
+      body: JSON.stringify({
+        password,
+        turnstileToken: turnstileToken ?? undefined,
+      }),
     });
 
     if (res.ok) {
@@ -34,6 +50,7 @@ export default function AdminLoginPage() {
       setError(data.error ?? 'Netočna lozinka');
       setShakeKey((k) => k + 1);
       setPassword('');
+      setTurnstileToken(null);
     }
     setLoading(false);
   };
@@ -100,6 +117,14 @@ export default function AdminLoginPage() {
             </div>
           </div>
 
+          {captchaEnabled && (
+            <TurnstileWidget
+              siteKey={TURNSTILE_SITE_KEY}
+              onToken={setTurnstileToken}
+              resetSignal={shakeKey}
+            />
+          )}
+
           {error && (
             <div className="flex items-center gap-2 text-red-600 bg-red-50 border border-red-200 rounded-xl px-3 py-2.5 text-sm mb-4">
               <AlertCircle size={15} className="shrink-0" />
@@ -109,7 +134,7 @@ export default function AdminLoginPage() {
 
           <button
             type="submit"
-            disabled={loading || !password}
+            disabled={loading || !password || (captchaEnabled && !turnstileToken)}
             className="w-full bg-terracotta hover:bg-terracotta-light disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium py-3 rounded-full transition-colors text-sm flex items-center justify-center gap-2"
           >
             {loading && <Loader2 size={15} className="animate-spin" />}
