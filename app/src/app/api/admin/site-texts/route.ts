@@ -9,7 +9,7 @@ import { getSiteTextsForAdmin } from '@/modules/cms/lib/get-site-texts';
 import type { AppLocale } from '@/i18n/routing';
 
 export async function GET(request: NextRequest) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -26,7 +26,7 @@ type UpsertItem = { key: string; locale: string; value: string };
 
 /** PUT body: { items: [{ key, locale, value }] } — upsert ili brisanje praznih. */
 export async function PUT(request: NextRequest) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

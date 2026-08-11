@@ -5,7 +5,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   verifyPassword,
-  getAdminToken,
+  createAdminSessionToken,
   ADMIN_COOKIE_NAME,
   ADMIN_COOKIE_MAX_AGE,
 } from 'MODULE_ROOT/lib/admin-auth';
@@ -16,6 +16,7 @@ import {
   getClientIp,
   recordLoginFailure,
 } from 'MODULE_ROOT/lib/login-rate-limit';
+import { verifyTurnstileToken } from 'MODULE_ROOT/lib/verify-turnstile';
 
 export async function DELETE() {
   const response = NextResponse.json({ success: true });
@@ -38,11 +39,18 @@ export async function POST(request: NextRequest) {
   }
 
   let password: unknown;
+  let turnstileToken: unknown;
   try {
     const body = await request.json();
     password = body?.password;
+    turnstileToken = body?.turnstileToken;
   } catch {
     return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
+  }
+
+  const captcha = await verifyTurnstileToken(turnstileToken, ip);
+  if (!captcha.ok) {
+    return NextResponse.json({ error: captcha.error }, { status: 400 });
   }
 
   if (typeof password !== 'string' || !verifyPassword(password)) {
@@ -61,8 +69,16 @@ export async function POST(request: NextRequest) {
 
   clearLoginFailures(ip);
 
+  const session = await createAdminSessionToken(ADMIN_COOKIE_MAX_AGE);
+  if (!session) {
+    return NextResponse.json(
+      { error: 'Admin session is not configured (missing ADMIN_TOKEN).' },
+      { status: 500 },
+    );
+  }
+
   const response = NextResponse.json({ success: true });
-  response.cookies.set(ADMIN_COOKIE_NAME, getAdminToken(), {
+  response.cookies.set(ADMIN_COOKIE_NAME, session, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',

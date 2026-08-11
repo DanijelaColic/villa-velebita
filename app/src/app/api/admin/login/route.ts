@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import {
   verifyPassword,
-  getAdminToken,
+  createAdminSessionToken,
   ADMIN_COOKIE_NAME,
   ADMIN_COOKIE_MAX_AGE,
 } from '@/modules/booking-admin/lib/admin-auth';
@@ -66,8 +66,16 @@ export async function POST(request: NextRequest) {
 
   clearLoginFailures(ip);
 
+  const session = await createAdminSessionToken(ADMIN_COOKIE_MAX_AGE);
+  if (!session) {
+    return NextResponse.json(
+      { error: 'Admin session nije konfigurirana (nedostaje ADMIN_TOKEN).' },
+      { status: 500 },
+    );
+  }
+
   const response = NextResponse.json({ success: true });
-  response.cookies.set(ADMIN_COOKIE_NAME, getAdminToken(), {
+  response.cookies.set(ADMIN_COOKIE_NAME, session, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',

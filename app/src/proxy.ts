@@ -1,11 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import createMiddleware from 'next-intl/middleware';
 import { ADMIN_COOKIE_NAME } from '@/modules/booking-admin/booking.config';
+import { verifyAdminSessionToken } from '@/modules/booking-admin/lib/admin-session';
 import { routing } from '@/i18n/routing';
 
 const handleI18nRouting = createMiddleware(routing);
 
-export function proxy(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isMetadataRoute =
     pathname === '/icon' ||
@@ -22,9 +23,9 @@ export function proxy(request: NextRequest) {
 
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
     const cookie = request.cookies.get(ADMIN_COOKIE_NAME);
-    const expected = process.env.ADMIN_TOKEN;
+    const ok = await verifyAdminSessionToken(cookie?.value);
 
-    if (!expected || !cookie || cookie.value !== expected) {
+    if (!ok) {
       const loginUrl = new URL('/admin/login', request.url);
       loginUrl.searchParams.set('redirect', pathname);
       return NextResponse.redirect(loginUrl);
@@ -33,8 +34,8 @@ export function proxy(request: NextRequest) {
 
   if (pathname === '/admin/login') {
     const cookie = request.cookies.get(ADMIN_COOKIE_NAME);
-    const expected = process.env.ADMIN_TOKEN;
-    if (expected && cookie?.value === expected) {
+    const ok = await verifyAdminSessionToken(cookie?.value);
+    if (ok) {
       return NextResponse.redirect(new URL('/admin', request.url));
     }
   }

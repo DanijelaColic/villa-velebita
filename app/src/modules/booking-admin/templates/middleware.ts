@@ -6,15 +6,16 @@
  */
 import { NextRequest, NextResponse } from 'next/server';
 import { ADMIN_COOKIE_NAME } from 'MODULE_ROOT/booking.config';
+import { verifyAdminSessionToken } from 'MODULE_ROOT/lib/admin-session';
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   if (pathname.startsWith('/admin') && pathname !== '/admin/login') {
     const cookie = request.cookies.get(ADMIN_COOKIE_NAME);
-    const expected = process.env.ADMIN_TOKEN;
+    const ok = await verifyAdminSessionToken(cookie?.value);
 
-    if (!expected || !cookie || cookie.value !== expected) {
+    if (!ok) {
       const loginUrl = new URL('/admin/login', request.url);
       loginUrl.searchParams.set('redirect', pathname);
       return NextResponse.redirect(loginUrl);
@@ -23,8 +24,8 @@ export function middleware(request: NextRequest) {
 
   if (pathname === '/admin/login') {
     const cookie = request.cookies.get(ADMIN_COOKIE_NAME);
-    const expected = process.env.ADMIN_TOKEN;
-    if (expected && cookie?.value === expected) {
+    const ok = await verifyAdminSessionToken(cookie?.value);
+    if (ok) {
       return NextResponse.redirect(new URL('/admin', request.url));
     }
   }

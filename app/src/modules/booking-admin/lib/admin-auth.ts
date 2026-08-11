@@ -2,8 +2,14 @@ import { createHash, timingSafeEqual } from 'node:crypto';
 import { cookies } from 'next/headers';
 import { NextRequest } from 'next/server';
 import { ADMIN_COOKIE_NAME, ADMIN_COOKIE_MAX_AGE } from '../booking.config';
+import { verifyAdminSessionToken } from './admin-session';
 
 export { ADMIN_COOKIE_NAME, ADMIN_COOKIE_MAX_AGE };
+export {
+  createAdminSessionToken,
+  getAdminSessionSecret,
+  verifyAdminSessionToken,
+} from './admin-session';
 
 /** Usporedba preko SHA-256 + timingSafeEqual (ista duljina digest-a; bez curenja duljine lozinke). */
 export function verifyPassword(input: string): boolean {
@@ -15,6 +21,7 @@ export function verifyPassword(input: string): boolean {
   return timingSafeEqual(a, b);
 }
 
+/** @deprecated Koristi se samo kao fallback secret za potpis sesije; ne stavlja se u cookie. */
 export function getAdminToken(): string {
   return process.env.ADMIN_TOKEN ?? '';
 }
@@ -23,13 +30,13 @@ export function getAdminToken(): string {
 export async function isAdminAuthenticated(): Promise<boolean> {
   const cookieStore = await cookies();
   const cookie = cookieStore.get(ADMIN_COOKIE_NAME);
-  const token = getAdminToken();
-  return !!token && cookie?.value === token;
+  return verifyAdminSessionToken(cookie?.value);
 }
 
-/** Provjera u API Route Handlerima (sinkrona, iz NextRequest) */
-export function isAdminAuthenticatedFromRequest(request: NextRequest): boolean {
+/** Provjera u API Route Handlerima (iz NextRequest) */
+export async function isAdminAuthenticatedFromRequest(
+  request: NextRequest,
+): Promise<boolean> {
   const cookie = request.cookies.get(ADMIN_COOKIE_NAME);
-  const token = getAdminToken();
-  return !!token && cookie?.value === token;
+  return verifyAdminSessionToken(cookie?.value);
 }

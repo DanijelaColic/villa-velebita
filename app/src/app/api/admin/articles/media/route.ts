@@ -21,7 +21,7 @@ function getExtension(fileName: string) {
 
 /** POST multipart: file — upload naslovnice u cms-media. */
 export async function POST(request: NextRequest) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
 
 /** DELETE JSON: { storage_path } — ukloni datoteku iz storagea. */
 export async function DELETE(request: NextRequest) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

@@ -14,7 +14,7 @@ type Params = { params: Promise<{ id: string }> };
 
 // PATCH /api/admin/bookings/[id]
 export async function PATCH(request: NextRequest, { params }: Params) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -103,7 +103,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 
 // DELETE /api/admin/bookings/[id]
 export async function DELETE(request: NextRequest, { params }: Params) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 

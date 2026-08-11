@@ -9,7 +9,7 @@ import { getPageSeoForAdmin } from '@/modules/cms/lib/get-page-seo';
 import type { AppLocale } from '@/i18n/routing';
 
 export async function GET(request: NextRequest) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -40,7 +40,7 @@ function clean(value: unknown): string | null {
 
 /** PUT body: { items: [...] } — upsert; sva prazna polja → delete reda. */
 export async function PUT(request: NextRequest) {
-  if (!isAdminAuthenticatedFromRequest(request)) {
+  if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
