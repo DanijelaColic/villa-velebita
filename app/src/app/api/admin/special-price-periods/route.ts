@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 import {
   getDefaultSpecialPricePeriods,
   getSpecialPricePeriods,
@@ -38,6 +40,7 @@ export async function PUT(request: NextRequest) {
 
   try {
     const saved = await saveSpecialPricePeriods(parsed.data);
+    revalidateCmsTag(CMS_CACHE_TAGS.specialPricePeriods);
     return NextResponse.json({
       periods: saved,
       defaults: getDefaultSpecialPricePeriods(),

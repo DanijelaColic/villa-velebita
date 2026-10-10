@@ -1,3 +1,5 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { createServiceClient } from '@/lib/supabase';
 import type { AppLocale } from '@/i18n/routing';
 import { getMessagesForLocale, getValidLocale } from '@/i18n/messages';
@@ -11,6 +13,10 @@ import { NEWS_HUB_BY_LOCALE } from '../news-copy';
 import { GUIDE_HUB_BY_LOCALE } from '@/modules/seo/guides/guides-content';
 import { getMessagePathValue } from './get-site-texts';
 import type { PageSeoFields } from '../types';
+import {
+  CMS_CACHE_REVALIDATE_SECONDS,
+  CMS_CACHE_TAGS,
+} from './cache-tags';
 
 export type PageSeoOverride = PageSeoFields;
 
@@ -90,19 +96,18 @@ export function getDefaultPageSeo(
   };
 }
 
-export async function getPageSeoOverride(
-  locale: string,
-  pageKey: EditablePageSeoKey | string,
+async function fetchPageSeoOverride(
+  locale: AppLocale,
+  pageKey: string,
 ): Promise<PageSeoOverride | null> {
   if (!EDITABLE_PAGE_SEO_KEY_SET.has(pageKey)) return null;
 
-  const appLocale = getValidLocale(locale);
   const supabase = createServiceClient();
   const { data, error } = await supabase
     .from('page_seo')
     .select('title, description, og_title, og_description, og_image_alt')
     .eq('page_key', pageKey)
-    .eq('locale', appLocale)
+    .eq('locale', locale)
     .maybeSingle();
 
   if (error) {
@@ -124,6 +129,27 @@ export async function getPageSeoOverride(
     og_image_alt: data.og_image_alt?.trim() || null,
   };
 }
+
+const loadPageSeoOverride = unstable_cache(
+  async (locale: AppLocale, pageKey: string) =>
+    fetchPageSeoOverride(locale, pageKey),
+  ['cms-page-seo'],
+  {
+    tags: [CMS_CACHE_TAGS.pageSeo],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+// React.cache (request) + unstable_cache (cross-request).
+export const getPageSeoOverride = cache(
+  async function getPageSeoOverride(
+    locale: string,
+    pageKey: EditablePageSeoKey | string,
+  ): Promise<PageSeoOverride | null> {
+    if (!EDITABLE_PAGE_SEO_KEY_SET.has(pageKey)) return null;
+    return loadPageSeoOverride(getValidLocale(locale), pageKey);
+  },
+);
 
 /** Spoji defaults s DB overrideom (prazna override polja → default). */
 export function mergePageSeo(

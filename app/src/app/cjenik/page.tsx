@@ -15,6 +15,8 @@ import { getBookingSettings } from '@/modules/cms/lib/get-booking-settings';
 
 const BASE_URL = 'https://villavelebita.hr';
 const DEFAULT_LOCALE = 'hr';
+// Module-scope — izbjegava request-time Date u RSC renderu.
+const OFFER_VALID_FROM = new Date().toISOString();
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -63,7 +65,7 @@ export default async function CjenikPage() {
       maxValue: villa.capacity,
     },
     eligibleCustomerType: 'https://schema.org/BusinessAudience',
-    validFrom: new Date().toISOString(),
+    validFrom: OFFER_VALID_FROM,
     description: `Flat rate ${settings.basePricePerNight} EUR per night with ${
       settings.longStayDiscountPercent
     }% discount for stays of ${settings.longStayDiscountNights}+ nights.`,

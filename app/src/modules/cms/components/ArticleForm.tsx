@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { AppImage } from '@/components/ui/AppImage';
 import type { AppLocale } from '@/i18n/routing';
 import { CMS_LOCALES } from '@/modules/cms/constants';
-import { getCmsMediaPublicUrl } from '@/modules/cms/lib/get-articles';
+import { getCmsMediaPublicUrl } from '@/modules/cms/lib/cms-media-url';
 import { slugify } from '@/modules/cms/lib/slug';
 import type {
   ArticleStatus,

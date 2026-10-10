@@ -1,5 +1,11 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { createServiceClient } from '@/lib/supabase';
 import type { GalleryCategoryKey } from '@/lib/gallery-categories';
+import {
+  CMS_CACHE_REVALIDATE_SECONDS,
+  CMS_CACHE_TAGS,
+} from '@/modules/cms/lib/cache-tags';
 
 export type GalleryItem = {
   id: string;
@@ -14,7 +20,7 @@ export type GalleryItem = {
 
 export const GALLERY_BUCKET = 'gallery-media';
 
-export async function getGalleryItems(): Promise<GalleryItem[]> {
+async function fetchGalleryItems(): Promise<GalleryItem[]> {
   const supabase = createServiceClient();
   const { data, error } = await supabase
     .from('gallery_items')
@@ -29,6 +35,22 @@ export async function getGalleryItems(): Promise<GalleryItem[]> {
 
   return (data ?? []) as GalleryItem[];
 }
+
+const loadGalleryItems = unstable_cache(
+  async () => fetchGalleryItems(),
+  ['cms-gallery-items'],
+  {
+    tags: [CMS_CACHE_TAGS.gallery],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+// React.cache (request) + unstable_cache (cross-request).
+export const getGalleryItems = cache(async function getGalleryItems(): Promise<
+  GalleryItem[]
+> {
+  return loadGalleryItems();
+});
 
 export function getPublicMediaUrl(storagePath: string) {
   const supabase = createServiceClient();

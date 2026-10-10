@@ -1,27 +1,24 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { createServiceClient } from '@/lib/supabase';
 import type { AppLocale } from '@/i18n/routing';
 import { routing } from '@/i18n/routing';
-import { CMS_MEDIA_BUCKET } from '../constants';
 import type {
   ArticleListItem,
   PublicArticle,
   TipTapDoc,
 } from '../types';
+import {
+  CMS_CACHE_REVALIDATE_SECONDS,
+  CMS_CACHE_TAGS,
+} from './cache-tags';
+
+export { getCmsMediaPublicUrl } from './cms-media-url';
 
 function normalizeLocale(locale: string): AppLocale {
   return (routing.locales as readonly string[]).includes(locale)
     ? (locale as AppLocale)
     : routing.defaultLocale;
-}
-
-export function getCmsMediaPublicUrl(storagePath: string | null | undefined): string | null {
-  if (!storagePath) return null;
-  if (storagePath.startsWith('/') || storagePath.startsWith('http')) {
-    return storagePath;
-  }
-  const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  if (!baseUrl) return null;
-  return `${baseUrl}/storage/v1/object/public/${CMS_MEDIA_BUCKET}/${encodeURIComponent(storagePath)}`;
 }
 
 type ArticleRow = {
@@ -58,11 +55,9 @@ function pickTranslation(
   return null;
 }
 
-/** Objavljeni članci za listu (locale + HR fallback naslova). */
-export async function getPublishedArticles(
-  locale: string,
+async function fetchPublishedArticles(
+  locale: AppLocale,
 ): Promise<ArticleListItem[]> {
-  const appLocale = normalizeLocale(locale);
   const supabase = createServiceClient();
 
   const { data, error } = await supabase
@@ -82,7 +77,7 @@ export async function getPublishedArticles(
 
   return rows
     .map((row) => {
-      const translation = pickTranslation(row.translations, appLocale);
+      const translation = pickTranslation(row.translations, locale);
       if (!translation) return null;
       return {
         id: row.id,
@@ -95,6 +90,24 @@ export async function getPublishedArticles(
     })
     .filter((item): item is ArticleListItem => item !== null);
 }
+
+const loadPublishedArticles = unstable_cache(
+  async (locale: AppLocale) => fetchPublishedArticles(locale),
+  ['cms-published-articles'],
+  {
+    tags: [CMS_CACHE_TAGS.articles],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+/** Objavljeni članci za listu (locale + HR fallback naslova). */
+export const getPublishedArticles = cache(
+  async function getPublishedArticles(
+    locale: string,
+  ): Promise<ArticleListItem[]> {
+    return loadPublishedArticles(normalizeLocale(locale));
+  },
+);
 
 /** Jedan članak po slug + locale (fallback na HR). */
 export async function getArticleBySlug(
@@ -155,8 +168,7 @@ export async function getPublishedArticleBySlug(
   return rest;
 }
 
-/** Slugovi za sitemap. */
-export async function getPublishedArticleSlugs(): Promise<string[]> {
+async function fetchPublishedArticleSlugs(): Promise<string[]> {
   const supabase = createServiceClient();
   const { data, error } = await supabase
     .from('articles')
@@ -170,3 +182,19 @@ export async function getPublishedArticleSlugs(): Promise<string[]> {
 
   return (data ?? []).map((row) => row.slug as string);
 }
+
+const loadPublishedArticleSlugs = unstable_cache(
+  async () => fetchPublishedArticleSlugs(),
+  ['cms-published-article-slugs'],
+  {
+    tags: [CMS_CACHE_TAGS.articles],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+/** Slugovi za sitemap. */
+export const getPublishedArticleSlugs = cache(
+  async function getPublishedArticleSlugs(): Promise<string[]> {
+    return loadPublishedArticleSlugs();
+  },
+);

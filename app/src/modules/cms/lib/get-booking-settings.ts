@@ -1,3 +1,5 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { createServiceClient } from '@/lib/supabase';
 import {
   MIN_NIGHTS as CONFIG_MIN_NIGHTS,
@@ -9,6 +11,10 @@ import {
   type SpecialPricePeriod,
 } from '@/modules/booking-admin/booking.config';
 import type { Apartment } from '@/modules/booking-admin/types';
+import {
+  CMS_CACHE_REVALIDATE_SECONDS,
+  CMS_CACHE_TAGS,
+} from './cache-tags';
 
 export type { SpecialPricePeriod };
 
@@ -137,8 +143,7 @@ const SETTINGS_KEYS = [
   BOOKING_SETTING_KEYS.longStayPercent,
 ] as const;
 
-/** Učitaj postavke iz DB-a (fallback na booking.config). */
-export async function getBookingSettings(): Promise<BookingSettings> {
+async function fetchBookingSettings(): Promise<BookingSettings> {
   const defaults = getDefaultBookingSettings();
 
   try {
@@ -153,7 +158,9 @@ export async function getBookingSettings(): Promise<BookingSettings> {
       return defaults;
     }
 
-    const map = new Map((data ?? []).map((row) => [row.key as string, row.value as string]));
+    const map = new Map(
+      (data ?? []).map((row) => [row.key as string, row.value as string]),
+    );
 
     const percent = Math.round(
       parseNonNegativeNumber(
@@ -190,12 +197,21 @@ export async function getBookingSettings(): Promise<BookingSettings> {
   }
 }
 
-/**
- * Posebni periodi iz DB-a.
- * Nema retka → fallback na SPECIAL_PRICE_PERIODS u kodu.
- * Prazan JSON array → namjerno bez perioda.
- */
-export async function getSpecialPricePeriods(): Promise<SpecialPricePeriod[]> {
+const loadBookingSettings = unstable_cache(
+  async () => fetchBookingSettings(),
+  ['cms-booking-settings'],
+  {
+    tags: [CMS_CACHE_TAGS.bookingSettings],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+/** Učitaj postavke iz DB-a (fallback na booking.config). */
+export const getBookingSettings = cache(async function getBookingSettings(): Promise<BookingSettings> {
+  return loadBookingSettings();
+});
+
+async function fetchSpecialPricePeriods(): Promise<SpecialPricePeriod[]> {
   const defaults = getDefaultSpecialPricePeriods();
 
   try {
@@ -220,6 +236,26 @@ export async function getSpecialPricePeriods(): Promise<SpecialPricePeriod[]> {
     return defaults;
   }
 }
+
+const loadSpecialPricePeriods = unstable_cache(
+  async () => fetchSpecialPricePeriods(),
+  ['cms-special-price-periods'],
+  {
+    tags: [CMS_CACHE_TAGS.specialPricePeriods],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+/**
+ * Posebni periodi iz DB-a.
+ * Nema retka → fallback na SPECIAL_PRICE_PERIODS u kodu.
+ * Prazan JSON array → namjerno bez perioda.
+ */
+export const getSpecialPricePeriods = cache(
+  async function getSpecialPricePeriods(): Promise<SpecialPricePeriod[]> {
+    return loadSpecialPricePeriods();
+  },
+);
 
 /** Apartman s override cijenom iz postavki (oba sezona = flat rate). */
 export function applyBasePriceToApartment(

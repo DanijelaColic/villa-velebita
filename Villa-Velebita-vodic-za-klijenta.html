@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8" />
+  <title>Villa Velebita — vodič za korištenje web stranice</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 16mm 16mm 18mm 16mm;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: #2c241c;
+      font-family: "Segoe UI", "Liberation Sans", Calibri, Arial, sans-serif;
+      font-size: 10.5pt;
+      line-height: 1.45;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: Georgia, "Palatino Linotype", "Times New Roman", serif;
+      color: #3d2e22;
+      page-break-after: avoid;
+      line-height: 1.25;
+    }
+
+    a { color: #b45a3c; text-decoration: none; }
+
+    .cover {
+      min-height: 240mm;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 18mm 8mm 12mm;
+      page-break-after: always;
+    }
+
+    .cover-kicker {
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      font-size: 9pt;
+      color: #b45a3c;
+      font-weight: 600;
+      margin: 0 0 14px;
+    }
+
+    .cover h1 {
+      font-size: 32pt;
+      margin: 0 0 8px;
+      font-weight: 600;
+    }
+
+    .cover h1 span { color: #b45a3c; }
+
+    .cover-sub {
+      font-size: 14pt;
+      color: #5c5046;
+      margin: 0 0 28px;
+    }
+
+    .cover-rule {
+      width: 64px;
+      height: 3px;
+      background: #b45a3c;
+      margin: 0 0 28px;
+    }
+
+    .cover-meta {
+      font-size: 10.5pt;
+      color: #3d2e22;
+      line-height: 1.7;
+    }
+
+    .cover-meta strong { display: inline-block; min-width: 118px; color: #5c5046; font-weight: 600; }
+
+    .cover-note {
+      margin-top: 42px;
+      padding: 16px 18px;
+      border-left: 4px solid #b45a3c;
+      background: #faf6f1;
+      max-width: 150mm;
+    }
+
+    nav.toc { page-break-after: always; }
+
+    nav.toc h2 { margin-top: 0; }
+
+    nav.toc ol {
+      padding-left: 22px;
+    }
+
+    nav.toc li { margin: 7px 0; }
+
+    h2 {
+      font-size: 16pt;
+      margin: 22px 0 10px;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #e6d9cc;
+    }
+
+    h3 {
+      font-size: 12.5pt;
+      margin: 16px 0 8px;
+      color: #b45a3c;
+    }
+
+    h4 {
+      font-size: 11pt;
+      margin: 12px 0 6px;
+    }
+
+    p { margin: 0 0 8px; }
+
+    ul, ol { margin: 0 0 10px; padding-left: 18px; }
+    li { margin: 3px 0; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 14px;
+      font-size: 9.7pt;
+      page-break-inside: auto;
+    }
+
+    thead { display: table-header-group; }
+
+    th {
+      text-align: left;
+      background: #3d2e22;
+      color: #fff;
+      font-weight: 600;
+      padding: 7px 8px;
+    }
+
+    td {
+      padding: 6px 8px;
+      border-bottom: 1px solid #eadfd4;
+      vertical-align: top;
+    }
+
+    tr:nth-child(even) td { background: #faf6f1; }
+
+    .box {
+      background: #faf6f1;
+      border: 1px solid #eadfd4;
+      padding: 10px 12px;
+      margin: 8px 0 12px;
+      page-break-inside: avoid;
+    }
+
+    .warn {
+      background: #fff6f2;
+      border: 1px solid #e8c4b6;
+      border-left: 4px solid #b45a3c;
+      padding: 10px 12px;
+      margin: 8px 0 12px;
+      page-break-inside: avoid;
+    }
+
+    .tip {
+      background: #f3f7f2;
+      border: 1px solid #c9dcc4;
+      border-left: 4px solid #5a7a4e;
+      padding: 10px 12px;
+      margin: 8px 0 12px;
+      page-break-inside: avoid;
+    }
+
+    .muted { color: #5c5046; }
+
+    .section { page-break-inside: avoid; }
+
+    code {
+      font-family: "Cascadia Mono", "Consolas", monospace;
+      font-size: 9.2pt;
+      background: #f4eee6;
+      padding: 1px 4px;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 9pt;
+      color: #7a6e64;
+      border-top: 1px solid #eadfd4;
+      padding-top: 10px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 16px;
+      margin-bottom: 10px;
+    }
+
+    .card {
+      border: 1px solid #eadfd4;
+      padding: 10px 12px;
+      page-break-inside: avoid;
+    }
+
+    .card strong { display: block; margin-bottom: 4px; color: #3d2e22; }
+  </style>
+</head>
+<body>
+
+  <section class="cover">
+    <p class="cover-kicker">Predaja web stranice</p>
+    <h1>Villa <span>Velebita</span></h1>
+    <p class="cover-sub">Vodič za korištenje web stranice i admin panela</p>
+    <div class="cover-rule"></div>
+    <p class="cover-meta">
+      <strong>Web</strong> https://villavelebita.hr<br>
+      <strong>Admin</strong> https://villavelebita.hr/admin<br>
+      <strong>Jezici</strong> hrvatski, engleski, njemački, talijanski<br>
+      <strong>Datum</strong> kolovoz 2026.
+    </p>
+    <div class="cover-note">
+      Ovaj vodič namijenjen je vlasnicima vile. Objašnjava što gosti vide na stranici,
+      kako radi rezervacija i što se uređuje u admin panelu — bez tehničkog žargona.
+    </div>
+  </section>
+
+  <nav class="toc">
+    <h2>Sadržaj</h2>
+    <ol>
+      <li>Javna web stranica</li>
+      <li>Kako gosti rezerviraju</li>
+      <li>Admin panel — prijava</li>
+      <li>Rezervacije</li>
+      <li>Galerija</li>
+      <li>Novosti</li>
+      <li>Cijene</li>
+      <li>Tekstovi</li>
+      <li>SEO</li>
+      <li>Što se ne mijenja u adminu</li>
+      <li>Česte situacije</li>
+      <li>Sigurnost</li>
+    </ol>
+  </nav>
+
+  <h2>1. Javna web stranica</h2>
+  <p>
+    Adresa: <a href="https://villavelebita.hr">https://villavelebita.hr</a>
+  </p>
+  <p>
+    Stranica je na <strong>četiri jezika</strong>: hrvatski, engleski, njemački i talijanski.
+    Hrvatski je zadani (bez prefiksa u adresi). Ostali jezici su <code>/en</code>, <code>/de</code> i <code>/it</code>.
+    Gost bira jezik u gornjem desnom kutu.
+  </p>
+
+  <h3>Glavne stranice (izbornik)</h3>
+  <table>
+    <thead>
+      <tr><th>Stranica</th><th>Adresa</th><th>Što gost vidi</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Početna</td><td>/</td><td>Hero, kratki uvodi, recenzije, kalendar rezervacije, kontakt</td></tr>
+      <tr><td>Smještaj</td><td>/smjestaj</td><td>Detaljan opis vile (155 m², 3 etaže, do 9 gostiju)</td></tr>
+      <tr><td>Galerija</td><td>/galerija</td><td>Slike i videi po kategorijama</td></tr>
+      <tr><td>Sadržaji</td><td>/sadrzaji</td><td>Jacuzzi, kuhinja, parking, WiFi, roštilj itd.</td></tr>
+      <tr><td>Cjenik</td><td>/cjenik</td><td>Cijena po noći, čišćenje, popust, posebni periodi</td></tr>
+      <tr><td>Novosti</td><td>/novosti</td><td>Vaši članci (objavljeni iz admina)</td></tr>
+      <tr><td>Rezervacija</td><td>/booking</td><td>Kalendar + forma za upit</td></tr>
+      <tr><td>Kontakt</td><td>/#kontakt</td><td>Adresa, telefoni, e-mailovi, karta, kontakt forma</td></tr>
+    </tbody>
+  </table>
+  <p>U podnožju su još <strong>Lokacija</strong> (<code>/lokacija</code>) i <strong>Česta pitanja</strong> (<code>/faq</code>).</p>
+
+  <h3>SEO / marketinške stranice</h3>
+  <p>
+    Ove stranice pomažu da vas gosti nađu na Googleu. <strong>Sadržaj vodiča i većine landing stranica nije u adminu</strong>
+    — mijenja se preko izrade stranice. U adminu možete mijenjati SEO naslove (poglavlje 9).
+  </p>
+  <ul>
+    <li><code>/vodic</code> — vodiči za goste (što posjetiti, aktivnosti, obiteljski odmor, koliko dana za Plitvice)</li>
+    <li><code>/novosti</code> — vaše objave</li>
+    <li><code>/smjestaj-plitvicka-jezera</code></li>
+    <li><code>/kuca-za-odmor-plitvice</code></li>
+    <li><code>/villa-jacuzzi-plitvice</code></li>
+    <li><code>/smjestaj-za-9-osoba-plitvice</code></li>
+    <li><code>/villa-plitvice</code> — landing za „Villa Plitvice”</li>
+  </ul>
+
+  <h3>Kontakt na stranici</h3>
+  <div class="grid-2">
+    <div class="card">
+      <strong>Adresa</strong>
+      Rudopolje 124, 53223 Vrhovine
+    </div>
+    <div class="card">
+      <strong>Check-in / check-out</strong>
+      14:00 / 10:00
+    </div>
+    <div class="card">
+      <strong>Ivana</strong>
+      095 750 3811<br>
+      Ivana.cacic485@gmail.com
+    </div>
+    <div class="card">
+      <strong>Ivica</strong>
+      091 929 5907<br>
+      Ivica.cacic485@gmail.com
+    </div>
+  </div>
+  <p>Društvene mreže (Facebook i Instagram) povezane su u podnožju stranice.</p>
+  <div class="box">
+    Kontakt forma šalje poruku na vaš e-mail. To <strong>nije rezervacija</strong> —
+    rezervacija ide isključivo preko kalendara.
+  </div>
+
+  <h2>2. Kako gosti rezerviraju</h2>
+  <ol>
+    <li>Gost odabere datume na kalendaru (zauzeti dani su već blokirani).</li>
+    <li>Vidi cijenu: noćenja + završno čišćenje, plus popust za duži boravak, plus posebna cijena ako padaju blagdani.</li>
+    <li>Unese ime, e-mail, telefon, broj gostiju i napomenu; prihvati kućni red.</li>
+    <li>Pošalje <strong>upit</strong>. Status u adminu: <strong>Na čekanju</strong>.</li>
+  </ol>
+
+  <h3>Što se dogodi odmah</h3>
+  <ul>
+    <li>Gost dobije e-mail s podacima boravka, iznosom za uplatu, IBAN-om, <strong>HUB3 barkodom</strong> (hrvatske banke) i <strong>SEPA QR</strong> (strani gosti), plus poveznicu na pregled rezervacije.</li>
+    <li>Vi dobijete e-mail da je stigao novi upit.</li>
+  </ul>
+  <div class="warn">
+    <strong>Rezervacija nije automatski potvrđena.</strong> Vi u adminu kliknete <strong>Potvrdi</strong>.
+    Tek tada gost dobije e-mail potvrde.
+  </div>
+  <p>
+    <strong>Plaćanje:</strong> gost plaća <strong>100 % iznosa</strong> bankovnim transferom (nema online kartice).
+    Kad novac stigne, u adminu označite <strong>Plaćeno</strong>.
+  </p>
+  <p>
+    <strong>Otkazivanje (zadano):</strong> besplatno do 5 dana prije dolaska; unutar 5 dana zadržava se puni iznos.
+    Računi se izdaju pri dolasku ili odlasku.
+  </p>
+  <p>
+    <strong>Pregled rezervacije</strong> (<code>/rezervacija/pregled</code>): gost otvara link iz e-maila
+    (stranica nije na Googleu). Vidi status, iznos i barkodove. Ako link ne radi, pošaljite e-mail ponovno iz admina.
+  </p>
+
+  <h2>3. Admin panel — prijava</h2>
+  <p>Ulaz: <a href="https://villavelebita.hr/admin/login">https://villavelebita.hr/admin/login</a></p>
+  <ul>
+    <li>Lozinka koju ste dobili pri predaji.</li>
+    <li>Ako je uključena CAPTCHA, treba je riješiti prije prijave.</li>
+    <li>Nakon 5 krivih pokušaja prijava se privremeno zaključava (oko 30 minuta).</li>
+    <li>Sesija traje <strong>7 dana</strong>, zatim se trebate ponovno prijaviti.</li>
+    <li><strong>Odjava</strong> je u gornjem desnom kutu.</li>
+  </ul>
+  <div class="warn">
+    <strong>Ne dijelite lozinku.</strong> Admin može mijenjati cijene, brisati rezervacije i slike.
+  </div>
+  <p>Navigacija admina (gore): <strong>Rezervacije · Galerija · Novosti · Cijene · Tekstovi · SEO</strong></p>
+
+  <h2>4. Rezervacije <span class="muted">(/admin)</span></h2>
+  <p>Glavni dnevni alat. Ovdje se vodi kalendar i gosti.</p>
+
+  <h3>Što vidite</h3>
+  <ul>
+    <li>Broj rezervacija na čekanju i potvrđenih</li>
+    <li>Tablica ili vremenska crta (timeline) — zauzetost po danima</li>
+    <li>Upozorenje na preklapanja (ako dvije aktivne rezervacije idu na iste datume)</li>
+    <li>Godišnje i mjesečne statistike (prihodi, noćenja)</li>
+  </ul>
+
+  <h3>Statusi</h3>
+  <table>
+    <thead>
+      <tr><th>Status</th><th>Značenje</th><th>Kalendar za goste</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Na čekanju</td><td>Upit s weba, još niste potvrdili</td><td>Datumi su zauzeti (nitko drugi ih ne može uzeti)</td></tr>
+      <tr><td>Potvrđeno</td><td>Prihvatili ste rezervaciju</td><td>Zauzeto</td></tr>
+      <tr><td>Otkazano</td><td>Otkazali ste</td><td>Datumi se oslobađaju</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Što možete raditi</h3>
+  <table>
+    <thead>
+      <tr><th>Akcija</th><th>Čemu služi</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Potvrdi</td><td>Šalje gostu e-mail potvrde s uplatom i barkodovima. Koristite kad ste dogovorili termin.</td></tr>
+      <tr><td>Plaćeno / Nije plaćeno</td><td>Označite kad vidi uplatu na računu. Ne šalje e-mail, samo evidencija.</td></tr>
+      <tr><td>Uredi</td><td>Datumi, ime, e-mail, telefon, broj gostiju, napomene, status. Ako se mijenjaju datumi, cijena se preračunava.</td></tr>
+      <tr><td>Pošalji e-mail ponovno</td><td>Samo za potvrđene rezervacije (izgubljen mail, novi barkod).</td></tr>
+      <tr><td>Otkaži</td><td>Status Otkazano; datumi se oslobađaju.</td></tr>
+      <tr><td>Obriši</td><td>Trajno briše zapis. Bolje otkazati nego brisati, osim ako je test ili greška.</td></tr>
+      <tr><td>Nova rezervacija</td><td>Ručni unos (telefon, WhatsApp, blokada s Booking.com). Cijena se računa sama. Ne šalje e-mail automatski.</td></tr>
+      <tr><td>CSV</td><td>Izvoz za Excel (evidencija, knjigovodstvo).</td></tr>
+    </tbody>
+  </table>
+  <p>Filteri: status, raspon datuma, pretraga po imenu ili e-mailu.</p>
+
+  <div class="tip">
+    <strong>Preporučeni dnevni ritam</strong>
+    <ol>
+      <li>Pogledati „Na čekanju”.</li>
+      <li>Javiti se gostu ako treba (telefon / WhatsApp).</li>
+      <li>Kliknuti <strong>Potvrdi</strong> kad je dogovoreno.</li>
+      <li>Kad stigne uplata → <strong>Plaćeno</strong>.</li>
+    </ol>
+    Ako ručno unosite rezervaciju i gost treba mail s uplatom: spremite kao „Na čekanju”, pa kliknite Potvrdi
+    (ili kasnije „Pošalji e-mail ponovno” na potvrđenoj rezervaciji).
+  </div>
+
+  <h2>5. Galerija <span class="muted">(/admin/gallery)</span></h2>
+  <p>Upravljanje slikama i videima na stranici Galerija.</p>
+  <ul>
+    <li>Upload više datoteka odjednom (slike i videi)</li>
+    <li>Kategorija, naslov i alt tekst (opis za Google i pristupačnost)</li>
+    <li>Redoslijed (gore / dolje)</li>
+    <li>Brisanje — briše i datoteku sa servera</li>
+  </ul>
+  <p><strong>Kategorije:</strong> Eksterijer i ulaz · Prizemlje · Kat · Potkrovlje · Sjenica · Priroda i pogledi · Okusi Like.</p>
+  <div class="box">
+    Hero i neke slike na Smještaju / Sadržajima su fiksne. Galerija mijenja <strong>samo</strong> stranicu Galerija.
+    Za zamjenu naslovne slike javite se izradi stranice.
+  </div>
+
+  <h2>6. Novosti <span class="muted">(/admin/articles)</span></h2>
+  <p>Blog i obavijesti (popusti, sezona, događaji). Javno: <code>/novosti</code>.</p>
+  <ul>
+    <li><strong>Novi članak:</strong> naslov, kratki opis, sadržaj (masno, naslovi, liste, linkovi), naslovnica, SEO naslov i opis.</li>
+    <li><strong>HR je obavezan.</strong> EN / DE / IT su opcionalni — ako su prazni, na tom jeziku se prikaže hrvatski.</li>
+    <li><strong>AI prijevod HR → EN/DE/IT</strong> napuni tabove, ali <strong>ne sprema sam</strong>. Pregledajte pa kliknite Spremi.</li>
+    <li>Status: <strong>Skica</strong> (nije na webu) ili <strong>Objavljeno</strong>.</li>
+    <li>Skicu možete pregledati na <code>/novosti/…?preview=1</code> dok ste ulogirani.</li>
+    <li>Zelene / narančaste oznake HR EN DE IT pokazuju je li jezik popunjen.</li>
+  </ul>
+  <p>URL (slug) nastaje iz naslova. Nakon objave ga bolje ne mijenjajte — Google i stari linkovi ostaju na starom naslovu.</p>
+
+  <h2>7. Cijene <span class="muted">(/admin/pricing)</span></h2>
+  <p>Tri bloka. Promjene odmah idu na kalendar, cjenik, FAQ i e-mailove.</p>
+
+  <h3>A) Cijene i uvjeti</h3>
+  <table>
+    <thead>
+      <tr><th>Polje</th><th>Zadano</th><th>Gdje se vidi</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Osnovna cijena po noći</td><td>270 €</td><td>Kalendar, cjenik, e-mail</td></tr>
+      <tr><td>Minimalni broj noći</td><td>2</td><td>Kalendar neće pustiti kraći boravak</td></tr>
+      <tr><td>Naknada za čišćenje</td><td>100 €</td><td>Uvijek se dodaje na ukupno</td></tr>
+      <tr><td>Popust za duži boravak (od X noći)</td><td>7</td><td>Postotak na iznos noćenja</td></tr>
+      <tr><td>Postotak popusta</td><td>10 %</td><td>Cjenik i kalkulacija</td></tr>
+    </tbody>
+  </table>
+
+  <h3>B) Posebni periodi</h3>
+  <p>Za raspon datuma vrijedi druga cijena po noći umjesto osnovne (blagdani, Nova godina, Uskrs…).</p>
+  <p>Primjer: 23.–29. 12. „Blagdani” 360 €; 30. 12.–7. 1. „Nova godina” 450 €.</p>
+  <ul>
+    <li>Datumi „od” i „do” su uključeni.</li>
+    <li>Prazna lista = namjerno bez posebnih cijena.</li>
+    <li>Nakon izmjene kliknite <strong>Spremi periode</strong>.</li>
+  </ul>
+
+  <h3>C) Podaci za uplatu</h3>
+  <p>IBAN, ime primatelja, BIC, naziv banke. Idu u FAQ, e-mail, barkodove i pregled rezervacije.</p>
+  <div class="warn">
+    Krivi IBAN znači da gosti plaćaju na krivi račun. Provjerite prije spremanja.
+  </div>
+  <p>
+    Već spremljene rezervacije <strong>ne mijenjaju iznos</strong> kad ažurirate cjenik.
+    Nova cijena vrijedi za nove upite i za uređivanje datuma postojeće rezervacije.
+  </p>
+
+  <h2>8. Tekstovi <span class="muted">(/admin/content)</span></h2>
+  <p>Kratki tekstovi na webu i u e-mailovima, po jezicima (tabovi HR / EN / DE / IT). Filter po grupi.</p>
+  <table>
+    <thead>
+      <tr><th>Grupa</th><th>Što uređujete</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Hero (početna)</td><td>Naslov, podnaslov, lokacija, tekstovi gumba</td></tr>
+      <tr><td>Sekcija rezervacije</td><td>Naslov i podnaslov iznad kalendara</td></tr>
+      <tr><td>Podnožje</td><td>Kratki opis vile</td></tr>
+      <tr><td>FAQ</td><td>Pitanja i odgovori</td></tr>
+      <tr><td>Kontakt</td><td>Naslov, podnaslov, uvod</td></tr>
+      <tr><td>Email predlošci</td><td>Naslov i tekstovi mailova gostu i vama</td></tr>
+    </tbody>
+  </table>
+  <p>Prazno polje = vraća se zadani prijevod. Spremaju se samo izmijenjena polja.</p>
+  <p>U FAQ odgovorima možete ostaviti oznake koje se same pune iz Cijena:</p>
+  <p><code>{cleaningFee}</code> &nbsp; <code>{minNights}</code> &nbsp; <code>{discountNights}</code> &nbsp; <code>{discountPercent}</code> &nbsp; <code>{iban}</code></p>
+  <p>U e-mail pozdravu: <code>{name}</code> = ime gosta.</p>
+  <div class="tip">
+    Mijenjate li cijenu, FAQ s tim oznakama ostaje točan. Ako u FAQ upišete „270 €” ručno, morate ga i ručno ažurirati.
+  </div>
+
+  <h2>9. SEO <span class="muted">(/admin/seo)</span></h2>
+  <p>Naslov i opis koji Google pokazuje u rezultatima (i pri dijeljenju na Facebook / WhatsApp).</p>
+  <p>
+    Stranice: Početna, Smještaj, Galerija, Sadržaji, Lokacija, Cjenik, FAQ, Rezervacija,
+    Novosti (lista), Villa Plitvice, Vodiči.
+  </p>
+  <p>
+    Po jeziku: Title, Description, te Open Graph naslov / opis / alt slike.
+    Prazno = zadani tekst.
+  </p>
+  <div class="box">
+    To <strong>nije</strong> sadržaj same stranice, samo „natpis” u Googleu.
+    Duljina: naslov oko 50–60 znakova, opis oko 140–160.
+  </div>
+
+  <h2>10. Što klijent ne može sam mijenjati</h2>
+  <p>Za sljedeće treba javiti se izradi stranice:</p>
+  <ul>
+    <li>jezici, izgled, logo, boje, fontovi</li>
+    <li>hero slike i fiksne fotografije izvan Galerije</li>
+    <li>tekstovi vodiča (<code>/vodic</code>) i većine landing stranica</li>
+    <li>recenzije na početnoj</li>
+    <li>kućni red u formi rezervacije (osim dijelova preko Tekstova / e-maila)</li>
+    <li>kontakt telefoni i adresa u kontakt sekciji (osim uvoda)</li>
+    <li>pravila otkazivanja u kodu (dio ide i kroz e-mail predloške)</li>
+    <li>nova admin lozinka, domena, e-mail pošiljatelj</li>
+  </ul>
+
+  <h2>11. Česte situacije</h2>
+  <h3>Gost zove i želi rezervirati</h3>
+  <p>Admin → Nova rezervacija → datumi, ime, e-mail. Ako treba mail s uplatom: status Na čekanju pa Potvrdi, ili kasnije Ponovno pošalji e-mail.</p>
+
+  <h3>Gost nije dobio mail</h3>
+  <p>Provjeriti mapu spam. Za potvrđene rezervacije: Ponovno pošalji e-mail. Link pregleda je samo u tom mailu.</p>
+
+  <h3>Želite blokirati datume (osobni boravak, Booking.com)</h3>
+  <p>Nova rezervacija na vaše ime, status Potvrđeno. Kalendar ih zatvara.</p>
+
+  <h3>Pogrešno potvrđeno</h3>
+  <p>Uredi → Otkazano (datumi se oslobađaju) ili obriši ako je test.</p>
+
+  <h3>Promjena cijene od sljedeće sezone</h3>
+  <p>Cijene → nova osnovna cijena i/ili posebni periodi → Spremi. Već spremljene rezervacije zadržavaju stari iznos.</p>
+
+  <h3>Novi članak na svim jezicima</h3>
+  <p>Napišite HR → AI prijevod → pregled EN/DE/IT → Spremi → Objavi.</p>
+
+  <h2>12. Sigurnost</h2>
+  <ul>
+    <li>Admin adresu ne stavljati u Facebook / Instagram bio.</li>
+    <li>Ne slati lozinku u običnom e-mailu ako nije nužno.</li>
+    <li>Odjaviti se na tuđem računalu.</li>
+    <li>U Galeriju i Novosti ne stavljati slike tuđih osoba bez privole, niti osobne dokumente.</li>
+  </ul>
+
+  <p class="footer-note">
+    Villa Velebita · Rudopolje 124, 53223 Vrhovine · villavelebita.hr<br>
+    Vodič za korištenje web stranice i admin panela · kolovoz 2026.
+  </p>
+
+</body>
+</html>

@@ -5,6 +5,8 @@ import {
   CMS_LOCALES,
   EDITABLE_SITE_TEXT_KEY_SET,
 } from '@/modules/cms/constants';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 import { getSiteTextsForAdmin } from '@/modules/cms/lib/get-site-texts';
 import type { AppLocale } from '@/i18n/routing';
 
@@ -87,6 +89,9 @@ export async function PUT(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
   }
+
+  // Javni site_texts cache — invalidate nakon uspješnog upsert/delete.
+  revalidateCmsTag(CMS_CACHE_TAGS.siteTexts);
 
   const rows = await getSiteTextsForAdmin();
   return NextResponse.json(rows);

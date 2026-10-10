@@ -1,3 +1,5 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { createServiceClient } from '@/lib/supabase';
 import type { AppLocale } from '@/i18n/routing';
 import { getMessagesForLocale, getValidLocale } from '@/i18n/messages';
@@ -7,6 +9,10 @@ import {
   EDITABLE_SITE_TEXT_KEYS,
   type EditableSiteTextKey,
 } from '../constants';
+import {
+  CMS_CACHE_REVALIDATE_SECONDS,
+  CMS_CACHE_TAGS,
+} from './cache-tags';
 
 /** Čita nested string iz messages JSON-a po dot pathu. */
 export function getMessagePathValue(
@@ -31,17 +37,15 @@ export function getDefaultSiteText(
   return getMessagePathValue(getMessagesForLocale(locale), key);
 }
 
-/** Override mapa key → value za jedan locale (samo whitelist ključevi). */
-export async function getSiteTextOverrides(
-  locale: string,
+async function fetchSiteTextOverrides(
+  locale: AppLocale,
 ): Promise<Record<string, string>> {
-  const appLocale = getValidLocale(locale);
   const supabase = createServiceClient();
 
   const { data, error } = await supabase
     .from('site_texts')
     .select('key, value')
-    .eq('locale', appLocale);
+    .eq('locale', locale);
 
   if (error) {
     console.error('Failed to fetch site_texts:', error.message);
@@ -60,6 +64,25 @@ export async function getSiteTextOverrides(
   }
   return map;
 }
+
+const loadSiteTextOverrides = unstable_cache(
+  async (locale: AppLocale) => fetchSiteTextOverrides(locale),
+  ['cms-site-texts'],
+  {
+    tags: [CMS_CACHE_TAGS.siteTexts],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+/** Override mapa key → value za jedan locale (samo whitelist ključevi). */
+// React.cache (request) + unstable_cache (cross-request / ISR data).
+export const getSiteTextOverrides = cache(
+  async function getSiteTextOverrides(
+    locale: string,
+  ): Promise<Record<string, string>> {
+    return loadSiteTextOverrides(getValidLocale(locale));
+  },
+);
 
 /** Vrijednost s DB overrideom ili messages fallback. */
 export function resolveSiteText(

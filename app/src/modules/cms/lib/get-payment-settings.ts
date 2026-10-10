@@ -1,3 +1,5 @@
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 import { createServiceClient } from '@/lib/supabase';
 import {
   RECIPIENT_IBAN as CONFIG_IBAN,
@@ -5,6 +7,10 @@ import {
   RECIPIENT_BIC as CONFIG_BIC,
   RECIPIENT_BANK_NAME as CONFIG_BANK,
 } from '@/modules/booking-admin/booking.config';
+import {
+  CMS_CACHE_REVALIDATE_SECONDS,
+  CMS_CACHE_TAGS,
+} from './cache-tags';
 
 export const PAYMENT_SETTING_KEYS = {
   iban: 'payment.iban',
@@ -35,7 +41,7 @@ function pickString(raw: string | undefined, fallback: string): string {
   return trimmed === '' ? fallback : trimmed;
 }
 
-export async function getPaymentSettings(): Promise<PaymentSettings> {
+async function fetchPaymentSettings(): Promise<PaymentSettings> {
   const defaults = getDefaultPaymentSettings();
 
   try {
@@ -50,7 +56,9 @@ export async function getPaymentSettings(): Promise<PaymentSettings> {
       return defaults;
     }
 
-    const map = new Map((data ?? []).map((row) => [row.key as string, row.value as string]));
+    const map = new Map(
+      (data ?? []).map((row) => [row.key as string, row.value as string]),
+    );
 
     return {
       iban: pickString(map.get(PAYMENT_SETTING_KEYS.iban), defaults.iban),
@@ -59,13 +67,29 @@ export async function getPaymentSettings(): Promise<PaymentSettings> {
         defaults.recipientName,
       ),
       bic: pickString(map.get(PAYMENT_SETTING_KEYS.bic), defaults.bic),
-      bankName: pickString(map.get(PAYMENT_SETTING_KEYS.bankName), defaults.bankName),
+      bankName: pickString(
+        map.get(PAYMENT_SETTING_KEYS.bankName),
+        defaults.bankName,
+      ),
     };
   } catch (err) {
     console.error('Failed to fetch payment settings:', err);
     return defaults;
   }
 }
+
+const loadPaymentSettings = unstable_cache(
+  async () => fetchPaymentSettings(),
+  ['cms-payment-settings'],
+  {
+    tags: [CMS_CACHE_TAGS.paymentSettings],
+    revalidate: CMS_CACHE_REVALIDATE_SECONDS,
+  },
+);
+
+export const getPaymentSettings = cache(async function getPaymentSettings(): Promise<PaymentSettings> {
+  return loadPaymentSettings();
+});
 
 export type PaymentSettingsInput = PaymentSettings;
 

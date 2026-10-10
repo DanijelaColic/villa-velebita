@@ -5,6 +5,8 @@ import {
   CMS_LOCALES,
   EDITABLE_PAGE_SEO_KEY_SET,
 } from '@/modules/cms/constants';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 import { getPageSeoForAdmin } from '@/modules/cms/lib/get-page-seo';
 import type { AppLocale } from '@/i18n/routing';
 
@@ -111,6 +113,8 @@ export async function PUT(request: NextRequest) {
       }
     }
   }
+
+  revalidateCmsTag(CMS_CACHE_TAGS.pageSeo);
 
   const rows = await getPageSeoForAdmin();
   return NextResponse.json(rows);

@@ -20,6 +20,9 @@ const NAV_LINKS = [
   { href: '/#kontakt', labelKey: 'contact' },
 ];
 
+// Module-scope — ne zvati Date tijekom RSC rendera (dynamic signal).
+const COPYRIGHT_YEAR = new Date().getFullYear();
+
 export async function Footer() {
   const locale = getValidLocale(await getLocale());
   const t = await getTranslations('footer');
@@ -30,7 +33,7 @@ export async function Footer() {
     t('description'),
   );
   const seoLinks = getSeoNavLinks(locale);
-  const year = new Date().getFullYear();
+  const year = COPYRIGHT_YEAR;
   const contactHref = `${localizePath('/', locale)}#kontakt`;
   const socialLinks = [
     {

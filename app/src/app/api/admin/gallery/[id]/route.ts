@@ -3,6 +3,8 @@ import { createServiceClient } from '@/lib/supabase';
 import { GALLERY_BUCKET } from '@/lib/gallery';
 import { isGalleryCategoryKey } from '@/lib/gallery-categories';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -40,6 +42,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     .single();
 
   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  revalidateCmsTag(CMS_CACHE_TAGS.gallery);
   return NextResponse.json(data);
 }
 
@@ -70,5 +73,6 @@ export async function DELETE(request: NextRequest, { params }: Params) {
   const { error: deleteError } = await supabase.from('gallery_items').delete().eq('id', id);
   if (deleteError) return NextResponse.json({ error: deleteError.message }, { status: 500 });
 
+  revalidateCmsTag(CMS_CACHE_TAGS.gallery);
   return NextResponse.json({ success: true });
 }

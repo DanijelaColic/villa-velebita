@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import {NextIntlClientProvider} from 'next-intl';
-import {getLocale, getMessages} from 'next-intl/server';
+import {getLocale, getMessages, setRequestLocale} from 'next-intl/server';
 import { Inter, Playfair_Display } from 'next/font/google';
 import {getRootMetadata, getStructuredData} from '@/i18n/metadata';
 import './globals.css';
@@ -19,6 +19,8 @@ const playfair = Playfair_Display({
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
+  // next-intl: omogućuje static rendering kad je locale poznat (npr. [locale] + generateStaticParams).
+  setRequestLocale(locale);
 
   return getRootMetadata(locale);
 }
@@ -29,6 +31,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  // Isto kao u [locale]/layout — bez ovoga root getLocale često forsira cijeli app u dynamic.
+  setRequestLocale(locale);
   const messages = await getMessages();
   const jsonLd = await getStructuredData(locale);
 

@@ -6,6 +6,8 @@ import {
   isGalleryCategoryKey,
 } from '@/lib/gallery-categories';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 
 const ALLOWED_MIME_TYPES = new Set([
   'image/jpeg',
@@ -124,5 +126,6 @@ export async function POST(request: NextRequest) {
     nextSortOrder += 1;
   }
 
+  revalidateCmsTag(CMS_CACHE_TAGS.gallery);
   return NextResponse.json(insertedRows, { status: 201 });
 }

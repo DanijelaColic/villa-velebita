@@ -44,9 +44,15 @@ export {
   getPublishedArticleBySlug,
   getArticleBySlug,
   getPublishedArticleSlugs,
-  getCmsMediaPublicUrl,
 } from './lib/get-articles';
+export { getCmsMediaPublicUrl } from './lib/cms-media-url';
 export { NEWS_HUB_BY_LOCALE, NEWS_FALLBACK_COVER } from './news-copy';
+export {
+  CMS_CACHE_TAGS,
+  CMS_CACHE_REVALIDATE_SECONDS,
+} from './lib/cache-tags';
+export type { CmsCacheTag } from './lib/cache-tags';
+export { revalidateCmsTag } from './lib/cache-revalidate';
 export {
   getSiteTextOverrides,
   resolveSiteText,

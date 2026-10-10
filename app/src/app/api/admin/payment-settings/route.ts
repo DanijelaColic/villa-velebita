@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 import {
   getDefaultPaymentSettings,
   getPaymentSettings,
@@ -38,6 +40,7 @@ export async function PUT(request: NextRequest) {
 
   try {
     const saved = await savePaymentSettings(parsed.data);
+    revalidateCmsTag(CMS_CACHE_TAGS.paymentSettings);
     return NextResponse.json({
       ...saved,
       defaults: getDefaultPaymentSettings(),

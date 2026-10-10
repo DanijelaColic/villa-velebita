@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 
 export async function POST(request: NextRequest) {
   if (!(await isAdminAuthenticatedFromRequest(request))) {
@@ -25,5 +27,6 @@ export async function POST(request: NextRequest) {
     if (error) return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  revalidateCmsTag(CMS_CACHE_TAGS.gallery);
   return NextResponse.json({ success: true });
 }

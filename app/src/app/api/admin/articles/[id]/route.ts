@@ -6,6 +6,8 @@ import {
   parseArticleUpsertBody,
   resolvePublishedAt,
 } from '@/modules/cms/lib/article-validation';
+import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
+import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
 import type { ArticleWithTranslations } from '@/modules/cms/types';
 
 type Params = { params: Promise<{ id: string }> };
@@ -131,6 +133,7 @@ export async function PATCH(request: NextRequest, { params }: Params) {
     translations: translations ?? [],
   };
 
+  revalidateCmsTag(CMS_CACHE_TAGS.articles);
   return NextResponse.json(result);
 }
 
@@ -166,5 +169,6 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     await supabase.storage.from(CMS_MEDIA_BUCKET).remove([existing.cover_path]);
   }
 
+  revalidateCmsTag(CMS_CACHE_TAGS.articles);
   return NextResponse.json({ success: true });
 }

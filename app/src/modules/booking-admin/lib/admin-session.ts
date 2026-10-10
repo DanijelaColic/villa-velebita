@@ -2,8 +2,7 @@
  * Potpisana admin sesija (HMAC-SHA256).
  * Cookie više nije statični ADMIN_TOKEN — svaki login = novi jti + expiry.
  *
- * Secret: ADMIN_SESSION_SECRET (opcionalno) ili fallback na postojeći ADMIN_TOKEN
- * (bez rotacije sifri u Fazi 4).
+ * Secret: ADMIN_SESSION_SECRET (preporučeno) ili fallback ADMIN_TOKEN.
  */
 
 import { ADMIN_COOKIE_MAX_AGE } from '../booking.config';
