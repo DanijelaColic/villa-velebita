@@ -5,6 +5,7 @@ import { isGalleryCategoryKey } from '@/lib/gallery-categories';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
 import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
 import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
+import { listRelatedStoragePaths } from '@/lib/media-variants';
 
 type Params = { params: Promise<{ id: string }> };
 
@@ -64,11 +65,21 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: 'Gallery item not found' }, { status: 404 });
   }
 
+  // Ukloni original + thumb + large (+ mogući -orig.*) — ignore missing.
+  const relatedPaths = listRelatedStoragePaths(existing.storage_path);
   const { error: storageError } = await supabase.storage
     .from(GALLERY_BUCKET)
-    .remove([existing.storage_path]);
+    .remove(relatedPaths);
 
-  if (storageError) return NextResponse.json({ error: storageError.message }, { status: 500 });
+  if (storageError) {
+    // Fallback: pokušaj barem canonical path.
+    const { error: singleError } = await supabase.storage
+      .from(GALLERY_BUCKET)
+      .remove([existing.storage_path]);
+    if (singleError) {
+      return NextResponse.json({ error: singleError.message }, { status: 500 });
+    }
+  }
 
   const { error: deleteError } = await supabase.from('gallery_items').delete().eq('id', id);
   if (deleteError) return NextResponse.json({ error: deleteError.message }, { status: 500 });

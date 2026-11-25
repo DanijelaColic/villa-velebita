@@ -2,15 +2,16 @@ import type { Metadata } from 'next';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { AppImage } from '@/components/ui/AppImage';
+import { StorageImage } from '@/components/ui/StorageImage';
 import { Link } from '@/i18n/navigation';
 import { getBreadcrumbStructuredData } from '@/i18n/metadata';
 import { getValidLocale } from '@/i18n/messages';
 import { InternalLinks } from '@/components/seo/InternalLinks';
+import { getPublishedArticles } from '@/modules/cms/lib/get-articles';
 import {
   getCmsMediaPublicUrl,
-  getPublishedArticles,
-} from '@/modules/cms/lib/get-articles';
+  getCmsMediaThumbUrl,
+} from '@/modules/cms/lib/cms-media-url';
 import {
   NEWS_FALLBACK_COVER,
   NEWS_HUB_BY_LOCALE,
@@ -103,8 +104,10 @@ export default async function NovostiPage() {
           ) : (
             <div className="grid gap-4">
               {articles.map((article) => {
-                const cover =
+                const coverFallback =
                   getCmsMediaPublicUrl(article.cover_path) ?? NEWS_FALLBACK_COVER;
+                const coverThumb =
+                  getCmsMediaThumbUrl(article.cover_path) ?? coverFallback;
                 const dateLabel = formatPublishedAt(article.published_at, locale);
 
                 return (
@@ -114,12 +117,14 @@ export default async function NovostiPage() {
                   >
                     <Link href={`/novosti/${article.slug}`} className="group block">
                       <div className="relative aspect-[21/9] w-full bg-stone-pale">
-                        <AppImage
-                          src={cover}
+                        <StorageImage
+                          src={coverThumb}
+                          fallbackSrc={coverFallback}
                           alt={article.title}
                           fill
                           className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                           sizes="(max-width: 768px) 100vw, 896px"
+                          unoptimized
                         />
                       </div>
                       <div className="p-5">

@@ -107,8 +107,11 @@ export default function ArticleForm({
     [translations],
   );
 
+  // Admin preview: thumb (manji egress); fallback na original/large path.
   const coverPreview =
-    getCmsMediaPublicUrl(coverPath) ?? (coverPath ? coverPath : null);
+    getCmsMediaPublicUrl(coverPath, 'thumb') ??
+    getCmsMediaPublicUrl(coverPath) ??
+    (coverPath ? coverPath : null);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {

@@ -2,6 +2,12 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createServiceClient } from '@/lib/supabase';
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
 import { CMS_MEDIA_BUCKET } from '@/modules/cms/constants';
+import { buildVersionedMediaBase, listRelatedStoragePaths } from '@/lib/media-variants';
+import {
+  MEDIA_CACHE_CONTROL,
+  optimizeImageVariants,
+} from '@/lib/optimize-image';
+import { buildPublicStorageUrl } from '@/lib/storage-public-url';
 
 const ALLOWED_MIME = new Set([
   'image/jpeg',
@@ -13,13 +19,7 @@ const ALLOWED_MIME = new Set([
 
 const MAX_BYTES = 8 * 1024 * 1024;
 
-function getExtension(fileName: string) {
-  const parts = fileName.split('.');
-  if (parts.length < 2) return '';
-  return parts.at(-1)?.toLowerCase() ?? '';
-}
-
-/** POST multipart: file — upload naslovnice u cms-media. */
+/** POST multipart: file — upload naslovnice u cms-media (auto WebP thumb+large). */
 export async function POST(request: NextRequest) {
   if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -46,38 +46,63 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const extension = getExtension(file.name);
-  const storagePath = `covers/${Date.now()}-${crypto.randomUUID()}${
-    extension ? `.${extension}` : ''
-  }`;
   const buffer = Buffer.from(await file.arrayBuffer());
   const supabase = createServiceClient();
+  const uploadedPaths: string[] = [];
 
-  const { error: uploadError } = await supabase.storage
-    .from(CMS_MEDIA_BUCKET)
-    .upload(storagePath, buffer, {
-      contentType: file.type,
-      upsert: false,
-    });
+  try {
+    const variants = await optimizeImageVariants(buffer);
+    const base = buildVersionedMediaBase('covers');
+    const thumbPath = `${base}-thumb.webp`;
+    const largePath = `${base}-large.webp`;
 
-  if (uploadError) {
-    return NextResponse.json({ error: uploadError.message }, { status: 500 });
+    const { error: thumbError } = await supabase.storage
+      .from(CMS_MEDIA_BUCKET)
+      .upload(thumbPath, variants.thumbWebp, {
+        contentType: variants.thumbContentType,
+        cacheControl: MEDIA_CACHE_CONTROL,
+        upsert: false,
+      });
+    if (thumbError) {
+      return NextResponse.json({ error: thumbError.message }, { status: 500 });
+    }
+    uploadedPaths.push(thumbPath);
+
+    const { error: largeError } = await supabase.storage
+      .from(CMS_MEDIA_BUCKET)
+      .upload(largePath, variants.largeWebp, {
+        contentType: variants.largeContentType,
+        cacheControl: MEDIA_CACHE_CONTROL,
+        upsert: false,
+      });
+    if (largeError) {
+      await supabase.storage.from(CMS_MEDIA_BUCKET).remove(uploadedPaths);
+      return NextResponse.json({ error: largeError.message }, { status: 500 });
+    }
+    uploadedPaths.push(largePath);
+
+    // Canonical = large (thumb se izvodi konvencijom).
+    const storagePath = largePath;
+    const publicUrl = buildPublicStorageUrl(CMS_MEDIA_BUCKET, storagePath);
+
+    return NextResponse.json(
+      {
+        storage_path: storagePath,
+        public_url: publicUrl,
+      },
+      { status: 201 },
+    );
+  } catch (err) {
+    if (uploadedPaths.length > 0) {
+      await supabase.storage.from(CMS_MEDIA_BUCKET).remove(uploadedPaths);
+    }
+    const message =
+      err instanceof Error ? err.message : 'Optimizacija slike nije uspjela.';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
-
-  const { data: urlData } = supabase.storage
-    .from(CMS_MEDIA_BUCKET)
-    .getPublicUrl(storagePath);
-
-  return NextResponse.json(
-    {
-      storage_path: storagePath,
-      public_url: urlData.publicUrl,
-    },
-    { status: 201 },
-  );
 }
 
-/** DELETE JSON: { storage_path } — ukloni datoteku iz storagea. */
+/** DELETE JSON: { storage_path } — ukloni datoteku (+ thumb/large varijante) iz storagea. */
 export async function DELETE(request: NextRequest) {
   if (!(await isAdminAuthenticatedFromRequest(request))) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -96,10 +121,16 @@ export async function DELETE(request: NextRequest) {
   }
 
   const supabase = createServiceClient();
-  const { error } = await supabase.storage.from(CMS_MEDIA_BUCKET).remove([storagePath]);
+  const related = listRelatedStoragePaths(storagePath);
+  const { error } = await supabase.storage.from(CMS_MEDIA_BUCKET).remove(related);
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    const { error: singleError } = await supabase.storage
+      .from(CMS_MEDIA_BUCKET)
+      .remove([storagePath]);
+    if (singleError) {
+      return NextResponse.json({ error: singleError.message }, { status: 500 });
+    }
   }
 
   return NextResponse.json({ success: true });

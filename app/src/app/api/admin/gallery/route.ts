@@ -8,6 +8,11 @@ import {
 import { isAdminAuthenticatedFromRequest } from '@/modules/booking-admin/lib/admin-auth';
 import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
 import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
+import { buildVersionedMediaBase } from '@/lib/media-variants';
+import {
+  MEDIA_CACHE_CONTROL,
+  optimizeImageVariants,
+} from '@/lib/optimize-image';
 
 const ALLOWED_MIME_TYPES = new Set([
   'image/jpeg',
@@ -86,22 +91,73 @@ export async function POST(request: NextRequest) {
   const insertedRows = [];
 
   for (const file of files) {
-    const extension = getFileExtension(file.name);
-    const storagePath = `${Date.now()}-${crypto.randomUUID()}${extension ? `.${extension}` : ''}`;
+    const mediaType = getMediaType(file.type);
     const fileBuffer = Buffer.from(await file.arrayBuffer());
+    const uploadedPaths: string[] = [];
 
-    const { error: uploadError } = await supabase.storage
-      .from(GALLERY_BUCKET)
-      .upload(storagePath, fileBuffer, {
-        contentType: file.type,
-        upsert: false,
-      });
+    let storagePath: string;
 
-    if (uploadError) {
-      return NextResponse.json({ error: uploadError.message }, { status: 500 });
+    try {
+      if (mediaType === 'image') {
+        // Automatska optimizacija — klijent ne mora ništa ručno raditi.
+        const variants = await optimizeImageVariants(fileBuffer);
+        const base = buildVersionedMediaBase('opt');
+        const thumbPath = `${base}-thumb.webp`;
+        const largePath = `${base}-large.webp`;
+
+        const { error: thumbError } = await supabase.storage
+          .from(GALLERY_BUCKET)
+          .upload(thumbPath, variants.thumbWebp, {
+            contentType: variants.thumbContentType,
+            cacheControl: MEDIA_CACHE_CONTROL,
+            upsert: false,
+          });
+        if (thumbError) {
+          return NextResponse.json({ error: thumbError.message }, { status: 500 });
+        }
+        uploadedPaths.push(thumbPath);
+
+        const { error: largeError } = await supabase.storage
+          .from(GALLERY_BUCKET)
+          .upload(largePath, variants.largeWebp, {
+            contentType: variants.largeContentType,
+            cacheControl: MEDIA_CACHE_CONTROL,
+            upsert: false,
+          });
+        if (largeError) {
+          await supabase.storage.from(GALLERY_BUCKET).remove(uploadedPaths);
+          return NextResponse.json({ error: largeError.message }, { status: 500 });
+        }
+        uploadedPaths.push(largePath);
+
+        // Canonical path = large (thumb/large se izvode konvencijom).
+        storagePath = largePath;
+      } else {
+        const extension = getFileExtension(file.name);
+        storagePath = `${Date.now()}-${crypto.randomUUID()}${
+          extension ? `.${extension}` : ''
+        }`;
+        const { error: uploadError } = await supabase.storage
+          .from(GALLERY_BUCKET)
+          .upload(storagePath, fileBuffer, {
+            contentType: file.type,
+            cacheControl: MEDIA_CACHE_CONTROL,
+            upsert: false,
+          });
+        if (uploadError) {
+          return NextResponse.json({ error: uploadError.message }, { status: 500 });
+        }
+        uploadedPaths.push(storagePath);
+      }
+    } catch (err) {
+      if (uploadedPaths.length > 0) {
+        await supabase.storage.from(GALLERY_BUCKET).remove(uploadedPaths);
+      }
+      const message =
+        err instanceof Error ? err.message : 'Optimizacija slike nije uspjela.';
+      return NextResponse.json({ error: message }, { status: 500 });
     }
 
-    const mediaType = getMediaType(file.type);
     const fallbackAlt = `${mediaType === 'video' ? 'Video' : 'Image'} ${nextSortOrder + 1}`;
 
     const { data: inserted, error: insertError } = await supabase
@@ -118,7 +174,7 @@ export async function POST(request: NextRequest) {
       .single();
 
     if (insertError) {
-      await supabase.storage.from(GALLERY_BUCKET).remove([storagePath]);
+      await supabase.storage.from(GALLERY_BUCKET).remove(uploadedPaths);
       return NextResponse.json({ error: insertError.message }, { status: 500 });
     }
 

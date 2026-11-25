@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { getLocale, getTranslations } from 'next-intl/server';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { AppImage } from '@/components/ui/AppImage';
+import { StorageImage } from '@/components/ui/StorageImage';
 import { Link } from '@/i18n/navigation';
 import { getBreadcrumbStructuredData } from '@/i18n/metadata';
 import { getValidLocale } from '@/i18n/messages';
@@ -11,9 +11,12 @@ import { InternalLinks } from '@/components/seo/InternalLinks';
 import { TipTapRenderer } from '@/modules/cms/components/TipTapRenderer';
 import {
   getArticleBySlug,
-  getCmsMediaPublicUrl,
   getPublishedArticles,
 } from '@/modules/cms/lib/get-articles';
+import {
+  getCmsMediaLargeUrl,
+  getCmsMediaPublicUrl,
+} from '@/modules/cms/lib/cms-media-url';
 import {
   NEWS_FALLBACK_COVER,
   NEWS_HUB_BY_LOCALE,
@@ -101,7 +104,10 @@ export default async function NovostiArticlePage({ params, searchParams }: Props
     : (await getPublishedArticles(locale))
         .filter((item) => item.slug !== article.slug)
         .slice(0, 3);
-  const cover = getCmsMediaPublicUrl(article.cover_path) ?? NEWS_FALLBACK_COVER;
+  const coverFallback =
+    getCmsMediaPublicUrl(article.cover_path) ?? NEWS_FALLBACK_COVER;
+  const coverLarge = getCmsMediaLargeUrl(article.cover_path) ?? coverFallback;
+  const cover = coverFallback;
   const dateLabel = formatPublishedAt(article.published_at, locale);
   const basePath = locale === 'hr' ? '' : `/${locale}`;
 
@@ -174,13 +180,15 @@ export default async function NovostiArticlePage({ params, searchParams }: Props
 
           <div className="mb-10 overflow-hidden rounded-card border border-stone-pale bg-white shadow-card">
             <div className="relative aspect-[21/9] w-full bg-stone-pale">
-              <AppImage
-                src={cover}
+              <StorageImage
+                src={coverLarge}
+                fallbackSrc={coverFallback}
                 alt={article.title}
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 768px"
                 priority
+                unoptimized
               />
             </div>
           </div>

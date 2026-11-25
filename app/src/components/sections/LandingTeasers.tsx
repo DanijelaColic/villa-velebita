@@ -1,4 +1,3 @@
-import { AppImage as Image } from '@/components/ui/AppImage';
 import Link from 'next/link';
 import { Link as LocaleLink } from '@/i18n/navigation';
 import { getLocale, getTranslations } from 'next-intl/server';
@@ -6,19 +5,25 @@ import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Button } from '@/components/ui/Button';
 import { MapPin, Navigation, Mountain, Waves, Wifi } from 'lucide-react';
-import { getGalleryItems, getPublicMediaUrl } from '@/lib/gallery';
+import {
+  getGalleryItems,
+  getGalleryThumbUrl,
+  getPublicMediaUrl,
+} from '@/lib/gallery';
 import { getValidLocale } from '@/i18n/messages';
 import { getSeoNavLinks } from '@/modules/seo/seo-nav-links';
+import { StorageImage } from '@/components/ui/StorageImage';
 
 /** Početna: uži izrez galerije + jedinstveni uvod (puna galerija na /galerija). */
 export async function GalleryTeaser() {
   const t = await getTranslations('landingTeasers.gallery');
   const items = await getGalleryItems();
-  const picks: { src: string; alt: string }[] = [];
+  const picks: { thumbSrc: string; fallbackSrc: string; alt: string }[] = [];
   for (const item of items) {
     if (item.media_type === 'image' && picks.length < 6) {
       picks.push({
-        src: getPublicMediaUrl(item.storage_path),
+        thumbSrc: getGalleryThumbUrl(item.storage_path),
+        fallbackSrc: getPublicMediaUrl(item.storage_path),
         alt: item.alt_text || item.title || t('heading.label'),
       });
     }
@@ -35,12 +40,13 @@ export async function GalleryTeaser() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
         {picks.map((item, i) => (
           <Link
-            key={`${item.src}-${i}`}
+            key={`${item.thumbSrc}-${i}`}
             href="/galerija"
             className="relative aspect-4/3 rounded-card overflow-hidden shadow-warm group"
           >
-            <Image
-              src={item.src}
+            <StorageImage
+              src={item.thumbSrc}
+              fallbackSrc={item.fallbackSrc}
               alt={item.alt}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"

@@ -1,14 +1,16 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { AppImage as Image } from '@/components/ui/AppImage';
+import { StorageImage } from '@/components/ui/StorageImage';
 import { useTranslations } from 'next-intl';
 import { X, ChevronLeft, ChevronRight, ZoomIn, Play } from 'lucide-react';
 import { SectionWrapper } from '@/components/ui/SectionWrapper';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export type GalleryMedia = {
-  src: string;
+  thumbSrc: string;
+  largeSrc: string;
+  fallbackSrc: string;
   type: 'image' | 'video';
   alt: string;
   caption: string;
@@ -90,8 +92,9 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                         aria-label={t('controls.open', { alt: item.alt })}
                       >
                         {item.type === 'image' ? (
-                          <Image
-                            src={item.src}
+                          <StorageImage
+                            src={item.thumbSrc}
+                            fallbackSrc={item.fallbackSrc}
                             alt={`${item.alt} ${mediaIndex + 1}`}
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-105"
@@ -100,9 +103,9 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                           />
                         ) : (
                           <video
-                            src={item.src}
+                            src={item.fallbackSrc}
                             className="h-full w-full object-cover"
-                            preload="metadata"
+                            preload="none"
                             playsInline
                             muted
                           />
@@ -165,8 +168,9 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                 onClick={e => e.stopPropagation()}
               >
                 {activeMedia.type === 'image' ? (
-                  <Image
-                    src={activeMedia.src}
+                  <StorageImage
+                    src={activeMedia.largeSrc}
+                    fallbackSrc={activeMedia.fallbackSrc}
                     alt={activeMedia.alt}
                     fill
                     className="object-contain"
@@ -176,11 +180,12 @@ export function GalleryClient({ sections }: { sections: GallerySection[] }) {
                   />
                 ) : (
                   <video
-                    src={activeMedia.src}
+                    src={activeMedia.fallbackSrc}
                     className="h-full w-full object-contain bg-black"
                     controls
                     autoPlay
                     playsInline
+                    preload="metadata"
                   />
                 )}
               </div>

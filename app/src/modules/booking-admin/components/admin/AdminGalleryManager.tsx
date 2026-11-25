@@ -32,7 +32,10 @@ type GalleryItem = {
   created_at: string;
 };
 
-type GalleryItemWithUrl = GalleryItem & { publicUrl: string };
+type GalleryItemWithUrl = GalleryItem & {
+  publicUrl: string;
+  fallbackUrl: string;
+};
 
 type Props = {
   showToast: (message: string, type?: 'success' | 'error') => void;
@@ -52,11 +55,40 @@ export default function AdminGalleryManager({ showToast }: Props) {
   );
   const [dirtyIds, setDirtyIds] = useState<Set<string>>(new Set());
 
-  const getPublicUrl = useCallback((storagePath: string) => {
-    const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    if (!baseUrl) return '';
-    return `${baseUrl}/storage/v1/object/public/gallery-media/${encodeURIComponent(storagePath)}`;
+  const encodeStoragePath = useCallback((storagePath: string) => {
+    return storagePath
+      .split('/')
+      .map((segment) => encodeURIComponent(segment))
+      .join('/');
   }, []);
+
+  const getPublicUrl = useCallback(
+    (storagePath: string, mediaType?: string) => {
+      const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      if (!baseUrl) return '';
+      // Admin preview: thumb za slike (manji egress); video = original.
+      let path = storagePath;
+      if (mediaType !== 'video') {
+        const base = storagePath
+          .replace(/-thumb\.webp$/i, '')
+          .replace(/-large\.webp$/i, '')
+          .replace(/-orig\.[^.]+$/i, '')
+          .replace(/\.[^.]+$/, '');
+        path = `${base}-thumb.webp`;
+      }
+      return `${baseUrl}/storage/v1/object/public/gallery-media/${encodeStoragePath(path)}`;
+    },
+    [encodeStoragePath],
+  );
+
+  const getFallbackUrl = useCallback(
+    (storagePath: string) => {
+      const baseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+      if (!baseUrl) return '';
+      return `${baseUrl}/storage/v1/object/public/gallery-media/${encodeStoragePath(storagePath)}`;
+    },
+    [encodeStoragePath],
+  );
 
   const fetchItems = useCallback(async () => {
     setLoading(true);
@@ -78,12 +110,13 @@ export default function AdminGalleryManager({ showToast }: Props) {
     setItems(
       data.map(item => ({
         ...item,
-        publicUrl: getPublicUrl(item.storage_path),
+        publicUrl: getPublicUrl(item.storage_path, item.media_type),
+        fallbackUrl: getFallbackUrl(item.storage_path),
       })),
     );
     setLoading(false);
     return data.length;
-  }, [getPublicUrl]);
+  }, [getFallbackUrl, getPublicUrl]);
 
   useEffect(() => {
     // Initial load of persisted gallery items.
@@ -366,12 +399,19 @@ export default function AdminGalleryManager({ showToast }: Props) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover"
                     unoptimized
+                    onError={(event) => {
+                      // Pre-migracija: thumb možda ne postoji — padni na original.
+                      const img = event.currentTarget;
+                      if (item.fallbackUrl && img.src !== item.fallbackUrl) {
+                        img.src = item.fallbackUrl;
+                      }
+                    }}
                   />
                 ) : (
                   <video
-                    src={item.publicUrl}
+                    src={item.fallbackUrl}
                     className="h-full w-full object-cover"
-                    preload="metadata"
+                    preload="none"
                     controls
                   />
                 )}

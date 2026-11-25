@@ -6,6 +6,11 @@ import {
   CMS_CACHE_REVALIDATE_SECONDS,
   CMS_CACHE_TAGS,
 } from '@/modules/cms/lib/cache-tags';
+import {
+  getMediaVariantPath,
+  type MediaVariant,
+} from '@/lib/media-variants';
+import { buildPublicStorageUrl } from '@/lib/storage-public-url';
 
 export type GalleryItem = {
   id: string;
@@ -52,8 +57,35 @@ export const getGalleryItems = cache(async function getGalleryItems(): Promise<
   return loadGalleryItems();
 });
 
-export function getPublicMediaUrl(storagePath: string) {
-  const supabase = createServiceClient();
-  const { data } = supabase.storage.from(GALLERY_BUCKET).getPublicUrl(storagePath);
-  return data.publicUrl;
+export function getPublicMediaUrl(
+  storagePath: string,
+  variant: MediaVariant = 'original',
+) {
+  const path =
+    variant === 'original'
+      ? storagePath
+      : getMediaVariantPath(storagePath, variant);
+  return buildPublicStorageUrl(GALLERY_BUCKET, path);
+}
+
+/** Thumb za grid/teaser; fallback original dok migracija nije gotova (UI onError). */
+export function getGalleryThumbUrl(storagePath: string) {
+  return getPublicMediaUrl(storagePath, 'thumb');
+}
+
+/** Large za lightbox / full view. */
+export function getGalleryLargeUrl(storagePath: string) {
+  return getPublicMediaUrl(storagePath, 'large');
+}
+
+/**
+ * Sitemap: samo URL koji sigurno postoji na Storageu.
+ * - Novi upload (`…-large.webp`): thumb je uploadan uz large → thumb URL.
+ * - Legacy original (`…jpg`): thumb još ne postoji → original URL.
+ */
+export function getGallerySitemapImageUrl(storagePath: string) {
+  if (/-large\.webp$/i.test(storagePath) || /-thumb\.webp$/i.test(storagePath)) {
+    return getGalleryThumbUrl(storagePath);
+  }
+  return getPublicMediaUrl(storagePath);
 }

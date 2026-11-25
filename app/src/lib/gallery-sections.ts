@@ -48,12 +48,18 @@ export function getGallerySections(sectionMeta: GallerySectionMeta[]): GallerySe
       files = [];
     }
 
-    const media = files.map((file, index) => ({
-      src: `/images/gallery/${section.folder}/${encodeURIComponent(file)}`,
-      type: videoExtensions.test(file) ? ('video' as const) : ('image' as const),
-      alt: `${section.title} ${index + 1}`,
-      caption: section.title,
-    }));
+    // Local public/ images: no Storage variants — thumb/large/fallback su isti path.
+    const media = files.map((file, index) => {
+      const src = `/images/gallery/${section.folder}/${encodeURIComponent(file)}`;
+      return {
+        thumbSrc: src,
+        largeSrc: src,
+        fallbackSrc: src,
+        type: videoExtensions.test(file) ? ('video' as const) : ('image' as const),
+        alt: `${section.title} ${index + 1}`,
+        caption: section.title,
+      };
+    });
 
     return {
       id: section.id,

@@ -8,6 +8,7 @@ import {
 } from '@/modules/cms/lib/article-validation';
 import { CMS_CACHE_TAGS } from '@/modules/cms/lib/cache-tags';
 import { revalidateCmsTag } from '@/modules/cms/lib/cache-revalidate';
+import { listRelatedStoragePaths } from '@/lib/media-variants';
 import type { ArticleWithTranslations } from '@/modules/cms/types';
 
 type Params = { params: Promise<{ id: string }> };
@@ -160,13 +161,15 @@ export async function DELETE(request: NextRequest, { params }: Params) {
     return NextResponse.json({ error: deleteError.message }, { status: 500 });
   }
 
-  // Obriši naslovnicu iz storagea (ako je CMS upload)
+  // Obriši naslovnicu (+ thumb/large varijante) iz storagea
   if (
     existing.cover_path &&
     !existing.cover_path.startsWith('/') &&
     !existing.cover_path.startsWith('http')
   ) {
-    await supabase.storage.from(CMS_MEDIA_BUCKET).remove([existing.cover_path]);
+    await supabase.storage
+      .from(CMS_MEDIA_BUCKET)
+      .remove(listRelatedStoragePaths(existing.cover_path));
   }
 
   revalidateCmsTag(CMS_CACHE_TAGS.articles);

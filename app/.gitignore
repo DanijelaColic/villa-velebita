@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# local Supabase storage image backups (migrate-storage-images.mjs)
+/backups/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

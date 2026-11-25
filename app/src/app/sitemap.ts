@@ -1,12 +1,13 @@
 import type { MetadataRoute } from 'next';
 import { routing } from '@/i18n/routing';
-import { getGalleryItems, getPublicMediaUrl } from '@/lib/gallery';
+import { getGalleryItems, getGallerySitemapImageUrl } from '@/lib/gallery';
 import { getPublishedArticleSlugs } from '@/modules/cms/lib/get-articles';
 import { GUIDES } from '@/modules/seo/guides/guides-content';
 
 const BASE_URL = 'https://villavelebita.hr';
 
-const MAX_SITEMAP_IMAGES = 100;
+/** Thumb URL-ovi — crawleri ne vuču full originale (Supabase egress). */
+const MAX_SITEMAP_IMAGES = 40;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes = [
@@ -58,11 +59,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       'x-default': `${BASE_URL}${toLocalizedPath(routing.defaultLocale, pathname)}`,
     });
 
-  // Image URLs are attached to key landing URLs to improve media discoverability in search.
+  // Samo postojeći Storage URL-ovi (legacy = original; post-opt = thumb).
   const galleryImageUrls = (await getGalleryItems())
     .filter((item) => item.media_type === 'image')
     .slice(0, MAX_SITEMAP_IMAGES)
-    .map((item) => getPublicMediaUrl(item.storage_path));
+    .map((item) => getGallerySitemapImageUrl(item.storage_path));
 
   const getRouteImages = (pathname: string) => {
     if (pathname === '/' || pathname === '/galerija') {
